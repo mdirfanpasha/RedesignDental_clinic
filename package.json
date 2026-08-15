@@ -1,0 +1,12 @@
+{
+  "name": "redesign-clinics",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "validate:i18n": "node scripts/validate-i18n.js",
+    "build": "node scripts/validate-i18n.js"
+  }
+}

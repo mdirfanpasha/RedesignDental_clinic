@@ -1,0 +1,395 @@
+/* ===== Redesign Clinics - Unified Booking & Callback System CSS ===== */
+
+:root {
+  --rc-booking-primary: #0f766e;
+  --rc-booking-primary-dark: #05262a;
+  --rc-booking-accent: #2ec4b6;
+  --rc-booking-bg: #ffffff;
+  --rc-booking-overlay: rgba(5, 38, 42, 0.75);
+}
+
+.rc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--rc-booking-overlay);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rc-modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rc-modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 24px;
+  box-shadow: 0 25px 70px rgba(5, 38, 42, 0.35);
+  padding: 32px;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(15, 118, 110, 0.15);
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.rc-modal-overlay.is-open .rc-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.rc-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: none;
+  color: #475569;
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+.rc-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  transform: scale(1.05);
+}
+
+.rc-modal-header {
+  margin-bottom: 24px;
+}
+
+.rc-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: #e6f4f4;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.rc-modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #05262a;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.rc-modal-sub {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.rc-form-group {
+  margin-bottom: 18px;
+}
+
+.rc-form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.rc-form-label span {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.rc-form-input,
+.rc-form-select {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 14px;
+  color: #0f172a;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.rc-form-input:focus,
+.rc-form-select:focus {
+  border-color: #0f766e;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+}
+
+.rc-time-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.rc-time-slot {
+  padding: 10px 4px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.rc-time-slot:hover {
+  border-color: #0f766e;
+  color: #0f766e;
+  background: #f0fdfa;
+}
+
+.rc-time-slot.is-selected {
+  border-color: #0f766e;
+  background: #0f766e;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25);
+}
+
+.rc-submit-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 99px;
+  background: #05262a;
+  color: #ffffff;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  margin-top: 24px;
+}
+
+.rc-submit-btn:hover {
+  background: #0f766e;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(15, 118, 110, 0.3);
+}
+
+.rc-submit-btn:active {
+  transform: translateY(0);
+}
+
+.rc-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.rc-form-note {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.rc-success-box {
+  text-align: center;
+  padding: 20px 0 10px;
+}
+
+.rc-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #d1fae5;
+  color: #059669;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 10px 25px rgba(5, 150, 105, 0.2);
+}
+
+.rc-success-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #05262a;
+  margin-bottom: 8px;
+}
+
+.rc-success-msg {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.rc-whatsapp-btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 99px;
+  background: #25d366;
+  color: #ffffff;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 10px;
+}
+
+.rc-whatsapp-btn:hover {
+  background: #1eb956;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 576px) {
+  .rc-modal-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+  .rc-time-slots {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== FLOATING ACTION BUTTONS (WhatsApp & Instagram) ===== */
+.rc-floating-actions {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.rc-float-btn {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 99px;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.rc-float-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.rc-float-btn svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.rc-float-wa {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.rc-float-ig {
+  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+}
+
+@media (max-width: 768px) {
+  .rc-floating-actions {
+    bottom: 16px;
+    right: 16px;
+    gap: 10px;
+  }
+  .rc-float-btn {
+    padding: 12px;
+    border-radius: 50%;
+  }
+  .rc-float-btn span {
+    display: none;
+  }
+  .rc-float-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ===== Google reCAPTCHA Integration ===== */
+.rc-recaptcha-group,
+.rc-turnstile-group {
+  margin-top: 18px;
+  margin-bottom: 14px;
+}
+
+.rc-recaptcha-box,
+.rc-turnstile-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 78px;
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+.rc-captcha-error-msg {
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+}
+
+
