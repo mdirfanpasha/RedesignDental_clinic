@@ -8,5 +8,8 @@
     "dev": "node server.js",
     "validate:i18n": "node scripts/validate-i18n.js",
     "build": "node scripts/validate-i18n.js"
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0"
   }
 }
