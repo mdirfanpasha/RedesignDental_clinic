@@ -62,7 +62,8 @@ const MIME_TYPES = {
 const CLEAN_ROUTES = {
   '/':          'index.html',
   '/about':     'about.html',
-  '/services':  'service.html',
+  '/services':  'services.html',
+  '/service':   'services.html',
   '/gallery':   'gallery.html',
   '/contact':   'contact.html',
   '/blog':      'blog.html',

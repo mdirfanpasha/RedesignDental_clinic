@@ -3,5 +3,10 @@
   "outputDirectory": ".",
   "framework": null,
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/services", "destination": "/services.html" },
+    { "source": "/service", "destination": "/services.html" },
+    { "source": "/service.html", "destination": "/services.html" }
+  ]
 }
