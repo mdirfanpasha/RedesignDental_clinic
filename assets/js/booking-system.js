@@ -167,6 +167,21 @@
               </div>
 
               <div class="rc-form-group">
+                <label class="rc-form-label" for="rc-apt-reason"><span data-i18n="booking.reasonLabel">Reason for Appointment (Optional)</span></label>
+                <select id="rc-apt-reason" class="rc-form-select">
+                  <option value="" data-i18n="booking.reasonSelect">Select Reason (Optional)</option>
+                  <option value="General" data-i18n="booking.reasonGeneral">General</option>
+                  <option value="Emergency" data-i18n="booking.reasonEmergency">Emergency</option>
+                  <option value="Implants" data-i18n="booking.reasonImplants">Implants</option>
+                  <option value="Custom Message" data-i18n="booking.reasonCustom">Custom Message</option>
+                </select>
+                <div id="rc-apt-custom-group" style="display: none; margin-top: 10px;">
+                  <label class="rc-form-label" for="rc-apt-custom-msg"><span data-i18n="booking.customMsgLabel">Tell us more (Optional)</span></label>
+                  <textarea id="rc-apt-custom-msg" class="rc-form-textarea" placeholder="Describe your reason for contacting us (Optional)" data-i18n-placeholder="booking.customMsgPlaceholder"></textarea>
+                </div>
+              </div>
+
+              <div class="rc-form-group">
                 <label class="rc-form-label" for="rc-apt-date" data-i18n="booking.dateLabel">Preferred Date *</label>
                 <input type="date" id="rc-apt-date" class="rc-form-input" required />
               </div>
@@ -242,21 +257,6 @@
                 <input type="tel" id="rc-cb-phone" class="rc-form-input" placeholder="10-Digit Mobile Number" data-i18n-placeholder="booking.phonePlaceholder" required />
               </div>
 
-              <div class="rc-form-group">
-                <label class="rc-form-label" for="rc-cb-email"><span data-i18n="booking.emailLabel">Email Address</span> <span>(<span data-i18n="common.optional">Optional</span>)</span></label>
-                <input type="email" id="rc-cb-email" class="rc-form-input" placeholder="Your Email (Optional)" data-i18n-placeholder="booking.emailPlaceholder" />
-              </div>
-
-              <div class="rc-form-group">
-                <label class="rc-form-label" for="rc-cb-pref-time" data-i18n="callback.prefTimeLabel">Preferred Callback Window</label>
-                <select id="rc-cb-pref-time" class="rc-form-select">
-                  <option value="Anytime" data-i18n="callback.timeAnytime">Anytime (10:00 AM - 8:00 PM IST)</option>
-                  <option value="Morning (10 AM - 1 PM)" data-i18n="callback.timeMorning">Morning (10:00 AM - 1:00 PM IST)</option>
-                  <option value="Afternoon (1 PM - 5 PM)" data-i18n="callback.timeAfternoon">Afternoon (1:00 PM - 5:00 PM IST)</option>
-                  <option value="Evening (5 PM - 8 PM)" data-i18n="callback.timeEvening">Evening (5:00 PM - 8:00 PM IST)</option>
-                </select>
-              </div>
-
               <!-- Google reCAPTCHA Widget -->
               <div class="rc-form-group rc-recaptcha-group">
                 <div id="rc-cb-recaptcha-container" class="rc-recaptcha-box"></div>
@@ -318,6 +318,20 @@
         updateSlotsForDate(dateInput.value);
       });
       updateSlotsForDate(dateInput.value);
+    }
+
+    var reasonSelect = document.getElementById('rc-apt-reason');
+    var customGroup = document.getElementById('rc-apt-custom-group');
+    var customMsg = document.getElementById('rc-apt-custom-msg');
+    if (reasonSelect && customGroup) {
+      reasonSelect.addEventListener('change', function () {
+        if (reasonSelect.value === 'Custom Message') {
+          customGroup.style.display = 'block';
+        } else {
+          customGroup.style.display = 'none';
+          if (customMsg) customMsg.value = '';
+        }
+      });
     }
 
     // Close buttons & overlay handlers
@@ -393,6 +407,12 @@
 
     var modal = document.getElementById('rc-appointment-modal');
     if (window.i18n) window.i18n.translateDOM(modal);
+    var reasonSelect = document.getElementById('rc-apt-reason');
+    var customGroup = document.getElementById('rc-apt-custom-group');
+    var customMsg = document.getElementById('rc-apt-custom-msg');
+    if (reasonSelect) reasonSelect.value = '';
+    if (customGroup) customGroup.style.display = 'none';
+    if (customMsg) customMsg.value = '';
     document.getElementById('rc-apt-form-view').style.display = 'block';
     document.getElementById('rc-apt-success-view').style.display = 'none';
     modal.classList.add('is-open');
@@ -452,6 +472,8 @@
     var name = document.getElementById('rc-apt-name').value.trim();
     var phone = document.getElementById('rc-apt-phone').value.trim();
     var email = document.getElementById('rc-apt-email').value.trim();
+    var reason = document.getElementById('rc-apt-reason') ? document.getElementById('rc-apt-reason').value : '';
+    var customMsg = document.getElementById('rc-apt-custom-msg') ? document.getElementById('rc-apt-custom-msg').value.trim() : '';
     var date = document.getElementById('rc-apt-date').value;
     var time = document.getElementById('rc-apt-time-input').value;
 
@@ -488,11 +510,19 @@
         document.getElementById('rc-apt-success-text').innerHTML =
           'Thank you, <strong>' + escapeHtml(name) + '</strong>!<br/>We have received your appointment request for <strong>' + escapeHtml(date) + ' at ' + escapeHtml(time) + '</strong>. Our team will contact you at <strong>' + escapeHtml(phone) + '</strong>.';
 
+        var reasonLine = '';
+        if (reason === 'Custom Message') {
+          reasonLine = "Reason: Custom Message" + (customMsg ? "\nMessage: " + customMsg : "") + "\n";
+        } else if (reason) {
+          reasonLine = "Reason: " + reason + "\n";
+        }
+
         var msg = encodeURIComponent(
           "Hello Redesign Clinics,\nI would like to request an appointment.\n\n" +
           "Name: " + name + "\n" +
           "Phone: " + phone + "\n" +
           (email ? "Email: " + email + "\n" : "") +
+          reasonLine +
           "Date: " + date + "\n" +
           "Time Slot: " + time
         );
@@ -522,7 +552,8 @@
 
     var name = document.getElementById('rc-cb-name').value.trim();
     var phone = document.getElementById('rc-cb-phone').value.trim();
-    var prefTime = document.getElementById('rc-cb-pref-time').value;
+    var prefTimeEl = document.getElementById('rc-cb-pref-time');
+    var prefTime = prefTimeEl ? prefTimeEl.value : '';
 
     if (!name || !phone) {
       alert('Please fill in your Name and Phone Number.');
@@ -555,7 +586,7 @@
         document.getElementById('rc-cb-success-view').style.display = 'block';
 
         document.getElementById('rc-cb-success-text').innerHTML =
-          'Thank you, <strong>' + escapeHtml(name) + '</strong>!<br/>We have received your callback request. Our team will call you back at <strong>' + escapeHtml(phone) + '</strong> (' + escapeHtml(prefTime) + ').';
+          'Thank you, <strong>' + escapeHtml(name) + '</strong>!<br/>We have received your callback request. Our team will call you back shortly at <strong>' + escapeHtml(phone) + '</strong>.';
       } else {
         btn.disabled = false;
         btn.querySelector('span').textContent = 'Request Callback Now';
@@ -596,11 +627,16 @@
     if (
       href === '#callback' ||
       href === '#call' ||
+      text.indexOf('make a call') !== -1 ||
+      text.indexOf('make call') !== -1 ||
       text.indexOf('book a call') !== -1 ||
       text.indexOf('request a call') !== -1 ||
       text.indexOf('call back') !== -1 ||
       text.indexOf('get a callback') !== -1 ||
-      text.indexOf('request callback') !== -1
+      text.indexOf('request callback') !== -1 ||
+      text.indexOf('request a callback') !== -1 ||
+      text.indexOf('call now') !== -1 ||
+      text.indexOf('call us') !== -1
     ) {
       e.preventDefault();
       openCallbackModal(target);

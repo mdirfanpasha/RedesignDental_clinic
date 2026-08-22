@@ -1,5 +1,4 @@
-export const enData = {
-  // Navigation & Header
+module.exports = {
   "nav.home": "Home",
   "nav.about": "About Us",
   "nav.services": "Services",
@@ -15,15 +14,13 @@ export const enData = {
   "nav.getAppointment": "Get Appointment",
   "nav.bookAppointment": "Book Appointment",
   "nav.language": "Language",
-  "nav.copyright": "© 2026 Redesign Clinics",
-
-  // Common UI Elements & Actions
-  "common.brand": "Redesign Clinics",
+  "nav.copyright": "© 2026 Redesign Dental Clinics",
+  "common.brand": "Redesign Dental Clinics",
   "common.location": "Banjara Hills, Hyderabad",
   "common.fullAddress": "6th Floor, Reliance Classic Enclave, Road no. 1, Banjara Hills, Hyderabad, Telangana - 500034",
-  "common.phone": "+91 77802 45307",
+  "common.phone": "+91 7780-245-307",
   "common.landline": "040-66772333",
-  "common.email": "redesigndentalclinics@gmail.com",
+  "common.email": "redesigndental@gmail.com",
   "common.workingHours": "Mon – Fri: 10:00 AM – 8:00 PM IST | Sun: 10:00 AM – 2:00 PM IST",
   "common.hoursWeekday": "Mon – Fri: 10:00 AM – 8:00 PM IST",
   "common.hoursSunday": "Sunday: 10:00 AM – 2:00 PM IST",
@@ -55,10 +52,8 @@ export const enData = {
   "common.prev": "Previous",
   "common.done": "Done",
   "common.send": "Send",
-
-  // Homepage Hero
   "hero.badge": "✦ Trusted Dental Destination in Banjara Hills",
-  "hero.title": "Experience World-Class Dental Care, Designed for Your Smile",
+  "hero.title": "Trusted Dental Care for Every Generation",
   "hero.subtitle": "From preventive care to advanced dental implants and full-mouth rehabilitation, our specialist-led clinic brings together clinical precision and gentle patient comfort.",
   "hero.stat1.number": "15+",
   "hero.stat1.label": "Years of Clinical Excellence",
@@ -72,17 +67,13 @@ export const enData = {
   "hero.leadForm.phonePlaceholder": "10-Digit Mobile Number",
   "hero.leadForm.servicePlaceholder": "Select Needed Treatment",
   "hero.leadForm.submit": "Request Callback Now",
-
-  // Drone Clinic Video Section
   "drone.badge": "OUR CLINIC",
-  "drone.title": "Redesign Clinics, Banjara Hills",
+  "drone.title": "Redesign Dental Clinics",
   "drone.subtitle": "A modern dental care destination in Banjara Hills, Hyderabad.",
   "drone.directionsText": "Conveniently located on Road No. 1, Banjara Hills with dedicated valet parking and complete accessibility.",
-
-  // Story & Who We Are Section
   "story.badge": "WHO WE ARE",
   "story.title": "Decades of Dental Excellence, Compassionate Care",
-  "story.p1": "At Redesign Clinics, we believe every patient deserves personalized, ethical, and pain-free dental treatments. Our state-of-the-art facility in Banjara Hills is equipped with advanced digital diagnostics and world-standard sterilization protocols.",
+  "story.p1": "At Redesign Dental Clinics, we believe every patient deserves personalized, ethical, and pain-free dental treatments. Our state-of-the-art facility in Banjara Hills is equipped with advanced digital diagnostics and world-standard sterilization protocols.",
   "story.p2": "Under the guidance of top prosthodontists and implantologists, our multi-specialty team delivers lasting smile transformations in a warm, anxiety-free setting.",
   "story.feature1.title": "Digital Precision",
   "story.feature1.desc": "3D CBCT imaging, digital impressions, and precision guided treatment planning.",
@@ -90,8 +81,6 @@ export const enData = {
   "story.feature2.desc": "Advanced computerized local anesthesia and soothing sedation options.",
   "story.feature3.title": "Strict Sterilization",
   "story.feature3.desc": "Class-B autoclave 6-step hospital-grade sterilization protocols.",
-
-  // Awards & Recognition
   "awards.badge": "EXCELLENCE & TRUST",
   "awards.title": "Recognized for Clinical Standards and Patient Trust",
   "awards.award1.title": "Best Dental Clinic in Hyderabad",
@@ -100,18 +89,24 @@ export const enData = {
   "awards.award2.desc": "Distinction in full-arch immediate loading implant surgery.",
   "awards.award3.title": "NABH Quality Benchmark",
   "awards.award3.desc": "Strict adherence to national patient safety protocols.",
-
-  // Doctor Showcase
-  "doctor.badge": "CHIEF SURGEON",
-  "doctor.title": "Meet Dr. Mohammed, BDS, MDS",
-  "doctor.designation": "Founder & Chief Dental Surgeon | Implantologist",
-  "doctor.bio": "With over 15 years of dedicated clinical practice and thousands of successful complex oral rehabilitations, Dr. Mohammed is renowned for combining micro-surgical precision with compassionate patient care.",
-  "doctor.spec1": "Full Mouth Rehabilitation",
-  "doctor.spec2": "Guided Dental Implants",
-  "doctor.spec3": "Cosmetic Smile Design",
-  "doctor.spec4": "Microscopic Endodontics",
-
-  // Services Preview on Home & Services Page
+  "doctor.badge": "CHIEF DENTAL SURGEON",
+  "doctor.title": "Meet Dr. Suhail A. Syed, BDS, MDS",
+  "doctor.designation": "Chief Dental Surgeon | Periodontics & Implantology",
+  "doctor.bio": "With over 20+ years of clinical expertise, Dr. Suhail A. Syed (BDS, MDS - Periodontics, Fellow AAID USA) specializes in advanced periodontal care, dental implants, aesthetic dentistry, fixed partial dentures, full mouth rehabilitation, hollywood smiles, and prosthodontics with gentle precision.",
+  "doctor.spec1": "Periodontics & Gum Care",
+  "doctor.spec2": "Dental Implantology",
+  "doctor.spec3": "Aesthetic Dentistry",
+  "doctor.spec4": "Fixed Partial Dentures",
+  "videoTestimonials.badge": "REAL PATIENT EXPERIENCES",
+  "videoTestimonials.title": "Hear From Our Patients",
+  "videoTestimonials.subtitle": "Real experiences from patients who chose Redesign Dental Clinics for their dental care.",
+  "videoTestimonials.doctorBadge": "FEATURED MESSAGE",
+  "videoTestimonials.doctorHeading": "A Word From Dr. Suhail",
+  "videoTestimonials.doctorSubtext": "Chief Dental Surgeon & Periodontist | 20+ Years Experience",
+  "videoTestimonials.patientLabel": "Patient Testimonial",
+  "videoTestimonials.patientSubtext": "Verified Patient Experience",
+  "videoTestimonials.unmute": "Click to Unmute",
+  "videoTestimonials.muted": "Muted",
   "services.badge": "OUR SERVICES",
   "services.title": "Comprehensive Dental Care, Designed Around You",
   "services.subtitle": "From routine preventive checkups to complex oral surgery, we provide a complete spectrum of specialist dental care.",
@@ -128,8 +123,6 @@ export const enData = {
   "services.cat.advanced": "Advanced Dentistry",
   "services.cat.pediatric": "Pediatric Care",
   "services.cat.emergency": "Emergency Care",
-
-  // All 37 Services
   "service.rootCanal.name": "Root Canal Treatment",
   "service.rootCanal.desc": "Single-visit pain-free root canal treatment using rotary endodontics and digital apex locators.",
   "service.endodonticRetreatment.name": "Endodontic Retreatment",
@@ -204,9 +197,7 @@ export const enData = {
   "service.tmjTreatment.desc": "Specialized diagnosis, splint therapy, and muscle relaxation for jaw clicking and TMD.",
   "service.orthodontics.name": "Traditional & Ceramic Braces",
   "service.orthodontics.desc": "Precision corrective orthodontics for misaligned bites, crowded teeth, and spacing issues.",
-
-  // Why Choose Us Section
-  "why.badge": "WHY REDESIGN CLINICS",
+  "why.badge": "WHY REDESIGN DENTAL CLINICS",
   "why.title": "Experience Dental Care With a Higher Standard",
   "why.item1.title": "Advanced 3D Digital Diagnostics",
   "why.item1.desc": "High-definition intraoral 3D scanning and digital X-rays with 90% less radiation for millimeter-precise treatment planning.",
@@ -216,31 +207,25 @@ export const enData = {
   "why.item3.desc": "Every instrument undergoes strict 6-step medical autoclaving and vacuum sealing for uncompromising patient hygiene.",
   "why.item4.title": "Transparent Pricing & Clear Treatment Plans",
   "why.item4.desc": "No hidden costs. We provide a detailed treatment estimate and explain every step before starting any procedure.",
-
-  // Clinic Tour Section (Before Blog)
   "clinicVideo.badge": "CLINIC TOUR",
-  "clinicVideo.title": "Inside Redesign Clinics",
+  "clinicVideo.title": "Inside Redesign Dental Clinics",
   "clinicVideo.desc": "Take a look inside our clinic and experience the environment where modern dental care meets patient comfort.",
   "clinicVideo.watchBtn": "Watch Video Tour",
-
-  // Testimonials Section
   "testimonials.badge": "PATIENT EXPERIENCES",
   "testimonials.title": "Stories of Restored Smiles and Genuine Trust",
-  "testimonials.review1.text": "I was terrified of getting a root canal, but Dr. Mohammed and his team made the entire procedure completely painless. The clinic is ultra-modern and pristine.",
+  "testimonials.review1.text": "I was terrified of getting a root canal, but Dr. Suhail and his team made the entire procedure completely painless. The clinic is ultra-modern and pristine.",
   "testimonials.review1.author": "Priya Sharma",
   "testimonials.review1.service": "Root Canal & Ceramic Crown",
-  "testimonials.review2.text": "The dental implant treatment I received at Redesign Clinics was exceptional. Everything was explained clearly and the result feels just like my natural teeth.",
+  "testimonials.review2.text": "The dental implant treatment I received at Redesign Dental Clinics was exceptional. Everything was explained clearly and the result feels just like my natural teeth.",
   "testimonials.review2.author": "Rajesh Varma",
   "testimonials.review2.service": "Dental Implant & Crown",
   "testimonials.review3.text": "Best dental clinic in Banjara Hills. My smile makeover with veneers turned out better than I could have imagined. Highly recommend to everyone!",
   "testimonials.review3.author": "Sneha Reddy",
   "testimonials.review3.service": "Cosmetic Smile Makeover",
   "testimonials.verified": "Verified Google Review",
-
-  // Gallery Page
   "gallery.badge": "✦ PATIENT STORIES",
   "gallery.heroTitle": "Happy Patients, Beautiful Smiles",
-  "gallery.heroSubtitle": "Every smile has a story. Explore moments from our patients and the Redesign Clinics experience.",
+  "gallery.heroSubtitle": "Every smile has a story. Explore moments from our patients and the Redesign Dental Clinics experience.",
   "gallery.introTitle": "Smiles That Speak For Themselves",
   "gallery.introDesc": "From everyday dental care to complete smile transformations, we are proud to be part of our patients' journeys toward healthier, more confident smiles.",
   "gallery.filter.all": "All Photos (51)",
@@ -251,8 +236,6 @@ export const enData = {
   "gallery.lightbox.next": "Next Image",
   "gallery.lightbox.prev": "Previous Image",
   "gallery.lightbox.close": "Close Lightbox",
-
-  // Blog Page
   "blog.badge": "✦ DENTAL HEALTH JOURNAL",
   "blog.heroTitle": "Expert Dental Insights & Oral Care Advice",
   "blog.heroSubtitle": "Stay informed with practical tips, oral health guidance, and the latest in modern dentistry from our dental team.",
@@ -264,30 +247,26 @@ export const enData = {
   "blog.category.pediatric": "Child Dental Care",
   "blog.readTime": "5 min read",
   "blog.publishedOn": "Published",
-
-  // Blog Articles
-  "blog.post1.title": "Everything You Need to Know About Pain-Free Root Canal Treatments",
-  "blog.post1.excerpt": "Modern rotary instruments and computerized anesthesia make root canal therapy as comfortable as getting a standard filling.",
-  "blog.post1.category": "Dental Care",
-  "blog.post2.title": "Dental Implants vs Bridges: Which Option is Right for You?",
-  "blog.post2.excerpt": "An in-depth clinical comparison of durability, bone health preservation, and aesthetic outcomes between implants and bridges.",
+  "blog.post1.title": "Root Canal Treatment: When Is It Recommended?",
+  "blog.post1.excerpt": "How modern endodontic therapy removes infection, relieves tooth pain, and saves your natural tooth with lasting strength.",
+  "blog.post1.category": "Root Canal & Endodontics",
+  "blog.post2.title": "Dental Implants: What Patients Should Know",
+  "blog.post2.excerpt": "A comprehensive guide to permanent tooth replacement with titanium implants, osseointegration, and custom crown restorations.",
   "blog.post2.category": "Dental Implants",
-  "blog.post3.title": "The Science of Professional Teeth Whitening: In-Clinic vs Home Kits",
-  "blog.post3.excerpt": "Understand how LED-activated hydrogen peroxide safely lifts deep enamel stains without causing dentin hypersensitivity.",
-  "blog.post3.category": "Cosmetic Care",
-  "blog.post4.title": "Early Dental Habits: A Parent's Guide to Protecting Children's Teeth",
-  "blog.post4.excerpt": "From the eruption of first milk teeth to pit and fissure sealants, key preventive steps every parent should know.",
-  "blog.post4.category": "Child Dental Care",
-  "blog.post5.title": "How to Prevent Gum Disease Before It Affects Your Overall Health",
-  "blog.post5.excerpt": "Exploring the link between periodontal inflammation and cardiovascular wellness, plus daily preventive oral hygiene tips.",
-  "blog.post5.category": "Oral Hygiene",
-  "blog.post6.title": "Clear Aligners vs Metal Braces: What to Expect During Treatment",
-  "blog.post6.excerpt": "Discover how custom digital invisible aligners gently reposition teeth with greater comfort and zero dietary restrictions.",
-  "blog.post6.category": "Cosmetic Care",
-
-  // Contact Page & Information
+  "blog.post3.title": "Dental Crowns: What Are They and When Are They Used?",
+  "blog.post3.excerpt": "Learn how zirconia and ceramic crowns protect weakened teeth, restore chewing function, and complete dental implant restorations.",
+  "blog.post3.category": "Dental Crowns",
+  "blog.post4.title": "Understanding Full Mouth Rehabilitation",
+  "blog.post4.excerpt": "Comprehensive restorative dental care combining implants, crowns, and periodontal therapies to reconstruct worn or missing teeth.",
+  "blog.post4.category": "Full Mouth Rehabilitation",
+  "blog.post5.title": "Smile Makeovers: Understanding Cosmetic Dental Treatment Options",
+  "blog.post5.excerpt": "Explore personalized cosmetic dentistry solutions including porcelain veneers, composite bonding, and professional teeth whitening.",
+  "blog.post5.category": "Smile Makeover",
+  "blog.post6.title": "Gum Disease & Periodontal Health: Early Signs to Watch",
+  "blog.post6.excerpt": "Recognizing early gingivitis warning signs and how specialist periodontal care prevents bone loss and preserves natural teeth.",
+  "blog.post6.category": "Periodontal Care",
   "contact.badge": "✦ GET IN TOUCH",
-  "contact.heroTitle": "Schedule Your Visit at Redesign Clinics",
+  "contact.heroTitle": "Schedule Your Visit at Redesign Dental Clinics",
   "contact.heroSubtitle": "We are here to answer your questions and provide personalized dental care. Reach out by phone, email, or fill out our quick form.",
   "contact.form.title": "Send Us a Message",
   "contact.form.nameLabel": "Full Name",
@@ -307,9 +286,7 @@ export const enData = {
   "contact.emailLabel": "Email Enquiries",
   "contact.hoursLabel": "Working Hours",
   "contact.emergencyTitle": "Dental Emergency?",
-  "contact.emergencyText": "Call us immediately at +91 77802 45307 for priority same-day emergency dental appointments.",
-
-  // Appointment & Callback Booking Modals
+  "contact.emergencyText": "Call us immediately at +91 7780-245-307 for priority same-day emergency dental appointments.",
   "booking.modalTitle": "Book Your Dental Appointment",
   "booking.modalSubtitle": "Choose your preferred date and time. Our team will confirm your visit shortly.",
   "booking.fullNameLabel": "Full Name",
@@ -325,8 +302,6 @@ export const enData = {
   "booking.recaptchaNotice": "Protected by Google reCAPTCHA. We respect your privacy.",
   "booking.successTitle": "Appointment Request Received!",
   "booking.successMessage": "Thank you! We have received your booking request. Our team will contact you shortly to confirm your appointment.",
-
-  // Callback Modal
   "callback.modalTitle": "Request a Fast Callback",
   "callback.modalSubtitle": "Leave your details and a senior dental specialist will call you back within 15 minutes.",
   "callback.prefTimeLabel": "Preferred Callback Window",
@@ -337,8 +312,6 @@ export const enData = {
   "callback.submitBtn": "Request Callback Now",
   "callback.successTitle": "Callback Request Received!",
   "callback.successMessage": "Thank you! Our front desk team will call you back shortly during your preferred time window.",
-
-  // Validation & Error Messages
   "errors.nameRequired": "Please enter your full name.",
   "errors.phoneInvalid": "Please enter a valid 10-digit mobile number.",
   "errors.emailInvalid": "Please enter a valid email address.",
@@ -346,29 +319,40 @@ export const enData = {
   "errors.timeRequired": "Please select a preferred time slot.",
   "errors.captchaRequired": "Please complete the reCAPTCHA verification.",
   "errors.submissionFailed": "Something went wrong while submitting. Please try again or call us directly.",
-
-  // Footer Section
-  "footer.tagline": "Redesign Clinics is a state-of-the-art dental care center in Banjara Hills, Hyderabad, delivering specialist-led treatments with comfort, precision, and trust.",
+  "footer.tagline": "Redesign Dental Clinics is a state-of-the-art dental care center in Banjara Hills, Hyderabad, delivering specialist-led treatments with comfort, precision, and trust.",
   "footer.quickLinks": "Quick Links",
   "footer.treatments": "Treatments",
   "footer.contactInfo": "Contact Information",
-  "footer.copyright": "© 2026 Redesign Clinics. All rights reserved.",
-
-  // Legal Pages
+  "footer.copyright": "© 2026 Redesign Dental Clinics. All rights reserved.",
   "legal.privacyTitle": "Privacy Policy",
   "legal.privacyUpdated": "Last updated: June 2026",
-  "legal.privacyIntro": "At Redesign Clinics, your privacy and trust matter to us as much as your smile. This policy explains what information we collect when you visit our website or book an appointment, and how we keep it safe.",
+  "legal.privacyIntro": "At Redesign Dental Clinics, your privacy and trust matter to us as much as your smile. This policy explains what information we collect when you visit our website or book an appointment, and how we keep it safe.",
   "legal.termsTitle": "Terms & Conditions",
   "legal.termsUpdated": "Last updated: June 2026",
-  "legal.termsIntro": "Welcome to Redesign Clinics. By accessing our website or booking an appointment, you agree to these standard healthcare service terms.",
+  "legal.termsIntro": "Welcome to Redesign Dental Clinics. By accessing our website or booking an appointment, you agree to these standard healthcare service terms.",
   "legal.cookiesTitle": "Cookie Policy",
   "legal.cookiesUpdated": "Last updated: June 2026",
-  "legal.cookiesIntro": "This Cookie Policy explains how Redesign Clinics uses cookies and similar technologies to remember your preferences and ensure website functionality.",
+  "legal.cookiesIntro": "This Cookie Policy explains how Redesign Dental Clinics uses cookies and similar technologies to remember your preferences and ensure website functionality.",
   "legal.licensesTitle": "Licenses & Registrations",
-  "legal.licensesIntro": "Redesign Clinics operates under official clinical registrations, adhering to medical council benchmarks and national dental standards.",
-
-  // 404 Page
+  "legal.licensesIntro": "Redesign Dental Clinics operates under official clinical registrations, adhering to medical council benchmarks and national dental standards.",
   "notFound.title": "404 - Page Not Found",
   "notFound.desc": "The page you are looking for might have been moved, renamed, or is temporarily unavailable.",
-  "notFound.homeBtn": "Return to Home Page"
+  "notFound.homeBtn": "Return to Home Page",
+  "booking.reasonLabel": "Reason for Appointment (Optional)",
+  "booking.reasonSelect": "Select Reason (Optional)",
+  "booking.reasonGeneral": "General",
+  "booking.reasonEmergency": "Emergency",
+  "booking.reasonImplants": "Implants",
+  "booking.reasonCustom": "Custom Message",
+  "booking.customMsgLabel": "Tell us more (Optional)",
+  "booking.customMsgPlaceholder": "Describe your reason for contacting us (Optional)",
+  "story.statWait.number": "Minutes",
+  "story.statWait.label": "Quick & Accessible",
+  "story.statWait.desc": "We aim to keep waiting times as short as possible for a smooth and comfortable visit.",
+  "story.statEmergency.number": "Support",
+  "story.statEmergency.label": "Emergency Care",
+  "story.statEmergency.desc": "For urgent dental concerns, our team can assess your situation and guide you toward appropriate care.",
+  "doctor.spec5": "Full Mouth Rehabilitation Expert",
+  "doctor.spec6": "Hollywood Smiles",
+  "doctor.spec7": "Prosthodontist"
 };

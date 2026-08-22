@@ -10,13 +10,18 @@ if (!fs.existsSync(outDir)) {
   fs.mkdirSync(outDir, { recursive: true });
 }
 
-// ─── TRANSLATION INVENTORY DATA ─────────────────────────────────────────────
-// Complete glossary and structured strings across all namespaces.
+const localesDir = path.join(__dirname, 'locales');
 
-import { enData } from './locales/en.js';
-import { teData } from './locales/te.js';
-import { hiData } from './locales/hi.js';
-import { arData } from './locales/ar.js';
+function loadLocale(file) {
+  const raw = fs.readFileSync(path.join(localesDir, file), 'utf-8');
+  const jsonStr = raw.replace(/^\s*module\.exports\s*=\s*/, '').replace(/;\s*$/, '');
+  return JSON.parse(jsonStr);
+}
+
+const enData = loadLocale('en.js');
+const teData = loadLocale('te.js');
+const hiData = loadLocale('hi.js');
+const arData = loadLocale('ar.js');
 
 console.log('Writing translation files...');
 fs.writeFileSync(path.join(outDir, 'en.json'), JSON.stringify(enData, null, 2), 'utf-8');

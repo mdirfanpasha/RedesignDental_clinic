@@ -63,7 +63,6 @@ const CLEAN_ROUTES = {
   '/':          'index.html',
   '/about':     'about.html',
   '/services':  'services.html',
-  '/service':   'services.html',
   '/gallery':   'gallery.html',
   '/contact':   'contact.html',
   '/blog':      'blog.html',
@@ -73,11 +72,13 @@ const CLEAN_ROUTES = {
   '/licenses':  'licenses.html',
 };
 
-// ─── Legacy .html Redirects ────────────────────────────────────────────────
+// ─── Legacy .html & Duplicate Route 301 Redirects ──────────────────────────
 const HTML_REDIRECTS = {
   '/index.html':    '/',
   '/about.html':    '/about',
   '/service.html':  '/services',
+  '/service':       '/services',
+  '/services.html': '/services',
   '/gallery.html':  '/gallery',
   '/contact.html':  '/contact',
   '/blog.html':     '/blog',
@@ -85,11 +86,11 @@ const HTML_REDIRECTS = {
   '/terms.html':    '/terms',
   '/cookies.html':  '/cookies',
   '/licenses.html': '/licenses',
-  // Also handle common variants
+  // Common variants
   '/index.htm':     '/',
   '/about.htm':     '/about',
-  '/services.html': '/services',  // In case anyone links to services.html
   '/services.htm':  '/services',
+  '/service.htm':   '/services',
 };
 
 // ─── Helper: serve a file with Range support ───────────────────────────────

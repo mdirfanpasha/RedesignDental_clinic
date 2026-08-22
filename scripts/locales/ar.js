@@ -1,5 +1,4 @@
-export const arData = {
-  // Navigation & Header
+module.exports = {
   "nav.home": "الرئيسية",
   "nav.about": "من نحن",
   "nav.services": "خدماتنا",
@@ -15,15 +14,13 @@ export const arData = {
   "nav.getAppointment": "احجز موعداً",
   "nav.bookAppointment": "حجز موعد",
   "nav.language": "اللغة",
-  "nav.copyright": "© 2026 Redesign Clinics",
-
-  // Common UI Elements & Actions
-  "common.brand": "Redesign Clinics",
+  "nav.copyright": "© 2026 Redesign Dental Clinics",
+  "common.brand": "Redesign Dental Clinics",
   "common.location": "بانجارا هيلز، حيدر أباد",
   "common.fullAddress": "الطابق السادس، ريلاينس كلاسيك إنكليف، طريق رقم 1، بانجارا هيلز، حيدر أباد، تيلانجانا - 500034",
-  "common.phone": "+91 77802 45307",
+  "common.phone": "+91 7780-245-307",
   "common.landline": "040-66772333",
-  "common.email": "redesigndentalclinics@gmail.com",
+  "common.email": "redesigndental@gmail.com",
   "common.workingHours": "الإثنين – الجمعة: 10:00 صباحاً – 8:00 مساءً بتوقيت الهند | الأحد: 10:00 صباحاً – 2:00 ظهراً",
   "common.hoursWeekday": "الإثنين – الجمعة: 10:00 صباحاً – 8:00 مساءً",
   "common.hoursSunday": "الأحد: 10:00 صباحاً – 2:00 ظهراً",
@@ -55,10 +52,8 @@ export const arData = {
   "common.prev": "السابق",
   "common.done": "تم",
   "common.send": "إرسال",
-
-  // Homepage Hero
   "hero.badge": "✦ وجهة رائدة لطب الأسنان في بانجارا هيلز",
-  "hero.title": "رعاية أسنان عالمية المستوى، صُممت خصيصاً لابتسامتك",
+  "hero.title": "رعاية أسنان موثوقة لكل الأجيال",
   "hero.subtitle": "من الرعاية الوقائية إلى زراعة الأسنان المتقدمة وإعادة تأهيل الفم بالكامل، يجمع فريقنا المتخصص بين الدقة الطبية والراحة التامة بدون ألم.",
   "hero.stat1.number": "15+",
   "hero.stat1.label": "سنوات من التميز السريري",
@@ -72,17 +67,13 @@ export const arData = {
   "hero.leadForm.phonePlaceholder": "رقم الهاتف (10 أرقام)",
   "hero.leadForm.servicePlaceholder": "اختر نوع العلاج المطلوب",
   "hero.leadForm.submit": "طلب معاودة اتصال الآن",
-
-  // Drone Clinic Video Section
   "drone.badge": "عيادتنا",
-  "drone.title": "Redesign Clinics، بانجارا هيلز",
+  "drone.title": "عيادات Redesign Dental Clinics",
   "drone.subtitle": "وجهة حديثة ومتطورة لطب وجراحة الأسنان في بانجارا هيلز، حيدر أباد.",
   "drone.directionsText": "موقع متميز على طريق رقم 1، بانجارا هيلز مع خدمة صف السيارات ووصول ميسر بالكامل.",
-
-  // Story & Who We Are Section
   "story.badge": "من نحن",
   "story.title": "عقود من التميز الطبي والرعاية الإنسانية المخلصة",
-  "story.p1": "في Redesign Clinics، نؤمن بأن كل مريض يستحق علاجاً مخصصاً وأخلاقياً وخالياً من الألم. تم تجهيز مركزنا المتطور في بانجارا هيلز بأحدث أجهزة التشخيص الرقمي وبروتوكولات التعقيم المعتمدة عالمياً.",
+  "story.p1": "في Redesign Dental Clinics، نؤمن بأن كل مريض يستحق علاجاً مخصصاً وأخلاقياً وخالياً من الألم. تم تجهيز مركزنا المتطور في بانجارا هيلز بأحدث أجهزة التشخيص الرقمي وبروتوكولات التعقيم المعتمدة عالمياً.",
   "story.p2": "تحت إشراف كبار استشاريي التركيبات والزراعة، يقدم فريقنا متعدد التخصصات تحولاً حقيقياً للابتسامة في بيئة هادئة ومريحة.",
   "story.feature1.title": "دقة رقمية متناهية",
   "story.feature1.desc": "تصوير ثلاثي الأبعاد CBCT، ومسح ضوئي رقمي مع تخطيط دقيق للعلاج.",
@@ -90,8 +81,6 @@ export const arData = {
   "story.feature2.desc": "تخدير موضعي حاسوبي متطور وخيارات مهدئة لراحة تامة.",
   "story.feature3.title": "تعقيم فائق الصرامة",
   "story.feature3.desc": "أوتوكلاف فئة B وبروتوكول تعقيم طبي من 6 مراحل لسلامة المرضى.",
-
-  // Awards & Recognition
   "awards.badge": "التميز والمصداقية",
   "awards.title": "تقدير للمعايير الطبية وثقة المرضى العالية",
   "awards.award1.title": "أفضل عيادة أسنان في حيدر أباد",
@@ -100,18 +89,24 @@ export const arData = {
   "awards.award2.desc": "ريادة في زراعة الفك الكامل مع التحميل الفوري للأسنان.",
   "awards.award3.title": "معيار الجودة NABH",
   "awards.award3.desc": "التزام كامل بالمعايير الوطنية لسلامة وجودة رعاية المرضى.",
-
-  // Doctor Showcase
-  "doctor.badge": "كبير الجراحين",
-  "doctor.title": "تعرف على د. محمد، BDS, MDS",
-  "doctor.designation": "المؤسس وكبير جراحي الأسنان | أخصائي زراعة الأسنان",
-  "doctor.bio": "مع أكثر من 15 عاماً من الممارسة السريرية وآلاف الحالات المعقدة الناجحة في إعادة تأهيل الفم، يشتهر د. محمد بالدقة الجراحية الدقيقة والرعاية الفائقة للمرضى.",
-  "doctor.spec1": "إعادة تأهيل الفم الكامل",
-  "doctor.spec2": "زراعة الأسنان الموجهة حاسوبياً",
-  "doctor.spec3": "تصميم الابتسامة التجميلية",
-  "doctor.spec4": "علاج الجذور بالمجهر الإلكتروني",
-
-  // Services Preview on Home & Services Page
+  "doctor.badge": "كبير جراحي الأسنان",
+  "doctor.title": "د. سهيل أ. سيد, BDS, MDS",
+  "doctor.designation": "كبير جراحي الأسنان | أمراض اللثة وزراعة الأسنان",
+  "doctor.bio": "مع أكثر من 20 عاماً من الخبرة السريرية، يتخصص الدكتور سهيل أ. سيد (BDS, MDS - علاج اللثة وزراعة الأسنان، زميل الجمعية الأمريكية لزراعة الأسنان AAID) في العناية المتقدمة باللثة، زراعة الأسنان، طب الأسنان التجميلي، التركيبات الثابتة، إعادة تأهيل الفم بالكامل، ابتسامة هوليوود، والاستعاضة السنية بدقة متناهية.",
+  "doctor.spec1": "أمراض وجراحة اللثة",
+  "doctor.spec2": "زراعة الأسنان المتقدمة",
+  "doctor.spec3": "طب الأسنان التجميلي",
+  "doctor.spec4": "التركيبات الثابتة والجسور",
+  "videoTestimonials.badge": "تجارب المرضى الحقيقية",
+  "videoTestimonials.title": "استمع إلى مرضانا",
+  "videoTestimonials.subtitle": "تجارب حقيقية من المرضى الذين اختاروا عيادات ريديزاين لطب الأسنان لرعايتهم.",
+  "videoTestimonials.doctorBadge": "رسالة مميزة",
+  "videoTestimonials.doctorHeading": "كلمة من د. سهيل",
+  "videoTestimonials.doctorSubtext": "كبير جراحي الأسنان وأخصائي أمراض اللثة | أكثر من 20 عاماً من الخبرة",
+  "videoTestimonials.patientLabel": "تجربة مريض",
+  "videoTestimonials.patientSubtext": "قصة مريض موثقة",
+  "videoTestimonials.unmute": "انقر لإلغاء الكتم",
+  "videoTestimonials.muted": "صامت",
   "services.badge": "خدماتنا المتميزة",
   "services.title": "رعاية أسنان شاملة، صممت خصيصاً لاحتياجاتك",
   "services.subtitle": "من الفحوصات الدورية الوقائية إلى الجراحات المعقدة، نقدم طيفاً متكاملاً من علاجات الأسنان التخصصية.",
@@ -128,8 +123,6 @@ export const arData = {
   "services.cat.advanced": "طب الأسنان المتقدم",
   "services.cat.pediatric": "طب أسنان الأطفال",
   "services.cat.emergency": "طوارئ الأسنان",
-
-  // All 37 Services
   "service.rootCanal.name": "علاج سحب العصب (علاج الجذور)",
   "service.rootCanal.desc": "علاج جذور الأسنان بدون ألم في جلسة واحدة باستخدام التقنيات الدوارة الحديثة وتحديد القنوات الرقمي.",
   "service.endodonticRetreatment.name": "إعادة معالجة العصب المجهرية",
@@ -204,9 +197,7 @@ export const arData = {
   "service.tmjTreatment.desc": "جبائر مخصصة وعلاجات لاسترخاء عضلات الفك وعلاج طقطقة المفصل الصدغي.",
   "service.orthodontics.name": "التقويم الثابت والتقويم الخزفي",
   "service.orthodontics.desc": "تقويم دقيق لتصحيح إطباق الأسنان وتعديل الفراغات والازدحام.",
-
-  // Why Choose Us Section
-  "why.badge": "لماذا REDESIGN CLINICS",
+  "why.badge": "لماذا REDESIGN DENTAL CLINICS",
   "why.title": "اختبر أعلى معايير الجودة والراحة في طب الأسنان",
   "why.item1.title": "تشخيص رقمي ثلاثي الأبعاد متطور",
   "why.item1.desc": "مسح رقمي وأشعة ثلاثية الأبعاد بجرعة إشعاعية أقل بنسبة 90% لتخطيط علاجي فائق الدقة.",
@@ -216,31 +207,25 @@ export const arData = {
   "why.item3.desc": "لا مساومة على النظافة والتعقيم، حيث تخضع جميع الأدوات لبروتوكول تعقيم من 6 مراحل.",
   "why.item4.title": "أسعار شفافة وخطة علاج واضحة",
   "why.item4.desc": "لا رسوم مخفية. نقدم تقديراً مفصلاً ونشرح كل خطوة بالتفصيل قبل بدء العلاج.",
-
-  // Clinic Tour Section
   "clinicVideo.badge": "جولة في العيادة",
-  "clinicVideo.title": "نظرة داخل Redesign Clinics",
+  "clinicVideo.title": "نظرة داخل Redesign Dental Clinics",
   "clinicVideo.desc": "استكشف أروقة عيادتنا واكتشف البيئة المريحة التي تجمع بين الرعاية المتطورة والاهتمام بالمرضى.",
   "clinicVideo.watchBtn": "شاهد الفيديو التعريفي",
-
-  // Testimonials Section
   "testimonials.badge": "تجارب المرضى",
   "testimonials.title": "قصص نجاح حقيقية وثقة نعتز بها من مرضانا",
-  "testimonials.review1.text": "كنت متخوفة جداً من علاج سحب العصب، لكن د. محمد وفريقه جعلوا العلاج يمر بدون أي ألم على الإطلاق. العيادة راقية ونظيفة للغاية.",
+  "testimonials.review1.text": "كنت متخوفة جداً من علاج سحب العصب، لكن د. سهيل وفريقه جعلوا العلاج يمر بدون أي ألم على الإطلاق. العيادة راقية ونظيفة للغاية.",
   "testimonials.review1.author": "بريا شارما",
   "testimonials.review1.service": "علاج عصب وتاج سيراميك",
-  "testimonials.review2.text": "تجربة زراعة الأسنان في Redesign Clinics كانت استثنائية بكل المقاييس. تم شرح كل شيء بوضوح والنتيجة تبدو كأسناني الطبيعية تماماً.",
+  "testimonials.review2.text": "تجربة زراعة الأسنان في Redesign Dental Clinics كانت استثنائية بكل المقاييس. تم شرح كل شيء بوضوح والنتيجة تبدو كأسناني الطبيعية تماماً.",
   "testimonials.review2.author": "راجيش فارما",
   "testimonials.review2.service": "زراعة أسنان وتاج",
   "testimonials.review3.text": "أفضل عيادة أسنان في بانجارا هيلز. تصميم ابتسامتي بالفينير جاء أجمل مما تخيلت بكثير. أوصي بهم بشدة للجميع!",
   "testimonials.review3.author": "سنيها ريدي",
   "testimonials.review3.service": "تجميل الابتسامة بالفينير",
   "testimonials.verified": "تقييم موثق من Google",
-
-  // Gallery Page
   "gallery.badge": "✦ قصص المرضى",
   "gallery.heroTitle": "مرضى سعداء، وابتسامات مشرقة",
-  "gallery.heroSubtitle": "وراء كل ابتسامة قصة نجاح. استكشف لحظات مميزة من تجارب مرضانا في Redesign Clinics.",
+  "gallery.heroSubtitle": "وراء كل ابتسامة قصة نجاح. استكشف لحظات مميزة من تجارب مرضانا في Redesign Dental Clinics.",
   "gallery.introTitle": "ابتسامات تتحدث عن جودتها",
   "gallery.introDesc": "من الفحوصات اليومية إلى عمليات التحول الكامل للابتسامة، نحن فخورون بأن نكون جزءاً من رحلة مرضانا نحو ابتسامة صحية وواثقة.",
   "gallery.filter.all": "جميع الصور (51)",
@@ -251,8 +236,6 @@ export const arData = {
   "gallery.lightbox.next": "الصورة التالية",
   "gallery.lightbox.prev": "الصورة السابقة",
   "gallery.lightbox.close": "إغلاق",
-
-  // Blog Page
   "blog.badge": "✦ مجلة صحة الفم والأسنان",
   "blog.heroTitle": "نصائح وإرشادات طبية من خبراء الأسنان",
   "blog.heroSubtitle": "ابقَ على اطلاع بأحدث النصائح العملية والمعلومات التثقيفية للعناية بصحة فمك وأسنانك.",
@@ -264,30 +247,26 @@ export const arData = {
   "blog.category.pediatric": "أسنان الأطفال",
   "blog.readTime": "قراءة في 5 دقائق",
   "blog.publishedOn": "نُشر بتاريخ",
-
-  // Blog Articles
-  "blog.post1.title": "كل ما تحتاج لمعرفته عن علاج سحب العصب بدون ألم",
-  "blog.post1.excerpt": "أدوات التوسيع الدوارة الحديثة والتخدير الحاسوبي جعلت علاج الجذور مريحاً تماماً مثل وضع حشوة بسيطة.",
-  "blog.post1.category": "صحة الأسنان",
-  "blog.post2.title": "زراعة الأسنان مقابل الجسور الثابتة: أيهما الخيار الأنسب لك؟",
-  "blog.post2.excerpt": "مقارنة سريرية مفصلة بين المتانة والحفاظ على عظم الفك والمظهر الجمالي بين الزراعة والجسور.",
+  "blog.post1.title": "علاج سحب العصب: متى يوصى به؟",
+  "blog.post1.excerpt": "كيف يزيل علاج الجذور الحديث العدوى ويخفف آلام الأسنان ويحافظ على سنك الطبيعي بقوة دائمة.",
+  "blog.post1.category": "علاج الجذور والأعصاب",
+  "blog.post2.title": "زراعة الأسنان: ما يجب أن يعرفه المرضى",
+  "blog.post2.excerpt": "دليل شامل لتعويض الأسنان المفقودة بشكل دائم باستخدام غرسات التيتانيوم والتيجان المخصصة.",
   "blog.post2.category": "زراعة الأسنان",
-  "blog.post3.title": "علم تبييض الأسنان الاحترافي: في العيادة مقابل القوالب المنزلية",
-  "blog.post3.excerpt": "تعرف على كيفية عمل بيروكسيد الهيدروجين المنشط بالضوء على إزالة التصبغات العميقة بأمان ودون حساسية.",
-  "blog.post3.category": "العناية التجميلية",
-  "blog.post4.title": "العادات المبكرة للعناية بأسنان الأطفال: دليل الآباء والأمهات",
-  "blog.post4.excerpt": "من ظهور أول سن لبني إلى تطبيق المواد السادة للشقوق، خطوات وقائية أساسية يحتاجها طفلك.",
-  "blog.post4.category": "أسنان الأطفال",
-  "blog.post5.title": "كيف تحمي لثتك قبل أن تؤثر أمراضها على صحتك العامة",
-  "blog.post5.excerpt": "استكشاف العلاقة بين التهابات دواعم الأسنان وصحة القلب، بالإضافة إلى نصائح العناية اليومية بنظافة الفم.",
-  "blog.post5.category": "صحة الفم والأسنان",
-  "blog.post6.title": "التقويم الشفاف مقابل التقويم المعدني: ما الذي تتوقعه أثناء العلاج",
-  "blog.post6.excerpt": "اكتشف كيف تقوم القوالب الشفافة الرقمية بتعديل مواقع الأسنان برفق وراحة دون قيود على الطعام.",
-  "blog.post6.category": "العناية التجميلية",
-
-  // Contact Page & Information
+  "blog.post3.title": "تيجان الأسنان: ما هي ومتى يتم استخدامها؟",
+  "blog.post3.excerpt": "تعرف على كيفية حماية تيجان الزركونيا والخزف للأسنان الضعيفة واستعادة وظيفة المضغ وإكمال زراعة الأسنان.",
+  "blog.post3.category": "تيجان الأسنان",
+  "blog.post4.title": "فهم إعادة تأهيل الفم بالكامل",
+  "blog.post4.excerpt": "رعاية ترميمية شاملة تجمع بين الزراعة والتيجان وعلاجات اللثة لإعادة بناء الأسنان المتآكلة أو المفقودة.",
+  "blog.post4.category": "إعادة تأهيل الفم بالكامل",
+  "blog.post5.title": "تجميل الابتسامة: فهم خيارات طب الأسنان التجميلي",
+  "blog.post5.excerpt": "استكشف حلول تجميل الأسنان المخصصة بما في ذلك عدسات الفينير والترميمات الضوئية وتبييض الأسنان الاحترافي.",
+  "blog.post5.category": "تجميل الابتسامة",
+  "blog.post6.title": "أمراض اللثة وصحة دواعم الأسنان: علامات مبكرة يجب الانتباه لها",
+  "blog.post6.excerpt": "التعرف على العلامات التحذيرية المبكرة لالتهاب اللثة وكيف تمنع رعاية دواعم الأسنان المتخصصة فقدان العظام.",
+  "blog.post6.category": "صحة اللثة",
   "contact.badge": "✦ تواصل معنا",
-  "contact.heroTitle": "احجز موعد استشارتك في Redesign Clinics",
+  "contact.heroTitle": "احجز موعد استشارتك في Redesign Dental Clinics",
   "contact.heroSubtitle": "نحن هنا للإجابة على استفساراتكم وتقديم أفضل رعاية لأسنانكم. تواصل معنا عبر الهاتف أو البريد الإلكتروني أو النموذج السريع.",
   "contact.form.title": "أرسل لنا رسالة",
   "contact.form.nameLabel": "الاسم الكامل",
@@ -307,9 +286,7 @@ export const arData = {
   "contact.emailLabel": "البريد الإلكتروني",
   "contact.hoursLabel": "ساعات العمل",
   "contact.emergencyTitle": "طوارئ الأسنان؟",
-  "contact.emergencyText": "اتصل بنا فوراً على الرقم +91 77802 45307 للحصول على موعد طارئ في نفس اليوم.",
-
-  // Appointment & Callback Booking Modals
+  "contact.emergencyText": "اتصل بنا فوراً على الرقم +91 7780-245-307 للحصول على موعد طارئ في نفس اليوم.",
   "booking.modalTitle": "احجز موعد علاج الأسنان",
   "booking.modalSubtitle": "اختر التاريخ والوقت المناسبين لك. سيقوم فريقنا بتأكيد موعدك في أقرب وقت.",
   "booking.fullNameLabel": "الاسم الكامل",
@@ -325,8 +302,6 @@ export const arData = {
   "booking.recaptchaNotice": "محمي بواسطة Google reCAPTCHA. نحن نحترم خصوصيتك بالكامل.",
   "booking.successTitle": "تم استلام طلب الموعد بنجاح!",
   "booking.successMessage": "شكراً لك! لقد استلمنا طلب الحجز وسيتواصل معك موظف الاستقبال لتأكيد الموعد.",
-
-  // Callback Modal
   "callback.modalTitle": "طلب معاودة اتصال سريع",
   "callback.modalSubtitle": "اترك بياناتك وسيتصل بك أحد أطباء الأسنان خلال 15 دقيقة.",
   "callback.prefTimeLabel": "الوقت المفضل للاتصال",
@@ -337,8 +312,6 @@ export const arData = {
   "callback.submitBtn": "طلب معاودة اتصال الآن",
   "callback.successTitle": "تم استلام طلب الاتصال!",
   "callback.successMessage": "شكراً لك! سيتصل بك فريقنا خلال نافذة الوقت المفضلة التي حددتها.",
-
-  // Validation & Error Messages
   "errors.nameRequired": "يرجى إدخال الاسم الكامل.",
   "errors.phoneInvalid": "يرجى إدخال رقم هاتف صحيح من 10 أرقام.",
   "errors.emailInvalid": "يرجى إدخال بريد إلكتروني صحيح.",
@@ -346,29 +319,40 @@ export const arData = {
   "errors.timeRequired": "يرجى اختيار الوقت المناسب.",
   "errors.captchaRequired": "يرجى إكمال التحقق من reCAPTCHA.",
   "errors.submissionFailed": "حدث خطأ أثناء الإرسال. يرجى المحاولة مجدداً أو الاتصال بنا مباشرة.",
-
-  // Footer Section
-  "footer.tagline": "Redesign Clinics هو مركز متطور لطب وجراحة الأسنان في بانجارا هيلز، حيدر أباد، يقدم رعاية تخصصية تجمع بين الراحة والدقة والمصداقية.",
+  "footer.tagline": "Redesign Dental Clinics هو مركز متطور لطب وجراحة الأسنان في بانجارا هيلز، حيدر أباد، يقدم رعاية تخصصية تجمع بين الراحة والدقة والمصداقية.",
   "footer.quickLinks": "روابط سريعة",
   "footer.treatments": "العلاجات",
   "footer.contactInfo": "بيانات التواصل",
-  "footer.copyright": "© 2026 Redesign Clinics. جميع الحقوق محفوظة.",
-
-  // Legal Pages
+  "footer.copyright": "© 2026 Redesign Dental Clinics. جميع الحقوق محفوظة.",
   "legal.privacyTitle": "سياسة الخصوصية",
   "legal.privacyUpdated": "آخر تحديث: يونيو 2026",
-  "legal.privacyIntro": "في Redesign Clinics، خصوصيتكم وثقتكم تهمنا بقدر اهتمامنا بابتسامتكم. توضح هذه السياسة كيفية جمع بياناتكم وحمايتها عند زيارة موقعنا أو حجز موعد.",
+  "legal.privacyIntro": "في Redesign Dental Clinics، خصوصيتكم وثقتكم تهمنا بقدر اهتمامنا بابتسامتكم. توضح هذه السياسة كيفية جمع بياناتكم وحمايتها عند زيارة موقعنا أو حجز موعد.",
   "legal.termsTitle": "الشروط والأحكام",
   "legal.termsUpdated": "آخر تحديث: يونيو 2026",
-  "legal.termsIntro": "مرحباً بكم في Redesign Clinics. استخدامكم للموقع أو حجزكم لموعد يعني موافقتكم على شروط وأحكام الرعاية الصحية القياسية هذه.",
+  "legal.termsIntro": "مرحباً بكم في Redesign Dental Clinics. استخدامكم للموقع أو حجزكم لموعد يعني موافقتكم على شروط وأحكام الرعاية الصحية القياسية هذه.",
   "legal.cookiesTitle": "سياسة ملفات تعريف الارتباط",
   "legal.cookiesUpdated": "آخر تحديث: يونيو 2026",
   "legal.cookiesIntro": "توضح هذه السياسة كيفية استخدامنا لملفات تعريف الارتباط لتحسين أداء الموقع وحفظ تفضيلاتكم.",
   "legal.licensesTitle": "التراخيص والاعتمادات الرسمية",
-  "legal.licensesIntro": "تعمل Redesign Clinics بموجب تراخيص طبية رسمية ومعتمدة وفقاً لأعلى المعايير الوطنية لطب الأسنان.",
-
-  // 404 Page
+  "legal.licensesIntro": "تعمل Redesign Dental Clinics بموجب تراخيص طبية رسمية ومعتمدة وفقاً لأعلى المعايير الوطنية لطب الأسنان.",
   "notFound.title": "404 - الصفحة غير موجودة",
   "notFound.desc": "الصفحة التي تبحث عنها ربما تم نقلها أو تغيير اسمها أو أنها غير متاحة مؤقتاً.",
-  "notFound.homeBtn": "العودة إلى الصفحة الرئيسية"
+  "notFound.homeBtn": "العودة إلى الصفحة الرئيسية",
+  "booking.reasonLabel": "سبب الموعد (اختياري)",
+  "booking.reasonSelect": "حدد السبب (اختياري)",
+  "booking.reasonGeneral": "عام",
+  "booking.reasonEmergency": "طوارئ",
+  "booking.reasonImplants": "زراعة الأسنان",
+  "booking.reasonCustom": "رسالة مخصصة",
+  "booking.customMsgLabel": "أخبرنا المزيد (اختياري)",
+  "booking.customMsgPlaceholder": "اوصف استفسارك أو العلاج المطلوب (اختياري)",
+  "story.statWait.number": "دقائق",
+  "story.statWait.label": "سريع ومتاح",
+  "story.statWait.desc": "نهدف إلى تقليل أوقات الانتظار قدر الإمكان لضمان زيارة سلسة ومريحة.",
+  "story.statEmergency.number": "دعم",
+  "story.statEmergency.label": "رعاية طارئة",
+  "story.statEmergency.desc": "للحالات السنية العاجلة، يمكن لفريقنا تقييم حالتك وتوجيهك نحو الرعاية المناسبة.",
+  "doctor.spec5": "خبير إعادة تأهيل الفم بالكامل",
+  "doctor.spec6": "ابتسامة هوليوود",
+  "doctor.spec7": "أخصائي الاستعاضة السنية"
 };

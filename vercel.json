@@ -4,9 +4,12 @@
   "framework": null,
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/service", "destination": "/services", "permanent": true },
+    { "source": "/service.html", "destination": "/services", "permanent": true },
+    { "source": "/services.html", "destination": "/services", "permanent": true }
+  ],
   "rewrites": [
-    { "source": "/services", "destination": "/services.html" },
-    { "source": "/service", "destination": "/services.html" },
-    { "source": "/service.html", "destination": "/services.html" }
+    { "source": "/services", "destination": "/services.html" }
   ]
 }
