@@ -217,8 +217,8 @@
 
     // Sound (Unmute / Mute) Toggle
     function updateSoundUI(isMuted) {
-      var iconMuted = soundBtn?.querySelector('.icon-muted');
-      var iconUnmuted = soundBtn?.querySelector('.icon-unmuted');
+      var iconMuted = soundBtn ? soundBtn.querySelector('.icon-muted') : null;
+      var iconUnmuted = soundBtn ? soundBtn.querySelector('.icon-unmuted') : null;
       if (iconMuted && iconUnmuted) {
         iconMuted.style.display = isMuted ? 'block' : 'none';
         iconUnmuted.style.display = isMuted ? 'none' : 'block';
@@ -237,8 +237,23 @@
     if (soundBtn) {
       soundBtn.addEventListener('click', function (e) {
         e.stopPropagation();
-        video.muted = !video.muted;
-        updateSoundUI(video.muted);
+        e.preventDefault();
+        
+        var willBeMuted = !video.muted;
+        video.muted = willBeMuted;
+        video.defaultMuted = willBeMuted;
+        
+        if (willBeMuted) {
+          video.setAttribute('muted', '');
+        } else {
+          video.removeAttribute('muted');
+          video.volume = 1.0;
+          var p = video.play();
+          if (p !== undefined) {
+            p.catch(function () {});
+          }
+        }
+        updateSoundUI(willBeMuted);
       });
     }
   }
