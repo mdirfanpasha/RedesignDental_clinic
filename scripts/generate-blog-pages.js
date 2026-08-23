@@ -1,0 +1,467 @@
+import fs from 'fs';
+import path from 'path';
+import vm from 'vm';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, '..');
+const blogDir = path.join(rootDir, 'blog');
+
+if (!fs.existsSync(blogDir)) {
+  fs.mkdirSync(blogDir, { recursive: true });
+}
+
+// Load blog data safely via vm sandbox
+const blogDataRaw = fs.readFileSync(path.join(rootDir, 'assets', 'js', 'blog-data.js'), 'utf-8');
+const sandbox = { window: {} };
+vm.createContext(sandbox);
+vm.runInContext(blogDataRaw, sandbox);
+const blogData = sandbox.window.__RC_BLOG_DATA__;
+
+// Load en locale for default static fallback text
+const en = JSON.parse(
+  fs.readFileSync(path.join(rootDir, 'scripts', 'locales', 'en.js'), 'utf-8')
+    .replace(/^module\.exports\s*=\s*/, '')
+    .replace(/;\s*$/, '')
+);
+
+function generateArticleHtml(art) {
+  const num = art.num || parseInt(art.id.replace('post-', ''), 10) || parseInt(art.titleKey.replace('blog.post', '').replace('.title', ''), 10);
+  const title = en[`blog.post${num}.title`];
+  const excerpt = en[`blog.post${num}.excerpt`];
+  const intro = en[`blog.post${num}.intro`];
+  const h2_1 = en[`blog.post${num}.h2_1`];
+  const p1 = en[`blog.post${num}.p1`];
+  const h2_2 = en[`blog.post${num}.h2_2`];
+  const p2 = en[`blog.post${num}.p2`];
+  const h2_3 = en[`blog.post${num}.h2_3`];
+  const p3 = en[`blog.post${num}.p3`];
+  const h2_4 = en[`blog.post${num}.h2_4`];
+  const p4 = en[`blog.post${num}.p4`];
+  const takeaway = en[`blog.post${num}.takeaway`];
+  const catLabel = en[art.categoryKey];
+  const publishedDate = art.publishedAt || art.publishedDate || 'June 15, 2026';
+  const canonicalUrl = `https://redesigndentalclinics.com/blog/${art.slug}`;
+
+  // Get related articles details
+  const relatedArticles = (art.relatedSlugs || []).map(slug => {
+    return blogData.articles.find(a => a.slug === slug);
+  }).filter(Boolean);
+
+  const relatedHtml = relatedArticles.map(rel => {
+    const relNum = rel.num || parseInt(rel.id.replace('post-', ''), 10) || parseInt(rel.titleKey.replace('blog.post', '').replace('.title', ''), 10);
+    const relTitle = en[`blog.post${relNum}.title`];
+    const relExcerpt = en[`blog.post${relNum}.excerpt`];
+    const relCat = en[rel.categoryKey];
+    return `
+      <div class="related-card" style="background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; display: flex; flex-direction: column; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);">
+        <a href="/blog/${rel.slug}" style="display: block; width: 100%; height: 180px; overflow: hidden; position: relative;">
+          <img src="/${rel.image}" alt="${rel.alt}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" />
+        </a>
+        <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1;">
+          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px;" data-i18n="${rel.categoryKey}">${relCat}</div>
+          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a;">
+            <a href="/blog/${rel.slug}" style="color: inherit; text-decoration: none;" data-i18n="blog.post${relNum}.title">${relTitle}</a>
+          </h3>
+          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" data-i18n="blog.post${relNum}.excerpt">${relExcerpt}</p>
+          <a href="/blog/${rel.slug}" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+            <span data-i18n="common.readMore">Read More</span> →
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const sourcesListHtml = art.sources.map(src => {
+    return `
+      <li style="margin-bottom: 8px; font-size: 14px; line-height: 1.5; color: #475569;">
+        <strong>${src.org}:</strong> <em>"${src.title}"</em> (${src.year}) — <a href="${src.url}" target="_blank" rel="noopener noreferrer" style="color: #0f766e; text-decoration: underline;">View Reference</a>
+      </li>
+    `;
+  }).join('');
+
+  // Structured Schema (BlogPosting & BreadcrumbList)
+  const schemaJson = JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "@id": `${canonicalUrl}#article`,
+        "isPartOf": {
+          "@type": "WebSite",
+          "@id": "https://redesigndentalclinics.com/#website",
+          "name": "Redesign Dental Clinics",
+          "url": "https://redesigndentalclinics.com"
+        },
+        "headline": title,
+        "description": excerpt,
+        "image": `https://redesigndentalclinics.com/${art.image}`,
+        "datePublished": `${publishedDate}T09:00:00+05:30`,
+        "dateModified": `${publishedDate}T09:00:00+05:30`,
+        "author": {
+          "@type": "Organization",
+          "name": "Redesign Dental Clinics",
+          "url": "https://redesigndentalclinics.com"
+        },
+        "publisher": {
+          "@type": "DentalClinic",
+          "name": "Redesign Dental Clinics",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redesigndentalclinics.com/assets/img/redesign-dental-clinics-logo-white.png"
+          }
+        },
+        "mainEntityOfPage": canonicalUrl
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${canonicalUrl}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://redesigndentalclinics.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://redesigndentalclinics.com/blog"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": title,
+            "item": canonicalUrl
+          }
+        ]
+      }
+    ]
+  }, null, 2);
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>${title} | Redesign Dental Clinics Hyderabad</title>
+    <meta name="description" content="${excerpt}"/>
+    <meta property="og:title" content="${title} | Redesign Dental Clinics"/>
+    <meta property="og:description" content="${excerpt}"/>
+    <meta property="og:image" content="https://redesigndentalclinics.com/${art.image}"/>
+    <meta property="og:url" content="${canonicalUrl}"/>
+    <meta property="og:type" content="article"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="${title} | Redesign Dental Clinics"/>
+    <meta name="twitter:description" content="${excerpt}"/>
+    <meta name="twitter:image" content="https://redesigndentalclinics.com/${art.image}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="canonical" href="${canonicalUrl}"/>
+    
+    <link href="/assets/css/lumora.css?v=20260614f" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="/assets/img/favicon.svg" rel="shortcut icon" type="image/x-icon"/>
+    <link href="/assets/img/webclip.png" rel="apple-touch-icon"/>
+    
+    <script src="/assets/js/gsap.min.js"></script>
+    <script src="/assets/js/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/booking-system.css" type="text/css"/>
+    
+    <!-- Multilingual Engine -->
+    <script src="/assets/i18n/translations.js"></script>
+    <script src="/assets/js/i18n.js"></script>
+    
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json">
+${schemaJson}
+    </script>
+    
+    <style>
+        body {
+            background-color: #f8fafc;
+            font-family: 'Sora', sans-serif;
+            color: #1e293b;
+        }
+        .article-hero {
+            background: linear-gradient(180deg, #05262a 0%, #083c38 120px, #115c55 220px, #268d83 340px, #86d4ca 440px, #d8f3ee 540px, #ffffff 680px, #ffffff 100%);
+            padding: 130px 20px 40px;
+            color: #05262a;
+        }
+        .article-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .article-content {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            border: 1px solid #e2e8f0;
+            margin-top: -30px;
+            position: relative;
+            z-index: 2;
+        }
+        .article-content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #05262a;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            line-height: 1.35;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .article-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+        .takeaways-box {
+            background: #f0fdf4;
+            border-left: 4px solid #0f766e;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 28px 0;
+        }
+        .disclaimer-box {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 40px 0 20px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #64748b;
+        }
+        .sources-box {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+        .service-cta-card {
+            background: linear-gradient(135deg, #05262a 0%, #0f766e 100%);
+            border-radius: 20px;
+            padding: 36px;
+            color: #ffffff;
+            margin: 48px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .breadcrumbs-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        .breadcrumbs-nav a {
+            color: #0f766e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .article-content {
+                padding: 24px;
+            }
+            .article-hero {
+                padding-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Navigation -->
+        <div data-collapse="medium" data-animation="default" data-duration="400" fs-scrolldisable-element="smart-nav" role="banner" class="navbar_wrap w-nav">
+            <div class="navbar_container">
+                <a href="/" class="navbar_logo w-nav-brand">
+                    <img loading="eager" src="/assets/img/redesign-dental-clinics-logo-white.png" alt="Redesign Dental Clinics" class="logo_image"/>
+                </a>
+                <div class="navbar-content_wrap">
+                    <nav role="navigation" class="navbar_menu w-nav-menu">
+                        <a href="/" class="navbar_link w-inline-block"><div data-i18n="nav.home">Home</div></a>
+                        <a href="/about" class="navbar_link w-inline-block"><div data-i18n="nav.about">About Us</div></a>
+                        <a href="/services" class="navbar_link w-inline-block"><div data-i18n="nav.services">Services</div></a>
+                        <a href="/gallery" class="navbar_link w-inline-block"><div data-i18n="nav.gallery">Gallery</div></a>
+                        <a href="/blog" class="navbar_link w-inline-block w--current"><div data-i18n="nav.blog">Blog</div></a>
+                        <a href="/contact" class="navbar_link w-inline-block"><div data-i18n="nav.contact">Contact</div></a>
+                    </nav>
+                    <div class="navbar-button_wrapper">
+                        <div class="navbar_button hide-mobile">
+                            <div class="button-container">
+                                <a href="/contact#book" class="button_primary w-variant-fb89ee7f-8db1-8e54-55c6-075f0151c951 w-inline-block">
+                                    <div class="button_inner">
+                                        <div class="button-text_wrap"><div class="button_text" data-i18n="nav.getAppointment">Get Appointment</div></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Header / Hero -->
+        <header class="article-hero">
+            <div class="article-container">
+                <nav class="breadcrumbs-nav" aria-label="Breadcrumb">
+                    <a href="/" data-i18n="blog.breadcrumbHome">Home</a>
+                    <span>/</span>
+                    <a href="/blog" data-i18n="blog.breadcrumbBlog">Blog</a>
+                    <span>/</span>
+                    <span style="color: #05262a; font-weight: 600;" data-i18n="${art.categoryKey}">${catLabel}</span>
+                </nav>
+                
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
+                    <span style="background: rgba(15, 118, 110, 0.12); color: #0f766e; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 99px; text-transform: uppercase;" data-i18n="${art.categoryKey}">${catLabel}</span>
+                    <span style="font-size: 13px; color: #475569;">•</span>
+                    <span style="font-size: 13px; color: #475569;">${art.readingTime} min read</span>
+                    <span style="font-size: 13px; color: #475569;">•</span>
+                    <span style="font-size: 13px; color: #475569;">Published: ${publishedDate}</span>
+                </div>
+                
+                <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.25; color: #05262a; margin-bottom: 20px;" data-i18n="blog.post${num}.title">
+                    ${title}
+                </h1>
+                
+                <p style="font-size: 18px; line-height: 1.6; color: #334155; margin-bottom: 24px; font-weight: 500;" data-i18n="blog.post${num}.excerpt">
+                    ${excerpt}
+                </p>
+                
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 30px;">
+                    <div style="width: 42px; height: 42px; border-radius: 50%; background: #0f766e; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">
+                        RC
+                    </div>
+                    <div>
+                        <div style="font-size: 14px; font-weight: 700; color: #05262a;" data-i18n="blog.authorName">Redesign Dental Clinics</div>
+                        <div style="font-size: 12px; color: #64748b;">Clinical Editorial Team • Banjara Hills, Hyderabad</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Article Body -->
+        <main class="article-container">
+            <article class="article-content">
+                <!-- Featured Image -->
+                <div style="border-radius: 16px; overflow: hidden; margin-bottom: 36px; max-height: 440px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+                    <img src="/${art.image}" alt="${art.alt}" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
+
+                <!-- Intro Paragraph -->
+                <p style="font-size: 17px; font-weight: 500; line-height: 1.8; color: #0f172a;" data-i18n="blog.post${num}.intro">
+                    ${intro}
+                </p>
+
+                <!-- Key Takeaways Box -->
+                <div class="takeaways-box">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="blog.keyTakeaways">Key Clinical Takeaways</h3>
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #064e3b;" data-i18n="blog.post${num}.takeaway">
+                        ${takeaway}
+                    </p>
+                </div>
+
+                <!-- Section 1 -->
+                <h2 data-i18n="blog.post${num}.h2_1">${h2_1}</h2>
+                <p data-i18n="blog.post${num}.p1">${p1}</p>
+
+                <!-- Section 2 -->
+                <h2 data-i18n="blog.post${num}.h2_2">${h2_2}</h2>
+                <p data-i18n="blog.post${num}.p2">${p2}</p>
+
+                <!-- Section 3 -->
+                <h2 data-i18n="blog.post${num}.h2_3">${h2_3}</h2>
+                <p data-i18n="blog.post${num}.p3">${p3}</p>
+
+                <!-- Section 4 -->
+                <h2 data-i18n="blog.post${num}.h2_4">${h2_4}</h2>
+                <p data-i18n="blog.post${num}.p4">${p4}</p>
+
+                <!-- Related Service CTA Banner -->
+                <div class="service-cta-card">
+                    <div>
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff;" data-i18n="blog.ctaTitle">Have Questions About Your Dental Health?</h3>
+                        <p style="font-size: 14px; opacity: 0.9; margin: 0; color: #e2e8f0;" data-i18n="blog.ctaSubtitle">Consult with our specialist dentists at Redesign Dental Clinics in Banjara Hills, Hyderabad.</p>
+                    </div>
+                    <a href="/contact#book" style="padding: 14px 24px; background: #ffffff; color: #05262a; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 14px; white-space: nowrap; transition: all 0.2s;" data-i18n="blog.ctaButton">
+                        Book Consultation
+                    </a>
+                </div>
+
+                <!-- Fact-Checked Sources -->
+                <div class="sources-box">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #05262a; margin-bottom: 12px;" data-i18n="blog.sourcesTitle">Fact-Checked Sources & References</h3>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        ${sourcesListHtml}
+                    </ul>
+                </div>
+
+                <!-- Educational & Medical Disclaimer -->
+                <div class="disclaimer-box">
+                    <strong style="color: #475569; display: block; margin-bottom: 6px;" data-i18n="blog.disclaimerTitle">Educational & Medical Disclaimer</strong>
+                    <p style="margin: 0; font-size: 13px;" data-i18n="blog.disclaimerText">
+                        This article is for general educational purposes only and is not a substitute for an individual dental examination or professional medical advice. Treatment recommendations may vary based on your oral health and clinical needs.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Related Articles Section -->
+            <section style="margin: 60px 0 80px;">
+                <h2 style="font-size: 24px; font-weight: 700; color: #05262a; margin-bottom: 24px; text-align: center;" data-i18n="blog.relatedTitle">
+                    Related Dental Articles
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+                    ${relatedHtml}
+                </div>
+                <div style="text-align: center; margin-top: 36px;">
+                    <a href="/blog" style="display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: #0f766e; text-decoration: none; font-size: 15px;">
+                        ← <span data-i18n="common.backToBlog">Back to All Articles</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer_wrap">
+            <div class="footer_container">
+                <div class="footer-top_element" style="padding: 48px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                        <a href="/" class="footer_logo w-inline-block">
+                            <img src="/assets/img/redesign-dental-clinics-logo-white.png" alt="Redesign Dental Clinics" style="max-height: 48px;" />
+                        </a>
+                        <div style="color: #94a3b8; font-size: 14px;">
+                            6th Floor, Reliance Classic Enclave, Road no. 1, Banjara Hills, Hyderabad
+                        </div>
+                    </div>
+                </div>
+                <div class="footer_bottom" style="padding: 24px 0; text-align: center; color: #94a3b8; font-size: 13px;">
+                    &copy; 2026 Redesign Dental Clinics. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/assets/js/booking-system.js"></script>
+</body>
+</html>`;
+}
+
+// Generate all 15 files
+for (const art of blogData.articles) {
+  const filePath = path.join(blogDir, `${art.slug}.html`);
+  const htmlContent = generateArticleHtml(art);
+  fs.writeFileSync(filePath, htmlContent, 'utf-8');
+  console.log(`✓ Generated static article page: blog/${art.slug}.html`);
+}
+
+console.log('✓ All 15 static blog article pages regenerated successfully!');

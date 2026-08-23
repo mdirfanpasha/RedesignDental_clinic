@@ -308,17 +308,25 @@
   }
 }
 
-/* ===== FLOATING ACTION BUTTONS (WhatsApp & Instagram) ===== */
+/* ===== FLOATING ACTION BUTTONS (Dr. Suhail, WhatsApp & Instagram) ===== */
 .rc-floating-actions {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  z-index: 9999;
+  z-index: 998;
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: flex-end;
   pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+/* Modal Open: Hide floating actions so they never overlap modals */
+body.rc-modal-open .rc-floating-actions {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .rc-float-btn {
@@ -336,7 +344,6 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
-  overflow: hidden;
 }
 
 .rc-float-btn:hover {
@@ -353,10 +360,101 @@
 
 .rc-float-wa {
   background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  overflow: hidden;
 }
 
 .rc-float-ig {
   background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  overflow: hidden;
+}
+
+/* Doctor Floating Button */
+.rc-float-doc {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  text-decoration: none !important;
+  cursor: pointer;
+  animation: docFloatIdle 3.5s ease-in-out infinite;
+  overflow: visible;
+}
+
+@keyframes docFloatIdle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.rc-float-doc:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: none !important;
+}
+
+.rc-float-doc-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2.5px solid #0f766e;
+  box-shadow: 0 8px 24px rgba(5, 38, 42, 0.25), 0 2px 8px rgba(15, 118, 110, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.rc-float-doc:hover .rc-float-doc-wrap {
+  border-color: #14b8a6;
+  box-shadow: 0 12px 30px rgba(5, 38, 42, 0.35), 0 0 16px rgba(20, 184, 166, 0.45);
+}
+
+.rc-float-doc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transform: scale(1.12) translateY(2px);
+}
+
+.rc-float-doc-label {
+  background: rgba(5, 38, 42, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Sora', sans-serif;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.rc-float-doc:hover .rc-float-doc-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-float-doc {
+    animation: none !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -365,16 +463,24 @@
     right: 16px;
     gap: 10px;
   }
-  .rc-float-btn {
+  .rc-float-btn:not(.rc-float-doc) {
     padding: 12px;
     border-radius: 50%;
   }
-  .rc-float-btn span {
+  .rc-float-btn:not(.rc-float-doc) span {
     display: none;
   }
-  .rc-float-btn svg {
+  .rc-float-btn:not(.rc-float-doc) svg {
     width: 24px;
     height: 24px;
+  }
+  .rc-float-doc-wrap {
+    width: 52px;
+    height: 52px;
+    border-width: 2px;
+  }
+  .rc-float-doc-label {
+    display: none !important;
   }
 }
 

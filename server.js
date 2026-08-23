@@ -191,6 +191,12 @@ const server = http.createServer(async (req, res) => {
     res.end();
     return;
   }
+  if (urlPath.startsWith('/blog/') && (urlPath.endsWith('.html') || urlPath.endsWith('.htm'))) {
+    const cleanBlog = urlPath.replace(/\.html?$/i, '');
+    res.writeHead(301, { Location: cleanBlog });
+    res.end();
+    return;
+  }
 
   // ── Step 2: Serve clean routes → mapped HTML files ────────────────────────
   // Strip trailing slash for matching (except root)
@@ -200,6 +206,16 @@ const server = http.createServer(async (req, res) => {
     const filePath = path.join(__dirname, CLEAN_ROUTES[normalizedPath]);
     serveFile(req, res, filePath);
     return;
+  }
+
+  // Check for dynamic /blog/:slug route
+  if (normalizedPath.startsWith('/blog/')) {
+    const slug = normalizedPath.slice(6);
+    const blogFilePath = path.join(__dirname, 'blog', `${slug}.html`);
+    if (fs.existsSync(blogFilePath) && fs.statSync(blogFilePath).isFile()) {
+      serveFile(req, res, blogFilePath);
+      return;
+    }
   }
 
   // ── Step 3: Serve static assets (CSS, JS, images, fonts, etc.) ───────────

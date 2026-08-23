@@ -10444,7 +10444,46 @@ html.lang-ar textarea {
   justify-content: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(20, 184, 166, 0.4);
   flex-shrink: 0;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.5, 1.2), background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.awards_marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 50px 0 60px;
+}
+
+.awards_marquee-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  animation: awardsMarquee 32s linear infinite;
+  -webkit-animation: awardsMarquee 32s linear infinite;
+  will-change: transform;
+}
+
+.awards_marquee-container:hover .awards_marquee-track {
+  animation-play-state: paused;
+  -webkit-animation-play-state: paused;
+}
+
+.award_card {
+  flex: 0 0 auto;
+  width: 280px;
+  height: 160px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid #edf2f4;
+  position: relative;
+  transform-origin: center center;
+  will-change: transform, box-shadow;
+  transition: border-color 0.2s ease;
 }
 
 .transformation_slider:hover .transformation_handle-button {
