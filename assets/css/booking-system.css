@@ -456,20 +456,27 @@ body.rc-modal-open .rc-floating-actions {
 
 @media (max-width: 768px) {
   .rc-floating-actions {
-    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     right: 16px;
     gap: 10px;
+    z-index: 990;
   }
   .rc-float-btn:not(.rc-float-doc) {
-    padding: 12px;
+    width: 48px;
+    height: 48px;
+    padding: 0;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
   }
   .rc-float-btn:not(.rc-float-doc) span {
     display: none;
   }
   .rc-float-btn:not(.rc-float-doc) svg {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
   .rc-float-doc-wrap {
     width: 56px;

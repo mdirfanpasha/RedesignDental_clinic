@@ -9848,51 +9848,65 @@ figure {
 @media (max-width:991px) {
   .lead-form_card {
     max-width: 100%;
-    background: rgba(255, 255, 255, 0.42) !important;
-    backdrop-filter: blur(24px) saturate(190%) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.65) !important;
-    box-shadow: 0 20px 50px rgba(5, 38, 42, 0.22), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8), inset 0 -1px 1px 0 rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 16px 40px rgba(5, 38, 42, 0.28) !important;
+    border-radius: 20px !important;
+    padding: 22px 18px !important;
+    margin-top: 24px !important;
   }
 
   .lead-form_card .lead-form_title {
     color: #05262a !important;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+    font-size: 20px !important;
+    font-weight: 700 !important;
   }
 
   .lead-form_card .lead-form_sub {
-    color: #1a3e44 !important;
-    font-weight: 500;
+    color: #334155 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    margin-top: 3px !important;
   }
 
   .lead-form_card .lead-form_input {
-    background: rgba(255, 255, 255, 0.6) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.8) !important;
-    color: #05262a !important;
-    box-shadow: inset 0 2px 4px rgba(5, 38, 42, 0.04), 0 2px 8px rgba(255, 255, 255, 0.5) !important;
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    height: 52px !important;
+    font-size: 15px !important;
+    border-radius: 12px !important;
+    padding: 0 16px !important;
   }
 
   .lead-form_card .lead-form_input::placeholder {
-    color: #435e65 !important;
+    color: #64748b !important;
   }
 
   .lead-form_card .lead-form_input:focus {
-    background: rgba(255, 255, 255, 0.9) !important;
+    background: #ffffff !important;
     border-color: #0f766e !important;
     box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.2) !important;
   }
 
   .lead-form_card .lead-form_btn {
     background: #05262a !important;
-    box-shadow: 0 10px 25px rgba(5, 38, 42, 0.35) !important;
+    color: #ffffff !important;
+    height: 52px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 20px rgba(5, 38, 42, 0.3) !important;
   }
 
   .lead-form_card .lead-form_note {
-    color: #1a3e44 !important;
-    font-weight: 500;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    color: #475569 !important;
+    font-weight: 500 !important;
+    font-size: 12px !important;
+    margin-top: 10px !important;
+    text-align: center !important;
   }
 }
 
@@ -9938,11 +9952,38 @@ footer {
 
 @media(max-width:991px) {
   .padding-home-hero {
-    padding-top: 120px !important;
+    padding-top: 135px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .hero-carousel-img {
+    object-position: 70% 12% !important;
   }
 
   .our-info_wrap {
     margin-top: 24px;
+  }
+
+  .hero-text-split,
+  h1.hero-text-split {
+    font-size: clamp(2.15rem, 7.6vw, 2.65rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -1.2px !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .home-hero_para {
+    font-size: 17px !important;
+    line-height: 1.5 !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    max-width: 100% !important;
+    margin-bottom: 22px !important;
+  }
+
+  .button_primary:where(.w-variant-62db4792-8717-dbe8-e811-0d36eb02f9ec) {
+    width: 100% !important;
+    min-height: 56px !important;
   }
 }
 
