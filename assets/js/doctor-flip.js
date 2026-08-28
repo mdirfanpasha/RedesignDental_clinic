@@ -49,8 +49,11 @@
       if (backFace) backFace.setAttribute('aria-hidden', 'false');
       if (frontFace) frontFace.setAttribute('aria-hidden', 'true');
 
-      // Video playback setup
+      // Video playback setup — always start muted (browser autoplay policy)
+      video.setAttribute('muted', '');
       video.muted = true;
+      video.defaultMuted = true;
+      video.volume = 0;
       video.playsInline = true;
       video.currentTime = 0;
 
