@@ -1,5 +1,73 @@
 [
   {
+    "referenceId": "RDC-APPT-20260828-PP3V",
+    "type": "appointment",
+    "name": "Mohammed Irfan",
+    "phone": "8639055447",
+    "email": "test@redesigndental.com",
+    "reason": "General",
+    "customMsg": "",
+    "date": "2026-08-30",
+    "time": "11:00 AM IST",
+    "ip": "::1",
+    "whatsappStatus": "sent",
+    "createdAt": "2026-08-28T14:23:44.181Z",
+    "createdAtIST": "Friday, 28 August 2026 at 7:53:44 pm IST",
+    "whatsappResults": [
+      {
+        "recipient": "918639055447",
+        "success": true,
+        "messageId": "wamid.HBgMOTE4NjM5MDU1NDQ3FQIAERgSQTk4NzdGMzA1RDZDNTBERjhDAA==",
+        "status": "sent"
+      }
+    ]
+  },
+  {
+    "referenceId": "RDC-CALL-20260828-228G",
+    "type": "callback",
+    "name": "Test Callback Patient",
+    "phone": "8639055447",
+    "email": "callback@redesigndental.com",
+    "reason": "Teeth Whitening Enquiry",
+    "preferredTime": "Evening 5-7 PM",
+    "message": "Interested in laser teeth whitening pricing",
+    "ip": "::1",
+    "whatsappStatus": "sent",
+    "createdAt": "2026-08-28T14:14:55.273Z",
+    "createdAtIST": "Friday, 28 August 2026 at 7:44:55 pm IST",
+    "whatsappResults": [
+      {
+        "recipient": "918639055447",
+        "success": true,
+        "messageId": "wamid.HBgMOTE4NjM5MDU1NDQ3FQIAERgSREVDNEI3OTI3MTc3RTFDN0Y0AA==",
+        "status": "sent"
+      }
+    ]
+  },
+  {
+    "referenceId": "RDC-APPT-20260828-LKPF",
+    "type": "appointment",
+    "name": "Test Patient Irfan",
+    "phone": "8639055447",
+    "email": "test@redesigndental.com",
+    "reason": "Dental Implant Consultation",
+    "customMsg": "",
+    "date": "2026-08-30",
+    "time": "11:00 AM IST",
+    "ip": "::1",
+    "whatsappStatus": "sent",
+    "createdAt": "2026-08-28T14:12:32.208Z",
+    "createdAtIST": "Friday, 28 August 2026 at 7:42:32 pm IST",
+    "whatsappResults": [
+      {
+        "recipient": "918639055447",
+        "success": true,
+        "messageId": "wamid.HBgMOTE4NjM5MDU1NDQ3FQIAERgSQzJCM0ZFNDM0NkY4MjcyNEU5AA==",
+        "status": "sent"
+      }
+    ]
+  },
+  {
     "referenceId": "RDC-CALL-20260828-YI54",
     "type": "callback",
     "name": "Sarah Smith",
