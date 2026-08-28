@@ -842,6 +842,25 @@
     });
   }
 
+  // Mobile Navigation Drawer Enhancement
+  function initMobileNavHelper() {
+    var toggler = document.querySelector('.navbar-toggler-button');
+    var navMenu = document.querySelector('.navbar_menu');
+    if (!toggler || !navMenu) return;
+
+    // Close menu when tapping any navigation link inside drawer on mobile
+    var links = navMenu.querySelectorAll('a');
+    links.forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (window.innerWidth < 992) {
+          if (toggler.classList.contains('w--open') || navMenu.classList.contains('w--nav-menu-open')) {
+            toggler.click();
+          }
+        }
+      });
+    });
+  }
+
   // Proactively init on DOM load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
@@ -849,11 +868,13 @@
       initFloatingActionButtons();
       initTestimonialAutoRotation();
       initContactForm();
+      initMobileNavHelper();
     });
   } else {
     initBookingModals();
     initFloatingActionButtons();
     initTestimonialAutoRotation();
     initContactForm();
+    initMobileNavHelper();
   }
 })();

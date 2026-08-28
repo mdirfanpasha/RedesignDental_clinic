@@ -11509,5 +11509,430 @@ html.lang-ar textarea {
   background: #0d9488 !important;
 }
 
+/* ==========================================================================
+   MOBILE UI/UX PREMIUM OPTIMIZATION (max-width: 767px)
+   Redesign Dental Clinics — Cinematic, Luxurious, Touch-Engineered
+   ========================================================================== */
+@media screen and (max-width: 767px) {
+  /* 1. Global Viewport & Container Reset */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
+  .page-wrapper {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
 
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* 2. Mobile Header & Clean Navigation */
+  .navbar_wrap {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 999 !important;
+    background: rgba(5, 38, 42, 0.92) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 10px 16px !important;
+  }
+
+  .navbar_container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .navbar_logo {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .logo_image {
+    max-height: 36px !important;
+    width: auto !important;
+    object-fit: contain !important;
+  }
+
+  .navbar-content_wrap {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .navbar-button_wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .navbar-toggler-button {
+    width: 44px !important;
+    height: 44px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+
+  .navbar_menu.w-nav-menu {
+    background: rgba(5, 38, 42, 0.98) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(45, 212, 191, 0.2) !important;
+    padding: 24px 20px 32px !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .navbar_menu.w-nav-menu .navbar_link {
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding: 12px 4px !important;
+    text-decoration: none !important;
+  }
+
+  .navbar_menu.w-nav-menu .navbar_link:last-of-type {
+    border-bottom: none !important;
+  }
+
+  /* 3. Mobile Hero: Balanced Cinematic Framing (Existing Real Image) */
+  .section_hero.is-home-hero {
+    position: relative !important;
+    overflow: hidden !important;
+    min-height: auto !important;
+  }
+
+  .padding-home-hero {
+    padding-top: 86px !important;
+    padding-bottom: 32px !important;
+  }
+
+  .hero-image_wrap {
+    background-image: url("../img/hero/dr-suhail-redesign-dental.webp") !important;
+    background-position: 65% 12% !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    opacity: 0.92 !important;
+  }
+
+  .hero-carousel-img {
+    object-position: 65% 12% !important;
+    object-fit: cover !important;
+    transform: scale(1.02) !important;
+  }
+
+  .hero_overlay.is-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(5, 38, 42, 0.52) 0%,
+      rgba(5, 38, 42, 0.78) 35%,
+      rgba(5, 38, 42, 0.94) 75%,
+      rgba(5, 38, 42, 1) 100%
+    ) !important;
+  }
+
+  .home-hero_content {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Hero Fluid Typography */
+  .hero-text-split,
+  h1.hero-text-split {
+    font-size: clamp(2.1rem, 7.8vw, 2.75rem) !important;
+    line-height: 1.14 !important;
+    letter-spacing: -1.2px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 14px !important;
+    max-width: 100% !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .home-hero_para {
+    font-size: 0.96rem !important;
+    line-height: 1.55 !important;
+    color: rgba(255, 255, 255, 0.88) !important;
+    max-width: 100% !important;
+    margin-bottom: 22px !important;
+  }
+
+  /* Touch-Optimized Primary CTA Button */
+  .button-container {
+    width: 100% !important;
+  }
+
+  .button_primary.w-variant-62db4792-8717-dbe8-e811-0d36eb02f9ec {
+    width: 100% !important;
+    min-height: 54px !important;
+    height: 54px !important;
+    border-radius: 99px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    box-shadow: 0 8px 24px rgba(13, 148, 136, 0.35) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .button_primary:active {
+    transform: scale(0.98) !important;
+  }
+
+  /* 4. Consultation Lead Form: Compact Glassmorphism */
+  .lead-form_card {
+    background: rgba(5, 38, 42, 0.84) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(45, 212, 191, 0.28) !important;
+    border-radius: 20px !important;
+    padding: 20px 16px !important;
+    margin-top: 22px !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .lead-form_head {
+    margin-bottom: 14px !important;
+    text-align: left !important;
+  }
+
+  .lead-form_title {
+    font-size: 1.22rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-bottom: 4px !important;
+  }
+
+  .lead-form_sub {
+    font-size: 0.86rem !important;
+    color: rgba(255, 255, 255, 0.78) !important;
+    line-height: 1.4 !important;
+  }
+
+  .lead-form_input {
+    height: 52px !important;
+    min-height: 52px !important;
+    font-size: 15px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    padding: 0 16px !important;
+    margin-bottom: 10px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    outline: none !important;
+    transition: border-color 0.2s ease, background 0.2s ease !important;
+  }
+
+  .lead-form_input:focus {
+    border-color: #2dd4bf !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2) !important;
+  }
+
+  .lead-form_btn {
+    height: 52px !important;
+    min-height: 52px !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%) !important;
+    color: #ffffff !important;
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 6px 18px rgba(13, 148, 136, 0.35) !important;
+    transition: transform 0.15s ease, opacity 0.15s ease !important;
+  }
+
+  .lead-form_btn:active {
+    transform: scale(0.98) !important;
+  }
+
+  .lead-form_note {
+    font-size: 0.75rem !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    margin-top: 10px !important;
+    text-align: center !important;
+    line-height: 1.35 !important;
+  }
+
+  /* 5. Hero Bottom Info Items */
+  .our-info_wrap {
+    margin-top: 16px !important;
+    padding: 0 !important;
+  }
+
+  .our-info_list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .our-info_item {
+    border-radius: 16px !important;
+    padding: 16px 14px !important;
+    background: rgba(5, 38, 42, 0.88) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* 6. Doctor Profile 3D Card Component */
+  .doctor-flip-card {
+    max-width: 340px !important;
+    margin: 0 auto !important;
+    border-radius: 22px !important;
+    min-height: 480px !important;
+    overflow: hidden !important;
+  }
+
+  .doctor-portrait-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .floating-cards-row {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .floating-doc-card {
+    padding: 10px 14px !important;
+    border-radius: 14px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* 7. Testimonials: Portrait 9:16 Video Cards (Zero-Crop Guarantee) */
+  .section_testimonial.is-home {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .hybrid-testimonial_slider {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .hybrid-testimonial_track {
+    gap: 16px !important;
+  }
+
+  .hybrid-testimonial_slide {
+    width: 86vw !important;
+    max-width: 320px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .hybrid-card_inner {
+    border-radius: 20px !important;
+    min-height: 460px !important;
+  }
+
+  .hybrid-card_video-container {
+    aspect-ratio: 9 / 16 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    background: #05262a !important;
+  }
+
+  .hybrid-card_video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    border-radius: 20px !important;
+  }
+
+  .hybrid-card_back-controls {
+    padding: 12px 14px !important;
+    gap: 8px !important;
+  }
+
+  .video-ctrl-btn {
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+    min-height: 40px !important;
+  }
+
+  /* 8. Sections & Typography Scaling */
+  h2 {
+    font-size: clamp(1.65rem, 5.8vw, 2.2rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.8px !important;
+  }
+
+  .section-padding {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .grid_services,
+  .service_list,
+  .awards_list,
+  .blog_list {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* 9. Footer Touch Optimization */
+  .section_footer {
+    padding: 44px 16px 28px !important;
+  }
+
+  .footer-menu_list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+}
+
+/* Extra Fine-Tuning for 320px–375px Ultra-Narrow Screens */
+@media screen and (max-width: 375px) {
+  .hero-text-split,
+  h1.hero-text-split {
+    font-size: 2rem !important;
+    letter-spacing: -1px !important;
+  }
+
+  .lead-form_card {
+    padding: 16px 12px !important;
+  }
+
+  .lead-form_input,
+  .lead-form_btn {
+    height: 48px !important;
+    min-height: 48px !important;
+    font-size: 14px !important;
+  }
+}
