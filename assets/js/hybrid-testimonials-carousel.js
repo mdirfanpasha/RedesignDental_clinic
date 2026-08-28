@@ -59,6 +59,8 @@
           try {
             v.pause();
             v.muted = true;
+            v.volume = 0;
+            v.setAttribute('muted', '');
             v.currentTime = 0;
           } catch (e) {}
           // Reset UI sound icon
@@ -67,6 +69,8 @@
             var soundBtn = card.querySelector('.video-sound-btn');
             if (soundBtn) {
               soundBtn.classList.remove('is-unmuted');
+              var span = soundBtn.querySelector('span');
+              if (span) span.textContent = 'Unmute';
             }
           }
         }
@@ -173,8 +177,18 @@
 
         if (timerBar) timerBar.style.width = '0%';
 
+        // Reset sound button state on every flip-open
+        if (soundBtn) {
+          soundBtn.classList.remove('is-unmuted');
+          var span = soundBtn.querySelector('span');
+          if (span) span.textContent = 'Unmute';
+        }
+
         if (video) {
+          // Always start muted to satisfy browser autoplay policy
+          video.setAttribute('muted', '');
           video.muted = true;
+          video.volume = 0;
           video.playsInline = true;
           video.currentTime = 0;
           var p = video.play();
@@ -196,10 +210,16 @@
           try {
             video.pause();
             video.muted = true;
+            video.setAttribute('muted', '');
+            video.volume = 0;
             video.currentTime = 0;
           } catch (e) {}
         }
-        if (soundBtn) soundBtn.classList.remove('is-unmuted');
+        if (soundBtn) {
+          soundBtn.classList.remove('is-unmuted');
+          var span = soundBtn.querySelector('span');
+          if (span) span.textContent = 'Unmute';
+        }
         startAutoPlay();
       }
 
@@ -235,13 +255,44 @@
       if (soundBtn && video) {
         soundBtn.addEventListener('click', function (e) {
           e.stopPropagation();
-          if (video.muted) {
-            stopAllVideos(video); // Mute all other videos
+          e.preventDefault();
+
+          var currentlyMuted = video.muted;
+
+          if (currentlyMuted) {
+            // --- UNMUTE ---
+            // Mute all other videos first (single-audio policy)
+            stopAllVideos(video);
+
+            // Remove HTML muted attribute (some browsers ignore .muted if attribute is present)
+            video.removeAttribute('muted');
             video.muted = false;
+            video.defaultMuted = false;
+            video.volume = 1.0;
+
+            // Resume playback within the same user-gesture tick to satisfy autoplay policy
+            if (video.paused) {
+              video.play().catch(function () {
+                // If play fails, re-mute gracefully
+                video.muted = true;
+                soundBtn.classList.remove('is-unmuted');
+                var span = soundBtn.querySelector('span');
+                if (span) span.textContent = 'Unmute';
+              });
+            }
+
             soundBtn.classList.add('is-unmuted');
+            var span = soundBtn.querySelector('span');
+            if (span) span.textContent = 'Mute';
+
           } else {
+            // --- MUTE ---
             video.muted = true;
+            video.setAttribute('muted', '');
+            video.volume = 0;
             soundBtn.classList.remove('is-unmuted');
+            var span = soundBtn.querySelector('span');
+            if (span) span.textContent = 'Unmute';
           }
         });
       }
