@@ -8,10 +8,16 @@
     { "source": "/service", "destination": "/services", "permanent": true },
     { "source": "/service.html", "destination": "/services", "permanent": true },
     { "source": "/services.html", "destination": "/services", "permanent": true },
-    { "source": "/blog.html", "destination": "/blog", "permanent": true }
+    { "source": "/blog.html", "destination": "/blog", "permanent": true },
+    { "source": "/doctors.html", "destination": "/doctors", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/doctors", "destination": "/doctors.html" },
     { "source": "/services", "destination": "/services.html" },
-    { "source": "/blog", "destination": "/blog.html" }
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/booking", "destination": "/booking.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/gallery", "destination": "/gallery.html" }
   ]
 }

@@ -556,5 +556,22 @@ module.exports = {
   "doctor.unmuteVideo": "అన్‌మ్యూట్",
   "doctor.muteVideo": "మ్యూట్",
   "doctor.videoAria": "డా. సుహైల్ సయ్యద్ - వీడియో చూడటానికి క్లిక్ చేయండి లేదా 3 సెకన్లు వేచి ఉండండి.",
-  "floating.doctorLabel": "డా. సుహైల్‌ను కలవండి"
+  "floating.doctorLabel": "డా. సుహైల్‌ను కలవండి",
+  "instagram.badge": "✦ ఇన్‌స్టాగ్రామ్",
+  "instagram.heading": "రీడిజైన్ డెంటల్ క్లినిక్స్‌ను ఫాలో అవ్వండి",
+  "instagram.description": "మా సరికొత్త చిరునవ్వులు, క్లినిక్ విశేషాలు మరియు దంత సంరక్షణ అప్‌డేట్‌ల కోసం రీడిజైన్ డెంటల్ క్లినిక్స్‌తో కనెక్ట్ అయి ఉండండి.",
+  "instagram.handle": "@redesign.dental.clinics",
+  "instagram.followBtn": "ఇన్‌స్టాగ్రామ్‌లో మమ్మల్ని ఫాలో అవ్వండి",
+  "instagram.postAlt": "రీడిజైన్ డెంటల్ క్లినిక్స్ ఇన్‌స్టాగ్రామ్ పోస్ట్",
+  "testimonials.watchVideo": "వీడియో టెస్టిమోనియల్ చూడండి",
+  "testimonials.backToReview": "సమీక్షకు తిరిగి వెళ్లండి",
+  "testimonials.tapOrHover": "వీడియో కోసం ట్యాప్ లేదా హోవర్ చేయండి",
+  "testimonials.unmute": "అన్‌మ్యూట్ చేయడానికి క్లిక్ చేయండి",
+  "testimonials.muted": "మ్యూట్ చేయబడింది",
+  "testimonials.patientStory": "రోగి వీడియో అనుభవం",
+  "nav.meetOurDoctors": "మా వైద్యులను కలవండి",
+  "doctors.pageTitle": "మా దంత నిపుణులు | రీడిజైన్ డెంటల్ క్లినిక్స్",
+  "doctors.badge": "మా నిపుణుల బృందం",
+  "doctors.heading": "మీ చిరునవ్వు వెనుక ఉన్న నిపుణులు",
+  "doctors.subheading": "బంజారా హిల్స్‌లోని రీడిజైన్ డెంటల్ క్లినిక్స్‌లోని అనుభవజ్ఞులైన నిపుణులను కలవండి."
 };

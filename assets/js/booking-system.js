@@ -6,104 +6,142 @@
 (function () {
   'use strict';
 
-  var aptRecaptchaToken = '';
-  var cbRecaptchaToken = '';
-
-  // Google reCAPTCHA Widget Implementation
+  // Google reCAPTCHA v3 Implementation
   var RecaptchaWidget = (function () {
+    var isScriptLoading = false;
+    var loadCallbacks = [];
+
+    function getSiteKey() {
+      return window.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LdkaZQtAAAAAlkSLA78ABt5Xeo0EgbfLbeqHZWu';
+    }
+
     function loadRecaptchaScript(callback) {
-      if (window.grecaptcha && typeof window.grecaptcha.render === 'function') {
+      var siteKey = getSiteKey();
+      if (window.grecaptcha && typeof window.grecaptcha.execute === 'function') {
         if (callback) callback();
         return;
       }
 
+      if (callback) loadCallbacks.push(callback);
+
+      if (isScriptLoading) return;
+
       var existingScript = document.querySelector('script[src*="recaptcha/api.js"]');
       if (!existingScript) {
-        window.onloadRecaptchaCallback = function () {
-          if (callback) callback();
-        };
+        isScriptLoading = true;
         var script = document.createElement('script');
-        script.src = 'https://www.google.com/recaptcha/api.js?onload=onloadRecaptchaCallback&render=explicit';
+        script.src = 'https://www.google.com/recaptcha/api.js?render=' + encodeURIComponent(siteKey);
         script.async = true;
         script.defer = true;
-        document.head.appendChild(script);
-      }
-
-      var checkInterval = setInterval(function () {
-        if (window.grecaptcha && typeof window.grecaptcha.render === 'function') {
-          clearInterval(checkInterval);
-          if (callback) callback();
-        }
-      }, 50);
-    }
-
-    function getSiteKey() {
-      return window.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeJ8IUtAAAAAExYajJHCjhaksT0ipqyEP3F3pId';
-    }
-
-    function renderWidget(containerId, options) {
-      options = options || {};
-      var container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
-      if (!container) return null;
-
-      loadRecaptchaScript(function () {
-        if (!window.grecaptcha || typeof window.grecaptcha.render !== 'function') return;
-
-        var existingWidgetId = container.getAttribute('data-widget-id');
-        if (existingWidgetId !== null && existingWidgetId !== undefined && existingWidgetId !== '') {
-          try {
-            window.grecaptcha.reset(existingWidgetId);
-            return;
-          } catch (e) {
-            container.innerHTML = '';
-            container.removeAttribute('data-widget-id');
+        script.onload = function () {
+          isScriptLoading = false;
+          if (window.grecaptcha && window.grecaptcha.ready) {
+            window.grecaptcha.ready(function () {
+              while (loadCallbacks.length > 0) {
+                var cb = loadCallbacks.shift();
+                try { cb(); } catch (e) { console.warn(e); }
+              }
+            });
           }
-        }
-
-        container.innerHTML = '';
-        var siteKey = getSiteKey();
-        try {
-          var widgetId = window.grecaptcha.render(container, {
-            sitekey: siteKey,
-            theme: options.theme || 'light',
-            callback: function (token) {
-              if (options.onSuccess) options.onSuccess(token);
-            },
-            'expired-callback': function () {
-              if (options.onExpire) options.onExpire();
-            },
-            'error-callback': function (err) {
-              if (options.onError) options.onError(err);
+        };
+        script.onerror = function () {
+          isScriptLoading = false;
+          console.warn('Google reCAPTCHA v3 failed to load.');
+          while (loadCallbacks.length > 0) {
+            var cb = loadCallbacks.shift();
+            try { cb(new Error('Failed to load reCAPTCHA script')); } catch (e) {}
+          }
+        };
+        document.head.appendChild(script);
+      } else {
+        var checkInterval = setInterval(function () {
+          if (window.grecaptcha && typeof window.grecaptcha.execute === 'function') {
+            clearInterval(checkInterval);
+            while (loadCallbacks.length > 0) {
+              var cb = loadCallbacks.shift();
+              try { cb(); } catch (e) {}
             }
-          });
+          }
+        }, 50);
+      }
+    }
 
-          container.setAttribute('data-widget-id', widgetId);
-          if (options.onRendered) options.onRendered(widgetId);
-        } catch (e) {
-          console.warn('reCAPTCHA render note:', e);
-        }
+    function execute(action) {
+      return new Promise(function (resolve, reject) {
+        var siteKey = getSiteKey();
+        // 5-second safety timeout so button never stays stuck
+        var timedOut = false;
+        var timeout = setTimeout(function () {
+          timedOut = true;
+          resolve('__timeout__');
+        }, 5000);
+        loadRecaptchaScript(function (err) {
+          if (timedOut) return;
+          if (err) {
+            clearTimeout(timeout);
+            return resolve('__error__');
+          }
+          if (!window.grecaptcha || typeof window.grecaptcha.execute !== 'function') {
+            clearTimeout(timeout);
+            return resolve('__unavailable__');
+          }
+          try {
+            window.grecaptcha.ready(function () {
+              if (timedOut) return;
+              window.grecaptcha.execute(siteKey, { action: action || 'submit' })
+                .then(function (token) {
+                  clearTimeout(timeout);
+                  if (!timedOut) resolve(token);
+                })
+                .catch(function () {
+                  clearTimeout(timeout);
+                  if (!timedOut) resolve('__error__');
+                });
+            });
+          } catch (e) {
+            clearTimeout(timeout);
+            resolve('__error__');
+          }
+        });
       });
     }
 
-    function resetWidget(containerId) {
+    // Modern v3 UI Indicator: replaces broken v2 checkbox boxes with sleek, trustworthy reCAPTCHA v3 shield badge
+    function render(containerId, options) {
       var container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
       if (!container) return;
+      container.innerHTML = [
+        '<div class="rc-v3-badge-container">',
+        '  <div class="rc-v3-badge-icon">',
+        '    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">',
+        '      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
+        '      <path d="m9 12 2 2 4-4"></path>',
+        '    </svg>',
+        '  </div>',
+        '  <div class="rc-v3-badge-text">',
+        '    <span class="rc-v3-badge-title">Protected by Google reCAPTCHA v3</span>',
+        '    <span class="rc-v3-badge-sub">Automated frictionless spam & abuse protection</span>',
+        '  </div>',
+        '</div>'
+      ].join('');
+      // Preload script in background so execute() on submit is instant
+      loadRecaptchaScript();
+      if (options && options.onRendered) options.onRendered();
+    }
 
-      var widgetId = container.getAttribute('data-widget-id');
-      if (window.grecaptcha && widgetId !== null && widgetId !== undefined) {
-        try {
-          window.grecaptcha.reset(widgetId);
-        } catch (e) {
-          container.removeAttribute('data-widget-id');
-          renderWidget(containerId);
-        }
+    function reset(containerId) {
+      var container = typeof containerId === 'string' ? document.getElementById(containerId) : containerId;
+      if (container) {
+        render(container);
       }
     }
 
     return {
       loadScript: loadRecaptchaScript,
-      render: renderWidget,
-      reset: resetWidget,
+      execute: execute,
+      getToken: execute,
+      render: render,
+      reset: reset,
       getSiteKey: getSiteKey
     };
   })();
@@ -355,54 +393,21 @@
   var activeTrigger = null;
 
   function renderAptRecaptcha() {
-    function tryRender() {
-      if (window.RecaptchaWidget) {
-        window.RecaptchaWidget.render('rc-apt-recaptcha-container', {
-          onSuccess: function (token) {
-            aptRecaptchaToken = token;
-            hideCaptchaError('rc-apt');
-          },
-          onExpire: function () {
-            aptRecaptchaToken = '';
-          },
-          onError: function () {
-            aptRecaptchaToken = '';
-          }
-        });
-      } else {
-        setTimeout(tryRender, 50);
-      }
+    if (window.RecaptchaWidget) {
+      window.RecaptchaWidget.render('rc-apt-recaptcha-container');
     }
-    tryRender();
   }
 
   function renderCbRecaptcha() {
-    function tryRender() {
-      if (window.RecaptchaWidget) {
-        window.RecaptchaWidget.render('rc-cb-recaptcha-container', {
-          onSuccess: function (token) {
-            cbRecaptchaToken = token;
-            hideCaptchaError('rc-cb');
-          },
-          onExpire: function () {
-            cbRecaptchaToken = '';
-          },
-          onError: function () {
-            cbRecaptchaToken = '';
-          }
-        });
-      } else {
-        setTimeout(tryRender, 50);
-      }
+    if (window.RecaptchaWidget) {
+      window.RecaptchaWidget.render('rc-cb-recaptcha-container');
     }
-    tryRender();
   }
 
   function openAppointmentModal(triggerEl) {
     initBookingModals();
     activeTrigger = triggerEl || null;
     closeAllModals();
-    aptRecaptchaToken = '';
     hideCaptchaError('rc-apt');
 
     var modal = document.getElementById('rc-appointment-modal');
@@ -427,7 +432,6 @@
     initBookingModals();
     activeTrigger = triggerEl || null;
     closeAllModals();
-    cbRecaptchaToken = '';
     hideCaptchaError('rc-cb');
 
     var modal = document.getElementById('rc-callback-modal');
@@ -467,7 +471,7 @@
     if (e.key === 'Escape') closeAllModals();
   });
 
-  // Appointment Submission with Server-Side Google reCAPTCHA Verification
+  // Appointment Submission with Server-Side Google reCAPTCHA v3 & WhatsApp Integration
   function handleAppointmentSubmit(e) {
     e.preventDefault();
     hideCaptchaError('rc-apt');
@@ -481,74 +485,64 @@
     var time = document.getElementById('rc-apt-time-input').value;
 
     if (!name || !phone || !date || !time) {
-      alert('Please fill in all required fields (Name, Phone, Date, Time).');
-      return;
-    }
-
-    if (!aptRecaptchaToken) {
-      showCaptchaError('rc-apt', 'Please complete the verification before submitting.');
+      showCaptchaError('rc-apt', 'Please fill in all required fields (Name, Phone, Date, Time).');
       return;
     }
 
     var btn = document.getElementById('rc-apt-submit-btn');
-    btn.disabled = true;
-    btn.querySelector('span').textContent = 'Verifying...';
+    var btnSpan = btn ? btn.querySelector('span') : null;
+    var originalBtnText = btnSpan ? btnSpan.textContent : 'Confirm Appointment Request';
+    if (btn) {
+      btn.disabled = true;
+      if (btnSpan) btnSpan.textContent = 'Submitting request...';
+    }
 
-    fetch('/api/verify-recaptcha', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ token: aptRecaptchaToken })
-    })
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      if (data && data.success) {
-        btn.disabled = false;
-        btn.querySelector('span').textContent = 'Confirm & Book Visit';
+    RecaptchaWidget.execute('appointment_booking')
+      .then(function (token) {
+        return fetch('/api/appointments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            email: email,
+            reason: reason,
+            customMsg: customMsg,
+            date: date,
+            time: time,
+            token: token
+          })
+        });
+      })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
 
-        document.getElementById('rc-apt-form-view').style.display = 'none';
-        document.getElementById('rc-apt-success-view').style.display = 'block';
+        if (data.success) {
+          document.getElementById('rc-apt-form-view').style.display = 'none';
+          document.getElementById('rc-apt-success-view').style.display = 'block';
 
-        document.getElementById('rc-apt-success-text').innerHTML =
-          'Thank you, <strong>' + escapeHtml(name) + '</strong>!<br/>We have received your appointment request for <strong>' + escapeHtml(date) + ' at ' + escapeHtml(time) + '</strong>. Our team will contact you at <strong>' + escapeHtml(phone) + '</strong>.';
+          var refHtml = data.referenceId ? ' <span style="font-size:0.85em; opacity:0.85;">(Ref: ' + escapeHtml(data.referenceId) + ')</span>' : '';
+          document.getElementById('rc-apt-success-text').innerHTML =
+            'Thank you, <strong>' + escapeHtml(name) + '</strong>!' + refHtml + '<br/>We have received your appointment request for <strong>' + escapeHtml(date) + ' at ' + escapeHtml(time) + '</strong>. Our team will contact you at <strong>' + escapeHtml(phone) + '</strong> to confirm the details.';
 
-        var reasonLine = '';
-        if (reason === 'Custom Message') {
-          reasonLine = "Reason: Custom Message" + (customMsg ? "\nMessage: " + customMsg : "") + "\n";
-        } else if (reason) {
-          reasonLine = "Reason: " + reason + "\n";
+          var waBtn = document.getElementById('rc-apt-wa-link');
+          if (waBtn) {
+            waBtn.style.display = 'none'; // Auto-notified on backend
+          }
+        } else {
+          showCaptchaError('rc-apt', data.error || 'Unable to process your appointment request right now. Please try again.');
         }
-
-        var msg = encodeURIComponent(
-          "Hello Redesign Clinics,\nI would like to request an appointment.\n\n" +
-          "Name: " + name + "\n" +
-          "Phone: " + phone + "\n" +
-          (email ? "Email: " + email + "\n" : "") +
-          reasonLine +
-          "Date: " + date + "\n" +
-          "Time Slot: " + time
-        );
-
-        document.getElementById('rc-apt-wa-link').href = "https://wa.me/917780245307?text=" + msg;
-      } else {
-        btn.disabled = false;
-        btn.querySelector('span').textContent = 'Confirm & Book Visit';
-        showCaptchaError('rc-apt', (data && data.error) || 'Verification failed. Please try again.');
-        if (window.RecaptchaWidget) window.RecaptchaWidget.reset('rc-apt-recaptcha-container');
-        aptRecaptchaToken = '';
-      }
-    })
-    .catch(function () {
-      btn.disabled = false;
-      btn.querySelector('span').textContent = 'Confirm & Book Visit';
-      showCaptchaError('rc-apt', 'Verification failed. Please try again.');
-      if (window.RecaptchaWidget) window.RecaptchaWidget.reset('rc-apt-recaptcha-container');
-      aptRecaptchaToken = '';
-    });
+      })
+      .catch(function () {
+        if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
+        showCaptchaError('rc-apt', 'Unable to reach the server. Please check your connection and try again.');
+      });
   }
 
-  // Callback Submission with Server-Side Google reCAPTCHA Verification
+  // Callback Submission with Server-Side Google reCAPTCHA v3 & WhatsApp Integration
   function handleCallbackSubmit(e) {
     e.preventDefault();
     hideCaptchaError('rc-cb');
@@ -559,52 +553,52 @@
     var prefTime = prefTimeEl ? prefTimeEl.value : '';
 
     if (!name || !phone) {
-      alert('Please fill in your Name and Phone Number.');
-      return;
-    }
-
-    if (!cbRecaptchaToken) {
-      showCaptchaError('rc-cb', 'Please complete the verification before submitting.');
+      showCaptchaError('rc-cb', 'Please fill in your Name and Phone Number.');
       return;
     }
 
     var btn = document.getElementById('rc-cb-submit-btn');
-    btn.disabled = true;
-    btn.querySelector('span').textContent = 'Verifying...';
+    var btnSpan = btn ? btn.querySelector('span') : null;
+    var originalBtnText = btnSpan ? btnSpan.textContent : 'Request Callback Now';
+    if (btn) {
+      btn.disabled = true;
+      if (btnSpan) btnSpan.textContent = 'Submitting request...';
+    }
 
-    fetch('/api/verify-recaptcha', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ token: cbRecaptchaToken })
-    })
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      if (data && data.success) {
-        btn.disabled = false;
-        btn.querySelector('span').textContent = 'Request Callback Now';
+    RecaptchaWidget.execute('callback_request')
+      .then(function (token) {
+        return fetch('/api/callback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name,
+            phone: phone,
+            preferredTime: prefTime,
+            token: token
+          })
+        });
+      })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
 
-        document.getElementById('rc-cb-form-view').style.display = 'none';
-        document.getElementById('rc-cb-success-view').style.display = 'block';
+        if (data.success) {
+          document.getElementById('rc-cb-form-view').style.display = 'none';
+          document.getElementById('rc-cb-success-view').style.display = 'block';
 
-        document.getElementById('rc-cb-success-text').innerHTML =
-          'Thank you, <strong>' + escapeHtml(name) + '</strong>!<br/>We have received your callback request. Our team will call you back shortly at <strong>' + escapeHtml(phone) + '</strong>.';
-      } else {
-        btn.disabled = false;
-        btn.querySelector('span').textContent = 'Request Callback Now';
-        showCaptchaError('rc-cb', (data && data.error) || 'Verification failed. Please try again.');
-        if (window.RecaptchaWidget) window.RecaptchaWidget.reset('rc-cb-recaptcha-container');
-        cbRecaptchaToken = '';
-      }
-    })
-    .catch(function () {
-      btn.disabled = false;
-      btn.querySelector('span').textContent = 'Request Callback Now';
-      showCaptchaError('rc-cb', 'Verification failed. Please try again.');
-      if (window.RecaptchaWidget) window.RecaptchaWidget.reset('rc-cb-recaptcha-container');
-      cbRecaptchaToken = '';
-    });
+          var refHtml = data.referenceId ? ' <span style="font-size:0.85em; opacity:0.85;">(Ref: ' + escapeHtml(data.referenceId) + ')</span>' : '';
+          document.getElementById('rc-cb-success-text').innerHTML =
+            'Thank you, <strong>' + escapeHtml(name) + '</strong>!' + refHtml + '<br/>We have received your callback request. Our front desk team will call you back shortly at <strong>' + escapeHtml(phone) + '</strong>.';
+        } else {
+          showCaptchaError('rc-cb', data.error || 'Unable to process your callback request right now. Please try again.');
+        }
+      })
+      .catch(function () {
+        if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
+        showCaptchaError('rc-cb', 'Unable to reach the server. Please check your connection and try again.');
+      });
   }
 
   function escapeHtml(str) {
@@ -680,7 +674,7 @@
       <a href="/#doctor-profile" class="rc-float-btn rc-float-doc" id="rc-float-doctor-btn" aria-label="Meet Dr. Suhail A. Syed" title="Meet Dr. Suhail" data-i18n-title="floating.doctorLabel">
         <span class="rc-float-doc-label" data-i18n="floating.doctorLabel">Meet Dr. Suhail</span>
         <div class="rc-float-doc-wrap">
-          <img src="assets/img/dr-suhail-floating-icon.png" alt="Meet Dr. Suhail A. Syed" class="rc-float-doc-img" />
+          <img src="assets/img/dr-suhail-floating-icon.png" onerror="this.onerror=null;this.src='assets/img/suhail_icon-removebg-preview.png'" alt="Meet Dr. Suhail A. Syed" class="rc-float-doc-img" />
         </div>
       </a>
       <a href="https://wa.me/917780245307?text=Hi%20Redesign%20Dental%20Clinics%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener noreferrer" class="rc-float-btn rc-float-wa" aria-label="Chat on WhatsApp">
@@ -763,23 +757,14 @@
     startRotation();
   }
 
-  var contactRecaptchaToken = '';
-
   function initContactForm() {
     var formView = document.getElementById('rc-contact-form-view');
     var form = document.getElementById('rc-contact-form');
     if (!form) return;
 
-    RecaptchaWidget.render('rc-contact-recaptcha', {
-      onSuccess: function (token) {
-        contactRecaptchaToken = token;
-        var errEl = document.getElementById('rc-contact-captcha-error');
-        if (errEl) errEl.style.display = 'none';
-      },
-      onExpire: function () {
-        contactRecaptchaToken = '';
-      }
-    });
+    if (window.RecaptchaWidget) {
+      window.RecaptchaWidget.render('rc-contact-recaptcha');
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -804,75 +789,56 @@
         return;
       }
 
-      if (!contactRecaptchaToken) {
-        showCaptchaError('rc-contact', 'Please complete the reCAPTCHA verification checkbox below.');
-        return;
-      }
-
       var btn = form.querySelector('button[type="submit"]');
+      var btnSpan = btn ? btn.querySelector('span') : null;
+      var originalBtnText = btnSpan ? btnSpan.textContent : 'Send Message';
       if (btn) {
         btn.disabled = true;
-        var btnSpan = btn.querySelector('span');
-        if (btnSpan) btnSpan.textContent = 'Submitting...';
+        if (btnSpan) btnSpan.textContent = 'Verifying security...';
       }
 
-      fetch('/api/verify-recaptcha', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: contactRecaptchaToken })
-      })
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        if (data && data.success) {
-          if (btn) {
-            btn.disabled = false;
-            var btnSpan = btn.querySelector('span');
-            if (btnSpan) btnSpan.textContent = 'Send Enquiry';
-          }
+      RecaptchaWidget.execute('contact_form')
+        .then(function (token) {
+          return fetch('/api/callback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: name,
+              phone: phone,
+              email: email,
+              subject: subject,
+              message: messageText,
+              token: token
+            })
+          });
+        })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
 
-          if (formView) formView.style.display = 'none';
-          var successView = document.getElementById('rc-contact-success-view');
-          if (successView) successView.style.display = 'block';
+          if (data.success) {
+            if (formView) formView.style.display = 'none';
+            var successView = document.getElementById('rc-contact-success-view');
+            if (successView) successView.style.display = 'block';
 
-          var successText = document.getElementById('rc-contact-success-text');
-          if (successText) {
-            successText.innerHTML = 'Thank you, <strong>' + escapeHtml(name) + '</strong>!<br/>We have received your enquiry regarding <strong>' + escapeHtml(subject) + '</strong>. Our team will review your message and get back to you shortly.';
-          }
+            var refHtml = data.referenceId ? ' <span style="font-size:0.85em; opacity:0.85;">(Ref: ' + escapeHtml(data.referenceId) + ')</span>' : '';
+            var successText = document.getElementById('rc-contact-success-text');
+            if (successText) {
+              successText.innerHTML = 'Thank you, <strong>' + escapeHtml(name) + '</strong>!' + refHtml + '<br/>We have received your enquiry regarding <strong>' + escapeHtml(subject) + '</strong>. Our team will review your message and get back to you shortly.';
+            }
 
-          var waMsg = encodeURIComponent(
-            "Hello Redesign Clinics,\nI submitted a contact enquiry on your website.\n\n" +
-            "Name: " + name + "\n" +
-            "Phone: " + phone + "\n" +
-            (email ? "Email: " + email + "\n" : "") +
-            "Subject: " + subject + "\n" +
-            (messageText ? "Message: " + messageText : "")
-          );
-
-          var waLink = document.getElementById('rc-contact-wa-link');
-          if (waLink) waLink.href = "https://wa.me/917780245307?text=" + waMsg;
-        } else {
-          if (btn) {
-            btn.disabled = false;
-            var btnSpan = btn.querySelector('span');
-            if (btnSpan) btnSpan.textContent = 'Send Enquiry';
+            var waLink = document.getElementById('rc-contact-wa-link');
+            if (waLink) waLink.style.display = 'none';
+          } else {
+            showCaptchaError('rc-contact', data.error || 'Unable to submit your message right now. Please try again.');
           }
-          if (errBox) {
-            errBox.textContent = "Something went wrong. We couldn't submit your enquiry right now. Please try again or contact us directly by phone or email.";
-            errBox.style.display = 'block';
-          }
-        }
-      })
-      .catch(function () {
-        if (btn) {
-          btn.disabled = false;
-          var btnSpan = btn.querySelector('span');
-          if (btnSpan) btnSpan.textContent = 'Send Enquiry';
-        }
-        if (errBox) {
-          errBox.textContent = "Something went wrong. We couldn't submit your enquiry right now. Please try again or contact us directly by phone or email.";
-          errBox.style.display = 'block';
-        }
-      });
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
+          showCaptchaError('rc-contact', 'Unable to reach the server. Please check your connection and try again.');
+        });
     });
   }
 

@@ -556,5 +556,22 @@
   "doctor.unmuteVideo": "تشغيل الصوت",
   "doctor.muteVideo": "كتم الصوت",
   "doctor.videoAria": "الدكتور سهيل سيد - انقر أو مرر لمدة 3 ثوانٍ لمشاهدة الفيديو التعريفي.",
-  "floating.doctorLabel": "تعرف على الدكتور سهيل"
+  "floating.doctorLabel": "تعرف على الدكتور سهيل",
+  "instagram.badge": "✦ إنستغرام",
+  "instagram.heading": "تابعوا عيادات ريديزاين لطب الأسنان",
+  "instagram.description": "ابقوا على تواصل مع عيادات ريديزاين لطب الأسنان لمتابعة أحدث الابتسامات، ولحظات العيادة، وتحديثات العناية بالأسنان.",
+  "instagram.handle": "@redesign.dental.clinics",
+  "instagram.followBtn": "تابعونا على إنستغرام",
+  "instagram.postAlt": "منشور إنستغرام لعيادات ريديزاين لطب الأسنان",
+  "testimonials.watchVideo": "شاهد فيديو تجربة المريض",
+  "testimonials.backToReview": "العودة إلى التقييم",
+  "testimonials.tapOrHover": "انقر أو مرر لمشاهدة الفيديو",
+  "testimonials.unmute": "انقر لإلغاء الكتم",
+  "testimonials.muted": "صامت",
+  "testimonials.patientStory": "قصة وتجربة المريض",
+  "nav.meetOurDoctors": "تعرف على أطبائنا",
+  "doctors.pageTitle": "أطباؤنا المتخصصون | عيادات ريديزاين لطب الأسنان",
+  "doctors.badge": "فريقنا المتخصص",
+  "doctors.heading": "الأطباء المتخصصون وراء ابتسامتك",
+  "doctors.subheading": "تعرف على الفريق الطبي المتخصص في عيادات ريديزاين لطب الأسنان في بانجارا هيلز، حيدر أباد."
 }

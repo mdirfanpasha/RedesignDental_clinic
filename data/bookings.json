@@ -1,0 +1,73 @@
+[
+  {
+    "referenceId": "RDC-CALL-20260828-YI54",
+    "type": "callback",
+    "name": "Sarah Smith",
+    "phone": "7780245307",
+    "email": "",
+    "reason": "General Consultation",
+    "preferredTime": "Afternoon",
+    "message": "",
+    "ip": "::1",
+    "whatsappStatus": "sent",
+    "createdAt": "2026-08-28T07:36:50.144Z",
+    "createdAtIST": "Friday, 28 August 2026 at 1:06:50 pm IST",
+    "whatsappResults": [
+      {
+        "recipient": "917780245307",
+        "success": true,
+        "messageId": "MOCK-WA-1787902610147-2uiyl",
+        "status": "simulated_dev_mode",
+        "note": "To send live messages, configure WHATSAPP_ACCESS_TOKEN and WHATSAPP_PHONE_NUMBER_ID in environment variables."
+      }
+    ]
+  },
+  {
+    "referenceId": "RDC-APPT-20260828-WQF3",
+    "type": "appointment",
+    "name": "Dr. John Doe",
+    "phone": "9876543210",
+    "email": "john@example.com",
+    "reason": "Implants",
+    "customMsg": "",
+    "date": "2026-08-30",
+    "time": "11:30 AM IST",
+    "ip": "::1",
+    "whatsappStatus": "sent",
+    "createdAt": "2026-08-28T07:36:50.125Z",
+    "createdAtIST": "Friday, 28 August 2026 at 1:06:50 pm IST",
+    "whatsappResults": [
+      {
+        "recipient": "917780245307",
+        "success": true,
+        "messageId": "MOCK-WA-1787902610127-ay7ij",
+        "status": "simulated_dev_mode",
+        "note": "To send live messages, configure WHATSAPP_ACCESS_TOKEN and WHATSAPP_PHONE_NUMBER_ID in environment variables."
+      }
+    ]
+  },
+  {
+    "referenceId": "RDC-CALL-20260828-GJKK",
+    "type": "callback",
+    "name": "Amina Begum",
+    "phone": "7780245307",
+    "reason": "Root Canal Enquiry",
+    "preferredTime": "Morning",
+    "createdAt": "2026-08-28T07:22:07.573Z",
+    "createdAtIST": "Friday, 28 August 2026 at 12:52:07 pm IST",
+    "whatsappStatus": "pending"
+  },
+  {
+    "referenceId": "RDC-APPT-20260828-Z4GQ",
+    "type": "appointment",
+    "name": "Mohammed Irfan",
+    "phone": "9876543210",
+    "email": "test@example.com",
+    "reason": "Dental Implants",
+    "date": "2026-08-30",
+    "time": "11:30 AM IST",
+    "createdAt": "2026-08-28T07:22:07.568Z",
+    "createdAtIST": "Friday, 28 August 2026 at 12:52:07 pm IST",
+    "whatsappStatus": "pending"
+  }
+]

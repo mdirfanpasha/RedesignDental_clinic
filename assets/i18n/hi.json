@@ -556,5 +556,22 @@
   "doctor.unmuteVideo": "ध्वनि चालू करें",
   "doctor.muteVideo": "म्यूट करें",
   "doctor.videoAria": "डॉ. सुहैल ए. सैयद - परिचयात्मक वीडियो देखने के लिए क्लिक करें या 3 सेकंड रुकें।",
-  "floating.doctorLabel": "डॉ. सुहैल से मिलें"
+  "floating.doctorLabel": "डॉ. सुहैल से मिलें",
+  "instagram.badge": "✦ इंस्टाग्राम",
+  "instagram.heading": "रीडिजाइन डेंटल क्लिनिक्स को फॉलो करें",
+  "instagram.description": "हमारी नवीनतम मुस्कानों, क्लिनिक के पलों और दंत चिकित्सा अपडेट्स के लिए रीडिजाइन डेंटल क्लिनिक्स से जुड़े रहें।",
+  "instagram.handle": "@redesign.dental.clinics",
+  "instagram.followBtn": "इंस्टाग्राम पर हमें फॉलो करें",
+  "instagram.postAlt": "रीडिजाइन डेंटल क्लिनिक्स इंस्टाग्राम पोस्ट",
+  "testimonials.watchVideo": "वीडियो प्रशंसापत्र देखें",
+  "testimonials.backToReview": "समीक्षा पर वापस जाएं",
+  "testimonials.tapOrHover": "वीडियो देखने के लिए टैप या होवर करें",
+  "testimonials.unmute": "अनम्यूट करने के लिए क्लिक करें",
+  "testimonials.muted": "म्यूट किया गया",
+  "testimonials.patientStory": "मरीज का वीडियो अनुभव",
+  "nav.meetOurDoctors": "हमारे डॉक्टरों से मिलें",
+  "doctors.pageTitle": "हमारे दंत विशेषज्ञ | रीडिजाइन डेंटल क्लिनिक",
+  "doctors.badge": "हमारी विशेषज्ञ टीम",
+  "doctors.heading": "आपकी मुस्कान के पीछे के विशेषज्ञ",
+  "doctors.subheading": "बंजारा हिल्स, हैदराबाद में रीडिजाइन डेंटल क्लिनिक्स के अनुभवी विशेषज्ञों से मिलें।"
 }

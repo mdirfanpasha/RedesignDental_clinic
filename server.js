@@ -62,6 +62,7 @@ const MIME_TYPES = {
 const CLEAN_ROUTES = {
   '/':          'index.html',
   '/about':     'about.html',
+  '/doctors':   'doctors.html',
   '/services':  'services.html',
   '/gallery':   'gallery.html',
   '/contact':   'contact.html',
@@ -86,6 +87,8 @@ const HTML_REDIRECTS = {
   '/terms.html':    '/terms',
   '/cookies.html':  '/cookies',
   '/licenses.html': '/licenses',
+  '/doctors.html':  '/doctors',
+  '/doctors.htm':   '/doctors',
   // Common variants
   '/index.htm':     '/',
   '/about.htm':     '/about',
@@ -148,6 +151,71 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
     res.end();
+    return;
+  }
+
+  // ── Helper to wrap Node http res with status().json() for Vercel functions ──
+  function wrapResponse(nodeRes) {
+    nodeRes.status = function (statusCode) {
+      this.statusCode = statusCode;
+      return this;
+    };
+    nodeRes.json = function (data) {
+      if (!this.headersSent) {
+        this.setHeader('Content-Type', 'application/json');
+      }
+      this.end(JSON.stringify(data));
+      return this;
+    };
+    return nodeRes;
+  }
+
+  // ── Handle Booking / Appointments / Callback API Routes ───────────────────
+  if (req.url.startsWith('/api/appointments') && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', async () => {
+      try {
+        req.body = JSON.parse(body || '{}');
+        const { default: handler } = await import('./api/appointments.js');
+        await handler(req, wrapResponse(res));
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: err.message || 'Internal server error' }));
+      }
+    });
+    return;
+  }
+
+  if (req.url.startsWith('/api/callback') && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', async () => {
+      try {
+        req.body = JSON.parse(body || '{}');
+        const { default: handler } = await import('./api/callback.js');
+        await handler(req, wrapResponse(res));
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: err.message || 'Internal server error' }));
+      }
+    });
+    return;
+  }
+
+  if (req.url.startsWith('/api/booking') && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', async () => {
+      try {
+        req.body = JSON.parse(body || '{}');
+        const { default: handler } = await import('./api/booking.js');
+        await handler(req, wrapResponse(res));
+      } catch (err) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, error: err.message || 'Internal server error' }));
+      }
+    });
     return;
   }
 

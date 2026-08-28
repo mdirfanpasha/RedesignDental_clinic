@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" data-wf-page="booking-page">
+<head>
+    <meta charset="utf-8" />
+    <title>Book an Appointment | Redesign Dental Clinics Hyderabad</title>
+    <meta name="description" content="Schedule your dental appointment with Dr. Suhail A. Syed and expert dental specialists at Redesign Dental Clinics in Banjara Hills, Hyderabad." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="assets/img/redesign-dental-clinics-logo.png" type="image/png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Core Styles -->
+    <link rel="stylesheet" href="assets/css/lumora.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/booking-system.css" type="text/css" />
+
+    <style>
+        :root {
+            --color-primary: #05262a;
+            --color-teal: #0d9488;
+            --color-teal-light: #14b8a6;
+            --color-bg: #f8fafc;
+            --color-text: #1e293b;
+            --color-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            margin: 0;
+            padding: 0;
+        }
+
+        .booking-hero {
+            background: linear-gradient(135deg, #02181b 0%, #05262a 50%, #083c42 100%);
+            padding: 130px 0 70px;
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(13, 148, 136, 0.15), transparent 60%);
+            pointer-events: none;
+        }
+
+        .booking-section {
+            padding: 60px 0 100px;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .booking-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 45px rgba(5, 38, 42, 0.07);
+            border: 1px solid rgba(13, 148, 136, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border-radius: 12px;
+            border: 1.5px solid #cbd5e1;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: #0f172a;
+            background: #ffffff;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-teal);
+            box-shadow: 0 0 0 3.5px rgba(13, 148, 136, 0.18);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(13, 148, 136, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(13, 148, 136, 0.4);
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        }
+
+        .info-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(5, 38, 42, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-card.highlight {
+            background: #05262a;
+            color: #ffffff;
+            border: 1px solid rgba(13, 148, 136, 0.4);
+        }
+
+        .info-card.highlight h3 {
+            color: #ffffff;
+        }
+
+        .info-card.highlight p {
+            color: #cbd5e1;
+        }
+
+        .whatsapp-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #25D366;
+            color: #ffffff;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            margin-top: 16px;
+        }
+
+        .whatsapp-cta:hover {
+            background: #1ebc59;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 900px) {
+            .booking-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .booking-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <!-- Global Navbar -->
+        <div data-collapse="medium" data-animation="default" data-duration="400" fs-scrolldisable-element="smart-nav"
+            data-easing="ease" data-easing2="ease" role="banner" class="navbar_wrap w-nav">
+            <div class="navbar_container">
+                <a href="/" class="navbar_logo w-nav-brand">
+                    <img loading="eager" src="assets/img/redesign-dental-clinics-logo-white.png" alt="Redesign Dental Clinics" class="logo_image" />
+                </a>
+                <div class="navbar-content_wrap">
+                    <nav role="navigation" class="navbar_menu w-nav-menu">
+                        <a href="/" class="navbar_link w-inline-block">
+                            <div data-i18n="nav.home">Home</div>
+                        </a>
+                        <a href="/about" class="navbar_link w-inline-block">
+                            <div data-i18n="nav.about">About Us</div>
+                        </a>
+                        <a href="/doctors" class="navbar_link w-inline-block">
+                            <div data-i18n="nav.meetOurDoctors">Doctors</div>
+                        </a>
+                        <a href="/services" class="navbar_link w-inline-block">
+                            <div data-i18n="nav.services">Services</div>
+                        </a>
+                        <a href="/gallery" class="navbar_link w-inline-block">
+                            <div data-i18n="nav.gallery">Gallery</div>
+                        </a>
+                        <a href="/blog" class="navbar_link w-inline-block">
+                            <div data-i18n="nav.blog">Blog</div>
+                        </a>
+                        <a href="/contact" class="navbar_link w-inline-block">
+                            <div data-i18n="nav.contact">Contact</div>
+                        </a>
+                    </nav>
+                    <div class="navbar_cta-wrap">
+                        <a href="tel:+919177166166" class="button_secondary is-small w-inline-block" style="border-color: rgba(255,255,255,0.3); color: #fff;">
+                            <div>+91 91771 66166</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="main-wrapper">
+            <!-- Hero Header -->
+            <header class="booking-hero">
+                <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;">
+                    <div class="section_tag" style="margin: 0 auto 16px; background: rgba(13, 148, 136, 0.2); border-color: rgba(13, 148, 136, 0.4); color: #2dd4bf;">
+                        <span>✦ ONLINE APPOINTMENT</span>
+                    </div>
+                    <h1 style="font-family: var(--font, 'Sora', sans-serif); font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 700; margin: 0 0 16px; line-height: 1.2;">
+                        Book Your Visit at <span class="text-highlighted">Redesign Dental</span>
+                    </h1>
+                    <p style="color: #cbd5e1; font-size: 1.1rem; line-height: 1.6; margin: 0 auto; max-width: 680px;">
+                        Schedule a consultation with Dr. Suhail A. Syed and our team of dental specialists in Banjara Hills, Hyderabad.
+                    </p>
+                </div>
+            </header>
+
+            <!-- Booking Section -->
+            <section class="booking-section">
+                <div class="container" style="max-width: 1180px; margin: 0 auto; padding: 0 20px;">
+                    <div class="booking-grid">
+                        
+                        <!-- Form Card -->
+                        <div class="booking-card">
+                            <h2 style="font-family: 'Sora', sans-serif; font-size: 1.6rem; color: #05262a; margin-top: 0; margin-bottom: 24px; font-weight: 700;">
+                                Patient Consultation Details
+                            </h2>
+
+                            <form id="direct-booking-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="patient-name">Full Name *</label>
+                                        <input type="text" id="patient-name" class="form-input" placeholder="e.g. Rahul Sharma" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="patient-phone">Phone Number *</label>
+                                        <input type="tel" id="patient-phone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="doctor-select">Select Doctor</label>
+                                        <select id="doctor-select" class="form-select">
+                                            <option value="dr-suhail">Dr. Suhail A. Syed (Chief Dental Surgeon & Implantologist)</option>
+                                            <option value="orthodontist">Consultant Orthodontist (Aligners & Braces)</option>
+                                            <option value="endodontist">Consultant Endodontist (Root Canal Specialist)</option>
+                                            <option value="prosthodontist">Consultant Prosthodontist (Crowns & Veneers)</option>
+                                            <option value="pedodontist">Consultant Pedodontist (Kids Dentistry)</option>
+                                            <option value="oral-surgeon">Consultant Oral & Maxillofacial Surgeon</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="service-select">Treatment / Service</label>
+                                        <select id="service-select" class="form-select">
+                                            <option value="General Consultation">General Dental Checkup & Consultation</option>
+                                            <option value="Implants">Dental Implants & Full Mouth Rehab</option>
+                                            <option value="Root Canal">Single-Sitting Root Canal Treatment</option>
+                                            <option value="Clear Aligners">Clear Aligners & Orthodontics</option>
+                                            <option value="Cosmetic Dentistry">Cosmetic Dentistry & Smile Design</option>
+                                            <option value="Teeth Whitening">Laser Teeth Whitening</option>
+                                            <option value="Emergency">Wisdom Tooth & Emergency</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label" for="appointment-date">Preferred Date *</label>
+                                        <input type="date" id="appointment-date" class="form-input" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="appointment-time">Preferred Time Slot</label>
+                                        <select id="appointment-time" class="form-select">
+                                            <option value="10:00 AM IST">Morning (10:00 AM - 01:00 PM)</option>
+                                            <option value="02:30 PM IST">Afternoon (02:00 PM - 05:00 PM)</option>
+                                            <option value="05:30 PM IST">Evening (05:00 PM - 08:00 PM)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="patient-notes">Describe Your Dental Concern (Optional)</label>
+                                    <textarea id="patient-notes" class="form-textarea" rows="3" placeholder="Briefly describe what treatment you are looking for or any symptoms you have..."></textarea>
+                                </div>
+
+                                <div id="direct-booking-msg" style="display: none; margin-bottom: 15px; padding: 12px 16px; border-radius: 8px; font-weight: 500; font-size: 0.95rem;"></div>
+
+                                <button type="submit" id="direct-booking-submit-btn" class="submit-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    <span>Confirm Appointment Request</span>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Sidebar Info -->
+                        <div class="info-sidebar">
+                            <div class="info-card highlight">
+                                <h3 style="font-family: 'Sora', sans-serif; font-size: 1.25rem; margin-top: 0; margin-bottom: 12px;">
+                                    Emergency or Immediate Care?
+                                </h3>
+                                <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px;">
+                                    Connect directly with our clinic desk on WhatsApp for prompt assistance and same-day emergency slots.
+                                </p>
+                                <a href="https://wa.me/917780245307?text=Hi%20Redesign%20Dental%20Clinics,%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener noreferrer" class="whatsapp-cta">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+                                    <span>WhatsApp Quick Booking</span>
+                                </a>
+                            </div>
+
+                            <div class="info-card">
+                                <h3 style="font-family: 'Sora', sans-serif; font-size: 1.15rem; color: #05262a; margin-top: 0; margin-bottom: 14px;">
+                                    Clinic Location &amp; Hours
+                                </h3>
+                                <p style="font-size: 0.9rem; color: #475569; line-height: 1.6; margin-bottom: 14px;">
+                                    📍 <strong>Redesign Dental Clinics</strong><br />
+                                    Road No. 12, Banjara Hills, Hyderabad, Telangana 500034
+                                </p>
+                                <p style="font-size: 0.9rem; color: #475569; line-height: 1.6; margin-bottom: 0;">
+                                    🕒 <strong>Consultation Timings:</strong><br />
+                                    Monday – Saturday: 10:00 AM – 8:00 PM<br />
+                                    Sunday: By Prior Appointment
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Global Footer -->
+        <footer class="footer_wrap">
+            <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center; color: #94a3b8; font-size: 0.9rem;">
+                <p style="margin: 0;">© 2026 Redesign Dental Clinics. All rights reserved. Dr. Suhail A. Syed & Specialist Dental Team.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Booking Scripts -->
+    <script src="assets/js/booking-system.js"></script>
+    <script>
+        // Set default minimum date to today and connect submission to backend API
+        (function() {
+            var dateInput = document.getElementById('appointment-date');
+            if (dateInput) {
+                var today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+
+            var form = document.getElementById('direct-booking-form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var name = (document.getElementById('patient-name').value || '').trim();
+                    var phone = (document.getElementById('patient-phone').value || '').trim();
+                    var date = document.getElementById('appointment-date').value;
+                    var time = document.getElementById('appointment-time').value;
+                    var service = document.getElementById('service-select').value;
+                    var notes = (document.getElementById('patient-notes').value || '').trim();
+                    var msgBox = document.getElementById('direct-booking-msg');
+                    var btn = document.getElementById('direct-booking-submit-btn');
+
+                    if (!name || !phone || !date) {
+                        alert('Please fill in required fields.');
+                        return;
+                    }
+
+                    if (btn) { btn.disabled = true; btn.querySelector('span').textContent = 'Submitting request...'; }
+
+                    var tokenPromise = (window.RecaptchaWidget && typeof window.RecaptchaWidget.execute === 'function')
+                        ? window.RecaptchaWidget.execute('direct_booking')
+                        : Promise.resolve('direct_booking_token');
+
+                    tokenPromise.then(function(token) {
+                        return fetch('/api/appointments', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                name: name,
+                                phone: phone,
+                                date: date,
+                                time: time,
+                                reason: service,
+                                customMsg: notes,
+                                token: token
+                            })
+                        });
+                    })
+                    .then(function(res) { return res.json(); })
+                    .then(function(data) {
+                        if (btn) { btn.disabled = false; btn.querySelector('span').textContent = 'Confirm Appointment Request'; }
+                        if (data.success) {
+                            if (msgBox) {
+                                msgBox.style.display = 'block';
+                                msgBox.style.background = '#dcfce7';
+                                msgBox.style.color = '#166534';
+                                msgBox.innerHTML = '✓ Thank you, ' + name + '! Your appointment request (Ref: ' + (data.referenceId || '') + ') has been received. Our clinical coordinator will call you shortly to confirm your time slot.';
+                            }
+                            form.reset();
+                        } else {
+                            if (msgBox) {
+                                msgBox.style.display = 'block';
+                                msgBox.style.background = '#fee2e2';
+                                msgBox.style.color = '#991b1b';
+                                msgBox.textContent = data.error || 'Unable to process your request. Please try again.';
+                            }
+                        }
+                    })
+                    .catch(function() {
+                        if (btn) { btn.disabled = false; btn.querySelector('span').textContent = 'Confirm Appointment Request'; }
+                        if (msgBox) {
+                            msgBox.style.display = 'block';
+                            msgBox.style.background = '#fee2e2';
+                            msgBox.style.color = '#991b1b';
+                            msgBox.textContent = 'Network error. Please check your connection and try again.';
+                        }
+                    });
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

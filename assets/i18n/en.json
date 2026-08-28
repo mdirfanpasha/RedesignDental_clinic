@@ -556,5 +556,22 @@
   "doctor.unmuteVideo": "Unmute",
   "doctor.muteVideo": "Mute",
   "doctor.videoAria": "Meet Dr. Suhail A. Syed - Interactive video card. Click or hover 3 seconds to watch video introduction.",
-  "floating.doctorLabel": "Meet Dr. Suhail"
+  "floating.doctorLabel": "Meet Dr. Suhail",
+  "instagram.badge": "✦ INSTAGRAM",
+  "instagram.heading": "Follow Redesign Dental Clinics",
+  "instagram.description": "Stay connected with Redesign Dental Clinics for our latest smiles, clinic moments, dental care updates and more.",
+  "instagram.handle": "@redesign.dental.clinics",
+  "instagram.followBtn": "Follow Us on Instagram",
+  "instagram.postAlt": "Redesign Dental Clinics Instagram post",
+  "testimonials.watchVideo": "Watch Video Testimonial",
+  "testimonials.backToReview": "Back to Review",
+  "testimonials.tapOrHover": "Tap or Hover (3s) to Watch Video",
+  "testimonials.unmute": "Click to Unmute",
+  "testimonials.muted": "Muted",
+  "testimonials.patientStory": "Patient Video Story",
+  "nav.meetOurDoctors": "Meet Our Doctors",
+  "doctors.pageTitle": "Our Dental Specialists | Redesign Dental Clinics",
+  "doctors.badge": "Our Specialist Team",
+  "doctors.heading": "Superheroes Behind Your Smile",
+  "doctors.subheading": "Meet the experienced specialists and clinical team behind Redesign Dental Clinics in Banjara Hills, Hyderabad."
 }
