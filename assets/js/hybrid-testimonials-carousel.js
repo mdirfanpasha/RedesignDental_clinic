@@ -137,8 +137,13 @@
 
       // Transform calculation
       var visible = getVisibleCount();
-      var gap = window.innerWidth < 768 ? 16 : 24;
-      var slideWidth = slides[0] ? slides[0].offsetWidth : 300;
+      var gap = 24;
+      var slideWidthPct = 100 / visible;
+      var offset = currentIndex * (slideWidthPct);
+
+      track.style.transform = 'translateX(-' + (currentIndex * (100 / visible + (gap / track.offsetWidth) * 100 * (visible > 1 ? 1 : 0))) + '%)';
+      // Safe fallback using CSS calc on child width
+      var slideWidth = slides[0].offsetWidth;
       track.style.transform = 'translateX(-' + (currentIndex * (slideWidth + gap)) + 'px)';
 
       updateDots();
