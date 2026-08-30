@@ -11081,7 +11081,7 @@ html.lang-ar textarea {
 .instagram-posts_grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 32px;
   max-width: 1140px;
   margin: 0 auto;
 }
@@ -11115,6 +11115,7 @@ html.lang-ar textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 15%;
   transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
   display: block;
@@ -11182,7 +11183,7 @@ html.lang-ar textarea {
   }
   .instagram-posts_grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    gap: 18px;
   }
   .instagram-post_card {
     border-radius: 16px;
@@ -11295,22 +11296,7 @@ html.lang-ar textarea {
 }
 
 .hybrid-card_author-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(13, 148, 136, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.hybrid-card_author-avatar img {
-  width: 70%;
-  height: 70%;
-  object-fit: contain;
+  display: none !important;
 }
 
 .hybrid-card_author-name {

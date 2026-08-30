@@ -398,8 +398,8 @@ body.rc-modal-open .rc-floating-actions {
 }
 
 .rc-float-doc-wrap {
-  width: 68px;
-  height: 68px;
+  width: 88px;
+  height: 88px;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -408,13 +408,13 @@ body.rc-modal-open .rc-floating-actions {
   justify-content: center;
   position: relative;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
-  filter: drop-shadow(0 6px 14px rgba(5, 38, 42, 0.3));
+  filter: drop-shadow(0 8px 18px rgba(5, 38, 42, 0.35));
   flex-shrink: 0;
 }
 
 .rc-float-doc:hover .rc-float-doc-wrap {
-  transform: scale(1.05);
-  filter: drop-shadow(0 10px 20px rgba(5, 38, 42, 0.4)) drop-shadow(0 0 10px rgba(46, 196, 182, 0.3));
+  transform: scale(1.06);
+  filter: drop-shadow(0 12px 24px rgba(5, 38, 42, 0.45)) drop-shadow(0 0 12px rgba(46, 196, 182, 0.35));
 }
 
 .rc-float-doc-img {
@@ -479,8 +479,8 @@ body.rc-modal-open .rc-floating-actions {
     height: 22px;
   }
   .rc-float-doc-wrap {
-    width: 56px;
-    height: 56px;
+    width: 70px;
+    height: 70px;
   }
   .rc-float-doc-label {
     display: none !important;

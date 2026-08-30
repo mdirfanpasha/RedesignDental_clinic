@@ -674,7 +674,7 @@
       <a href="/#doctor-profile" class="rc-float-btn rc-float-doc" id="rc-float-doctor-btn" aria-label="Meet Dr. Suhail A. Syed" title="Meet Dr. Suhail" data-i18n-title="floating.doctorLabel">
         <span class="rc-float-doc-label" data-i18n="floating.doctorLabel">Meet Dr. Suhail</span>
         <div class="rc-float-doc-wrap">
-          <img src="assets/img/dr-suhail-floating-icon.png" onerror="this.onerror=null;this.src='assets/img/suhail_icon-removebg-preview.png'" alt="Meet Dr. Suhail A. Syed" class="rc-float-doc-img" />
+          <img src="/assets/img/dr-suhail-floating-icon.png" onerror="this.onerror=null;this.src='/assets/img/suhail_icon-removebg-preview.png'" alt="Meet Dr. Suhail A. Syed" class="rc-float-doc-img" />
         </div>
       </a>
       <a href="https://wa.me/917780245307?text=Hi%20Redesign%20Dental%20Clinics%2C%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener noreferrer" class="rc-float-btn rc-float-wa" aria-label="Chat on WhatsApp">

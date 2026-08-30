@@ -99,10 +99,31 @@
             font-family: 'Sora', sans-serif;
             color: #1e293b;
         }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Sora', sans-serif !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+            word-break: normal !important;
+        }
+        p {
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+        }
         .article-hero {
-            background: linear-gradient(180deg, #05262a 0%, #083c38 120px, #115c55 220px, #268d83 340px, #86d4ca 440px, #d8f3ee 540px, #ffffff 680px, #ffffff 100%);
-            padding: 130px 20px 40px;
-            color: #05262a;
+            background: linear-gradient(180deg, #05262a 0%, #083c38 120px, #115c55 220px, #1a746b 360px, #268d83 500px, #86d4ca 680px, #d8f3ee 800px, #ffffff 920px);
+            padding: 130px 20px 50px;
+            color: #ffffff;
+        }
+        .article-hero h1 {
+            color: #ffffff !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+            text-shadow: 0 2px 10px rgba(5, 38, 42, 0.4);
+        }
+        .article-hero p {
+            color: #e2e8f0 !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
         }
         .article-container {
             max-width: 860px;
@@ -122,18 +143,22 @@
         .article-content h2 {
             font-size: 24px;
             font-weight: 700;
-            color: #05262a;
+            color: #05262a !important;
             margin-top: 36px;
             margin-bottom: 16px;
             line-height: 1.35;
             padding-bottom: 8px;
             border-bottom: 2px solid #e2e8f0;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
         }
         .article-content p {
             font-size: 16px;
             line-height: 1.8;
             color: #334155;
             margin-bottom: 20px;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
         }
         .takeaways-box {
             background: #f0fdf4;
@@ -229,36 +254,36 @@
         <header class="article-hero">
             <div class="article-container">
                 <nav class="breadcrumbs-nav" aria-label="Breadcrumb">
-                    <a href="/" data-i18n="blog.breadcrumbHome">Home</a>
-                    <span>/</span>
-                    <a href="/blog" data-i18n="blog.breadcrumbBlog">Blog</a>
-                    <span>/</span>
-                    <span style="color: #05262a; font-weight: 600;" data-i18n="blog.category.implants">Dental Implants</span>
+                    <a href="/" data-i18n="blog.breadcrumbHome" style="color: #2dd4bf; text-decoration: none; font-weight: 600;">Home</a>
+                    <span style="color: #64748b;">/</span>
+                    <a href="/blog" data-i18n="blog.breadcrumbBlog" style="color: #2dd4bf; text-decoration: none; font-weight: 600;">Blog</a>
+                    <span style="color: #64748b;">/</span>
+                    <span style="color: #cbd5e1; font-weight: 600;" data-i18n="blog.category.implants">Dental Implants</span>
                 </nav>
                 
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
-                    <span style="background: rgba(15, 118, 110, 0.12); color: #0f766e; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 99px; text-transform: uppercase;" data-i18n="blog.category.implants">Dental Implants</span>
-                    <span style="font-size: 13px; color: #475569;">•</span>
-                    <span style="font-size: 13px; color: #475569;">6 min read</span>
-                    <span style="font-size: 13px; color: #475569;">•</span>
-                    <span style="font-size: 13px; color: #475569;">Published: June 15, 2026</span>
+                    <span style="background: rgba(45, 212, 191, 0.2); color: #2dd4bf; border: 1px solid rgba(45, 212, 191, 0.4); font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="blog.category.implants">Dental Implants</span>
+                    <span style="font-size: 13px; color: #64748b;">•</span>
+                    <span style="font-size: 13px; color: #cbd5e1;">6 min read</span>
+                    <span style="font-size: 13px; color: #64748b;">•</span>
+                    <span style="font-size: 13px; color: #cbd5e1;">Published: June 15, 2026</span>
                 </div>
                 
-                <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.25; color: #05262a; margin-bottom: 20px;" data-i18n="blog.post1.title">
+                <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.25; color: #ffffff !important; margin-bottom: 20px; letter-spacing: normal !important; word-spacing: normal !important; text-shadow: 0 2px 10px rgba(5, 38, 42, 0.5);" data-i18n="blog.post1.title">
                     Dental Implants: What Patients Should Know Before Treatment
                 </h1>
                 
-                <p style="font-size: 18px; line-height: 1.6; color: #334155; margin-bottom: 24px; font-weight: 500;" data-i18n="blog.post1.excerpt">
+                <p style="font-size: 18px; line-height: 1.65; color: #e2e8f0 !important; margin-bottom: 24px; font-weight: 400; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post1.excerpt">
                     A comprehensive guide to dental implant components, bone evaluation, candidacy, and long-term oral hygiene care.
                 </p>
                 
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 30px;">
-                    <div style="width: 42px; height: 42px; border-radius: 50%; background: #0f766e; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">
+                    <div style="width: 42px; height: 42px; border-radius: 50%; background: #0f766e; border: 1.5px solid #2dd4bf; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">
                         RC
                     </div>
                     <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #05262a;" data-i18n="blog.authorName">Redesign Dental Clinics</div>
-                        <div style="font-size: 12px; color: #64748b;">Clinical Editorial Team • Banjara Hills, Hyderabad</div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;" data-i18n="blog.authorName">Redesign Dental Clinics</div>
+                        <div style="font-size: 12px; color: #cbd5e1;">Clinical Editorial Team • Banjara Hills, Hyderabad</div>
                     </div>
                 </div>
             </div>
@@ -273,39 +298,39 @@
                 </div>
 
                 <!-- Intro Paragraph -->
-                <p style="font-size: 17px; font-weight: 500; line-height: 1.8; color: #0f172a;" data-i18n="blog.post1.intro">
+                <p style="font-size: 17px; font-weight: 500; line-height: 1.8; color: #0f172a; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post1.intro">
                     Dental implants are a widely utilized, permanent solution for replacing missing teeth. Unlike traditional removable dentures or bridges that rely on adjacent teeth, a dental implant acts as an artificial tooth root anchored securely into the jawbone.
                 </p>
 
                 <!-- Key Takeaways Box -->
                 <div class="takeaways-box">
-                    <h3 style="font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="blog.keyTakeaways">Key Clinical Takeaways</h3>
-                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #064e3b;" data-i18n="blog.post1.takeaway">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px !important; word-spacing: normal !important;" data-i18n="blog.keyTakeaways">Key Clinical Takeaways</h3>
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #064e3b; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post1.takeaway">
                         Dental implants provide durable tooth replacement, but thorough pre-surgical evaluation and dedicated daily oral hygiene are critical to ensuring lasting osseointegration and gum health.
                     </p>
                 </div>
 
                 <!-- Section 1 -->
-                <h2 data-i18n="blog.post1.h2_1">Understanding the Structure of a Dental Implant</h2>
-                <p data-i18n="blog.post1.p1">A complete dental implant restoration consists of three primary components: the titanium or zirconia implant post (which integrates with the jawbone through osseointegration), the abutment connector, and the custom prosthetic crown. This structural design mimics natural tooth anatomy, providing stability for biting and chewing.</p>
+                <h2 data-i18n="blog.post1.h2_1" style="letter-spacing: normal !important; word-spacing: normal !important;">Understanding the Structure of a Dental Implant</h2>
+                <p data-i18n="blog.post1.p1" style="letter-spacing: normal !important; word-spacing: normal !important;">A complete dental implant restoration consists of three primary components: the titanium or zirconia implant post (which integrates with the jawbone through osseointegration), the abutment connector, and the custom prosthetic crown. This structural design mimics natural tooth anatomy, providing stability for biting and chewing.</p>
 
                 <!-- Section 2 -->
-                <h2 data-i18n="blog.post1.h2_2">Who Is a Candidate for Dental Implants?</h2>
-                <p data-i18n="blog.post1.p2">Dental implant suitability depends on several factors, including adequate bone volume and density, healthy gum tissue, and good general health. Patients with controlled diabetes, smoking habits, or reduced bone density require detailed assessment; procedures such as bone grafting or sinus lifts may be considered when bone support is insufficient.</p>
+                <h2 data-i18n="blog.post1.h2_2" style="letter-spacing: normal !important; word-spacing: normal !important;">Who Is a Candidate for Dental Implants?</h2>
+                <p data-i18n="blog.post1.p2" style="letter-spacing: normal !important; word-spacing: normal !important;">Dental implant suitability depends on several factors, including adequate bone volume and density, healthy gum tissue, and good general health. Patients with controlled diabetes, smoking habits, or reduced bone density require detailed assessment; procedures such as bone grafting or sinus lifts may be considered when bone support is insufficient.</p>
 
                 <!-- Section 3 -->
-                <h2 data-i18n="blog.post1.h2_3">The Clinical Evaluation & 3D Diagnostic Process</h2>
-                <p data-i18n="blog.post1.p3">Before implant surgery, comprehensive digital imaging—including 3D CBCT (Cone Beam Computed Tomography)—is essential. This allows the dental surgeon to assess anatomical structures such as nerves, blood vessels, and sinus cavities, ensuring millimeter-precise placement.</p>
+                <h2 data-i18n="blog.post1.h2_3" style="letter-spacing: normal !important; word-spacing: normal !important;">The Clinical Evaluation & 3D Diagnostic Process</h2>
+                <p data-i18n="blog.post1.p3" style="letter-spacing: normal !important; word-spacing: normal !important;">Before implant surgery, comprehensive digital imaging—including 3D CBCT (Cone Beam Computed Tomography)—is essential. This allows the dental surgeon to assess anatomical structures such as nerves, blood vessels, and sinus cavities, ensuring millimeter-precise placement.</p>
 
                 <!-- Section 4 -->
-                <h2 data-i18n="blog.post1.h2_4">Caring for Your Implants & Preventing Peri-Implantitis</h2>
-                <p data-i18n="blog.post1.p4">While implants cannot develop dental cavities, the surrounding gum and bone remain susceptible to bacterial infection known as peri-implantitis. Daily interdental cleaning, soft-bristle brushing with low-abrasive toothpaste, and regular professional maintenance appointments are vital for long-term implant success.</p>
+                <h2 data-i18n="blog.post1.h2_4" style="letter-spacing: normal !important; word-spacing: normal !important;">Caring for Your Implants & Preventing Peri-Implantitis</h2>
+                <p data-i18n="blog.post1.p4" style="letter-spacing: normal !important; word-spacing: normal !important;">While implants cannot develop dental cavities, the surrounding gum and bone remain susceptible to bacterial infection known as peri-implantitis. Daily interdental cleaning, soft-bristle brushing with low-abrasive toothpaste, and regular professional maintenance appointments are vital for long-term implant success.</p>
 
                 <!-- Related Service CTA Banner -->
                 <div class="service-cta-card">
                     <div>
-                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff;" data-i18n="blog.ctaTitle">Have Questions About Your Dental Health?</h3>
-                        <p style="font-size: 14px; opacity: 0.9; margin: 0; color: #e2e8f0;" data-i18n="blog.ctaSubtitle">Consult with our specialist dentists at Redesign Dental Clinics in Banjara Hills, Hyderabad.</p>
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.ctaTitle">Have Questions About Your Dental Health?</h3>
+                        <p style="font-size: 14px; opacity: 0.9; margin: 0; color: #e2e8f0; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.ctaSubtitle">Consult with our specialist dentists at Redesign Dental Clinics in Banjara Hills, Hyderabad.</p>
                     </div>
                     <a href="/contact#book" style="padding: 14px 24px; background: #ffffff; color: #05262a; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 14px; white-space: nowrap; transition: all 0.2s;" data-i18n="blog.ctaButton">
                         Book Consultation
@@ -314,15 +339,15 @@
 
                 <!-- Fact-Checked Sources -->
                 <div class="sources-box">
-                    <h3 style="font-size: 16px; font-weight: 700; color: #05262a; margin-bottom: 12px;" data-i18n="blog.sourcesTitle">Fact-Checked Sources & References</h3>
+                    <h3 style="font-size: 16px; font-weight: 700; color: #05262a; margin-bottom: 12px; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.sourcesTitle">Fact-Checked Sources & References</h3>
                     <ul style="margin: 0; padding-left: 20px;">
                         
-      <li style="margin-bottom: 8px; font-size: 14px; line-height: 1.5; color: #475569;">
-        <strong>undefined:</strong> <em>"Dental Implants: Overview & Research"</em> (undefined) — <a href="https://www.ada.org/resources/research/science-and-research-institute/oral-health-topics/dental-implants" target="_blank" rel="noopener noreferrer" style="color: #0f766e; text-decoration: underline;">View Reference</a>
+      <li style="margin-bottom: 8px; font-size: 14px; line-height: 1.5; color: #475569; letter-spacing: normal !important; word-spacing: normal !important;">
+        <strong>American Dental Association (ADA):</strong> <em>"Dental Implants: Overview & Research"</em> — <a href="https://www.ada.org/resources/research/science-and-research-institute/oral-health-topics/dental-implants" target="_blank" rel="noopener noreferrer" style="color: #0f766e; text-decoration: underline;">View Reference</a>
       </li>
     
-      <li style="margin-bottom: 8px; font-size: 14px; line-height: 1.5; color: #475569;">
-        <strong>undefined:</strong> <em>"Tooth Loss and Replacement Options"</em> (undefined) — <a href="https://www.nidcr.nih.gov/health-info/tooth-loss" target="_blank" rel="noopener noreferrer" style="color: #0f766e; text-decoration: underline;">View Reference</a>
+      <li style="margin-bottom: 8px; font-size: 14px; line-height: 1.5; color: #475569; letter-spacing: normal !important; word-spacing: normal !important;">
+        <strong>National Institute of Dental and Craniofacial Research (NIDCR):</strong> <em>"Tooth Loss and Replacement Options"</em> — <a href="https://www.nidcr.nih.gov/health-info/tooth-loss" target="_blank" rel="noopener noreferrer" style="color: #0f766e; text-decoration: underline;">View Reference</a>
       </li>
     
                     </ul>
@@ -330,8 +355,8 @@
 
                 <!-- Educational & Medical Disclaimer -->
                 <div class="disclaimer-box">
-                    <strong style="color: #475569; display: block; margin-bottom: 6px;" data-i18n="blog.disclaimerTitle">Educational & Medical Disclaimer</strong>
-                    <p style="margin: 0; font-size: 13px;" data-i18n="blog.disclaimerText">
+                    <strong style="color: #475569; display: block; margin-bottom: 6px; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.disclaimerTitle">Educational & Medical Disclaimer</strong>
+                    <p style="margin: 0; font-size: 13px; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.disclaimerText">
                         This article is for general educational purposes only and is not a substitute for an individual dental examination or professional medical advice. Treatment recommendations may vary based on your oral health and clinical needs.
                     </p>
                 </div>
@@ -339,7 +364,7 @@
 
             <!-- Related Articles Section -->
             <section style="margin: 60px 0 80px;">
-                <h2 style="font-size: 24px; font-weight: 700; color: #05262a; margin-bottom: 24px; text-align: center;" data-i18n="blog.relatedTitle">
+                <h2 style="font-size: 24px; font-weight: 700; color: #05262a; margin-bottom: 24px; text-align: center; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.relatedTitle">
                     Related Dental Articles
                 </h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
@@ -349,12 +374,12 @@
           <img src="/assets/img/69e15ff64495113a87fc8c93_blog-image-5.jpg" alt="High precision ceramic and zirconia dental crown restoration" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" />
         </a>
         <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1;">
-          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px;" data-i18n="blog.category.restorative">Restorative Dentistry</div>
-          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a;">
+          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px; letter-spacing: normal !important;" data-i18n="blog.category.restorative">Restorative Dentistry</div>
+          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a; letter-spacing: normal !important; word-spacing: normal !important;">
             <a href="/blog/dental-crowns-guide" style="color: inherit; text-decoration: none;" data-i18n="blog.post3.title">Dental Crowns: What They Are and When They May Be Used</a>
           </h3>
-          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" data-i18n="blog.post3.excerpt">Explore when dental crowns are recommended, crown materials like zirconia and ceramic, and factors affecting their longevity.</p>
-          <a href="/blog/dental-crowns-guide" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post3.excerpt">Explore when dental crowns are recommended, crown materials like zirconia and ceramic, and factors affecting their longevity.</p>
+          <a href="/blog/dental-crowns-guide" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; letter-spacing: normal !important;">
             <span data-i18n="common.readMore">Read More</span> →
           </a>
         </div>
@@ -365,12 +390,12 @@
           <img src="/assets/img/69e088e30997df57b27b8a2a_blog-image-2.jpg" alt="Full mouth dental reconstruction and comprehensive smile restoration planning" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" />
         </a>
         <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1;">
-          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px;" data-i18n="blog.category.restorative">Restorative Dentistry</div>
-          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a;">
+          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px; letter-spacing: normal !important;" data-i18n="blog.category.restorative">Restorative Dentistry</div>
+          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a; letter-spacing: normal !important; word-spacing: normal !important;">
             <a href="/blog/full-mouth-rehabilitation" style="color: inherit; text-decoration: none;" data-i18n="blog.post4.title">Understanding Full Mouth Rehabilitation</a>
           </h3>
-          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" data-i18n="blog.post4.excerpt">A comprehensive guide to multi-disciplinary full mouth restoration combining implants, crowns, periodontal therapy, and bite alignment.</p>
-          <a href="/blog/full-mouth-rehabilitation" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post4.excerpt">A comprehensive guide to multi-disciplinary full mouth restoration combining implants, crowns, periodontal therapy, and bite alignment.</p>
+          <a href="/blog/full-mouth-rehabilitation" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; letter-spacing: normal !important;">
             <span data-i18n="common.readMore">Read More</span> →
           </a>
         </div>
@@ -381,12 +406,12 @@
           <img src="/assets/img/69e1602ff6439f6075d47037_blog-image-6.jpg" alt="Periodontal gum examination evaluating gingival health and pocket depth" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" />
         </a>
         <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1;">
-          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px;" data-i18n="blog.category.gum">Gum Health</div>
-          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a;">
+          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px; letter-spacing: normal !important;" data-i18n="blog.category.gum">Gum Health</div>
+          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a; letter-spacing: normal !important; word-spacing: normal !important;">
             <a href="/blog/gum-disease-warning-signs" style="color: inherit; text-decoration: none;" data-i18n="blog.post7.title">What Is Gum Disease and What Are the Warning Signs?</a>
           </h3>
-          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" data-i18n="blog.post7.excerpt">Recognizing gingivitis and periodontitis symptoms: bleeding gums, recession, mobility, and professional periodontal treatment.</p>
-          <a href="/blog/gum-disease-warning-signs" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post7.excerpt">Recognizing gingivitis and periodontitis symptoms: bleeding gums, recession, mobility, and professional periodontal treatment.</p>
+          <a href="/blog/gum-disease-warning-signs" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; letter-spacing: normal !important;">
             <span data-i18n="common.readMore">Read More</span> →
           </a>
         </div>

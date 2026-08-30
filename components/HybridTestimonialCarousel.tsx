@@ -170,9 +170,6 @@ export const HybridTestimonialCarousel: React.FC<HybridTestimonialCarouselProps>
                     style={{ cursor: isVideo ? 'pointer' : 'default' }}
                   >
                     <div className="hybrid-card_author-wrap">
-                      <div className="hybrid-card_author-avatar">
-                        <img src={item.logo || 'assets/img/redesign-dental-clinics-logo.png'} alt="Redesign Dental Clinics" />
-                      </div>
                       <div className="hybrid-card_author-info">
                         <h3 className="hybrid-card_author-name">{item.author}</h3>
                         <div className="hybrid-card_author-source">{item.designation}</div>

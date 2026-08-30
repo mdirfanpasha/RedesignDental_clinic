@@ -184,7 +184,7 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
+            gap: 32px;
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 20px;
@@ -199,7 +199,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
             cursor: pointer;
             transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 4 / 5;
             width: 100%;
         }
 
@@ -212,7 +212,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: var(--img-pos, center 12%);
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             display: block;
         }
@@ -479,7 +479,7 @@
         @media (max-width: 991px) {
             .gallery-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 16px;
+                gap: 24px;
                 padding: 0 20px;
             }
 
@@ -500,7 +500,7 @@
         @media (max-width: 767px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-                gap: 12px !important;
+                gap: 18px !important;
                 padding: 0 16px !important;
             }
 
@@ -560,7 +560,7 @@
         @media (max-width: 480px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-                gap: 8px !important;
+                gap: 14px !important;
                 padding: 0 10px !important;
             }
 
@@ -966,59 +966,59 @@
 
     <!-- Centralized Gallery Data & Interactive Controls Script -->
     <script>
-        // Authentic Gallery Items from gallery_photos/ directory
+        // Authentic Gallery Items from gallery_photos/ directory with fine-tuned face & smile positioning
         const galleryData = [
-            { id: 1, image: "gallery_photos/1-1.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 2, image: "gallery_photos/14.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 3, image: "gallery_photos/15.jpg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 4, image: "gallery_photos/16.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 5, image: "gallery_photos/17.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 6, image: "gallery_photos/18.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 7, image: "gallery_photos/2-1.jpg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 8, image: "gallery_photos/21.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 9, image: "gallery_photos/266974067_135968318816733_3409194608756020211_n.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 10, image: "gallery_photos/278211379_734134057614055_6441445144783909838_n.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 11, image: "gallery_photos/286972629_130394369664007_6971501439913534831_n.jpg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 12, image: "gallery_photos/289813768_1439902143116833_2178718375520754533_n.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 13, image: "gallery_photos/4-1.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 14, image: "gallery_photos/5-1.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 15, image: "gallery_photos/51826D27-3D2C-47E4-A421-8BBB1D1B9A4F (1).JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 16, image: "gallery_photos/637f189e-2910-4124-98ec-62ee244a71f8.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 17, image: "gallery_photos/8-1.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 18, image: "gallery_photos/95f7b5b8-5bf0-422e-bc00-05f0bce79f2b.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 19, image: "gallery_photos/97E4224A-D74A-4F1C-AC0B-5D5A0E6558D8.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 20, image: "gallery_photos/DSC05450.JPG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 21, image: "gallery_photos/DSC05461.JPG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 22, image: "gallery_photos/DSC05469.JPG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 23, image: "gallery_photos/IMG_0886.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 24, image: "gallery_photos/IMG_0923.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 25, image: "gallery_photos/IMG_0932.JPEG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 26, image: "gallery_photos/IMG_0941.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 27, image: "gallery_photos/IMG_1565.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 28, image: "gallery_photos/IMG_1576.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 29, image: "gallery_photos/IMG_1732 (1).JPEG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 30, image: "gallery_photos/IMG_2177.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 31, image: "gallery_photos/IMG_2351 (1).JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 32, image: "gallery_photos/IMG_6099.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 33, image: "gallery_photos/IMG_6106.JPEG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 34, image: "gallery_photos/IMG_6114.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 35, image: "gallery_photos/IMG_6736.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 36, image: "gallery_photos/nig-e1656267110127.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 37, image: "gallery_photos/Screenshot 2026-08-15 162231.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 38, image: "gallery_photos/Screenshot 2026-08-15 162300.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 39, image: "gallery_photos/Screenshot 2026-08-15 162314.png", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 40, image: "gallery_photos/Screenshot 2026-08-15 162322.png", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 41, image: "gallery_photos/Screenshot 2026-08-15 162332.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 42, image: "gallery_photos/Screenshot 2026-08-15 162340.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 43, image: "gallery_photos/Screenshot 2026-08-15 162353.png", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 44, image: "gallery_photos/Screenshot 2026-08-15 162401.png", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 45, image: "gallery_photos/Screenshot 2026-08-15 162410.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 46, image: "gallery_photos/Screenshot 2026-08-15 162419.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 47, image: "gallery_photos/Screenshot 2026-08-15 162428.png", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" },
-            { id: 48, image: "gallery_photos/Screenshot 2026-08-15 162443.png", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics" },
-            { id: 49, image: "gallery_photos/Screenshot 2026-08-15 162452.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics" },
-            { id: 50, image: "gallery_photos/Screenshot 2026-08-15 162506.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics" },
-            { id: 51, image: "gallery_photos/WhatsApp-Image-2022-08-31-at-7.30.51-PM.jpeg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics" }
+            { id: 1, image: "gallery_photos/1-1.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 5%" },
+            { id: 2, image: "gallery_photos/14.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center 6%" },
+            { id: 3, image: "gallery_photos/15.jpg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 4, image: "gallery_photos/16.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 12%" },
+            { id: 5, image: "gallery_photos/17.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 0%" },
+            { id: 6, image: "gallery_photos/18.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center 0%" },
+            { id: 7, image: "gallery_photos/2-1.jpg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 10%" },
+            { id: 8, image: "gallery_photos/21.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 4%" },
+            { id: 9, image: "gallery_photos/266974067_135968318816733_3409194608756020211_n.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 10, image: "gallery_photos/278211379_734134057614055_6441445144783909838_n.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center 4%" },
+            { id: 11, image: "gallery_photos/286972629_130394369664007_6971501439913534831_n.jpg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 0%" },
+            { id: 12, image: "gallery_photos/289813768_1439902143116833_2178718375520754533_n.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 0%" },
+            { id: 13, image: "gallery_photos/4-1.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 10%" },
+            { id: 14, image: "gallery_photos/5-1.jpg", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 15, image: "gallery_photos/51826D27-3D2C-47E4-A421-8BBB1D1B9A4F (1).JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 16, image: "gallery_photos/637f189e-2910-4124-98ec-62ee244a71f8.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 10%" },
+            { id: 17, image: "gallery_photos/8-1.jpg", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 10%" },
+            { id: 18, image: "gallery_photos/95f7b5b8-5bf0-422e-bc00-05f0bce79f2b.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center center" },
+            { id: 19, image: "gallery_photos/97E4224A-D74A-4F1C-AC0B-5D5A0E6558D8.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 10%" },
+            { id: 20, image: "gallery_photos/DSC05450.JPG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center center" },
+            { id: 21, image: "gallery_photos/DSC05461.JPG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center center" },
+            { id: 22, image: "gallery_photos/DSC05469.JPG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center center" },
+            { id: 23, image: "gallery_photos/IMG_0886.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 24, image: "gallery_photos/IMG_0923.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 25, image: "gallery_photos/IMG_0932.JPEG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 26, image: "gallery_photos/IMG_0941.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center 6%" },
+            { id: 27, image: "gallery_photos/IMG_1565.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 28, image: "gallery_photos/IMG_1576.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 29, image: "gallery_photos/IMG_1732 (1).JPEG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 6%" },
+            { id: 30, image: "gallery_photos/IMG_2177.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center 2%" },
+            { id: 31, image: "gallery_photos/IMG_2351 (1).JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 2%" },
+            { id: 32, image: "gallery_photos/IMG_6099.JPEG", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 33, image: "gallery_photos/IMG_6106.JPEG", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center 6%" },
+            { id: 34, image: "gallery_photos/IMG_6114.JPEG", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center 6%" },
+            { id: 35, image: "gallery_photos/IMG_6736.JPEG", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 8%" },
+            { id: 36, image: "gallery_photos/nig-e1656267110127.jpg", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center 12%" },
+            { id: 37, image: "gallery_photos/Screenshot 2026-08-15 162231.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center top" },
+            { id: 38, image: "gallery_photos/Screenshot 2026-08-15 162300.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center top" },
+            { id: 39, image: "gallery_photos/Screenshot 2026-08-15 162314.png", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center top" },
+            { id: 40, image: "gallery_photos/Screenshot 2026-08-15 162322.png", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center top" },
+            { id: 41, image: "gallery_photos/Screenshot 2026-08-15 162332.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center top" },
+            { id: 42, image: "gallery_photos/Screenshot 2026-08-15 162340.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center top" },
+            { id: 43, image: "gallery_photos/Screenshot 2026-08-15 162353.png", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center top" },
+            { id: 44, image: "gallery_photos/Screenshot 2026-08-15 162401.png", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center top" },
+            { id: 45, image: "gallery_photos/Screenshot 2026-08-15 162410.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center top" },
+            { id: 46, image: "gallery_photos/Screenshot 2026-08-15 162419.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center top" },
+            { id: 47, image: "gallery_photos/Screenshot 2026-08-15 162428.png", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center top" },
+            { id: 48, image: "gallery_photos/Screenshot 2026-08-15 162443.png", category: "clinic-moments", catLabel: "Clinic Moments", caption: "Modern Clinic Facility — Redesign Dental Clinics", pos: "center top" },
+            { id: 49, image: "gallery_photos/Screenshot 2026-08-15 162452.png", category: "happy-patients", catLabel: "Happy Patients", caption: "Happy Patient Smile — Redesign Dental Clinics", pos: "center top" },
+            { id: 50, image: "gallery_photos/Screenshot 2026-08-15 162506.png", category: "patient-smiles", catLabel: "Patient Smiles", caption: "Patient Smile Transformation — Redesign Dental Clinics", pos: "center top" },
+            { id: 51, image: "gallery_photos/WhatsApp-Image-2022-08-31-at-7.30.51-PM.jpeg", category: "patient-care", catLabel: "Patient Care", caption: "Comfortable Patient Care — Redesign Dental Clinics", pos: "center 8%" }
         ];
 
         let activeItems = [...galleryData];
@@ -1030,7 +1030,7 @@
         const lightboxCaption = document.getElementById('lightboxCaption');
         const lightboxCounter = document.getElementById('lightboxCounter');
 
-        // Render Gallery Cards (All with identical aspect ratio and dimensions)
+        // Render Gallery Cards (All with optimized 4:5 aspect ratio and face-aligned framing)
         function renderGallery(filter = 'all') {
             gridContainer.innerHTML = '';
             activeItems = filter === 'all'
@@ -1041,9 +1041,11 @@
                 const card = document.createElement('div');
                 card.className = 'gallery-card';
                 card.dataset.index = index;
+                const imgPos = item.pos || 'center 12%';
+                card.style.setProperty('--img-pos', imgPos);
 
                 card.innerHTML = `
-                        <img src="${item.image}" alt="${item.caption}" loading="lazy" onerror="this.onerror=null; this.src='gallery_photos/happy-smile-01.webp';"/>
+                        <img src="${item.image}" alt="${item.caption}" loading="lazy" style="object-position: ${imgPos};" onerror="this.onerror=null; this.src='gallery_photos/happy-smile-01.webp';"/>
                         <div class="card-overlay">
                             <span class="card-badge">${item.catLabel}</span>
                             <div class="card-caption">

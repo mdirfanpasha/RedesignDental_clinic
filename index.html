@@ -853,10 +853,6 @@
                                         Medical Registration Verified
                                     </div>
                                     <div class="doc-pill is-green">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><path d="M20 6L9 17l-5-5"></path></svg>
-                                        Profile is claimed
-                                    </div>
-                                    <div class="doc-pill is-green">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                                         20+ Years Experience
                                     </div>
@@ -877,13 +873,13 @@
                                         Specialties & Key Clinical Procedures
                                     </div>
                                     <div class="specialties-tags">
-                                        <span class="specialty-tag">Periodontics</span>
-                                        <span class="specialty-tag">Implantology</span>
-                                        <span class="specialty-tag">Aesthetic Dentistry</span>
-                                        <span class="specialty-tag">Fixed Partial Dentures</span>
-                                        <span class="specialty-tag">Full Mouth Rehabilitation Expert</span>
-                                        <span class="specialty-tag">Hollywood Smiles</span>
-                                        <span class="specialty-tag">Prosthodontist</span>
+                                        <a href="/blog/gum-disease-warning-signs" class="specialty-tag" title="Read about Periodontics & Gum Care">Periodontics</a>
+                                        <a href="/blog/dental-implants-guide" class="specialty-tag" title="Read the Dental Implants Guide">Implantology</a>
+                                        <a href="/blog/teeth-whitening-guide" class="specialty-tag" title="Read about Aesthetic Dentistry & Teeth Whitening">Aesthetic Dentistry</a>
+                                        <a href="/blog/dental-crowns-guide" class="specialty-tag" title="Read about Dental Crowns & Bridges">Fixed Partial Dentures</a>
+                                        <a href="/blog/full-mouth-rehabilitation" class="specialty-tag" title="Read about Full Mouth Rehabilitation">Full Mouth Rehabilitation Expert</a>
+                                        <a href="/blog/veneers-and-smile-makeovers" class="specialty-tag" title="Read about Hollywood Smiles & Veneers">Hollywood Smiles</a>
+                                        <a href="/blog/dental-crowns-guide" class="specialty-tag" title="Read about Prosthodontic Restorations">Prosthodontist</a>
                                     </div>
                                 </div>
 
@@ -1105,6 +1101,19 @@
                     font-weight: 600;
                     color: #05262a;
                     box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+                    text-decoration: none;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+                    cursor: pointer;
+                }
+                .specialty-tag:hover {
+                    background: #f0fdfa;
+                    border-color: #0d9488;
+                    color: #0f766e;
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 16px rgba(13, 148, 136, 0.14);
                 }
                 .doctor-image-col {
                     position: relative;
@@ -2140,9 +2149,6 @@
                                             <!-- Front Side (Text) -->
                                             <div class="hybrid-card_front">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Syed Mohammed</h3>
                                                         <div class="hybrid-card_author-source">Practo Patient Story</div>
@@ -2190,9 +2196,6 @@
                                             <!-- Front Side (Text) -->
                                             <div class="hybrid-card_front">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Verified Patient</h3>
                                                         <div class="hybrid-card_author-source">Practo Patient Story</div>
@@ -2240,9 +2243,6 @@
                                             <!-- Front Side (Text) -->
                                             <div class="hybrid-card_front">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Ali</h3>
                                                         <div class="hybrid-card_author-source">Practo Patient Story</div>
@@ -2290,9 +2290,6 @@
                                             <!-- Front Side (Text) -->
                                             <div class="hybrid-card_front">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Rahul</h3>
                                                         <div class="hybrid-card_author-source">Practo Patient Story</div>
@@ -2339,9 +2336,6 @@
                                         <div class="hybrid-card_inner">
                                             <div class="hybrid-card_front" style="cursor: default;">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Verified Patient</h3>
                                                         <div class="hybrid-card_author-source">Practo Patient Story</div>
@@ -2363,9 +2357,6 @@
                                         <div class="hybrid-card_inner">
                                             <div class="hybrid-card_front" style="cursor: default;">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Umar Khan</h3>
                                                         <div class="hybrid-card_author-source">Justdial Review</div>
@@ -2387,9 +2378,6 @@
                                         <div class="hybrid-card_inner">
                                             <div class="hybrid-card_front" style="cursor: default;">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Shy</h3>
                                                         <div class="hybrid-card_author-source">Justdial Review</div>
@@ -2411,9 +2399,6 @@
                                         <div class="hybrid-card_inner">
                                             <div class="hybrid-card_front" style="cursor: default;">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Verified Patient</h3>
                                                         <div class="hybrid-card_author-source">Google Review</div>
@@ -2435,9 +2420,6 @@
                                         <div class="hybrid-card_inner">
                                             <div class="hybrid-card_front" style="cursor: default;">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Verified Patient</h3>
                                                         <div class="hybrid-card_author-source">Google Review</div>
@@ -2459,9 +2441,6 @@
                                         <div class="hybrid-card_inner">
                                             <div class="hybrid-card_front" style="cursor: default;">
                                                 <div class="hybrid-card_author-wrap">
-                                                    <div class="hybrid-card_author-avatar">
-                                                        <img src="assets/img/redesign-dental-clinics-logo.png" loading="lazy" alt="Redesign Dental Clinics" />
-                                                    </div>
                                                     <div class="hybrid-card_author-info">
                                                         <h3 class="hybrid-card_author-name">Verified Patient</h3>
                                                         <div class="hybrid-card_author-source">Google Review</div>

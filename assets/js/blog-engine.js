@@ -136,13 +136,13 @@
             '<div class="blog-content_wrap">' +
               '<div class="blog-item_content">' +
                 '<div class="blog-item_content-inner">' +
-                  '<div class="blog-card_meta" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; font-weight: 600; color: #0f766e;">' +
-                    '<span class="blog-card_badge" style="background: #e6f4f4; padding: 4px 10px; border-radius: 99px; font-size: 12px;">' + catName + '</span>' +
+                  '<div class="blog-card_meta" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; font-weight: 600;">' +
+                    '<span class="blog-card_badge" style="background: rgba(15, 118, 110, 0.9); color: #ffffff; padding: 4px 10px; border-radius: 99px; font-size: 12px; border: 1px solid rgba(45, 212, 191, 0.4);">' + catName + '</span>' +
                     '<span style="color: #cbd5e1;">•</span>' +
-                    '<span style="color: #64748b; font-size: 12px;">' + readTime + '</span>' +
+                    '<span style="color: #cbd5e1; font-size: 12px;">' + readTime + '</span>' +
                   '</div>' +
-                  '<h2 class="blog-item_title" style="font-size: 20px; font-weight: 700; line-height: 1.35; margin-bottom: 10px; color: #05262a;">' + title + '</h2>' +
-                  '<p class="blog-card_excerpt" style="font-size: 14px; line-height: 1.6; color: #475569; margin-bottom: 18px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">' + excerpt + '</p>' +
+                  '<h2 class="blog-item_title" style="font-size: 20px; font-weight: 700; line-height: 1.35; margin-bottom: 10px; color: #ffffff !important; letter-spacing: normal !important; word-spacing: normal !important; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">' + title + '</h2>' +
+                  '<p class="blog-card_excerpt" style="font-size: 14px; line-height: 1.6; color: #e2e8f0 !important; margin-bottom: 18px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; letter-spacing: normal !important; word-spacing: normal !important; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">' + excerpt + '</p>' +
                   '<div class="blog-item_cta">' +
                     '<div>' + readMoreText + '</div>' +
                     '<div class="blog-item_icon-wrap">' +

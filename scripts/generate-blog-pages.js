@@ -60,12 +60,12 @@ function generateArticleHtml(art) {
           <img src="/${rel.image}" alt="${rel.alt}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" />
         </a>
         <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1;">
-          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px;" data-i18n="${rel.categoryKey}">${relCat}</div>
-          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a;">
+          <div style="font-size: 12px; font-weight: 700; color: #0f766e; text-transform: uppercase; margin-bottom: 8px; letter-spacing: normal !important;" data-i18n="${rel.categoryKey}">${relCat}</div>
+          <h3 style="font-size: 16px; font-weight: 700; line-height: 1.4; margin-bottom: 10px; color: #05262a; letter-spacing: normal !important; word-spacing: normal !important;">
             <a href="/blog/${rel.slug}" style="color: inherit; text-decoration: none;" data-i18n="blog.post${relNum}.title">${relTitle}</a>
           </h3>
-          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;" data-i18n="blog.post${relNum}.excerpt">${relExcerpt}</p>
-          <a href="/blog/${rel.slug}" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <p style="font-size: 13px; line-height: 1.5; color: #64748b; margin-bottom: 16px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post${relNum}.excerpt">${relExcerpt}</p>
+          <a href="/blog/${rel.slug}" style="font-size: 13px; font-weight: 700; color: #0f766e; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; letter-spacing: normal !important;">
             <span data-i18n="common.readMore">Read More</span> →
           </a>
         </div>
@@ -73,10 +73,12 @@ function generateArticleHtml(art) {
     `;
   }).join('');
 
-  const sourcesListHtml = art.sources.map(src => {
+  const sourcesListHtml = (art.sources || []).map(src => {
+    const orgName = src.name || src.org || 'Authoritative Clinical Reference';
+    const docTitle = src.title || 'Overview & Guidelines';
     return `
-      <li style="margin-bottom: 8px; font-size: 14px; line-height: 1.5; color: #475569;">
-        <strong>${src.org}:</strong> <em>"${src.title}"</em> (${src.year}) — <a href="${src.url}" target="_blank" rel="noopener noreferrer" style="color: #0f766e; text-decoration: underline;">View Reference</a>
+      <li style="margin-bottom: 8px; font-size: 14px; line-height: 1.5; color: #475569; letter-spacing: normal !important; word-spacing: normal !important;">
+        <strong>${orgName}:</strong> <em>"${docTitle}"</em> — <a href="${src.url}" target="_blank" rel="noopener noreferrer" style="color: #0f766e; text-decoration: underline;">View Reference</a>
       </li>
     `;
   }).join('');
@@ -185,10 +187,31 @@ ${schemaJson}
             font-family: 'Sora', sans-serif;
             color: #1e293b;
         }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Sora', sans-serif !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+            word-break: normal !important;
+        }
+        p {
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+        }
         .article-hero {
-            background: linear-gradient(180deg, #05262a 0%, #083c38 120px, #115c55 220px, #268d83 340px, #86d4ca 440px, #d8f3ee 540px, #ffffff 680px, #ffffff 100%);
-            padding: 130px 20px 40px;
-            color: #05262a;
+            background: linear-gradient(180deg, #05262a 0%, #083c38 120px, #115c55 220px, #1a746b 360px, #268d83 500px, #86d4ca 680px, #d8f3ee 800px, #ffffff 920px);
+            padding: 130px 20px 50px;
+            color: #ffffff;
+        }
+        .article-hero h1 {
+            color: #ffffff !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+            text-shadow: 0 2px 10px rgba(5, 38, 42, 0.4);
+        }
+        .article-hero p {
+            color: #e2e8f0 !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
         }
         .article-container {
             max-width: 860px;
@@ -208,18 +231,22 @@ ${schemaJson}
         .article-content h2 {
             font-size: 24px;
             font-weight: 700;
-            color: #05262a;
+            color: #05262a !important;
             margin-top: 36px;
             margin-bottom: 16px;
             line-height: 1.35;
             padding-bottom: 8px;
             border-bottom: 2px solid #e2e8f0;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
         }
         .article-content p {
             font-size: 16px;
             line-height: 1.8;
             color: #334155;
             margin-bottom: 20px;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
         }
         .takeaways-box {
             background: #f0fdf4;
@@ -315,36 +342,36 @@ ${schemaJson}
         <header class="article-hero">
             <div class="article-container">
                 <nav class="breadcrumbs-nav" aria-label="Breadcrumb">
-                    <a href="/" data-i18n="blog.breadcrumbHome">Home</a>
-                    <span>/</span>
-                    <a href="/blog" data-i18n="blog.breadcrumbBlog">Blog</a>
-                    <span>/</span>
-                    <span style="color: #05262a; font-weight: 600;" data-i18n="${art.categoryKey}">${catLabel}</span>
+                    <a href="/" data-i18n="blog.breadcrumbHome" style="color: #2dd4bf; text-decoration: none; font-weight: 600;">Home</a>
+                    <span style="color: #64748b;">/</span>
+                    <a href="/blog" data-i18n="blog.breadcrumbBlog" style="color: #2dd4bf; text-decoration: none; font-weight: 600;">Blog</a>
+                    <span style="color: #64748b;">/</span>
+                    <span style="color: #cbd5e1; font-weight: 600;" data-i18n="${art.categoryKey}">${catLabel}</span>
                 </nav>
                 
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;">
-                    <span style="background: rgba(15, 118, 110, 0.12); color: #0f766e; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 99px; text-transform: uppercase;" data-i18n="${art.categoryKey}">${catLabel}</span>
-                    <span style="font-size: 13px; color: #475569;">•</span>
-                    <span style="font-size: 13px; color: #475569;">${art.readingTime} min read</span>
-                    <span style="font-size: 13px; color: #475569;">•</span>
-                    <span style="font-size: 13px; color: #475569;">Published: ${publishedDate}</span>
+                    <span style="background: rgba(45, 212, 191, 0.2); color: #2dd4bf; border: 1px solid rgba(45, 212, 191, 0.4); font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="${art.categoryKey}">${catLabel}</span>
+                    <span style="font-size: 13px; color: #64748b;">•</span>
+                    <span style="font-size: 13px; color: #cbd5e1;">${art.readingTime} min read</span>
+                    <span style="font-size: 13px; color: #64748b;">•</span>
+                    <span style="font-size: 13px; color: #cbd5e1;">Published: ${publishedDate}</span>
                 </div>
                 
-                <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.25; color: #05262a; margin-bottom: 20px;" data-i18n="blog.post${num}.title">
+                <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.25; color: #ffffff !important; margin-bottom: 20px; letter-spacing: normal !important; word-spacing: normal !important; text-shadow: 0 2px 10px rgba(5, 38, 42, 0.5);" data-i18n="blog.post${num}.title">
                     ${title}
                 </h1>
                 
-                <p style="font-size: 18px; line-height: 1.6; color: #334155; margin-bottom: 24px; font-weight: 500;" data-i18n="blog.post${num}.excerpt">
+                <p style="font-size: 18px; line-height: 1.65; color: #e2e8f0 !important; margin-bottom: 24px; font-weight: 400; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post${num}.excerpt">
                     ${excerpt}
                 </p>
                 
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 30px;">
-                    <div style="width: 42px; height: 42px; border-radius: 50%; background: #0f766e; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">
+                    <div style="width: 42px; height: 42px; border-radius: 50%; background: #0f766e; border: 1.5px solid #2dd4bf; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px;">
                         RC
                     </div>
                     <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #05262a;" data-i18n="blog.authorName">Redesign Dental Clinics</div>
-                        <div style="font-size: 12px; color: #64748b;">Clinical Editorial Team • Banjara Hills, Hyderabad</div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;" data-i18n="blog.authorName">Redesign Dental Clinics</div>
+                        <div style="font-size: 12px; color: #cbd5e1;">Clinical Editorial Team • Banjara Hills, Hyderabad</div>
                     </div>
                 </div>
             </div>
@@ -359,39 +386,39 @@ ${schemaJson}
                 </div>
 
                 <!-- Intro Paragraph -->
-                <p style="font-size: 17px; font-weight: 500; line-height: 1.8; color: #0f172a;" data-i18n="blog.post${num}.intro">
+                <p style="font-size: 17px; font-weight: 500; line-height: 1.8; color: #0f172a; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post${num}.intro">
                     ${intro}
                 </p>
 
                 <!-- Key Takeaways Box -->
                 <div class="takeaways-box">
-                    <h3 style="font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;" data-i18n="blog.keyTakeaways">Key Clinical Takeaways</h3>
-                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #064e3b;" data-i18n="blog.post${num}.takeaway">
+                    <h3 style="font-size: 16px; font-weight: 700; color: #0f766e; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px !important; word-spacing: normal !important;" data-i18n="blog.keyTakeaways">Key Clinical Takeaways</h3>
+                    <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #064e3b; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.post${num}.takeaway">
                         ${takeaway}
                     </p>
                 </div>
 
                 <!-- Section 1 -->
-                <h2 data-i18n="blog.post${num}.h2_1">${h2_1}</h2>
-                <p data-i18n="blog.post${num}.p1">${p1}</p>
+                <h2 data-i18n="blog.post${num}.h2_1" style="letter-spacing: normal !important; word-spacing: normal !important;">${h2_1}</h2>
+                <p data-i18n="blog.post${num}.p1" style="letter-spacing: normal !important; word-spacing: normal !important;">${p1}</p>
 
                 <!-- Section 2 -->
-                <h2 data-i18n="blog.post${num}.h2_2">${h2_2}</h2>
-                <p data-i18n="blog.post${num}.p2">${p2}</p>
+                <h2 data-i18n="blog.post${num}.h2_2" style="letter-spacing: normal !important; word-spacing: normal !important;">${h2_2}</h2>
+                <p data-i18n="blog.post${num}.p2" style="letter-spacing: normal !important; word-spacing: normal !important;">${p2}</p>
 
                 <!-- Section 3 -->
-                <h2 data-i18n="blog.post${num}.h2_3">${h2_3}</h2>
-                <p data-i18n="blog.post${num}.p3">${p3}</p>
+                <h2 data-i18n="blog.post${num}.h2_3" style="letter-spacing: normal !important; word-spacing: normal !important;">${h2_3}</h2>
+                <p data-i18n="blog.post${num}.p3" style="letter-spacing: normal !important; word-spacing: normal !important;">${p3}</p>
 
                 <!-- Section 4 -->
-                <h2 data-i18n="blog.post${num}.h2_4">${h2_4}</h2>
-                <p data-i18n="blog.post${num}.p4">${p4}</p>
+                <h2 data-i18n="blog.post${num}.h2_4" style="letter-spacing: normal !important; word-spacing: normal !important;">${h2_4}</h2>
+                <p data-i18n="blog.post${num}.p4" style="letter-spacing: normal !important; word-spacing: normal !important;">${p4}</p>
 
                 <!-- Related Service CTA Banner -->
                 <div class="service-cta-card">
                     <div>
-                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff;" data-i18n="blog.ctaTitle">Have Questions About Your Dental Health?</h3>
-                        <p style="font-size: 14px; opacity: 0.9; margin: 0; color: #e2e8f0;" data-i18n="blog.ctaSubtitle">Consult with our specialist dentists at Redesign Dental Clinics in Banjara Hills, Hyderabad.</p>
+                        <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.ctaTitle">Have Questions About Your Dental Health?</h3>
+                        <p style="font-size: 14px; opacity: 0.9; margin: 0; color: #e2e8f0; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.ctaSubtitle">Consult with our specialist dentists at Redesign Dental Clinics in Banjara Hills, Hyderabad.</p>
                     </div>
                     <a href="/contact#book" style="padding: 14px 24px; background: #ffffff; color: #05262a; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 14px; white-space: nowrap; transition: all 0.2s;" data-i18n="blog.ctaButton">
                         Book Consultation
@@ -400,7 +427,7 @@ ${schemaJson}
 
                 <!-- Fact-Checked Sources -->
                 <div class="sources-box">
-                    <h3 style="font-size: 16px; font-weight: 700; color: #05262a; margin-bottom: 12px;" data-i18n="blog.sourcesTitle">Fact-Checked Sources & References</h3>
+                    <h3 style="font-size: 16px; font-weight: 700; color: #05262a; margin-bottom: 12px; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.sourcesTitle">Fact-Checked Sources & References</h3>
                     <ul style="margin: 0; padding-left: 20px;">
                         ${sourcesListHtml}
                     </ul>
@@ -408,8 +435,8 @@ ${schemaJson}
 
                 <!-- Educational & Medical Disclaimer -->
                 <div class="disclaimer-box">
-                    <strong style="color: #475569; display: block; margin-bottom: 6px;" data-i18n="blog.disclaimerTitle">Educational & Medical Disclaimer</strong>
-                    <p style="margin: 0; font-size: 13px;" data-i18n="blog.disclaimerText">
+                    <strong style="color: #475569; display: block; margin-bottom: 6px; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.disclaimerTitle">Educational & Medical Disclaimer</strong>
+                    <p style="margin: 0; font-size: 13px; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.disclaimerText">
                         This article is for general educational purposes only and is not a substitute for an individual dental examination or professional medical advice. Treatment recommendations may vary based on your oral health and clinical needs.
                     </p>
                 </div>
@@ -417,7 +444,7 @@ ${schemaJson}
 
             <!-- Related Articles Section -->
             <section style="margin: 60px 0 80px;">
-                <h2 style="font-size: 24px; font-weight: 700; color: #05262a; margin-bottom: 24px; text-align: center;" data-i18n="blog.relatedTitle">
+                <h2 style="font-size: 24px; font-weight: 700; color: #05262a; margin-bottom: 24px; text-align: center; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.relatedTitle">
                     Related Dental Articles
                 </h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">

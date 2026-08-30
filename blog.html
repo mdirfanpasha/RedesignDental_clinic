@@ -15,7 +15,111 @@
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
         <link href="assets/css/lumora.css?v=20260614f" rel="stylesheet" type="text/css"/>
         <style>
-            
+            /* Typography Reset to prevent collapsed/smushed words */
+            h1, h2, h3, h4, h5, h6,
+            .blog-item_title,
+            .feature-blog_title,
+            .blog_item h2 {
+                letter-spacing: normal !important;
+                word-spacing: normal !important;
+                word-break: normal !important;
+            }
+
+            /* High Contrast & Crystal Clear Blog Cards */
+            .blog_item {
+                position: relative;
+                height: 440px;
+                border-radius: 20px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                box-shadow: 0 8px 24px rgba(5, 38, 42, 0.15);
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+                background-color: #05262a;
+                text-decoration: none !important;
+            }
+            .blog_item:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 18px 38px rgba(5, 38, 42, 0.3);
+            }
+            .blog-item_image-wrap {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+            .blog-item_image-wrap::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, rgba(5, 38, 42, 0.15) 0%, rgba(5, 38, 42, 0.65) 42%, rgba(5, 38, 42, 0.96) 88%);
+                transition: background 0.3s ease;
+            }
+            .blog_item:hover .blog-item_image-wrap::after {
+                background: linear-gradient(180deg, rgba(5, 38, 42, 0.1) 0%, rgba(5, 38, 42, 0.7) 38%, rgba(5, 38, 42, 0.98) 84%);
+            }
+            .blog-item_image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .blog_item:hover .blog-item_image {
+                transform: scale(1.06);
+            }
+            .blog-content_wrap {
+                position: relative;
+                z-index: 2;
+                padding: 24px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .blog-card_badge {
+                background: rgba(15, 118, 110, 0.85) !important;
+                color: #ffffff !important;
+                border: 1px solid rgba(45, 212, 191, 0.4);
+                font-weight: 600;
+                backdrop-filter: blur(4px);
+            }
+            .blog-item_title {
+                color: #ffffff !important;
+                font-size: 19px !important;
+                font-weight: 700 !important;
+                line-height: 1.35 !important;
+                margin-bottom: 8px !important;
+                letter-spacing: normal !important;
+                word-spacing: normal !important;
+                text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            }
+            .blog-card_excerpt {
+                color: #e2e8f0 !important;
+                font-size: 13.5px !important;
+                line-height: 1.55 !important;
+                margin-bottom: 16px !important;
+                letter-spacing: normal !important;
+                word-spacing: normal !important;
+                opacity: 0.94;
+            }
+            .blog-item_cta {
+                color: #2dd4bf !important;
+                font-size: 13.5px !important;
+                font-weight: 700 !important;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                letter-spacing: normal !important;
+            }
+            .blog-item_icon-wrap {
+                background-color: #2dd4bf !important;
+                color: #05262a !important;
+                transition: transform 0.25s ease;
+            }
+            .blog_item:hover .blog-item_icon-wrap {
+                transform: translateX(4px);
+            }
         </style>
                 <link href="https://fonts.googleapis.com" rel="preconnect"/>
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
@@ -165,9 +269,9 @@
                             <div class="section_component">
                                 <div class="margin-bottom margin-56px">
                                     <div class="blog_header">
-                                        <h1 hero-text-split="" data-w-id="2302474f-6bba-a7ff-4dba-3e5a91ca8caa" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">Insights for a Healthier Smile</h1>
+                                        <h1 style="letter-spacing: normal !important; word-spacing: normal !important; font-size: clamp(34px, 5vw, 54px); font-weight: 700; color: #05262a; line-height: 1.25; margin: 0 0 16px;">Insights for a Healthier Smile</h1>
                                         <div id="w-node-_2302474f-6bba-a7ff-4dba-3e5a91ca8cac-965ec343" class="blog-header_para">
-                                            <p data-w-id="2302474f-6bba-a7ff-4dba-3e5a91ca8cad" style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="body-text-18px">From everyday habits to advanced treatments, our dental experts share insights </p>
+                                            <p class="body-text-18px" style="letter-spacing: normal !important; word-spacing: normal !important; font-size: 1.15rem; line-height: 1.6; color: #475569;">From everyday habits to advanced treatments, our dental experts share evidence-based insights to help you maintain a healthy smile.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -193,7 +297,7 @@
                                                                     <div class="feature-blog_info">
                                                                         <div class="feature-blog_info-text" data-i18n="blog.featuredBadge">Featured Article</div>
                                                                         <div class="feature-blog_info-divider"></div>
-                                                                        <div class="feature-blog_info-text" data-i18n="blog.readTime">5 min read</div>
+                                                                        <div class="feature-blog_info-text">5 min read</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
