@@ -4,6 +4,10 @@
 node_modules/
 .DS_Store
 .vercel/
+scratch/
 
 .vercel
 drvideo/
+
+.vercel
+.env*

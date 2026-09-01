@@ -7,9 +7,12 @@
     "start": "node server.js",
     "dev": "node server.js",
     "validate:i18n": "node scripts/validate-i18n.js",
-    "build": "node scripts/validate-i18n.js"
+    "build": "node scripts/validate-i18n.js && node scripts/generate-sitemap.js"
   },
   "devDependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0"
+  },
+  "dependencies": {
+    "zod": "^4.5.4"
   }
 }

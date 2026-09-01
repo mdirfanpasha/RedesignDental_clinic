@@ -196,6 +196,9 @@
     </style>
         <!-- Google reCAPTCHA v3 - Loaded eagerly -->
         <script src="https://www.google.com/recaptcha/api.js?render=6LdkaZQtAAAAAlkSLA78ABt5Xeo0EgbfLbeqHZWu" async defer></script>
+    <!-- Multilingual i18n Engine -->
+    <script src="assets/i18n/translations.js"></script>
+    <script src="assets/js/i18n.js"></script>
 </head>
 
 <body>
@@ -210,25 +213,25 @@
                 <div class="navbar-content_wrap">
                     <nav role="navigation" class="navbar_menu w-nav-menu">
                         <a href="/" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.home">Home</div>
+                            <div data-i18n="nav.home" data-i18n="nav.home" data-i18n="nav.home">Home</div>
                         </a>
                         <a href="/about" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.about">About Us</div>
+                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
                         </a>
                         <a href="/doctors" class="navbar_link w-inline-block">
                             <div data-i18n="nav.meetOurDoctors">Doctors</div>
                         </a>
                         <a href="/services" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.services">Services</div>
+                            <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
                         </a>
                         <a href="/gallery" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.gallery">Gallery</div>
+                            <div data-i18n="nav.gallery" data-i18n="nav.gallery" data-i18n="nav.gallery">Gallery</div>
                         </a>
                         <a href="/blog" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.blog">Blog</div>
+                            <div data-i18n="nav.blog" data-i18n="nav.blog" data-i18n="nav.blog">Blog</div>
                         </a>
                         <a href="/contact" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.contact">Contact</div>
+                            <div data-i18n="nav.contact" data-i18n="nav.contact" data-i18n="nav.contact">Contact</div>
                         </a>
                     </nav>
                     <div class="navbar_cta-wrap">
@@ -268,14 +271,16 @@
                             </h2>
 
                             <form id="direct-booking-form">
+                                <!-- Anti-Spam Honeypot Field -->
+                                <input type="text" name="clinic_hp" id="direct-booking-hp" style="display:none!important; position:absolute; left:-9999px;" tabindex="-1" autocomplete="off" />
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label class="form-label" for="patient-name">Full Name *</label>
-                                        <input type="text" id="patient-name" class="form-input" placeholder="e.g. Rahul Sharma" required />
+                                        <input type="text" id="patient-name" class="form-input" placeholder="e.g. John Doe" required />
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label" for="patient-phone">Phone Number *</label>
-                                        <input type="tel" id="patient-phone" class="form-input" placeholder="e.g. +91 98765 43210" required />
+                                        <input type="tel" id="patient-phone" class="form-input" placeholder="10-digit mobile number" required />
                                     </div>
                                 </div>
 
@@ -329,7 +334,7 @@
 
                                 <button type="submit" id="direct-booking-submit-btn" class="submit-btn">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                                    <span>Confirm Appointment Request</span>
+                                    <span data-i18n="booking.submitBtn" data-i18n="booking.submitBtn">Confirm Appointment Request</span>
                                 </button>
                             </form>
                         </div>
@@ -370,10 +375,26 @@
             </section>
         </main>
 
-        <!-- Global Footer -->
-        <footer class="footer_wrap">
-            <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; text-align: center; color: #94a3b8; font-size: 0.9rem;">
-                <p style="margin: 0;">© 2026 Redesign Dental Clinics. All rights reserved. Dr. Suhail A. Syed & Specialist Dental Team.</p>
+                        <!-- Global Footer -->
+        <footer class="footer_wrap" style="background: #021417; border-top: 1px solid rgba(13, 148, 136, 0.2); padding: 48px 0 32px;">
+            <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
+                <div>
+                    <a href="/" style="display: inline-block; margin-bottom: 8px;">
+                        <img src="assets/img/redesign-dental-clinics-logo-white.png" alt="Redesign Dental Clinics" style="max-height: 42px;" />
+                    </a>
+                    <p style="margin: 0; color: #94a3b8; font-size: 0.88rem;">&copy; 2026 Redesign Dental Clinics. All rights reserved. Dr. Suhail A. Syed &amp; Specialist Dental Team.</p>
+                </div>
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <a href="https://www.facebook.com/RedesignDental" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #ffffff; text-decoration: none; transition: background 0.2s ease;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/redesign.dental.clinics/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #ffffff; text-decoration: none; transition: background 0.2s ease;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCA1C9H8oWZomVPiV2GjEOaQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); color: #ffffff; text-decoration: none; transition: background 0.2s ease;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
             </div>
         </footer>
     </div>
@@ -383,6 +404,7 @@
     <script>
         // Set default minimum date to today and connect submission to backend API
         (function() {
+            var _pageLoadTime = Date.now();
             var dateInput = document.getElementById('appointment-date');
             if (dateInput) {
                 var today = new Date().toISOString().split('T')[0];
@@ -394,6 +416,9 @@
             if (form) {
                 form.addEventListener('submit', function(e) {
                     e.preventDefault();
+                    var hpInput = document.getElementById('direct-booking-hp');
+                    var hpValue = hpInput ? hpInput.value.trim() : '';
+
                     var name = (document.getElementById('patient-name').value || '').trim();
                     var phone = (document.getElementById('patient-phone').value || '').trim();
                     var date = document.getElementById('appointment-date').value;
@@ -425,7 +450,9 @@
                                 time: time,
                                 reason: service,
                                 customMsg: notes,
-                                token: token
+                                token: token,
+                                clinic_hp: hpValue,
+                                _timer: _pageLoadTime
                             })
                         });
                     })

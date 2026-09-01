@@ -1,8 +1,17 @@
 import { verifyRecaptcha } from '../lib/verifyRecaptcha.js';
+import { captchaRateLimiter } from '../lib/security/rateLimiter.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
     return res.status(405).json({ success: false, error: 'Method not allowed' });
+  }
+
+  // Rate Limiting (25 requests per 15 min per IP)
+  const rateLimit = captchaRateLimiter.check(req);
+  if (!rateLimit.allowed) {
+    res.setHeader('Retry-After', String(rateLimit.resetTime));
+    return res.status(429).json({ success: false, error: 'Too many verification attempts. Please try again later.' });
   }
 
   try {

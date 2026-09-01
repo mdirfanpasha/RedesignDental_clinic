@@ -19,8 +19,8 @@ export const HybridTestimonialCarousel: React.FC<HybridTestimonialCarouselProps>
     {
       id: 'testimonial-1',
       type: 'video',
-      author: 'Syed Mohammed',
-      designation: 'Practo Patient Story',
+      author: 'ABDRABALREDHA',
+      designation: 'Verified Patient Video',
       quote: 'Dr Suhail is very professional and patient. He explained the root canal procedure clearly before starting and made sure I felt no pain throughout the treatment. I am extremely satisfied with the care provided.',
       video: 'assets/video/t1.mp4',
       logo: 'assets/img/redesign-dental-clinics-logo.png'
@@ -28,8 +28,8 @@ export const HybridTestimonialCarousel: React.FC<HybridTestimonialCarouselProps>
     {
       id: 'testimonial-2',
       type: 'video',
-      author: 'Verified Patient',
-      designation: 'Practo Patient Story',
+      author: 'ALMAZNI MOHAMMED',
+      designation: 'Verified Patient Video',
       quote: 'I had a tooth extraction done by Dr Suhail. I was very anxious before the procedure, but Dr Suhail and the staff were very reassuring and gentle. The entire extraction process was smooth and comfortable.',
       video: 'assets/video/t2.mp4',
       logo: 'assets/img/redesign-dental-clinics-logo.png'
@@ -37,8 +37,8 @@ export const HybridTestimonialCarousel: React.FC<HybridTestimonialCarouselProps>
     {
       id: 'testimonial-3',
       type: 'video',
-      author: 'Ali',
-      designation: 'Practo Patient Story',
+      author: 'JUMAAH TAHAAR',
+      designation: 'Verified Patient Video',
       quote: 'Very friendly, soft spoken and professional team at Redesign Dental Clinics. The clinic is clean and well maintained with modern equipment. Highly recommend for any dental treatment.',
       video: 'assets/video/t3.mp4',
       logo: 'assets/img/redesign-dental-clinics-logo.png'
@@ -46,8 +46,8 @@ export const HybridTestimonialCarousel: React.FC<HybridTestimonialCarouselProps>
     {
       id: 'testimonial-4',
       type: 'video',
-      author: 'Rahul',
-      designation: 'Practo Patient Story',
+      author: 'NASSER ABDULWAHAB',
+      designation: 'Verified Patient Video',
       quote: 'Dr Suhail took time to explain my dental condition and treatment options clearly. He was considerate and professional during the implant procedure. Excellent doctor and clinic.',
       video: 'assets/video/t4.mp4',
       logo: 'assets/img/redesign-dental-clinics-logo.png'

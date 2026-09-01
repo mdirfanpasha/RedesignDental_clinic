@@ -32,6 +32,7 @@ function loadEnv() {
 loadEnv();
 
 const PORT = process.env.PORT || 8000;
+const MAX_BODY_SIZE = 50 * 1024; // 50 KB max request body to prevent DoS
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -57,8 +58,44 @@ const MIME_TYPES = {
   '.m4v': 'video/mp4',
 };
 
+// ─── Global HTTP Security Headers ──────────────────────────────────────────
+function setSecurityHeaders(res) {
+  // Prevent clickjacking by restricting framing
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  // Prevent MIME-type sniffing
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  // Referrer Policy
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  // Permissions Policy (restrict sensitive hardware APIs)
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  // Cross-Origin Opener Policy
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+  // X-XSS-Protection legacy defense
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  
+  // HSTS in production
+  if (process.env.NODE_ENV === 'production') {
+    res.setHeader('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+  }
+
+  // Content Security Policy
+  const csp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://ajax.googleapis.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com data:",
+    "img-src 'self' data: https: blob:",
+    "media-src 'self' data: blob:",
+    "frame-src 'self' https://www.google.com/ https://www.youtube.com/ https://www.youtube-nocookie.com/ https://maps.google.com/",
+    "connect-src 'self' https://www.google.com/recaptcha/ https://graph.facebook.com/",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'"
+  ].join('; ');
+  res.setHeader('Content-Security-Policy', csp);
+}
+
 // ─── Clean URL → HTML file mapping ─────────────────────────────────────────
-// Maps every clean public route to its corresponding .html file on disk.
 const CLEAN_ROUTES = {
   '/':          'index.html',
   '/about':     'about.html',
@@ -91,18 +128,63 @@ const HTML_REDIRECTS = {
   '/licenses.html': '/licenses',
   '/doctors.html':  '/doctors',
   '/doctors.htm':   '/doctors',
-  // Common variants
   '/index.htm':     '/',
   '/about.htm':     '/about',
   '/services.htm':  '/services',
   '/service.htm':   '/services',
 };
 
-// ─── Helper: serve a file with Range support ───────────────────────────────
+// ─── Helper: safely read JSON body with size limits ───────────────────────
+function parseJsonBody(req, maxBytes = MAX_BODY_SIZE) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    let bytesReceived = 0;
+
+    req.on('data', chunk => {
+      bytesReceived += chunk.length;
+      if (bytesReceived > maxBytes) {
+        req.destroy();
+        const err = new Error('Payload Too Large');
+        err.statusCode = 413;
+        reject(err);
+        return;
+      }
+      body += chunk;
+    });
+
+    req.on('end', () => {
+      if (!body.trim()) {
+        resolve({});
+        return;
+      }
+      try {
+        const parsed = JSON.parse(body);
+        resolve(parsed);
+      } catch (e) {
+        const err = new Error('Invalid JSON Payload');
+        err.statusCode = 400;
+        reject(err);
+      }
+    });
+
+    req.on('error', err => {
+      reject(err);
+    });
+  });
+}
+
+// ─── Helper: serve a file with Range support & Path Traversal Prevention ───
 function serveFile(req, res, filePath) {
-  fs.stat(filePath, (err, stats) => {
+  // Path Traversal Security Check: Ensure requested path stays strictly within __dirname
+  const safeResolvedPath = path.resolve(filePath);
+  if (!safeResolvedPath.startsWith(path.resolve(__dirname))) {
+    res.writeHead(403, { 'Content-Type': 'text/plain' });
+    res.end('Access Denied');
+    return;
+  }
+
+  fs.stat(safeResolvedPath, (err, stats) => {
     if (err || !stats.isFile()) {
-      // Serve 404 page
       const notFoundPath = path.join(__dirname, '404.html');
       fs.stat(notFoundPath, (e2, s2) => {
         if (!e2 && s2.isFile()) {
@@ -116,7 +198,7 @@ function serveFile(req, res, filePath) {
       return;
     }
 
-    const ext = path.extname(filePath).toLowerCase();
+    const ext = path.extname(safeResolvedPath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
     const range = req ? req.headers?.range : null;
 
@@ -125,7 +207,7 @@ function serveFile(req, res, filePath) {
       const start = parseInt(parts[0], 10);
       const end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1;
       const chunksize = (end - start) + 1;
-      const file = fs.createReadStream(filePath, { start, end });
+      const file = fs.createReadStream(safeResolvedPath, { start, end });
       res.writeHead(206, {
         'Content-Range': `bytes ${start}-${end}/${stats.size}`,
         'Accept-Ranges': 'bytes',
@@ -139,12 +221,15 @@ function serveFile(req, res, filePath) {
         'Accept-Ranges': 'bytes',
         'Content-Type': contentType
       });
-      fs.createReadStream(filePath).pipe(res);
+      fs.createReadStream(safeResolvedPath).pipe(res);
     }
   });
 }
 
 const server = http.createServer(async (req, res) => {
+  // Set Global Security Headers
+  setSecurityHeaders(res);
+
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -156,7 +241,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // ── Helper to wrap Node http res with status().json() for Vercel functions ──
+  // Helper to wrap Node http res with status().json()
   function wrapResponse(nodeRes) {
     nodeRes.status = function (statusCode) {
       this.statusCode = statusCode;
@@ -172,79 +257,95 @@ const server = http.createServer(async (req, res) => {
     return nodeRes;
   }
 
-  // ── Handle Booking / Appointments / Callback API Routes ───────────────────
-  if (req.url.startsWith('/api/appointments') && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', async () => {
-      try {
-        req.body = JSON.parse(body || '{}');
-        const { default: handler } = await import('./api/appointments.js');
-        await handler(req, wrapResponse(res));
-      } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, error: err.message || 'Internal server error' }));
-      }
-    });
+  // ── Handle Booking / Appointments / Callback / Contact API Routes ────────
+  if (req.url.startsWith('/api/appointments')) {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json', 'Allow': 'POST' });
+      res.end(JSON.stringify({ success: false, error: 'Method not allowed' }));
+      return;
+    }
+    try {
+      req.body = await parseJsonBody(req);
+      const { default: handler } = await import('./api/appointments.js');
+      await handler(req, wrapResponse(res));
+    } catch (err) {
+      const code = err.statusCode || 500;
+      res.writeHead(code, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: err.message || 'Unable to process request' }));
+    }
     return;
   }
 
-  if (req.url.startsWith('/api/callback') && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', async () => {
-      try {
-        req.body = JSON.parse(body || '{}');
-        const { default: handler } = await import('./api/callback.js');
-        await handler(req, wrapResponse(res));
-      } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, error: err.message || 'Internal server error' }));
-      }
-    });
+  if (req.url.startsWith('/api/callback')) {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json', 'Allow': 'POST' });
+      res.end(JSON.stringify({ success: false, error: 'Method not allowed' }));
+      return;
+    }
+    try {
+      req.body = await parseJsonBody(req);
+      const { default: handler } = await import('./api/callback.js');
+      await handler(req, wrapResponse(res));
+    } catch (err) {
+      const code = err.statusCode || 500;
+      res.writeHead(code, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: err.message || 'Unable to process request' }));
+    }
     return;
   }
 
-  if (req.url.startsWith('/api/booking') && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', async () => {
-      try {
-        req.body = JSON.parse(body || '{}');
-        const { default: handler } = await import('./api/booking.js');
-        await handler(req, wrapResponse(res));
-      } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, error: err.message || 'Internal server error' }));
-      }
-    });
+  if (req.url.startsWith('/api/contact')) {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json', 'Allow': 'POST' });
+      res.end(JSON.stringify({ success: false, error: 'Method not allowed' }));
+      return;
+    }
+    try {
+      req.body = await parseJsonBody(req);
+      const { default: handler } = await import('./api/contact.js');
+      await handler(req, wrapResponse(res));
+    } catch (err) {
+      const code = err.statusCode || 500;
+      res.writeHead(code, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: err.message || 'Unable to process request' }));
+    }
+    return;
+  }
+
+  if (req.url.startsWith('/api/booking')) {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json', 'Allow': 'POST' });
+      res.end(JSON.stringify({ success: false, error: 'Method not allowed' }));
+      return;
+    }
+    try {
+      req.body = await parseJsonBody(req);
+      const { default: handler } = await import('./api/booking.js');
+      await handler(req, wrapResponse(res));
+    } catch (err) {
+      const code = err.statusCode || 500;
+      res.writeHead(code, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: err.message || 'Unable to process request' }));
+    }
     return;
   }
 
   // ── Handle reCAPTCHA / Turnstile Verification API Routes ─────────────────
-  if ((req.url === '/api/verify-recaptcha' || req.url === '/api/verify-turnstile') && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', async () => {
-      try {
-        const parsed = JSON.parse(body || '{}');
-        const token = parsed.token;
-        const remoteIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress;
-
-        const result = await verifyRecaptcha(token, remoteIp);
-
-        if (result.success) {
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true, message: 'reCAPTCHA verified successfully' }));
-        } else {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: false, error: result.error || 'reCAPTCHA verification failed' }));
-        }
-      } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, error: 'Internal server error' }));
-      }
-    });
+  if (req.url === '/api/verify-recaptcha' || req.url === '/api/verify-turnstile') {
+    if (req.method !== 'POST') {
+      res.writeHead(405, { 'Content-Type': 'application/json', 'Allow': 'POST' });
+      res.end(JSON.stringify({ success: false, error: 'Method not allowed' }));
+      return;
+    }
+    try {
+      req.body = await parseJsonBody(req);
+      const { default: handler } = await import('./api/verify-recaptcha.js');
+      await handler(req, wrapResponse(res));
+    } catch (err) {
+      const code = err.statusCode || 500;
+      res.writeHead(code, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: err.message || 'Verification failed' }));
+    }
     return;
   }
 
@@ -267,9 +368,14 @@ const server = http.createServer(async (req, res) => {
     res.end();
     return;
   }
+  if (urlPath.startsWith('/services/') && (urlPath.endsWith('.html') || urlPath.endsWith('.htm'))) {
+    const cleanService = urlPath.replace(/\.html?$/i, '');
+    res.writeHead(301, { Location: cleanService });
+    res.end();
+    return;
+  }
 
   // ── Step 2: Serve clean routes → mapped HTML files ────────────────────────
-  // Strip trailing slash for matching (except root)
   const normalizedPath = urlPath.length > 1 ? urlPath.replace(/\/$/, '') : urlPath;
 
   if (CLEAN_ROUTES[normalizedPath]) {
@@ -288,8 +394,17 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // Check for dynamic /services/:slug route
+  if (normalizedPath.startsWith('/services/')) {
+    const slug = normalizedPath.slice(10);
+    const serviceFilePath = path.join(__dirname, 'services', `${slug}.html`);
+    if (fs.existsSync(serviceFilePath) && fs.statSync(serviceFilePath).isFile()) {
+      serveFile(req, res, serviceFilePath);
+      return;
+    }
+  }
+
   // ── Step 3: Serve static assets (CSS, JS, images, fonts, etc.) ───────────
-  // Anything with a file extension that is NOT .html/.htm is served directly.
   const ext = path.extname(urlPath).toLowerCase();
   if (ext && ext !== '.html' && ext !== '.htm') {
     const assetPath = path.join(__dirname, urlPath);
@@ -311,9 +426,6 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Redesign Clinics server running at http://localhost:${PORT}`);
-  console.log('Clean URL routing active:');
-  Object.entries(CLEAN_ROUTES).forEach(([route, file]) => {
-    console.log(`  ${route.padEnd(12)} → ${file}`);
-  });
+  console.log(`[Security Hardened] Redesign Clinics server running at http://localhost:${PORT}`);
+  console.log('Clean URL routing & HTTP Security Headers active.');
 });

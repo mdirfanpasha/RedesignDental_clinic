@@ -1,21 +1,21 @@
 /**
  * hybrid-testimonials-carousel.js
- * Manages the continuous hybrid testimonial carousel with 3D flip video cards.
+ * Manages the continuous hybrid testimonial carousel with front-facing video cards.
  * 
  * Features:
- * - 3D Flip for first 4 items to reveal portrait 9:16 authentic patient videos
- * - Desktop: 3-second hover countdown OR click/tap to flip
- * - Mobile/Tablet: Tap to flip
- * - Multi-card responsive continuous sliding carousel
- * - Intelligent single-audio management (all other videos pause + mute on slide change)
- * - Auto-slide pause during video viewing
+ * - Direct video testimonial on front for the first 4 cards (ABDRABALREDHA, ALMAZNI MOHAMMED, JUMAAH TAHAAR, NASSER ABDULWAHAB)
+ * - Click video / Play button to play/pause with animated overlay
+ * - Unmute/Mute button with intelligent single-audio policy
+ * - Flip to review text with "Review" button & flip back with "Back to Video"
+ * - Multi-card responsive continuous sliding carousel (desktop 3 cards, tablet 2, mobile 1)
+ * - Auto-slide pause during video playback and card interaction
+ * - Touch swipe & arrow navigation
  */
 
 (function () {
   'use strict';
 
-  var HOVER_FLIP_DELAY = 3000;
-  var AUTOPLAY_INTERVAL = 5000;
+  var AUTOPLAY_INTERVAL = 6000;
 
   function initHybridCarousel() {
     var section = document.querySelector('.section_testimonial.is-home');
@@ -36,7 +36,7 @@
     var totalSlides = slides.length; // 10
     var currentIndex = 0;
     var autoPlayTimer = null;
-    var isUserInteractingWithVideo = false;
+    var activePlayingVideo = null;
 
     // Responsive visible count
     function getVisibleCount() {
@@ -61,20 +61,28 @@
             v.muted = true;
             v.volume = 0;
             v.setAttribute('muted', '');
-            v.currentTime = 0;
           } catch (e) {}
-          // Reset UI sound icon
+
           var card = v.closest('.hybrid-card_inner');
           if (card) {
+            card.classList.remove('is-playing');
+            var playBtn = card.querySelector('.video-play-btn');
+            if (playBtn) {
+              var playSpan = playBtn.querySelector('span');
+              if (playSpan) playSpan.textContent = 'Play';
+            }
             var soundBtn = card.querySelector('.video-sound-btn');
             if (soundBtn) {
               soundBtn.classList.remove('is-unmuted');
-              var span = soundBtn.querySelector('span');
-              if (span) span.textContent = 'Unmute';
+              var soundSpan = soundBtn.querySelector('span');
+              if (soundSpan) soundSpan.textContent = 'Unmute';
             }
           }
         }
       });
+      if (!exceptVideo) {
+        activePlayingVideo = null;
+      }
     }
 
     // Flip all cards back to front
@@ -83,11 +91,8 @@
         var inner = slide.querySelector('.hybrid-card_inner');
         if (inner && inner !== exceptCard) {
           inner.classList.remove('is-flipped');
-          var timerBar = slide.querySelector('.hover-timer-bar');
-          if (timerBar) timerBar.style.width = '0%';
         }
       });
-      isUserInteractingWithVideo = false;
     }
 
     // Render navigation dots
@@ -131,214 +136,219 @@
 
       currentIndex = index;
 
-      // On slide change, stop all videos and reset flipped cards
+      // On slide change, stop other playing videos
       stopAllVideos();
-      flipAllBack();
 
       // Transform calculation
-      var visible = getVisibleCount();
       var gap = 24;
-      var slideWidthPct = 100 / visible;
-      var offset = currentIndex * (slideWidthPct);
-
-      track.style.transform = 'translateX(-' + (currentIndex * (100 / visible + (gap / track.offsetWidth) * 100 * (visible > 1 ? 1 : 0))) + '%)';
-      // Safe fallback using CSS calc on child width
       var slideWidth = slides[0].offsetWidth;
       track.style.transform = 'translateX(-' + (currentIndex * (slideWidth + gap)) + 'px)';
 
       updateDots();
     }
 
-    // Attach card flip handlers for video-type cards
+    // Attach card handlers
     slides.forEach(function (slide) {
-      var inner = slide.querySelector('.hybrid-card_inner.is-flip-enabled');
+      var inner = slide.querySelector('.hybrid-card_inner');
       if (!inner) return;
 
       var front = inner.querySelector('.hybrid-card_front');
       var back = inner.querySelector('.hybrid-card_back');
-      var video = back ? back.querySelector('video') : null;
-      var closeBtn = back ? back.querySelector('.card-flip-close-btn') : null;
-      var playBtn = back ? back.querySelector('.video-play-btn') : null;
-      var soundBtn = back ? back.querySelector('.video-sound-btn') : null;
-      var timerBar = front ? front.querySelector('.hover-timer-bar') : null;
-
-      var hoverTimer = null;
-      var startTime = 0;
-      var animFrame = null;
-
-      function flipToVideo() {
-        if (inner.classList.contains('is-flipped')) return;
-        stopAllVideos();
-        flipAllBack(inner);
-
-        inner.classList.add('is-flipped');
-        isUserInteractingWithVideo = true;
-        pauseAutoPlay();
-
-        if (timerBar) timerBar.style.width = '0%';
-
-        // Reset sound button state on every flip-open
-        if (soundBtn) {
-          soundBtn.classList.remove('is-unmuted');
-          var span = soundBtn.querySelector('span');
-          if (span) span.textContent = 'Unmute';
-        }
-
-        if (video) {
-          // Always start muted to satisfy browser autoplay policy
-          video.setAttribute('muted', '');
-          video.muted = true;
-          video.volume = 0;
-          video.playsInline = true;
-          video.currentTime = 0;
-          var p = video.play();
-          if (p !== undefined) {
-            p.catch(function () {
-              video.muted = true;
-              video.play().catch(function () {});
-            });
-          }
-        }
-      }
-
-      function flipToText() {
-        if (!inner.classList.contains('is-flipped')) return;
-        inner.classList.remove('is-flipped');
-        isUserInteractingWithVideo = false;
-
-        if (video) {
-          try {
-            video.pause();
-            video.muted = true;
-            video.setAttribute('muted', '');
-            video.volume = 0;
-            video.currentTime = 0;
-          } catch (e) {}
-        }
-        if (soundBtn) {
-          soundBtn.classList.remove('is-unmuted');
-          var span = soundBtn.querySelector('span');
-          if (span) span.textContent = 'Unmute';
-        }
-        startAutoPlay();
-      }
+      var video = inner.querySelector('video');
+      var playBtn = inner.querySelector('.video-play-btn');
+      var soundBtn = inner.querySelector('.video-sound-btn');
+      var flipToReviewBtn = inner.querySelector('.card-flip-btn');
+      var backToVideoBtns = inner.querySelectorAll('.card-flip-close-btn');
 
       if (video) {
-        video.addEventListener('ended', function () {
-          flipToText();
-        });
-      }
-
-      // Close button on video side
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          flipToText();
-        });
-      }
-
-      // Play/Pause toggle
-      if (playBtn && video) {
-        playBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
+        function togglePlay() {
           if (video.paused) {
-            video.play();
-            playBtn.classList.remove('is-paused');
+            stopAllVideos(video);
+            activePlayingVideo = video;
+            pauseAutoPlay();
+
+            video.play().then(function () {
+              inner.classList.add('is-playing');
+              if (playBtn) {
+                var s = playBtn.querySelector('span');
+                if (s) s.textContent = 'Pause';
+              }
+            }).catch(function () {
+              video.muted = true;
+              video.play().then(function () {
+                inner.classList.add('is-playing');
+              }).catch(function () {});
+            });
           } else {
             video.pause();
-            playBtn.classList.add('is-paused');
-          }
-        });
-      }
-
-      // Mute/Unmute sound toggle
-      if (soundBtn && video) {
-        soundBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          e.preventDefault();
-
-          var currentlyMuted = video.muted;
-
-          if (currentlyMuted) {
-            // --- UNMUTE ---
-            // Mute all other videos first (single-audio policy)
-            stopAllVideos(video);
-
-            // Remove HTML muted attribute (some browsers ignore .muted if attribute is present)
-            video.removeAttribute('muted');
-            video.muted = false;
-            video.defaultMuted = false;
-            video.volume = 1.0;
-
-            // Resume playback within the same user-gesture tick to satisfy autoplay policy
-            if (video.paused) {
-              video.play().catch(function () {
-                // If play fails, re-mute gracefully
-                video.muted = true;
-                soundBtn.classList.remove('is-unmuted');
-                var span = soundBtn.querySelector('span');
-                if (span) span.textContent = 'Unmute';
-              });
+            inner.classList.remove('is-playing');
+            if (playBtn) {
+              var s = playBtn.querySelector('span');
+              if (s) s.textContent = 'Play';
             }
-
-            soundBtn.classList.add('is-unmuted');
-            var span = soundBtn.querySelector('span');
-            if (span) span.textContent = 'Mute';
-
-          } else {
-            // --- MUTE ---
-            video.muted = true;
-            video.setAttribute('muted', '');
-            video.volume = 0;
-            soundBtn.classList.remove('is-unmuted');
-            var span = soundBtn.querySelector('span');
-            if (span) span.textContent = 'Unmute';
+            activePlayingVideo = null;
           }
-        });
-      }
+        }
 
-      // Click to flip on front
-      if (front) {
-        front.addEventListener('click', function (e) {
-          // If not clicking interactive link
-          if (e.target.tagName !== 'A') {
-            flipToVideo();
-          }
-        });
+        // Click on video container to toggle play
+        var videoContainer = inner.querySelector('.hybrid-card_video-container');
+        if (videoContainer) {
+          videoContainer.addEventListener('click', function (e) {
+            e.stopPropagation();
+            togglePlay();
+          });
+        }
 
-        // Desktop 3-second hover timer
-        front.addEventListener('mouseenter', function () {
-          if (window.innerWidth < 1024 || inner.classList.contains('is-flipped')) return;
-          startTime = Date.now();
+        if (playBtn) {
+          playBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            togglePlay();
+          });
+        }
 
-          function updateTimer() {
-            var elapsed = Date.now() - startTime;
-            var pct = Math.min(100, (elapsed / HOVER_FLIP_DELAY) * 100);
-            if (timerBar) timerBar.style.width = pct + '%';
+        // Mute/Unmute sound toggle
+        if (soundBtn) {
+          soundBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
 
-            if (elapsed >= HOVER_FLIP_DELAY) {
-              flipToVideo();
+            var currentlyMuted = video.muted;
+
+            if (currentlyMuted) {
+              // UNMUTE
+              stopAllVideos(video);
+              video.removeAttribute('muted');
+              video.muted = false;
+              video.defaultMuted = false;
+              video.volume = 1.0;
+
+              if (video.paused) {
+                video.play().catch(function () {
+                  video.muted = true;
+                  soundBtn.classList.remove('is-unmuted');
+                  var span = soundBtn.querySelector('span');
+                  if (span) span.textContent = 'Unmute';
+                });
+              }
+
+              inner.classList.add('is-playing');
+              soundBtn.classList.add('is-unmuted');
+              var span = soundBtn.querySelector('span');
+              if (span) span.textContent = 'Mute';
+              if (playBtn) {
+                var ps = playBtn.querySelector('span');
+                if (ps) ps.textContent = 'Pause';
+              }
+              activePlayingVideo = video;
+              pauseAutoPlay();
             } else {
-              animFrame = requestAnimationFrame(updateTimer);
+              // MUTE
+              video.muted = true;
+              video.setAttribute('muted', '');
+              video.volume = 0;
+              soundBtn.classList.remove('is-unmuted');
+              var span = soundBtn.querySelector('span');
+              if (span) span.textContent = 'Unmute';
             }
-          }
-          animFrame = requestAnimationFrame(updateTimer);
-        });
+          });
+        }
 
-        front.addEventListener('mouseleave', function () {
-          if (animFrame) cancelAnimationFrame(animFrame);
-          if (timerBar) timerBar.style.width = '0%';
+        video.addEventListener('ended', function () {
+          inner.classList.remove('is-playing');
+          if (playBtn) {
+            var s = playBtn.querySelector('span');
+            if (s) s.textContent = 'Play';
+          }
+          activePlayingVideo = null;
+          startAutoPlay();
+        });
+      }
+
+      // Flip to video from written review text (Front -> Back)
+      if (flipToReviewBtn) {
+        flipToReviewBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          stopAllVideos(video);
+          flipAllBack(inner);
+          inner.classList.add('is-flipped');
+          if (video) {
+            activePlayingVideo = video;
+            pauseAutoPlay();
+            video.play().then(function () {
+              inner.classList.add('is-playing');
+              if (playBtn) {
+                var s = playBtn.querySelector('span');
+                if (s) s.textContent = 'Pause';
+              }
+            }).catch(function () {
+              video.muted = true;
+              video.play().then(function () {
+                inner.classList.add('is-playing');
+                if (playBtn) {
+                  var s = playBtn.querySelector('span');
+                  if (s) s.textContent = 'Pause';
+                }
+              }).catch(function () {});
+            });
+          }
+        });
+      }
+
+      // Also allow clicking anywhere on front text card to flip if it's flip enabled
+      if (front && inner.classList.contains('is-flip-enabled')) {
+        front.addEventListener('click', function (e) {
+          if (e.target.closest('button') || e.target.closest('a')) return;
+          stopAllVideos(video);
+          flipAllBack(inner);
+          inner.classList.add('is-flipped');
+          if (video) {
+            activePlayingVideo = video;
+            pauseAutoPlay();
+            video.play().then(function () {
+              inner.classList.add('is-playing');
+              if (playBtn) {
+                var s = playBtn.querySelector('span');
+                if (s) s.textContent = 'Pause';
+              }
+            }).catch(function () {
+              video.muted = true;
+              video.play().then(function () {
+                inner.classList.add('is-playing');
+                if (playBtn) {
+                  var s = playBtn.querySelector('span');
+                  if (s) s.textContent = 'Pause';
+                }
+              }).catch(function () {});
+            });
+          }
+        });
+      }
+
+      // Back to written review from video (Back -> Front)
+      if (backToVideoBtns && backToVideoBtns.length > 0) {
+        backToVideoBtns.forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (video) {
+              video.pause();
+              inner.classList.remove('is-playing');
+              if (playBtn) {
+                var s = playBtn.querySelector('span');
+                if (s) s.textContent = 'Play';
+              }
+              activePlayingVideo = null;
+            }
+            inner.classList.remove('is-flipped');
+          });
         });
       }
 
       // Keyboard accessibility (Enter / Space)
       slide.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          if (inner.classList.contains('is-flipped')) {
-            flipToText();
-          } else {
-            flipToVideo();
+          if (e.target.tagName !== 'BUTTON') {
+            e.preventDefault();
+            if (video) togglePlay();
           }
         }
       });
@@ -385,7 +395,7 @@
     function startAutoPlay() {
       if (autoPlayTimer) clearInterval(autoPlayTimer);
       autoPlayTimer = setInterval(function () {
-        if (!isUserInteractingWithVideo) {
+        if (!activePlayingVideo) {
           goToSlide(currentIndex + 1);
         }
       }, AUTOPLAY_INTERVAL);
@@ -397,7 +407,7 @@
 
     container.addEventListener('mouseenter', pauseAutoPlay);
     container.addEventListener('mouseleave', function () {
-      if (!isUserInteractingWithVideo) startAutoPlay();
+      if (!activePlayingVideo) startAutoPlay();
     });
 
     // Window resize handler

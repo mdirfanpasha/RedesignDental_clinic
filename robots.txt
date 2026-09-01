@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://redesign-tau-five.vercel.app/sitemap.xml

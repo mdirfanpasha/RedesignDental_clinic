@@ -1,4 +1,5 @@
 /* ===== Redesign Clinics - Unified Booking & Callback System CSS ===== */
+@import url('dr-suhail-chatbot.css');
 
 :root {
   --rc-booking-primary: #0f766e;
@@ -398,8 +399,8 @@ body.rc-modal-open .rc-floating-actions {
 }
 
 .rc-float-doc-wrap {
-  width: 88px;
-  height: 88px;
+  width: 112px;
+  height: 112px;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -408,13 +409,13 @@ body.rc-modal-open .rc-floating-actions {
   justify-content: center;
   position: relative;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
-  filter: drop-shadow(0 8px 18px rgba(5, 38, 42, 0.35));
+  filter: drop-shadow(0 10px 22px rgba(5, 38, 42, 0.38));
   flex-shrink: 0;
 }
 
 .rc-float-doc:hover .rc-float-doc-wrap {
   transform: scale(1.06);
-  filter: drop-shadow(0 12px 24px rgba(5, 38, 42, 0.45)) drop-shadow(0 0 12px rgba(46, 196, 182, 0.35));
+  filter: drop-shadow(0 14px 28px rgba(5, 38, 42, 0.48)) drop-shadow(0 0 14px rgba(46, 196, 182, 0.4));
 }
 
 .rc-float-doc-img {
@@ -479,8 +480,8 @@ body.rc-modal-open .rc-floating-actions {
     height: 22px;
   }
   .rc-float-doc-wrap {
-    width: 70px;
-    height: 70px;
+    width: 88px;
+    height: 88px;
   }
   .rc-float-doc-label {
     display: none !important;
@@ -651,6 +652,125 @@ body.rc-modal-open .rc-floating-actions {
   color: #64748b !important;
   margin: 0 !important;
   line-height: 1.4 !important;
+}
+
+/* ===== Multilingual Language Selector & Typography Styling ===== */
+.lang-selector_wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 12px;
+}
+
+.lang-selector_toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.lang-selector_toggle:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.lang-selector_dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 175px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(5, 38, 42, 0.25);
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 999999;
+}
+
+.lang-selector_dropdown.is-open {
+  display: flex;
+}
+
+.lang-dropdown_header {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  padding: 6px 10px 4px;
+  letter-spacing: 0.5px;
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.lang-option:hover {
+  background: #f1f5f9;
+  color: #0f766e;
+}
+
+.lang-option.is-active {
+  background: #e6f4f4;
+  color: #0f766e;
+}
+
+.lang-option_pill {
+  font-size: 10.5px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #e2e8f0;
+  color: #475569;
+  font-weight: 700;
+}
+
+.lang-option.is-active .lang-option_pill {
+  background: #0f766e;
+  color: #ffffff;
+}
+
+/* Specific language typography & shaping */
+html.lang-ar, html.lang-ar * {
+  font-family: 'Noto Sans Arabic', 'Sora', sans-serif !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+html.lang-te, html.lang-te * {
+  font-family: 'Noto Sans Telugu', 'Sora', sans-serif !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+html.lang-hi, html.lang-hi * {
+  font-family: 'Noto Sans Devanagari', 'Sora', sans-serif !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
 }
 
 

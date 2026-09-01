@@ -1,13 +1,15 @@
 /**
  * api/booking.js
- * Unified Vercel Serverless Function & Local Endpoint for Bookings & Callbacks
+ * Unified Hardened Router for Appointments, Callbacks & Enquiries
  */
 
 import appointmentHandler from './appointments.js';
 import callbackHandler from './callback.js';
+import contactHandler from './contact.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
 
@@ -17,6 +19,8 @@ export default async function handler(req, res) {
 
     if (type === 'callback') {
       return await callbackHandler(req, res);
+    } else if (type === 'contact') {
+      return await contactHandler(req, res);
     } else {
       return await appointmentHandler(req, res);
     }
