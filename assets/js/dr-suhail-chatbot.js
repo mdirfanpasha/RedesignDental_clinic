@@ -2,278 +2,176 @@
  * Dr. Suhail's Virtual Dental Assistant Chatbot
  * Redesign Dental Clinics - Specialist Dental Care
  * 
- * Future-AI Ready, Modular Predefined Assistant Engine
+ * Modular Predefined Assistant Engine with Dedicated Quick Questions & Smooth Message Scrolling
  */
 
 (function () {
   'use strict';
 
-  // ─── Predefined Knowledge Base (24 Clinical & Clinic Questions) ────────────
+  // ─── Predefined Knowledge Base (Full Predefined Questions Set) ────────────
   var SUHAIL_CHAT_DATA = [
     {
       id: 'book-appointment',
-      category: 'Appointments',
-      isInitial: true,
       question: 'How can I book an appointment?',
-      answer: 'Booking an appointment is easy. You can use our appointment form and our team will contact you to confirm your preferred date and time.',
+      answer: "You can book an appointment by using the 'Book Appointment' button on the website. Fill in your details and preferred appointment information, and our clinic team will assist you with the booking.",
       keywords: ['book', 'appointment', 'schedule', 'visit', 'consultation', 'reserve', 'timing', 'slot', 'booking'],
       ctas: [
-        { label: 'Book Appointment', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'request-callback',
-      category: 'Appointments',
-      isInitial: true,
-      question: 'Can I request a callback?',
-      answer: 'Absolutely. Please submit your name and mobile number through our callback form, and our team will contact you as soon as possible.',
-      keywords: ['callback', 'call back', 'call me', 'phone', 'contact me', 'reach out', 'ring'],
-      ctas: [
-        { label: 'Request Callback', action: 'open_callback', style: 'is-primary', icon: 'phone' }
+        { label: 'Book an Appointment', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
       ]
     },
     {
       id: 'dental-services',
-      category: 'Services',
-      isInitial: true,
       question: 'What dental services do you provide?',
-      answer: 'Redesign Dental Clinics provides comprehensive dental care, including preventive dentistry, cosmetic dentistry, dental implants, root canal treatments, orthodontic care, smile makeovers and other advanced dental treatments.',
+      answer: 'Redesign Dental Clinics provides comprehensive specialist dental care, including Orthodontics, Endodontics, Dental Implants, Preventive & General Dentistry, Cosmetic Dentistry, Restorative Dentistry, Oral Surgery, Periodontics & Gum Care, Advanced Laser Dentistry, Pediatric Care, and Emergency Dental Care.',
       keywords: ['services', 'treatments', 'procedures', 'provide', 'offer', 'options', 'care', 'dental care'],
       ctas: [
         { label: 'Explore Services', action: 'explore_services', style: 'is-primary', icon: 'arrow' }
       ]
     },
     {
-      id: 'dental-implants',
-      category: 'Treatments',
-      isInitial: true,
-      question: 'Do you provide dental implants?',
-      answer: 'Yes. We provide advanced dental implant solutions designed to restore missing teeth and improve both function and appearance. A consultation is recommended so our dental team can assess your individual needs.',
-      keywords: ['implant', 'implants', 'missing tooth', 'missing teeth', 'titanium', 'zirconia', 'all-on-4', 'fixed teeth'],
-      ctas: [
-        { label: 'Book Implant Consultation', action: 'open_appointment', payload: { reason: 'Implants' }, style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'dental-emergency',
-      category: 'Support',
-      isInitial: true,
-      question: 'I have a dental emergency',
-      answer: 'If you are experiencing severe dental pain, significant bleeding, swelling or a dental injury, please contact the clinic as soon as possible so our team can guide you.',
-      keywords: ['emergency', 'urgent', 'bleeding', 'swelling', 'broken tooth', 'injury', 'severe', 'acute', 'trauma'],
-      ctas: [
-        { label: 'Call Clinic', action: 'call_clinic', style: 'is-call', icon: 'phone' },
-        { label: 'Book Urgent Appointment', action: 'open_appointment', payload: { reason: 'Emergency' }, style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'tooth-pain',
-      category: 'Treatments',
-      isInitial: false,
-      question: 'I have severe tooth pain',
-      answer: 'Tooth pain can have different causes, and an examination is the best way to identify the problem. If the pain is severe or persistent, we recommend contacting our dental team for an appointment.',
-      keywords: ['pain', 'tooth pain', 'toothache', 'ache', 'hurts', 'throbbing', 'sensitivity', 'sore'],
-      ctas: [
-        { label: 'Book Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'root-canal',
-      category: 'Treatments',
-      isInitial: false,
-      question: 'Do you provide root canal treatment?',
-      answer: 'Yes. Root canal treatment may be recommended when the inner part of a tooth is affected by infection or damage. Our dental team can evaluate your condition and explain the most suitable treatment options.',
-      keywords: ['root canal', 'rct', 'endodontic', 'infection', 'pulp', 'nerve', 'decay', 'abscess'],
-      ctas: [
-        { label: 'Book Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'teeth-cleaning',
-      category: 'Services',
-      isInitial: false,
-      question: 'Do you provide teeth cleaning?',
-      answer: 'Yes. Professional dental cleaning can help maintain oral hygiene by removing plaque and tartar that regular brushing may not completely remove.',
-      keywords: ['cleaning', 'scaling', 'polishing', 'plaque', 'tartar', 'hygiene', 'stains', 'clean'],
-      ctas: [
-        { label: 'Book Cleaning Appointment', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'cosmetic-dentistry',
-      category: 'Services',
-      isInitial: false,
-      question: 'Do you provide cosmetic dentistry?',
-      answer: 'Yes. We provide cosmetic dental solutions designed to improve the appearance of your smile. Available options may include smile enhancement and other aesthetic dental treatments depending on your individual needs.',
-      keywords: ['cosmetic', 'aesthetic', 'veneers', 'laminates', 'bonding', 'appearance', 'smile aesthetics'],
-      ctas: [
-        { label: 'Explore Cosmetic Dentistry', action: 'explore_services', style: 'is-primary', icon: 'arrow' }
-      ]
-    },
-    {
-      id: 'smile-makeover',
-      category: 'Treatments',
-      isInitial: false,
-      question: 'Can I get a smile makeover?',
-      answer: 'Yes. A smile makeover is personalised based on your teeth, facial features and aesthetic goals. Our dental team can evaluate your smile and discuss suitable treatment options.',
-      keywords: ['smile makeover', 'smile design', 'hollywood smile', 'transformation', 'makeover', 'perfect smile'],
-      ctas: [
-        { label: 'Book Smile Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'teeth-whitening',
-      category: 'Treatments',
-      isInitial: false,
-      question: 'Do you offer teeth whitening?',
-      answer: 'Professional teeth whitening options may be available depending on your dental condition. A consultation helps us recommend the safest and most suitable approach for you.',
-      keywords: ['whitening', 'teeth whitening', 'bleaching', 'brighten', 'yellow teeth', 'stains', 'sparkle'],
-      ctas: [
-        { label: 'Ask About Whitening', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'braces-aligners',
-      category: 'Treatments',
-      isInitial: false,
-      question: 'Do you provide braces or aligners?',
-      answer: 'Orthodontic treatment options depend on your dental alignment and treatment goals. Our dental team can evaluate your teeth and discuss suitable orthodontic options.',
-      keywords: ['braces', 'aligners', 'invisalign', 'clear aligners', 'teeth straightening', 'orthodontics', 'crooked teeth', 'gap'],
-      ctas: [
-        { label: 'Book Orthodontic Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'treatment-cost',
-      category: 'Clinic Info',
-      isInitial: true,
-      question: 'How much does dental treatment cost?',
-      answer: 'Treatment costs vary depending on your dental condition and the treatment required. After a consultation and examination, our team can provide more accurate information about the recommended treatment and costs.',
-      keywords: ['cost', 'price', 'fee', 'charge', 'expensive', 'pricing', 'estimate', 'rate', 'how much'],
-      ctas: [
-        { label: 'Request Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'payment-options',
-      category: 'Clinic Info',
-      isInitial: false,
-      question: 'What payment options are available?',
-      answer: 'Our team can provide information about the available payment options when you contact or visit the clinic. Please speak with our team for the most accurate details.',
-      keywords: ['payment', 'pay', 'emi', 'credit card', 'debit card', 'upi', 'cash', 'options'],
-      ctas: [
-        { label: 'Contact Clinic', action: 'view_contact', style: 'is-primary', icon: 'arrow' }
-      ]
-    },
-    {
       id: 'clinic-location',
-      category: 'Clinic Info',
-      isInitial: true,
-      question: 'Where is the clinic located?',
-      answer: 'You can find our clinic address and contact details on the Contact section of our website. Our team will also be happy to help you with directions.',
+      question: 'Where is Redesign Dental Clinics located?',
+      answer: 'Redesign Dental Clinics is located at Road No. 1, Banjara Hills, Hyderabad (6th Floor, Reliance Classic Enclave). We have dedicated valet parking and complete patient accessibility.',
       keywords: ['location', 'where', 'address', 'directions', 'map', 'banjara hills', 'hyderabad', 'place'],
       ctas: [
-        { label: 'View Location', action: 'view_contact', style: 'is-primary', icon: 'arrow' }
+        { label: 'View Location & Directions', action: 'view_contact', style: 'is-primary', icon: 'arrow' }
       ]
     },
     {
-      id: 'clinic-timings',
-      category: 'Clinic Info',
-      isInitial: false,
-      question: 'What are the clinic timings?',
-      answer: 'Our clinic timings are available on the Contact section of the website. Please check the latest timings there or contact our team before visiting.',
+      id: 'working-hours',
+      question: 'What are your working hours?',
+      answer: 'Our clinic is open Monday through Friday from 10:00 AM to 8:00 PM IST, and Sunday from 10:00 AM to 2:00 PM IST.',
       keywords: ['timings', 'hours', 'open', 'closing', 'working hours', 'sunday', 'schedule', 'time'],
       ctas: [
         { label: 'View Contact Details', action: 'view_contact', style: 'is-primary', icon: 'arrow' }
       ]
     },
     {
-      id: 'insurance',
-      category: 'Clinic Info',
-      isInitial: false,
-      question: 'Do you accept dental insurance?',
-      answer: 'Insurance and coverage availability can depend on your provider and treatment. Please contact our clinic team with your insurance details so we can guide you with the most accurate information.',
-      keywords: ['insurance', 'coverage', 'mediclaim', 'reimbursement', 'tpa', 'policy', 'cashless'],
+      id: 'contact-clinic',
+      question: 'How can I contact the clinic?',
+      answer: 'You can reach us by phone at +91 7780-245-307, landline 040-66772333, email redesigndental@gmail.com, or through WhatsApp.',
+      keywords: ['contact', 'phone', 'call', 'email', 'reach out', 'number', 'landline'],
       ctas: [
-        { label: 'Contact Our Team', action: 'open_callback', style: 'is-primary', icon: 'phone' }
+        { label: 'Call Clinic', action: 'call_clinic', style: 'is-call', icon: 'phone' },
+        { label: 'WhatsApp Us', action: 'whatsapp_chat', style: 'is-whatsapp', icon: 'whatsapp' }
+      ]
+    },
+    {
+      id: 'dental-implants',
+      question: 'Do you provide dental implants?',
+      answer: 'Yes! We specialize in single-tooth, multi-tooth, and full-arch (All-on-4) permanent dental implants using advanced 3D CBCT guided surgical technology.',
+      keywords: ['implant', 'implants', 'missing tooth', 'missing teeth', 'titanium', 'zirconia', 'all-on-4', 'fixed teeth'],
+      ctas: [
+        { label: 'Book Implant Consultation', action: 'open_appointment', payload: { reason: 'Implants' }, style: 'is-primary', icon: 'calendar' }
+      ]
+    },
+    {
+      id: 'root-canal',
+      question: 'Do you provide root canal treatment?',
+      answer: 'Yes! We provide single-visit pain-free root canal treatment using rotary endodontics, digital apex locators, and microscopic precision.',
+      keywords: ['root canal', 'rct', 'endodontic', 'infection', 'pulp', 'nerve', 'decay', 'abscess'],
+      ctas: [
+        { label: 'Book Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
+      ]
+    },
+    {
+      id: 'cosmetic-dentistry',
+      question: 'Do you provide cosmetic dentistry?',
+      answer: 'Yes! We offer porcelain veneers, composite bonding, teeth reshaping, gum contouring, and comprehensive digital smile makeovers.',
+      keywords: ['cosmetic', 'aesthetic', 'veneers', 'laminates', 'bonding', 'appearance', 'smile aesthetics'],
+      ctas: [
+        { label: 'Explore Cosmetic Dentistry', action: 'explore_services', style: 'is-primary', icon: 'arrow' }
+      ]
+    },
+    {
+      id: 'teeth-whitening',
+      question: 'Do you provide teeth whitening?',
+      answer: 'Yes! We offer in-office LED laser whitening that brightens teeth up to 8 shades in a single 45-minute appointment.',
+      keywords: ['whitening', 'teeth whitening', 'bleaching', 'brighten', 'yellow teeth', 'stains', 'sparkle'],
+      ctas: [
+        { label: 'Book Whitening Session', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
       ]
     },
     {
       id: 'child-dentistry',
-      category: 'Services',
-      isInitial: false,
       question: 'Do you treat children?',
-      answer: "Our dental team can guide you regarding dental care options for children. Please contact us to discuss your child's dental needs and schedule a consultation if appropriate.",
+      answer: 'Yes! Our pediatric dental care covers routine checkups, fissure sealants, fluoride therapy, pulpotomies, and protective mouthguards in a friendly, gentle environment.',
       keywords: ['children', 'child', 'kids', 'pediatric', 'pediatric dentistry', 'baby teeth', 'toddler'],
       ctas: [
+        { label: 'Book Pediatric Visit', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
+      ]
+    },
+    {
+      id: 'dental-emergency',
+      question: 'Do you handle dental emergencies?',
+      answer: 'Yes! We provide priority same-day emergency dental care for acute toothaches, dental trauma, swelling, or broken restorations.',
+      keywords: ['emergency', 'urgent', 'bleeding', 'swelling', 'broken tooth', 'injury', 'severe', 'acute', 'trauma'],
+      ctas: [
+        { label: 'Call Emergency Support', action: 'call_clinic', style: 'is-call', icon: 'phone' },
+        { label: 'Book Urgent Visit', action: 'open_appointment', payload: { reason: 'Emergency' }, style: 'is-primary', icon: 'calendar' }
+      ]
+    },
+    {
+      id: 'gum-treatment',
+      question: 'Do you provide gum treatment?',
+      answer: 'Yes! Dr. Suhail A. Syed is a specialist Periodontist (BDS, MDS). We provide scaling and root planing, laser gum therapy (LANAP), gum grafting, and periodontal pocket reduction.',
+      keywords: ['gum', 'gums', 'periodontal', 'periodontics', 'bleeding gums', 'receding', 'scaling'],
+      ctas: [
+        { label: 'Book Gum Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
+      ]
+    },
+    {
+      id: 'orthodontic-treatment',
+      question: 'Do you provide orthodontic treatment?',
+      answer: 'Yes! We provide traditional metal braces, ceramic tooth-colored braces, clear aligners, bite correction, and teeth alignment treatments.',
+      keywords: ['orthodontics', 'braces', 'aligners', 'invisalign', 'clear aligners', 'teeth straightening', 'bite correction'],
+      ctas: [
+        { label: 'Explore Orthodontics', action: 'explore_services', style: 'is-primary', icon: 'arrow' }
+      ]
+    },
+    {
+      id: 'doctor-consultation',
+      question: 'Can I consult the doctor before treatment?',
+      answer: 'Absolutely! We conduct thorough initial diagnostic consultations, including digital X-rays and 3D intraoral scans, to answer all your questions before starting any treatment.',
+      keywords: ['consult', 'consultation', 'doctor', 'speak', 'before treatment', 'first time', 'evaluate'],
+      ctas: [
         { label: 'Book Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
       ]
     },
     {
-      id: 'first-visit',
-      category: 'Appointments',
-      isInitial: false,
-      question: 'What should I expect during my first visit?',
-      answer: 'During your first visit, our dental team will understand your concerns, review your dental condition and discuss suitable next steps. Depending on your needs, an examination and treatment planning may be recommended.',
-      keywords: ['first visit', 'new patient', 'first time', 'expect', 'checkup', 'initial visit', 'consultation'],
+      id: 'appointment-info',
+      question: 'What information do I need to provide for an appointment?',
+      answer: 'You only need to provide your full name, 10-digit mobile number, preferred date and time, and the reason for your visit.',
+      keywords: ['information', 'details', 'requirements', 'need', 'provide', 'booking info'],
       ctas: [
-        { label: 'Book First Visit', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
+        { label: 'Book Appointment', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
       ]
     },
     {
-      id: 'whatsapp-support',
-      category: 'Support',
-      isInitial: true,
-      question: 'Can I contact you on WhatsApp?',
-      answer: 'Yes. You can contact our team on WhatsApp for appointment enquiries and general clinic information.',
-      keywords: ['whatsapp', 'chat', 'message', 'text', 'online chat', 'support'],
+      id: 'full-mouth-rehab',
+      question: 'Do you provide full mouth rehabilitation?',
+      answer: "Yes! Under Dr. Suhail's lead, our multi-specialty team performs complete functional and aesthetic full mouth reconstructions combining implants, crowns, and bite realignment.",
+      keywords: ['full mouth', 'rehabilitation', 'reconstruction', 'worn teeth', 'broken teeth', 'full arch'],
       ctas: [
-        { label: 'Chat on WhatsApp', action: 'whatsapp_chat', style: 'is-whatsapp', icon: 'whatsapp' }
+        { label: 'Book Rehabilitation Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
       ]
     },
     {
-      id: 'talk-to-doctor',
-      category: 'Appointments',
-      isInitial: false,
-      question: 'Can I speak with a doctor?',
-      answer: 'Our team can help you arrange an appropriate consultation with one of our dental professionals. The doctor can better guide you after understanding your dental concerns.',
-      keywords: ['speak with doctor', 'doctor', 'talk to doctor', 'dentist', 'surgeon', 'specialist', 'dr suhail'],
+      id: 'who-is-dr-suhail',
+      question: 'Who is Dr. Suhail?',
+      answer: 'Dr. Suhail A. Syed (BDS, MDS - Periodontics, Fellow AAID USA) is our Chief Dental Surgeon with over 20 years of clinical experience in periodontics, implantology, and full mouth rehabilitation.',
+      keywords: ['suhail', 'dr suhail', 'who is', 'qualification', 'experience', 'doctor info', 'surgeon'],
       ctas: [
-        { label: 'Book Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
+        { label: 'View Doctors Page', action: 'view_doctors', style: 'is-primary', icon: 'arrow' }
       ]
     },
     {
-      id: 'before-and-after',
-      category: 'Clinic Info',
-      isInitial: false,
-      question: 'Can I see treatment results?',
-      answer: 'You can explore our website gallery and treatment-related sections to learn more about our clinic and dental work. Your treatment plan will always depend on your individual dental condition.',
-      keywords: ['results', 'before and after', 'gallery', 'photos', 'cases', 'pictures', 'portfolio', 'smile photos'],
+      id: 'about-doctors',
+      question: 'How can I learn more about the doctors?',
+      answer: "You can view complete doctor profiles, qualifications, and specialties on our dedicated 'Our Doctors' page.",
+      keywords: ['doctors', 'team', 'dentists', 'specialists', 'learn more', 'profiles'],
       ctas: [
-        { label: 'View Gallery', action: 'view_gallery', style: 'is-primary', icon: 'arrow' }
-      ]
-    },
-    {
-      id: 'dental-anxiety',
-      category: 'Support',
-      isInitial: false,
-      question: "I'm nervous about dental treatment",
-      answer: "You're not alone. Many people feel nervous about visiting the dentist. Please let our team know about your concerns so we can help make your visit as comfortable and reassuring as possible.",
-      keywords: ['nervous', 'scared', 'fear', 'anxiety', 'pain', 'afraid', 'phobia', 'comfortable', 'gentle'],
-      ctas: [
-        { label: 'Book a Consultation', action: 'open_appointment', style: 'is-primary', icon: 'calendar' }
-      ]
-    },
-    {
-      id: 'talk-to-team',
-      category: 'Support',
-      isInitial: false,
-      question: 'I want to talk to your team',
-      answer: 'Our team would be happy to help you with appointments, general enquiries and clinic information.',
-      keywords: ['talk', 'team', 'staff', 'front desk', 'reception', 'call', 'talk to team'],
-      ctas: [
-        { label: 'Call Clinic', action: 'call_clinic', style: 'is-call', icon: 'phone' },
-        { label: 'WhatsApp Us', action: 'whatsapp_chat', style: 'is-whatsapp', icon: 'whatsapp' }
+        { label: 'View Our Doctors', action: 'view_doctors', style: 'is-primary', icon: 'arrow' }
       ]
     }
   ];
@@ -286,13 +184,12 @@
     return fallback || key;
   }
 
-  var WELCOME_TEXT = "Hello! 👋\n\nI'm Dr. Suhail's virtual dental assistant.\n\nI can help you with appointments, treatments, dental services, emergencies and general clinic information.\n\nHow can I help you today?";
-  var FOLLOW_UP_TEXT = "What else can I help you with?";
+  var WELCOME_TEXT = "Hi! 👋 I'm the Redesign Clinics virtual assistant.\n\nHow can I help you today?";
   var DOCTOR_AVATAR_SRC = '/assets/img/dr-suhail-floating-icon.png';
   var DOCTOR_AVATAR_FALLBACK = '/assets/img/suhail_icon-removebg-preview.png';
   var CLINIC_PHONE = '+917780245307';
   var WA_URL = 'https://wa.me/917780245307?text=Hi%20Redesign%20Dental%20Clinics%2C%20I%20would%20like%20to%20enquire%20about%20dental%20treatments';
-  var SESSION_STORAGE_KEY = 'redesign_suhail_chat_session_v1';
+  var SESSION_STORAGE_KEY = 'redesign_suhail_chat_session_v2';
 
   // ─── SVG Icons Helper ───────────────────────────────────────────────────────
   var ICONS = {
@@ -303,74 +200,11 @@
     phone: '<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>',
     whatsapp: '<svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>',
     arrow: '<svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>',
-    chevronDown: '<svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>',
-    sparkle: '<svg viewBox="0 0 24 24"><path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg>'
+    chevronDown: '<svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>'
   };
 
-  // ─── Future-AI Ready Query Dispatcher ───────────────────────────────────────
+  // ─── Query Dispatcher ───────────────────────────────────────────────────────
   var ChatDispatcher = {
-    /**
-     * Resolves a question by direct ID or semantic keyword search
-     * Architecture supports replacing this promise with a remote fetch('/api/chat') in the future.
-     */
-    processQuery: function (queryOrId) {
-      return new Promise(function (resolve) {
-        var trimmed = String(queryOrId || '').trim().toLowerCase();
-
-        // 1. Direct ID match
-        var directMatch = SUHAIL_CHAT_DATA.find(function (q) {
-          return q.id.toLowerCase() === trimmed;
-        });
-        if (directMatch) {
-          return resolve(directMatch);
-        }
-
-        // 2. Direct Question Text Match
-        var textMatch = SUHAIL_CHAT_DATA.find(function (q) {
-          return q.question.toLowerCase() === trimmed;
-        });
-        if (textMatch) {
-          return resolve(textMatch);
-        }
-
-        // 3. Keyword / Weighted search match
-        var bestScore = 0;
-        var bestMatch = null;
-
-        SUHAIL_CHAT_DATA.forEach(function (q) {
-          var score = 0;
-          var qText = q.question.toLowerCase();
-          
-          if (qText.indexOf(trimmed) !== -1) score += 10;
-          
-          q.keywords.forEach(function (kw) {
-            if (trimmed.indexOf(kw.toLowerCase()) !== -1) score += 5;
-            if (kw.toLowerCase().indexOf(trimmed) !== -1) score += 3;
-          });
-
-          if (score > bestScore) {
-            bestScore = score;
-            bestMatch = q;
-          }
-        });
-
-        if (bestMatch && bestScore > 0) {
-          return resolve(bestMatch);
-        }
-
-        // Fallback default
-        return resolve({
-          id: 'general-enquiry',
-          question: queryOrId,
-          answer: "Our team would be happy to assist you with any questions regarding dental care, appointments, or clinic services. Please let us know how we can best support you.",
-          ctas: [
-            { label: 'Book Appointment', action: 'open_appointment', style: 'is-primary', icon: 'calendar' },
-            { label: 'Request Callback', action: 'open_callback', style: 'is-secondary', icon: 'phone' }
-          ]
-        });
-      });
-    },
-
     searchQuestions: function (keyword) {
       var query = String(keyword || '').trim().toLowerCase();
       if (!query) return [];
@@ -384,7 +218,7 @@
     }
   };
 
-  // ─── Session History Storage ────────────────────────────────────────────────
+  // ─── Session Storage ────────────────────────────────────────────────────────
   var ChatSession = {
     load: function () {
       try {
@@ -432,6 +266,7 @@
 
       this.buildDOM();
       this.bindEvents();
+      this.renderQuickQuestionsArea();
       this.restoreSessionOrWelcome();
     },
 
@@ -478,10 +313,23 @@
           </div>
         </div>
 
+        <!-- 1. MESSAGES CONTAINER (Scrolls independently) -->
         <div class="sh-chat-body" id="sh-chat-body" aria-live="polite">
           <!-- Messages dynamically injected here -->
         </div>
 
+        <!-- 2. DEDICATED QUICK QUESTIONS AREA (Fixed at bottom above footer) -->
+        <div class="sh-quick-questions-area" id="sh-quick-questions-area">
+          <div class="sh-qq-header">Quick Questions</div>
+          <div class="sh-qq-list" id="sh-qq-initial-list"></div>
+          <button type="button" class="sh-see-more-btn" id="sh-see-more-btn" aria-expanded="false">
+            <span>See More Questions</span>
+            <span class="sh-see-more-icon">${ICONS.chevronDown}</span>
+          </button>
+          <div class="sh-qq-expanded-panel" id="sh-qq-expanded-panel" style="display: none;"></div>
+        </div>
+
+        <!-- 3. CHAT FOOTER (Search bar & branding) -->
         <div class="sh-chat-footer">
           <div class="sh-search-results" id="sh-search-results" role="listbox" aria-label="Matching questions"></div>
           <div class="sh-search-wrap">
@@ -518,7 +366,7 @@
         });
       }
 
-      // Backdrop click (closes chat on mobile)
+      // Backdrop click
       if (this.backdropEl) {
         this.backdropEl.addEventListener('click', function () {
           self.close();
@@ -562,21 +410,74 @@
           self.close();
         }
       });
+    },
 
-      // Multilingual Instant Re-render on Language Change
-      window.addEventListener('rcLanguageChanged', function () {
-        if (self.widgetEl) {
-          self.startOver(false);
-          // Update placeholder and buttons
-          if (self.searchInput) {
-            self.searchInput.placeholder = t('chatbot.searchPlaceholder', 'Search for a question...');
-          }
-          var headerTitle = self.widgetEl.querySelector('.sh-header-title');
-          if (headerTitle) headerTitle.textContent = t('chatbot.title', "Dr. Suhail's Assistant");
-          var headerSubtitle = self.widgetEl.querySelector('.sh-header-subtitle');
-          if (headerSubtitle) headerSubtitle.textContent = t('chatbot.subtitle', "Your Dental Care Assistant");
-        }
+    renderQuickQuestionsArea: function () {
+      var initialListEl = this.widgetEl.querySelector('#sh-qq-initial-list');
+      var expandedPanelEl = this.widgetEl.querySelector('#sh-qq-expanded-panel');
+      var seeMoreBtn = this.widgetEl.querySelector('#sh-see-more-btn');
+
+      if (!initialListEl || !expandedPanelEl) return;
+
+      var self = this;
+
+      // Top 3 Initial Questions
+      var top3Ids = ['book-appointment', 'dental-services', 'clinic-location'];
+      var top3Questions = top3Ids.map(function (id) {
+        return SUHAIL_CHAT_DATA.find(function (q) { return q.id === id; });
+      }).filter(Boolean);
+
+      var top3Html = top3Questions.map(function (q) {
+        return `
+          <button type="button" class="sh-qq-btn" data-question-id="${q.id}">
+            <span>${q.question}</span>
+          </button>
+        `;
+      }).join('');
+
+      initialListEl.innerHTML = top3Html;
+
+      // Remaining Predefined Questions
+      var remainingQuestions = SUHAIL_CHAT_DATA.filter(function (q) {
+        return top3Ids.indexOf(q.id) === -1;
       });
+
+      var remainingHtml = remainingQuestions.map(function (q) {
+        return `
+          <button type="button" class="sh-qq-btn" data-question-id="${q.id}">
+            <span>${q.question}</span>
+          </button>
+        `;
+      }).join('');
+
+      expandedPanelEl.innerHTML = remainingHtml;
+
+      // Bind click on all quick question buttons
+      this.widgetEl.querySelectorAll('.sh-qq-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var qId = btn.getAttribute('data-question-id');
+          self.selectQuestion(qId);
+        });
+      });
+
+      // Toggle See More / Show Less
+      if (seeMoreBtn) {
+        seeMoreBtn.onclick = function (e) {
+          e.preventDefault();
+          var isExpanded = expandedPanelEl.style.display !== 'none';
+          if (!isExpanded) {
+            expandedPanelEl.style.display = 'flex';
+            seeMoreBtn.classList.add('is-expanded');
+            seeMoreBtn.setAttribute('aria-expanded', 'true');
+            seeMoreBtn.querySelector('span').textContent = 'Show Less';
+          } else {
+            expandedPanelEl.style.display = 'none';
+            seeMoreBtn.classList.remove('is-expanded');
+            seeMoreBtn.setAttribute('aria-expanded', 'false');
+            seeMoreBtn.querySelector('span').textContent = 'See More Questions';
+          }
+        };
+      }
     },
 
     restoreSessionOrWelcome: function () {
@@ -600,12 +501,11 @@
         id: 'msg_' + Date.now(),
         sender: 'assistant',
         text: WELCOME_TEXT,
-        time: this.getCurrentTimeString(),
-        showDiscovery: true
+        time: this.getCurrentTimeString()
       };
 
       this.messages.push(welcomeMsg);
-      this.appendMessageDOM(welcomeMsg, true);
+      this.appendMessageDOM(welcomeMsg);
       this.saveCurrentSession();
 
       if (triggerScroll !== false) {
@@ -637,7 +537,6 @@
 
       this.scrollToBottom();
 
-      // Focus search input on desktop
       if (window.innerWidth > 768 && this.searchInput) {
         setTimeout(function () {
           DrSuhailChatbot.searchInput.focus();
@@ -675,7 +574,7 @@
       var matches = ChatDispatcher.searchQuestions(query);
       if (matches.length === 0) {
         this.searchResults.innerHTML = `
-          <div class="sh-search-empty">No direct matches found. Try keywords like <em>implants, pain, cleaning, appointment, cost</em></div>
+          <div class="sh-search-empty">No direct matches found. Try keywords like <em>implants, pain, cleaning, appointment, services</em></div>
         `;
         this.searchResults.classList.add('is-active');
         return;
@@ -692,7 +591,6 @@
       this.searchResults.innerHTML = html;
       this.searchResults.classList.add('is-active');
 
-      // Bind search items
       var self = this;
       this.searchResults.querySelectorAll('.sh-search-item').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -723,52 +621,41 @@
       if (!qObj) return;
 
       this.isProcessing = true;
-      var qKey = 'chatbot.q.' + qObj.id.replace(/-/g, '_');
-      var aKey = 'chatbot.a.' + qObj.id.replace(/-/g, '_');
-      var localizedQuestion = t(qKey, qObj.question);
-      var localizedAnswer = t(aKey, qObj.answer);
 
-      // 1. Render User message bubble
+      // 1. Append User Message Bubble to scrollable messages area
       var userMsg = {
         id: 'msg_' + Date.now(),
         sender: 'user',
-        text: localizedQuestion,
+        text: qObj.question,
         time: this.getCurrentTimeString()
       };
       this.messages.push(userMsg);
       this.appendMessageDOM(userMsg);
       this.scrollToBottom();
 
-      // 2. Show Typing Indicator
+      // 2. Show Typing Indicator inside messages area
       this.showTypingIndicator();
 
-      // 3. Process with realistic assistant typing delay (650-850ms)
+      // 3. Process Assistant Response
       setTimeout(function () {
         self.hideTypingIndicator();
 
         var assistantMsg = {
           id: 'msg_' + (Date.now() + 1),
           sender: 'assistant',
-          text: localizedAnswer,
+          text: qObj.answer,
           ctas: qObj.ctas,
-          time: self.getCurrentTimeString(),
-          showFollowUp: true
+          time: self.getCurrentTimeString()
         };
 
         self.messages.push(assistantMsg);
         self.appendMessageDOM(assistantMsg);
         self.saveCurrentSession();
-        var rowEl = document.getElementById(assistantMsg.id);
-        if (rowEl && self.bodyEl) {
-          setTimeout(function () {
-            var targetTop = rowEl.offsetTop - 12;
-            self.bodyEl.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-          }, 60);
-        } else {
-          self.scrollToBottom();
-        }
+
+        // 4. Smoothly scroll ONLY the chatbot message area to the latest response
+        self.scrollToBottom();
         self.isProcessing = false;
-      }, 750);
+      }, 700);
     },
 
     showTypingIndicator: function () {
@@ -785,7 +672,7 @@
             <span class="sh-typing-dot"></span>
             <span class="sh-typing-dot"></span>
             <span class="sh-typing-dot"></span>
-            <span class="sh-typing-text">${t('chatbot.typing', "Dr. Suhail's Assistant is typing...")}</span>
+            <span class="sh-typing-text">Dr. Suhail's Assistant is typing...</span>
           </div>
         </div>
       `;
@@ -801,14 +688,13 @@
     renderAllMessages: function () {
       var self = this;
       this.bodyEl.innerHTML = '';
-      this.messages.forEach(function (msg, idx) {
-        var isLast = idx === self.messages.length - 1;
-        self.appendMessageDOM(msg, isLast);
+      this.messages.forEach(function (msg) {
+        self.appendMessageDOM(msg);
       });
       this.scrollToBottom();
     },
 
-    appendMessageDOM: function (msg, isLatest) {
+    appendMessageDOM: function (msg) {
       var row = document.createElement('div');
       row.className = 'sh-message-row ' + (msg.sender === 'user' ? 'is-user' : 'is-assistant');
       row.id = msg.id;
@@ -831,26 +717,15 @@
           msg.ctas.forEach(function (cta) {
             var iconHtml = ICONS[cta.icon] || '';
             var payloadAttr = cta.payload ? ' data-payload=\'' + JSON.stringify(cta.payload) + '\'' : '';
-            var labelText = cta.label;
-            if (cta.action === 'open_appointment') labelText = t('chatbot.btn.bookAppointment', cta.label);
-            else if (cta.action === 'open_callback') labelText = t('chatbot.btn.requestCallback', cta.label);
-            else if (cta.action === 'call_clinic') labelText = t('chatbot.btn.callClinic', cta.label);
-            else if (cta.action === 'whatsapp_chat') labelText = t('chatbot.btn.chatWhatsApp', cta.label);
-            else if (cta.action === 'explore_services') labelText = t('chatbot.btn.exploreServices', cta.label);
 
             ctaHtml += `
               <button type="button" class="sh-cta-btn ${cta.style || 'is-primary'}" data-action="${cta.action}"${payloadAttr}>
                 ${iconHtml}
-                <span>${labelText}</span>
+                <span>${cta.label}</span>
               </button>
             `;
           });
           ctaHtml += '</div>';
-        }
-
-        var discoveryHtml = '';
-        if (msg.showDiscovery || msg.showFollowUp) {
-          discoveryHtml = this.buildDiscoveryChipsHTML(msg.showFollowUp);
         }
 
         row.innerHTML = `
@@ -863,7 +738,6 @@
               ${ctaHtml}
             </div>
             <span class="sh-msg-time">${msg.time || ''}</span>
-            ${discoveryHtml}
           </div>
         `;
       }
@@ -872,98 +746,8 @@
       this.bindMessageActions(row);
     },
 
-    buildDiscoveryChipsHTML: function (isFollowUp) {
-      var initialQuestions = SUHAIL_CHAT_DATA.filter(function (q) {
-        return q.isInitial;
-      });
-
-      var label = isFollowUp ? t('chatbot.btn.askAnother', FOLLOW_UP_TEXT) : t('chatbot.cat.all', 'Frequently Asked Questions:');
-
-      var chipsHtml = initialQuestions.map(function (q) {
-        var qText = t('chatbot.q.' + q.id.replace(/-/g, '_'), q.question);
-        return `
-          <button type="button" class="sh-chip-btn" data-question-id="${q.id}">
-            <span>${qText}</span>
-          </button>
-        `;
-      }).join('');
-
-      // Group all 24 questions by category for the expanded panel
-      var categories = [
-        { name: 'Appointments', key: 'chatbot.cat.appointments' },
-        { name: 'Services', key: 'chatbot.cat.services' },
-        { name: 'Treatments', key: 'chatbot.cat.treatments' },
-        { name: 'Clinic Info', key: 'chatbot.cat.clinic' },
-        { name: 'Support', key: 'chatbot.cat.support' }
-      ];
-
-      var categoryGroupsHtml = categories.map(function (catObj) {
-        var items = SUHAIL_CHAT_DATA.filter(function (q) {
-          return q.category === catObj.name;
-        });
-        if (items.length === 0) return '';
-        var itemsHtml = items.map(function (q) {
-          var qText = t('chatbot.q.' + q.id.replace(/-/g, '_'), q.question);
-          return `
-            <button type="button" class="sh-chip-btn" data-question-id="${q.id}">
-              <span>${qText}</span>
-            </button>
-          `;
-        }).join('');
-
-        return `
-          <div class="sh-category-group">
-            <div class="sh-category-title">${t(catObj.key, catObj.name)}</div>
-            <div class="sh-discovery-chips">${itemsHtml}</div>
-          </div>
-        `;
-      }).join('');
-
-      return `
-        <div class="sh-discovery-container">
-          <div class="sh-discovery-label">
-            <span>${label}</span>
-          </div>
-          <div class="sh-discovery-chips">
-            ${chipsHtml}
-          </div>
-          <button type="button" class="sh-view-all-btn" aria-expanded="false">
-            <span>${t('common.viewAll', 'View all questions (24)')}</span>
-            ${ICONS.chevronDown}
-          </button>
-          <div class="sh-all-questions-panel">
-            ${categoryGroupsHtml}
-          </div>
-        </div>
-      `;
-    },
-
     bindMessageActions: function (containerEl) {
       var self = this;
-
-      // Question Chips
-      containerEl.querySelectorAll('.sh-chip-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var qId = btn.getAttribute('data-question-id');
-          self.selectQuestion(qId);
-        });
-      });
-
-      // View all toggle
-      var viewAllBtn = containerEl.querySelector('.sh-view-all-btn');
-      var allPanel = containerEl.querySelector('.sh-all-questions-panel');
-      if (viewAllBtn && allPanel) {
-        viewAllBtn.addEventListener('click', function () {
-          var isExpanded = allPanel.classList.toggle('is-visible');
-          viewAllBtn.classList.toggle('is-open', isExpanded);
-          viewAllBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-          var textSpan = viewAllBtn.querySelector('span');
-          if (textSpan) {
-            textSpan.textContent = isExpanded ? 'Hide all questions' : 'View all questions (24)';
-          }
-          self.scrollToBottom();
-        });
-      }
 
       // CTAs
       containerEl.querySelectorAll('.sh-cta-btn').forEach(function (btn) {
@@ -1023,15 +807,8 @@
           window.open(WA_URL, '_blank', 'noopener,noreferrer');
           break;
 
-        case 'view_gallery':
-          if (window.location.pathname === '/' || window.location.pathname.endsWith('index.html') || window.location.pathname === '') {
-            var galEl = document.getElementById('gallery') || document.querySelector('.section_gallery');
-            if (galEl) {
-              galEl.scrollIntoView({ behavior: 'smooth' });
-              break;
-            }
-          }
-          window.location.href = '/gallery';
+        case 'view_doctors':
+          window.location.href = '/doctors';
           break;
 
         case 'view_contact':
@@ -1054,9 +831,9 @@
       var self = this;
       setTimeout(function () {
         if (self.bodyEl) {
-          self.bodyEl.scrollTop = self.bodyEl.scrollHeight;
+          self.bodyEl.scrollTo({ top: self.bodyEl.scrollHeight, behavior: 'smooth' });
         }
-      }, 50);
+      }, 60);
     },
 
     formatParagraphs: function (text) {

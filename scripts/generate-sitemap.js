@@ -16,6 +16,7 @@ const urls = [
   '/blog',
   '/contact',
   '/booking',
+  '/appointment',
   '/privacy',
   '/terms',
   '/cookies',

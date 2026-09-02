@@ -41,6 +41,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/appointment</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/privacy</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
@@ -76,6 +81,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/services/bite-correction</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/services/bonding</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -86,7 +96,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/services/braces</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/services/broken-teeth</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/ceramic-braces</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -107,6 +127,11 @@
   </url>
   <url>
     <loc>https://redesign-tau-five.vercel.app/services/clear-and-invisible-braces</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/clear-braces</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -132,6 +157,16 @@
   </url>
   <url>
     <loc>https://redesign-tau-five.vercel.app/services/cosmetic-procedures</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/crowding-and-spacing</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/crowding-correction</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -321,7 +356,17 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/services/invisalign-aligners</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/services/invisalign</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/invisible-aligners</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -356,6 +401,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/services/metal-braces</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/services/missing-or-failing-teeth</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -376,7 +426,32 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/services/occlusion-correction</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/services/odontoplasty</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/ortho-consultation</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/orthodontic-alignment</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/orthodontic-braces</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/orthodontic-consultation</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -471,7 +546,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/services/spacing-correction</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/services/sports-guards</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/teeth-alignment</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/teeth-braces</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -501,12 +591,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://redesign-tau-five.vercel.app/services/tooth-colored-braces</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://redesign-tau-five.vercel.app/services/tooth-extractions</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://redesign-tau-five.vercel.app/services/toothache-relief</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://redesign-tau-five.vercel.app/services/traditional-braces</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

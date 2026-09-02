@@ -409,6 +409,10 @@
   }
 
   function openAppointmentModal(triggerEl) {
+    if (window.location.pathname !== '/appointment' && !window.location.pathname.endsWith('/appointment.html')) {
+      window.location.href = '/appointment';
+      return;
+    }
     initBookingModals();
     activeTrigger = triggerEl || null;
     closeAllModals();
@@ -478,6 +482,77 @@
   // Track form open time for bot defense
   var _formOpenTime = Date.now();
 
+  // Temporary WhatsApp Appointment & Callback Redirection Helper
+  function triggerWhatsAppAppointment(formData) {
+    if (window.RedesignWhatsApp && typeof window.RedesignWhatsApp.openWhatsApp === 'function') {
+      var msg = window.RedesignWhatsApp.buildAppointmentMessage(formData);
+      window.RedesignWhatsApp.openWhatsApp(msg);
+    } else {
+      var cleanNumber = '917780245307';
+      var lines = [
+        'Hello Redesign Dental Clinics 👋',
+        '',
+        'I would like to book a dental appointment.',
+        '',
+        '📋 PATIENT DETAILS',
+        '',
+        '👤 Name: ' + (formData.name || 'Not provided'),
+        '',
+        '📱 Mobile Number: ' + (formData.phone || 'Not provided')
+      ];
+      if (formData.email) lines.push('', '📧 Email: ' + formData.email);
+      if (formData.date) lines.push('', '📅 Preferred Date: ' + formData.date);
+      if (formData.time) lines.push('', '⏰ Preferred Time: ' + formData.time);
+      if (formData.reason || formData.service) lines.push('', '🦷 Service Required: ' + (formData.reason || formData.service));
+      if (formData.customMsg || formData.additional) lines.push('', '💬 Additional Concern:', (formData.customMsg || formData.additional));
+      lines.push('', 'Please confirm my appointment availability.', '', 'Thank you!');
+
+      var url = 'https://wa.me/' + cleanNumber + '?text=' + encodeURIComponent(lines.join('\n'));
+      try {
+        var win = window.open(url, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = url;
+        }
+      } catch (err) {
+        window.location.href = url;
+      }
+    }
+  }
+
+  function triggerWhatsAppCallback(formData) {
+    if (window.RedesignWhatsApp && typeof window.RedesignWhatsApp.openWhatsApp === 'function') {
+      var msg = window.RedesignWhatsApp.buildCallbackMessage(formData);
+      window.RedesignWhatsApp.openWhatsApp(msg);
+    } else {
+      var cleanNumber = '917780245307';
+      var lines = [
+        'Hello Redesign Dental Clinics 👋',
+        '',
+        'I would like to request a callback.',
+        '',
+        '📋 MY DETAILS',
+        '',
+        '👤 Name: ' + (formData.name || 'Not provided'),
+        '',
+        '📱 Mobile Number: ' + (formData.phone || 'Not provided'),
+        '',
+        'Please contact me regarding a dental consultation.',
+        '',
+        'Thank you!'
+      ];
+
+      var url = 'https://wa.me/' + cleanNumber + '?text=' + encodeURIComponent(lines.join('\n'));
+      try {
+        var win = window.open(url, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = url;
+        }
+      } catch (err) {
+        window.location.href = url;
+      }
+    }
+  }
+
   // Appointment Submission with Server-Side Google reCAPTCHA v3 & WhatsApp Integration
   function handleAppointmentSubmit(e) {
     e.preventDefault();
@@ -499,13 +574,26 @@
       return;
     }
 
+    var formData = {
+      name: name,
+      phone: phone,
+      email: email,
+      reason: reason,
+      customMsg: customMsg,
+      date: date,
+      time: time
+    };
+
     var btn = document.getElementById('rc-apt-submit-btn');
     var btnSpan = btn ? btn.querySelector('span') : null;
     var originalBtnText = btnSpan ? btnSpan.textContent : 'Confirm Appointment Request';
     if (btn) {
       btn.disabled = true;
-      if (btnSpan) btnSpan.textContent = 'Submitting request...';
+      if (btnSpan) btnSpan.textContent = 'Opening WhatsApp...';
     }
+
+    // Trigger WhatsApp Redirection
+    triggerWhatsAppAppointment(formData);
 
     RecaptchaWidget.execute('appointment_booking')
       .then(function (token) {
@@ -540,11 +628,6 @@
           document.getElementById('rc-apt-success-text').innerHTML =
             'Thank you, <strong>' + escapeHtml(name) + '</strong>!' + refHtml + '<br/>We have received your appointment request for <strong>' + escapeHtml(date) + ' at ' + escapeHtml(time) + '</strong>. Our team will contact you at <strong>' + escapeHtml(phone) + '</strong> to confirm the details.';
 
-          var waBtn = document.getElementById('rc-apt-wa-link');
-          if (waBtn) {
-            waBtn.style.display = 'none'; // Auto-notified on backend
-          }
-
           // Clear patient inputs for privacy protection
           var form = document.getElementById('rc-appointment-form');
           if (form) form.reset();
@@ -554,7 +637,9 @@
       })
       .catch(function () {
         if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
-        showCaptchaError('rc-apt', 'Unable to reach the server. Please check your connection and try again.');
+        // Keep success view active as WhatsApp was launched
+        document.getElementById('rc-apt-form-view').style.display = 'none';
+        document.getElementById('rc-apt-success-view').style.display = 'block';
       });
   }
 
@@ -576,13 +661,22 @@
       return;
     }
 
+    var formData = {
+      name: name,
+      phone: phone,
+      preferredTime: prefTime
+    };
+
     var btn = document.getElementById('rc-cb-submit-btn');
     var btnSpan = btn ? btn.querySelector('span') : null;
     var originalBtnText = btnSpan ? btnSpan.textContent : 'Request Callback Now';
     if (btn) {
       btn.disabled = true;
-      if (btnSpan) btnSpan.textContent = 'Submitting request...';
+      if (btnSpan) btnSpan.textContent = 'Opening WhatsApp...';
     }
+
+    // Trigger WhatsApp Redirection
+    triggerWhatsAppCallback(formData);
 
     RecaptchaWidget.execute('callback_request')
       .then(function (token) {
@@ -622,7 +716,9 @@
       })
       .catch(function () {
         if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
-        showCaptchaError('rc-cb', 'Unable to reach the server. Please check your connection and try again.');
+        // Keep success view active as WhatsApp was launched
+        document.getElementById('rc-cb-form-view').style.display = 'none';
+        document.getElementById('rc-cb-success-view').style.display = 'block';
       });
   }
 
@@ -636,6 +732,13 @@
   document.addEventListener('click', function (e) {
     var target = e.target.closest('a, button');
     if (!target) return;
+
+    // Do NOT intercept clicks originating inside the chatbot UI unless it is an explicit chatbot CTA (.sh-cta-btn)
+    if (target.closest('#sh-chat-widget')) {
+      if (!target.classList.contains('sh-cta-btn')) {
+        return;
+      }
+    }
 
     // Do NOT open modal when submitting an inline form (like the hero lead form)
     if (target.getAttribute('type') === 'submit' || target.closest('form')) {
@@ -678,7 +781,11 @@
       (text.indexOf('appointment') !== -1 && target.classList.contains('button_primary'))
     ) {
       e.preventDefault();
-      openAppointmentModal(target);
+      if (window.location.pathname !== '/appointment' && !window.location.pathname.endsWith('/appointment.html')) {
+        window.location.href = '/appointment';
+      } else {
+        openAppointmentModal(target);
+      }
       return;
     }
   });
@@ -821,13 +928,24 @@
         return;
       }
 
+      var formData = {
+        name: name,
+        phone: phone,
+        email: email,
+        service: subject,
+        additional: messageText
+      };
+
       var btn = form.querySelector('button[type="submit"]');
       var btnSpan = btn ? btn.querySelector('span') : null;
       var originalBtnText = btnSpan ? btnSpan.textContent : 'Send Message';
       if (btn) {
         btn.disabled = true;
-        if (btnSpan) btnSpan.textContent = 'Verifying security...';
+        if (btnSpan) btnSpan.textContent = 'Opening WhatsApp...';
       }
+
+      // Trigger WhatsApp Redirection
+      triggerWhatsAppAppointment(formData);
 
       RecaptchaWidget.execute('contact_form')
         .then(function (token) {
@@ -866,9 +984,6 @@
               successText.innerHTML = 'Thank you, <strong>' + escapeHtml(name) + '</strong>!' + refHtml + '<br/>We have received your enquiry regarding <strong>' + escapeHtml(subject) + '</strong>. Our team will review your message and get back to you shortly.';
             }
 
-            var waLink = document.getElementById('rc-contact-wa-link');
-            if (waLink) waLink.style.display = 'none';
-
             // Reset form for privacy
             if (form) form.reset();
           } else {
@@ -877,8 +992,54 @@
         })
         .catch(function () {
           if (btn) { btn.disabled = false; if (btnSpan) btnSpan.textContent = originalBtnText; }
-          showCaptchaError('rc-contact', 'Unable to reach the server. Please check your connection and try again.');
+          if (formView) formView.style.display = 'none';
+          var successView = document.getElementById('rc-contact-success-view');
+          if (successView) successView.style.display = 'block';
         });
+    });
+  }
+
+  function initDropdownNavigation() {
+    document.querySelectorAll('.rc-nav-dropdown').forEach(function (dropdown) {
+      var toggle = dropdown.querySelector('.navbar-dropdown_toggle');
+      if (!toggle) return;
+
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = dropdown.classList.contains('is-open');
+        document.querySelectorAll('.rc-nav-dropdown').forEach(function (d) {
+          d.classList.remove('is-open');
+          var t = d.querySelector('.navbar-dropdown_toggle');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          dropdown.classList.add('is-open');
+          toggle.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.rc-nav-dropdown')) {
+        document.querySelectorAll('.rc-nav-dropdown').forEach(function (d) {
+          d.classList.remove('is-open');
+          var toggle = d.querySelector('.navbar-dropdown_toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    document.querySelectorAll('.rc-dropdown-link').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.querySelectorAll('.rc-nav-dropdown').forEach(function (d) {
+          d.classList.remove('is-open');
+        });
+        var navMenu = document.querySelector('.navbar_menu.w-nav-menu');
+        var navButton = document.querySelector('.navbar-toggler-button.w-nav-button');
+        if (navMenu && (navMenu.classList.contains('w--nav-menu-open') || navMenu.style.display !== 'none')) {
+          if (navButton) navButton.click();
+        }
+      });
     });
   }
 
@@ -889,11 +1050,13 @@
       initFloatingActionButtons();
       initTestimonialAutoRotation();
       initContactForm();
+      initDropdownNavigation();
     });
   } else {
     initBookingModals();
     initFloatingActionButtons();
     initTestimonialAutoRotation();
     initContactForm();
+    initDropdownNavigation();
   }
 })();

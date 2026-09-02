@@ -41,8 +41,12 @@ function generateServiceHtml(svc) {
   const categoryName = svc.categoryName || 'Dental Care';
   const categorySlug = svc.category || 'general';
 
+  const seoTitle = (svc.seo && svc.seo.title) ? svc.seo.title : `${svc.title} in Banjara Hills, Hyderabad | Redesign Dental Clinics`;
+  const seoDescription = (svc.seo && svc.seo.description) ? svc.seo.description : (svc.heroSubtitle || `${svc.title} at Redesign Dental Clinics in Banjara Hills, Hyderabad.`);
+  const seoKeywords = (svc.seo && svc.seo.keywords) ? svc.seo.keywords : `${svc.title}, ${categoryName}, dental clinic Banjara Hills, Hyderabad dentist`;
+
   // Process overview paragraphs
-  const overviewHtml = svc.overview
+  const overviewHtml = (svc.overview || '')
     .split('\n\n')
     .filter(p => p.trim())
     .map(p => `<p class="service-detail_p">${escapeHtml(p.trim())}</p>`)
@@ -74,53 +78,53 @@ function generateServiceHtml(svc) {
     </div>
   `).join('');
 
-  // Step-by-step process items
+  // Benefits cards
+  const benefitsHtml = (svc.benefits || []).map((b, i) => `
+    <div class="benefit-card">
+      <div class="benefit-card_num">0${i + 1}</div>
+      <h3 class="benefit-card_title">${escapeHtml(b.title)}</h3>
+      <p class="benefit-card_desc">${escapeHtml(b.desc)}</p>
+    </div>
+  `).join('');
+
+  // Process timeline items
   const processHtml = (svc.process || []).map(p => `
     <div class="process-step_card">
-      <div class="process-step_badge">${escapeHtml(p.step)}</div>
-      <div class="process-step_content">
-        <h3 class="process-step_title">${escapeHtml(p.title)}</h3>
-        <p class="process-step_desc">${escapeHtml(p.desc)}</p>
-      </div>
+      <div class="process-step_num">${escapeHtml(p.step)}</div>
+      <h3 class="process-step_title">${escapeHtml(p.title)}</h3>
+      <p class="process-step_desc">${escapeHtml(p.desc)}</p>
     </div>
   `).join('');
 
-  // Technology items
-  const techHtml = (svc.technology || [
-    { title: '3D CBCT Volumetric Diagnostics', desc: 'High-definition digital 3D imaging with 90% less radiation for sub-millimeter precision.' },
-    { title: 'Digital Intraoral 3D Scanning', desc: 'Comfortable optical impressions eliminating uncomfortable impression trays.' },
-    { title: 'Computerized Local Anesthesia', desc: 'Microprocessor-controlled flow rate for gentle, virtually imperceptible numbing.' },
-    { title: 'Hospital-Grade Class-B Sterilization', desc: 'Strict 6-step medical autoclave protocols ensuring uncompromising safety.' }
-  ]).map(t => `
-    <div class="tech-item_card">
+  // Technology cards
+  const techHtml = (svc.technology || []).map(t => `
+    <div class="tech-card">
       <div class="tech-icon_wrap">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#2dd4bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#0d9488" stroke-width="2"/>
+          <path d="M12 8V12L15 15" stroke="#0d9488" stroke-width="2" stroke-linecap="round"/>
         </svg>
       </div>
-      <div class="tech-card_body">
-        <h3 class="tech-item_title">${escapeHtml(t.title)}</h3>
-        <p class="tech-item_desc">${escapeHtml(t.desc)}</p>
-      </div>
+      <h3 class="tech-item_title">${escapeHtml(t.title)}</h3>
+      <p class="tech-item_desc">${escapeHtml(t.desc)}</p>
     </div>
   `).join('');
 
-  // FAQs Accordion
-  const faqsHtml = (svc.faqs || []).map((faq, idx) => `
-    <div class="faq-item_accordion" data-faq-id="${idx}">
-      <button class="faq-question_btn" type="button" aria-expanded="${idx === 0 ? 'true' : 'false'}" aria-controls="faq-ans-${idx}">
-        <span class="faq-question_text">${escapeHtml(faq.q)}</span>
-        <span class="faq-toggle_icon">
-          <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
+  // FAQ Accordion items
+  const faqHtml = (svc.faqs || []).map((faq, i) => `
+    <div class="faq-accordion_item">
+      <button type="button" class="faq-question_btn" aria-expanded="${i === 0 ? 'true' : 'false'}" onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); this.nextElementSibling.style.display = this.getAttribute('aria-expanded') === 'true' ? 'block' : 'none';">
+        <span>${escapeHtml(faq.q)}</span>
+        <div class="faq-toggle_icon">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
       </button>
-      <div class="faq-answer_wrap" id="faq-ans-${idx}" style="${idx === 0 ? 'display: block;' : 'display: none;'}">
+      <div class="faq-answer_wrap" style="display: ${i === 0 ? 'block' : 'none'};">
         <p class="faq-answer_text">${escapeHtml(faq.a)}</p>
       </div>
     </div>
   `).join('');
+  const faqsHtml = faqHtml;
 
   // Structured Schema (MedicalProcedure & BreadcrumbList)
   const schemaJson = JSON.stringify({
@@ -130,7 +134,7 @@ function generateServiceHtml(svc) {
         "@type": "MedicalProcedure",
         "@id": `${canonicalUrl}#procedure`,
         "name": svc.title,
-        "description": svc.seo.description,
+        "description": seoDescription,
         "procedureType": "http://schema.org/NoninvasiveProcedure",
         "howPerformed": (svc.process || []).map(p => `${p.step}: ${p.title} - ${p.desc}`).join(' '),
         "provider": {
@@ -156,7 +160,7 @@ function generateServiceHtml(svc) {
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://redesigndentalclinics.com/"
+            "item": "https://redesigndentalclinics.com"
           },
           {
             "@type": "ListItem",
@@ -179,16 +183,16 @@ function generateServiceHtml(svc) {
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>${escapeHtml(svc.seo.title)}</title>
-    <meta content="${escapeHtml(svc.seo.description)}" name="description"/>
-    <meta content="${escapeHtml(svc.seo.keywords || '')}" name="keywords"/>
-    <meta content="${escapeHtml(svc.seo.title)}" property="og:title"/>
-    <meta content="${escapeHtml(svc.seo.description)}" property="og:description"/>
+    <title>${escapeHtml(seoTitle)}</title>
+    <meta content="${escapeHtml(seoDescription)}" name="description"/>
+    <meta content="${escapeHtml(seoKeywords)}" name="keywords"/>
+    <meta content="${escapeHtml(seoTitle)}" property="og:title"/>
+    <meta content="${escapeHtml(seoDescription)}" property="og:description"/>
     <meta content="${heroImage}" property="og:image"/>
     <meta content="${canonicalUrl}" property="og:url"/>
     <meta property="og:type" content="article"/>
-    <meta content="${escapeHtml(svc.seo.title)}" name="twitter:title"/>
-    <meta content="${escapeHtml(svc.seo.description)}" name="twitter:description"/>
+    <meta content="${escapeHtml(seoTitle)}" name="twitter:title"/>
+    <meta content="${escapeHtml(seoDescription)}" name="twitter:description"/>
     <meta content="${heroImage}" name="twitter:image"/>
     <meta content="summary_large_image" name="twitter:card"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
@@ -923,8 +927,49 @@ function generateServiceHtml(svc) {
                 <div class="navbar-content_wrap">
                     <nav role="navigation" class="navbar_menu w-nav-menu">
                         <a href="/" class="navbar_link w-inline-block"><div data-i18n="nav.home">Home</div></a>
-                        <a href="/about" class="navbar_link w-inline-block"><div data-i18n="nav.about">About Us</div></a>
-                        <a href="/services" aria-current="page" class="navbar_link w-inline-block w--current"><div data-i18n="nav.services">Services</div></a>
+                        <!-- ABOUT US DROPDOWN -->
+                        <div data-delay="200" data-hover="true" class="navbar_dropdown w-dropdown rc-nav-dropdown">
+                            <div class="navbar-dropdown_toggle w-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false" role="button">
+                                <div data-i18n="nav.about">About Us</div>
+                                <div class="dropdown_chevron">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                                        <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+                                <div class="rc-dropdown-inner">
+                                    <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+                                    <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+                                    <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+                                </div>
+                            </nav>
+                        </div>
+                        <!-- SERVICES DROPDOWN -->
+                        <div data-delay="200" data-hover="true" class="navbar_dropdown w-dropdown rc-nav-dropdown">
+                            <div class="navbar-dropdown_toggle w-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false" role="button">
+                                <div data-i18n="nav.services">Services</div>
+                                <div class="dropdown_chevron">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                                        <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+                                <div class="rc-dropdown-inner">
+                                    <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+                                    <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+                                    <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+                                    <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+                                    <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+                                    <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+                                    <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+                                    <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+                                    <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+                                    <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+                                </div>
+                            </nav>
+                        </div>
                         <a href="/gallery" class="navbar_link w-inline-block"><div data-i18n="nav.gallery">Gallery</div></a>
                         <a href="/blog" class="navbar_link w-inline-block"><div data-i18n="nav.blog">Blog</div></a>
                         <a href="/contact" class="navbar_link w-inline-block"><div data-i18n="nav.contact">Contact</div></a>
@@ -1257,6 +1302,7 @@ function generateServiceHtml(svc) {
     <script src="/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
     <script src="/assets/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script>
     <script src="/assets/js/booking-system.js"></script>
+    <script src="/assets/js/navbar-dropdowns.js"></script>
 
     <!-- Interactive FAQ Accordion Script & CTA Bindings -->
     <script>

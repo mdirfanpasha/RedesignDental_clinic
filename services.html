@@ -59,11 +59,13 @@
             .section_hero.is-light-theme, .section_hero {
                 position: relative;
                 padding-top: 100px !important;
-                background: linear-gradient(180deg, #05262a 0%, #083c38 120px, #115c55 220px, #268d83 340px, #86d4ca 440px, #d8f3ee 540px, #ffffff 680px, #ffffff 100%) !important;
-                color: #05262a;
+                background:
+                    linear-gradient(180deg, rgba(2,18,20,0.68) 0%, rgba(5,38,42,0.50) 50%, rgba(5,38,42,0.25) 100%),
+                    url('assets/img/services-hero-bg.webp') center center / cover no-repeat !important;
+                color: #ffffff;
                 overflow: hidden;
-                padding-bottom: 50px;
-                border-bottom: 1px solid #e2e8f0;
+                padding-bottom: 60px;
+                border-bottom: none;
             }
 
             .heading-hero-title {
@@ -98,20 +100,15 @@
 
             .section_hero.is-light-theme {
                 position: relative;
-                background: radial-gradient(circle at 50% 0%, rgba(20, 184, 166, 0.08) 0%, rgba(248, 250, 252, 1) 75%), #f8fafc;
-                color: #0f172a;
+                background:
+                    linear-gradient(180deg, rgba(2,18,20,0.68) 0%, rgba(5,38,42,0.50) 50%, rgba(5,38,42,0.25) 100%),
+                    url('assets/img/services-hero-bg.webp') center center / cover no-repeat;
+                color: #ffffff;
                 overflow: hidden;
-                border-bottom: 1px solid #e2e8f0;
+                border-bottom: none;
             }
 
-            .hero-mesh-grid-light {
-                position: absolute;
-                inset: 0;
-                background-image: linear-gradient(rgba(15, 23, 42, 0.02) 1px, transparent 1px),
-                                  linear-gradient(90deg, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
-                background-size: 40px 40px;
-                pointer-events: none;
-            }
+            .hero-mesh-grid-light { display: none !important; }
 
             .heading-hero-title {
                 font-family: 'Sora', sans-serif !important;
@@ -120,9 +117,12 @@
                 line-height: 1.25 !important;
                 letter-spacing: -0.01em !important;
                 word-spacing: normal !important;
-                color: #05262a !important;
+                color: #ffffff !important;
                 margin-bottom: 24px !important;
+                text-shadow: 0 2px 24px rgba(0,0,0,0.35);
             }
+            .service-hero_para { color: rgba(255,255,255,0.90) !important; }
+            .section_tag { background: rgba(255,255,255,0.15) !important; border-color: rgba(255,255,255,0.35) !important; color: #ffffff !important; backdrop-filter: blur(8px); }
 
             .services-main-section-light {
                 background: #f8fafc;
@@ -503,8 +503,6 @@
             <!-- Multilingual Engine -->
         <script src="assets/i18n/translations.js"></script>
         <script src="assets/js/i18n.js"></script>
-        <!-- Google reCAPTCHA v3 - Loaded eagerly -->
-        <script src="https://www.google.com/recaptcha/api.js?render=6LdkaZQtAAAAAlkSLA78ABt5Xeo0EgbfLbeqHZWu" async defer></script>
 </head>
     <body>
         <div class="page-wrapper">
@@ -518,10 +516,53 @@
                         <nav role="navigation" class="navbar_menu w-nav-menu">
                             <a href="/" class="navbar_link w-inline-block"><div data-i18n="nav.home" data-i18n="nav.home" data-i18n="nav.home">Home</div>
                             </a>
-                            <a href="/about" class="navbar_link w-inline-block"><div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
-                            </a>
-                            <a href="/services" aria-current="page" class="navbar_link w-inline-block w--current"><div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                            </a>
+                            <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                             <a href="/gallery" class="navbar_link w-inline-block"><div data-i18n="nav.gallery" data-i18n="nav.gallery" data-i18n="nav.gallery">Gallery</div>
                             </a>
                             <a href="/blog" class="navbar_link w-inline-block"><div data-i18n="nav.blog" data-i18n="nav.blog" data-i18n="nav.blog">Blog</div>
@@ -542,10 +583,53 @@
                                             <a href="/" data-animation="text-flip" class="navbar-dropdown_link w-inline-block">
                                                 <div data-i18n="nav.home" data-i18n="nav.home">Home</div>
                                             </a>
-                                            <a href="/about" data-animation="text-flip" class="navbar-dropdown_link w-inline-block"><div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
-                                            </a>
-                                            <a href="/services" data-animation="text-flip" aria-current="page" class="navbar-dropdown_link w-inline-block w--current"><div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                                            </a>
+                                            <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                                             <a href="/blog" data-animation="text-flip" class="navbar-dropdown_link w-inline-block"><div data-i18n="nav.blogs">Blogs</div>
                                             </a>
                                         </div>
@@ -630,7 +714,7 @@
                             <div class="section_component">
                                 <div class="service-hero_content" style="text-align: center; max-width: 840px; margin: 0 auto;">
                                     <div class="section-tag_wrap" style="justify-content: center; margin-bottom: 20px;">
-                                        <div class="section_tag" style="background: #ccfbf1; border: 1px solid #99f6e4; color: #0f766e;">
+                                        <div class="section_tag" >
                                             <div class="icon_wrap is-small">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12" fill="none">
                                                     <path d="M6 0C6.4 3.2 8.8 5.6 12 6C8.8 6.4 6.4 8.8 6 12C5.6 8.8 3.2 6.4 0 6C3.2 5.6 5.6 3.2 6 0Z" fill="currentColor"></path>
@@ -640,9 +724,9 @@
                                         </div>
                                     </div>
                                     <h1 class="heading-hero-title">
-                                        Dental Care, <span style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Designed Around You</span>
+                                        Dental Care, <span style="color: #7ee8df; -webkit-text-fill-color: #7ee8df;">Designed Around You</span>
                                     </h1>
-                                    <p class="service-hero_para" style="font-size: 18px; line-height: 1.6; color: #475569; margin-bottom: 36px; max-width: 680px; margin-left: auto; margin-right: auto;">
+                                    <p class="service-hero_para" style="font-size: 18px; line-height: 1.6; margin-bottom: 36px; max-width: 680px; margin-left: auto; margin-right: auto;">
                                         From routine checkups to advanced restorative and cosmetic dentistry, our services are designed to help you maintain a healthy, confident smile.
                                     </p>
                                     <div class="button-container" style="justify-content: center;">
@@ -688,16 +772,17 @@
 
                             <!-- Category Navigation Filter Pills -->
                             <div class="category-nav-scroll" role="tablist" id="category-pills-container">
-                                <button type="button" class="category-pill-light is-active" data-category="all" role="tab" aria-selected="true">All Services (37)</button>
+                                <button type="button" class="category-pill-light is-active" data-category="all" role="tab" aria-selected="true">All Services (45)</button>
+                                <button type="button" class="category-pill-light" data-category="orthodontics" role="tab" aria-selected="false">Orthodontics</button>
                                 <button type="button" class="category-pill-light" data-category="endodontics" role="tab" aria-selected="false">Endodontics</button>
-                                <button type="button" class="category-pill-light" data-category="preventive" role="tab" aria-selected="false">Preventive &amp; General</button>
-                                <button type="button" class="category-pill-light" data-category="cosmetic" role="tab" aria-selected="false">Cosmetic Dentistry</button>
-                                <button type="button" class="category-pill-light" data-category="restorative" role="tab" aria-selected="false">Restorative Dentistry</button>
+                                <button type="button" class="category-pill-light" data-category="preventive-general" role="tab" aria-selected="false">Preventive &amp; General</button>
+                                <button type="button" class="category-pill-light" data-category="cosmetic-dentistry" role="tab" aria-selected="false">Cosmetic Dentistry</button>
+                                <button type="button" class="category-pill-light" data-category="restorative-dentistry" role="tab" aria-selected="false">Restorative Dentistry</button>
                                 <button type="button" class="category-pill-light" data-category="oral-surgery" role="tab" aria-selected="false">Oral Surgery</button>
-                                <button type="button" class="category-pill-light" data-category="periodontics" role="tab" aria-selected="false">Gum Care / Periodontics</button>
-                                <button type="button" class="category-pill-light" data-category="advanced" role="tab" aria-selected="false">Advanced Dentistry</button>
-                                <button type="button" class="category-pill-light" data-category="pediatric" role="tab" aria-selected="false">Pediatric Care</button>
-                                <button type="button" class="category-pill-light" data-category="emergency" role="tab" aria-selected="false">Emergency Care</button>
+                                <button type="button" class="category-pill-light" data-category="gum-care-periodontics" role="tab" aria-selected="false">Gum Care / Periodontics</button>
+                                <button type="button" class="category-pill-light" data-category="advanced-dentistry" role="tab" aria-selected="false">Advanced Dentistry</button>
+                                <button type="button" class="category-pill-light" data-category="pediatric-care" role="tab" aria-selected="false">Pediatric Care</button>
+                                <button type="button" class="category-pill-light" data-category="emergency-care" role="tab" aria-selected="false">Emergency Care</button>
                             </div>
                         </div>
 
@@ -793,11 +878,53 @@
                                         <a href="/" class="footer-menu_link w-inline-block">
                                             <div data-i18n="nav.home" data-i18n="nav.home">Home</div>
                                         </a>
-                                        <a href="/about" class="footer-menu_link w-inline-block">
-                                            <div>About</div>
-                                        </a>
-                                        <a href="/services" aria-current="page" class="footer-menu_link w-inline-block w--current"><div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                                        </a>
+                                        <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                                         <a href="/blog" class="footer-menu_link w-inline-block">
                                             <div>Blogs</div>
                                         </a>
@@ -877,28 +1004,97 @@
         <script src="assets/js/gsap.min.js" type="text/javascript"></script>
         <script src="assets/js/SplitText.min.js" type="text/javascript"></script>
         <script src="assets/js/ScrollTrigger.min.js" type="text/javascript"></script>
+        <script src="assets/js/whatsapp-config.js"></script>
         <script src="assets/js/booking-system.js"></script>
+    <script src="assets/js/navbar-dropdowns.js"></script>
 
         <!-- ===== SERVICES DATA & REAL-TIME FILTER ENGINE ===== -->
         <script>
             (function() {
                 'use strict';
 
-                // Category Definitions with i18n keys
+                // Category Definitions with i18n keys and exact section anchor IDs
                 const categories = [
+                    { id: 'orthodontics', name: 'Orthodontics', key: 'services.cat.orthodontics' },
                     { id: 'endodontics', name: 'Endodontics', key: 'services.cat.endodontics' },
-                    { id: 'preventive', name: 'Preventive & General Dentistry', key: 'services.cat.preventive' },
-                    { id: 'cosmetic', name: 'Cosmetic Dentistry', key: 'services.cat.cosmetic' },
-                    { id: 'restorative', name: 'Restorative Dentistry', key: 'services.cat.restorative' },
+                    { id: 'preventive-general', name: 'Preventive & General Dentistry', key: 'services.cat.preventive' },
+                    { id: 'cosmetic-dentistry', name: 'Cosmetic Dentistry', key: 'services.cat.cosmetic' },
+                    { id: 'restorative-dentistry', name: 'Restorative Dentistry', key: 'services.cat.restorative' },
                     { id: 'oral-surgery', name: 'Oral Surgery', key: 'services.cat.surgery' },
-                    { id: 'periodontics', name: 'Periodontics / Gum Care', key: 'services.cat.periodontics' },
-                    { id: 'advanced', name: 'Advanced Dentistry', key: 'services.cat.advanced' },
-                    { id: 'pediatric', name: 'Pediatric Dentistry', key: 'services.cat.pediatric' },
-                    { id: 'emergency', name: 'Emergency Dental Care', key: 'services.cat.emergency' }
+                    { id: 'gum-care-periodontics', name: 'Periodontics / Gum Care', key: 'services.cat.periodontics' },
+                    { id: 'advanced-dentistry', name: 'Advanced Dentistry', key: 'services.cat.advanced' },
+                    { id: 'pediatric-care', name: 'Pediatric Dentistry', key: 'services.cat.pediatric' },
+                    { id: 'emergency-care', name: 'Emergency Dental Care', key: 'services.cat.emergency' }
                 ];
 
-                // Complete Approved Services List (All 37 Services with exact slugs and i18n keys)
+                // Complete Approved Services List (All Services with exact slugs and i18n keys)
                 const servicesData = [
+                    // --- ORTHODONTICS ---
+                    {
+                        slug: "braces",
+                        key: "service.braces",
+                        name: "Braces",
+                        category: "orthodontics",
+                        description: "Comprehensive orthodontic braces to align teeth, correct bite alignment, and enhance long-term oral health.",
+                        image: "assets/img/gen_blog-image-1.jpg"
+                    },
+                    {
+                        slug: "metal-braces",
+                        key: "service.metalBraces",
+                        name: "Metal Braces",
+                        category: "orthodontics",
+                        description: "Durable, time-tested traditional metal braces providing precise alignment control for all types of conditions.",
+                        image: "assets/img/gen_blog-image-1.jpg"
+                    },
+                    {
+                        slug: "ceramic-braces",
+                        key: "service.ceramicBraces",
+                        name: "Ceramic Braces",
+                        category: "orthodontics",
+                        description: "Tooth-colored ceramic braces offering the alignment strength of traditional braces with a subtle appearance.",
+                        image: "assets/img/gen_service-thumbnail-image-2.jpg"
+                    },
+                    {
+                        slug: "clear-aligners",
+                        key: "service.clearAligners",
+                        name: "Clear Aligners",
+                        category: "orthodontics",
+                        description: "Custom transparent removable aligners designed to straighten teeth comfortably and discreetly without wires.",
+                        image: "assets/img/gen_blog-image-1.jpg"
+                    },
+                    {
+                        slug: "teeth-alignment",
+                        key: "service.teethAlignment",
+                        name: "Teeth Alignment",
+                        category: "orthodontics",
+                        description: "Targeted alignment therapies to improve arch symmetry, spacing, and structural positioning of teeth.",
+                        image: "assets/img/gen_service-thumbnail-image.jpg"
+                    },
+                    {
+                        slug: "bite-correction",
+                        key: "service.biteCorrection",
+                        name: "Bite Correction",
+                        category: "orthodontics",
+                        description: "Specialized orthodontic evaluation and treatment to correct overbites, underbites, crossbites, and open bites.",
+                        image: "assets/img/gen_story-image-3.jpg"
+                    },
+                    {
+                        slug: "crowding-and-spacing",
+                        key: "service.crowdingSpacing",
+                        name: "Crowding & Spacing Correction",
+                        category: "orthodontics",
+                        description: "Focused orthodontic treatment to resolve overlapping crowded teeth or close unwanted gaps for a uniform arch.",
+                        image: "assets/img/gen_our-story-image-2.jpg"
+                    },
+                    {
+                        slug: "orthodontic-consultation",
+                        key: "service.orthoConsultation",
+                        name: "Orthodontic Consultation",
+                        category: "orthodontics",
+                        description: "Comprehensive diagnostic evaluation, 3D imaging, and expert treatment planning with our specialist orthodontists.",
+                        image: "assets/img/gen_home-value-image.jpg"
+                    },
+
                     // --- ENDODONTICS ---
                     {
                         slug: "root-canal-treatment",
@@ -938,7 +1134,7 @@
                         slug: "teeth-cleaning",
                         key: "service.teethCleaning",
                         name: "Teeth Cleaning",
-                        category: "preventive",
+                        category: "preventive-general",
                         description: "Professional cleaning that helps remove plaque, tartar, and surface buildup for healthier teeth and gums.",
                         image: "assets/img/gen_dentist-examining-patients-teeth-close-up_1.jpg"
                     },
@@ -946,7 +1142,7 @@
                         slug: "dental-checkups",
                         key: "service.checkups",
                         name: "Check-ups",
-                        category: "preventive",
+                        category: "preventive-general",
                         description: "Routine dental examinations designed to monitor oral health and identify concerns early.",
                         image: "assets/img/gen_home-value-image.jpg"
                     },
@@ -954,7 +1150,7 @@
                         slug: "fillings-and-sealants",
                         key: "service.fillings",
                         name: "Fillings & Sealants",
-                        category: "preventive",
+                        category: "preventive-general",
                         description: "Protective and restorative treatments that help repair teeth and protect vulnerable surfaces.",
                         image: "assets/img/69ddaeb6ae6fea2f56ab02f9_home-value-image-p-500.webp"
                     },
@@ -962,7 +1158,7 @@
                         slug: "fillings-and-sealants",
                         key: "service.fillings",
                         name: "Fillings",
-                        category: "preventive",
+                        category: "preventive-general",
                         description: "Restorative treatment used to repair teeth affected by decay or minor damage.",
                         image: "assets/img/gen_our-story-image-1.jpg"
                     },
@@ -970,7 +1166,7 @@
                         slug: "preventive-care",
                         key: "service.preventiveCare",
                         name: "Preventive Care",
-                        category: "preventive",
+                        category: "preventive-general",
                         description: "Proactive dental care focused on maintaining oral health and reducing the risk of future problems.",
                         image: "assets/img/gen_about-hero-image.jpg"
                     },
@@ -978,7 +1174,7 @@
                         slug: "digital-xrays",
                         key: "service.digitalXray",
                         name: "X-Ray",
-                        category: "preventive",
+                        category: "preventive-general",
                         description: "Dental imaging used to help evaluate areas that may not be visible during a routine examination.",
                         image: "assets/img/gen_our-story-image-3.jpg"
                     },
@@ -988,7 +1184,7 @@
                         slug: "teeth-whitening",
                         key: "service.teethWhitening",
                         name: "Teeth Whitening",
-                        category: "cosmetic",
+                        category: "cosmetic-dentistry",
                         description: "A cosmetic treatment designed to brighten teeth and improve the appearance of your smile.",
                         image: "assets/img/gen_service-thumbnail-image-2.jpg"
                     },
@@ -996,7 +1192,7 @@
                         slug: "teeth-whitening",
                         key: "service.teethWhitening",
                         name: "Teeth Whitening & Smile Makeovers",
-                        category: "cosmetic",
+                        category: "cosmetic-dentistry",
                         description: "Personalized cosmetic care combining whitening and smile-enhancing treatments.",
                         image: "assets/img/69dde4c6be5aa13c0c8ac8bd_service-thumbnail-image-2-p-500.jpg"
                     },
@@ -1004,7 +1200,7 @@
                         slug: "teeth-reshaping",
                         key: "service.teethReshaping",
                         name: "Teeth Reshaping",
-                        category: "cosmetic",
+                        category: "cosmetic-dentistry",
                         description: "Carefully reshaping selected teeth to improve their appearance, symmetry, or contours.",
                         image: "assets/img/gen_our-story-image-2.jpg"
                     },
@@ -1012,7 +1208,7 @@
                         slug: "composite-bonding",
                         key: "service.bonding",
                         name: "Bonding",
-                        category: "cosmetic",
+                        category: "cosmetic-dentistry",
                         description: "A tooth-colored material can be applied to improve the shape or appearance of selected teeth.",
                         image: "assets/img/gen_story-image-1.jpg"
                     },
@@ -1020,7 +1216,7 @@
                         slug: "porcelain-veneers",
                         key: "service.veneers",
                         name: "Veneers",
-                        category: "cosmetic",
+                        category: "cosmetic-dentistry",
                         description: "Thin custom-made coverings designed to improve the appearance of selected teeth.",
                         image: "assets/img/gen_story-image-2.jpg"
                     },
@@ -1028,7 +1224,7 @@
                         slug: "porcelain-veneers",
                         key: "service.cosmeticProcedures",
                         name: "Cosmetic Procedures",
-                        category: "cosmetic",
+                        category: "cosmetic-dentistry",
                         description: "Smile-focused treatments designed to improve the appearance of teeth while supporting natural-looking results.",
                         image: "assets/img/gen_story-image-3.jpg"
                     },
@@ -1038,7 +1234,7 @@
                         slug: "dental-implants",
                         key: "service.dentalImplants",
                         name: "Dental Implants",
-                        category: "restorative",
+                        category: "restorative-dentistry",
                         description: "A long-term tooth replacement option designed to restore function and the appearance of missing teeth.",
                         image: "assets/img/gen_story-image-4.jpg"
                     },
@@ -1046,7 +1242,7 @@
                         slug: "dental-implants",
                         key: "service.dentalImplants",
                         name: "Dental Implants & Crowns",
-                        category: "restorative",
+                        category: "restorative-dentistry",
                         description: "A combined restorative approach using implants and crowns to replace and restore missing teeth.",
                         image: "assets/img/gen_story-image-5.jpg"
                     },
@@ -1054,7 +1250,7 @@
                         slug: "dentures-and-bridges",
                         key: "service.denturesBridges",
                         name: "Dentures & Bridges",
-                        category: "restorative",
+                        category: "restorative-dentistry",
                         description: "Restorative solutions designed to replace missing teeth and support everyday function.",
                         image: "assets/img/gen_our-story-image-4.jpg"
                     },
@@ -1062,7 +1258,7 @@
                         slug: "full-mouth-rehabilitation",
                         key: "service.fullMouthRehab",
                         name: "Full Mouth Rehabilitation & Dentures",
-                        category: "restorative",
+                        category: "restorative-dentistry",
                         description: "Comprehensive restorative care designed around the needs of patients requiring extensive dental rehabilitation.",
                         image: "assets/img/gen_our-story-image-5.jpg"
                     },
@@ -1106,7 +1302,7 @@
                         slug: "gum-disease-treatment",
                         key: "service.gumTreatment",
                         name: "Gum Treatment",
-                        category: "periodontics",
+                        category: "gum-care-periodontics",
                         description: "Care focused on improving gum health and managing periodontal concerns.",
                         image: "assets/img/69e04a223f433596d3d0395e_job-image-5-p-500.webp"
                     },
@@ -1114,7 +1310,7 @@
                         slug: "gum-recession-treatment",
                         key: "service.gumGrafting",
                         name: "Gum Grafting",
-                        category: "periodontics",
+                        category: "gum-care-periodontics",
                         description: "A periodontal procedure designed to address areas of gum recession and support gum health.",
                         image: "assets/img/69e04a22189ced06cbe03360_job-image-3-p-500.webp"
                     },
@@ -1122,7 +1318,7 @@
                         slug: "non-surgical-periodontal-therapy",
                         key: "service.nonSurgicalPerio",
                         name: "Non-Surgical Periodontal Therapy",
-                        category: "periodontics",
+                        category: "gum-care-periodontics",
                         description: "Non-surgical treatment designed to manage gum disease and improve periodontal health.",
                         image: "assets/img/69e04a22dc5ccb1bff991531_job-image-4-p-500.webp"
                     },
@@ -1130,7 +1326,7 @@
                         slug: "osseous-surgery",
                         key: "service.pocketReduction",
                         name: "Periodontal Pocket Reduction",
-                        category: "periodontics",
+                        category: "gum-care-periodontics",
                         description: "Treatment focused on reducing deep periodontal pockets and supporting healthier gums.",
                         image: "assets/img/69e1254bc12dfcfe31c2c09e_location-image-1-p-500.webp"
                     },
@@ -1138,7 +1334,7 @@
                         slug: "scaling-and-root-planing",
                         key: "service.scalingRootPlaning",
                         name: "Scaling & Root Planing",
-                        category: "periodontics",
+                        category: "gum-care-periodontics",
                         description: "Deep cleaning treatment designed to remove deposits around the teeth and smooth affected root surfaces.",
                         image: "assets/img/69e1254b5bfb8519af35c271_location-image-2-p-500.webp"
                     },
@@ -1148,7 +1344,7 @@
                         slug: "lanap-laser-gum-treatment",
                         key: "service.laserDentistry",
                         name: "Laser Dentistry",
-                        category: "advanced",
+                        category: "advanced-dentistry",
                         description: "Modern dental techniques using laser technology for selected procedures and treatments.",
                         image: "assets/img/69e1254a118093ebd39a1ec4_location-image-3-p-500.webp"
                     },
@@ -1156,7 +1352,7 @@
                         slug: "clear-and-invisible-braces",
                         key: "service.clearBraces",
                         name: "Clear & Invisible Braces",
-                        category: "advanced",
+                        category: "advanced-dentistry",
                         description: "Discreet orthodontic options designed to gradually improve tooth alignment.",
                         image: "assets/img/gen_blog-image-1.jpg"
                     },
@@ -1164,7 +1360,7 @@
                         slug: "dental-anxiety-comfort",
                         key: "service.sedation",
                         name: "Sedation",
-                        category: "advanced",
+                        category: "advanced-dentistry",
                         description: "Sedation options that may help suitable patients feel more relaxed during selected dental procedures.",
                         image: "assets/img/gen_blog-image-2.jpg"
                     },
@@ -1174,7 +1370,7 @@
                         slug: "pediatric-dental-care",
                         key: "service.pediatricCare",
                         name: "Pediatric Dental Care / Paediatrics",
-                        category: "pediatric",
+                        category: "pediatric-care",
                         description: "Dental care tailored to the oral health needs of children at different stages of development.",
                         image: "assets/img/gen_blog-image-3.jpg"
                     },
@@ -1182,7 +1378,7 @@
                         slug: "mouth-guards",
                         key: "service.mouthGuards",
                         name: "Mouth Guards",
-                        category: "pediatric",
+                        category: "pediatric-care",
                         description: "Protective dental appliances designed to help safeguard teeth during activities such as sports or nighttime grinding.",
                         image: "assets/img/gen_blog-image-4.jpg"
                     },
@@ -1192,7 +1388,7 @@
                         slug: "emergency-dental-care",
                         key: "service.emergencyCare",
                         name: "Emergency Care",
-                        category: "emergency",
+                        category: "emergency-care",
                         description: "Prompt dental attention for urgent problems such as severe pain, injury, or unexpected dental concerns.",
                         image: "assets/img/gen_hero-2.jpg"
                     },
@@ -1200,7 +1396,7 @@
                         slug: "pain-management",
                         key: "service.painManagement",
                         name: "Pain Management",
-                        category: "emergency",
+                        category: "emergency-care",
                         description: "Approaches focused on helping patients manage dental discomfort before, during, and after treatment.",
                         image: "assets/img/gen_hero-3.jpg"
                     },
@@ -1208,7 +1404,7 @@
                         slug: "toothache-relief",
                         key: "service.toothacheRelief",
                         name: "Toothache Relief",
-                        category: "emergency",
+                        category: "emergency-care",
                         description: "Assessment and appropriate treatment aimed at identifying and addressing the cause of tooth pain.",
                         image: "assets/img/gen_hero-4.jpg"
                     }
@@ -1267,7 +1463,7 @@
                     pillsContainerEl.querySelectorAll('.category-pill-light').forEach(btn => {
                         const catId = btn.getAttribute('data-category');
                         if (catId === 'all') {
-                            btn.textContent = getLocalizedText('services.allTab', 'All Services (37)');
+                            btn.textContent = getLocalizedText('services.allTab', `All Services (${servicesData.length})`);
                         } else {
                             const catObj = categories.find(c => c.id === catId);
                             if (catObj) {
@@ -1311,7 +1507,7 @@
                             if (catItems.length > 0) {
                                 const catTitle = getLocalizedText(cat.key, cat.name);
                                 html += `
-                                    <div class="service-category-group">
+                                    <div class="service-category-group" id="${cat.id}">
                                         <div class="service-category-header-light">
                                             <h2 class="service-category-title-light">${catTitle}</h2>
                                             <span class="service-category-badge-light">${catItems.length}</span>
@@ -1327,7 +1523,7 @@
                         const catObj = categories.find(c => c.id === currentCategory);
                         const headerTitle = query ? `${getLocalizedText('common.search', 'Search')}: "${searchQuery}"` : (catObj ? getLocalizedText(catObj.key, catObj.name) : 'Filtered Services');
                         html += `
-                            <div class="service-category-group">
+                            <div class="service-category-group" id="${catObj ? catObj.id : ''}">
                                 <div class="service-category-header-light">
                                     <h2 class="service-category-title-light">${headerTitle}</h2>
                                     <span class="service-category-badge-light">${filtered.length}</span>
@@ -1388,6 +1584,23 @@
 
                 // Initial Render
                 renderServices();
+
+                // Hash Anchor Navigation Handler
+                function handleHashNavigation() {
+                    const hash = window.location.hash.replace('#', '');
+                    if (!hash) return;
+
+                    const targetEl = document.getElementById(hash);
+                    if (targetEl) {
+                        setTimeout(function() {
+                            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 150);
+                    }
+                }
+
+                window.addEventListener('DOMContentLoaded', handleHashNavigation);
+                window.addEventListener('hashchange', handleHashNavigation);
+                setTimeout(handleHashNavigation, 300);
             })();
         </script>
     </body>

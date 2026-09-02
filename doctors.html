@@ -78,9 +78,12 @@
         }
 
         .section_hero {
-            background: radial-gradient(circle at 50% 15%, #083b42 0%, #021417 75%) !important;
+            background-image: linear-gradient(180deg, rgba(2, 20, 23, 0.72) 0%, rgba(2, 20, 23, 0.88) 100%), url('assets/img/gen_team-bg.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
             padding-top: 140px;
-            padding-bottom: 50px;
+            padding-bottom: 60px;
             position: relative;
         }
 
@@ -289,15 +292,53 @@
                         <a href="/" class="navbar_link w-inline-block">
                             <div data-i18n="nav.home" data-i18n="nav.home" data-i18n="nav.home">Home</div>
                         </a>
-                        <a href="/about" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
-                        </a>
-                        <a href="/doctors" aria-current="page" class="navbar_link w-inline-block w--current">
-                            <div data-i18n="nav.meetOurDoctors">Doctors</div>
-                        </a>
-                        <a href="/services" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                        </a>
+                        <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                         <a href="/gallery" class="navbar_link w-inline-block">
                             <div data-i18n="nav.gallery" data-i18n="nav.gallery" data-i18n="nav.gallery">Gallery</div>
                         </a>
@@ -325,15 +366,53 @@
                                         <a href="/" data-animation="text-flip" class="navbar-dropdown_link w-inline-block">
                                             <div data-i18n="nav.home" data-i18n="nav.home">Home</div>
                                         </a>
-                                        <a href="/about" data-animation="text-flip" class="navbar-dropdown_link w-inline-block">
-                                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
-                                        </a>
-                                        <a href="/doctors" data-animation="text-flip" aria-current="page" class="navbar-dropdown_link w-inline-block w--current">
-                                            <div data-i18n="nav.meetOurDoctors">Doctors</div>
-                                        </a>
-                                        <a href="/services" data-animation="text-flip" class="navbar-dropdown_link w-inline-block">
-                                            <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                                        </a>
+                                        <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                                         <a href="/blog" data-animation="text-flip" class="navbar-dropdown_link w-inline-block">
                                             <div data-i18n="nav.blogs">Blogs</div>
                                         </a>
@@ -419,13 +498,15 @@
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
                                 <span class="doctor-card_featured-badge">★ Chief Surgeon</span>
-                                <img src="assets/img/dr-suhail.webp" alt="Dr. Suhail A. Syed - Chief Dental Surgeon &amp; Implantologist" class="doctor-card_image" loading="eager" />
+                                <a href="/#doctor-profile" title="View Dr. Suhail A. Syed Profile" style="display:block;width:100%;height:100%;">
+                                    <img src="assets/img/dr-suhail.webp" alt="Dr. Suhail A. Syed - Chief Dental Surgeon &amp; Implantologist" class="doctor-card_image" loading="eager" />
+                                </a>
                             </div>
                             <div class="doctor-card_content">
                                 <div>
-                                    <h2 class="doctor-card_name">Dr. Suhail A. Syed</h2>
-                                    <div class="doctor-card_title">Chief Dental Surgeon &amp; Implantologist</div>
-                                    <div class="doctor-card_qualification">BDS, MDS - Periodontics, MS (Strategic Implantology) • 20+ Years Exp.</div>
+                                    <h2 class="doctor-card_name"><a href="/#doctor-profile" style="color:inherit;text-decoration:none;" title="View Dr. Suhail A. Syed Profile">Dr. Suhail A. Syed</a></h2>
+                                    <div class="doctor-card_title">Founder &amp; Lead Dentist</div>
+                                    <div class="doctor-card_qualification">BDS, MDS – Periodontics · Fellow AAID, USA • 20+ Years Exp.</div>
                                     <div class="doctor-card_tags">
                                         <span class="doctor-card_tag">Implantology</span>
                                         <span class="doctor-card_tag">Periodontics</span>
@@ -439,7 +520,30 @@
                             </div>
                         </div>
 
-                        <!-- Doctor 2: Dr. Bilal Ahmed Asaq (Orthodontist) -->
+                        <!-- Doctor 2: Dr. Mousa Jeelani (General Dentist & Clinic Manager) -->
+                        <div class="doctor-card">
+                            <div class="doctor-card_image-wrap">
+                                <img src="assets/img/dr-mousa-jeelani.webp" alt="Dr. Mousa Jeelani - General Dentist &amp; Clinic Manager" class="doctor-card_image" loading="lazy" onerror="this.src='assets/img/dr-mousa-jeelani.jpg'" />
+                            </div>
+                            <div class="doctor-card_content">
+                                <div>
+                                    <h2 class="doctor-card_name">Dr. Mousa Jeelani</h2>
+                                    <div class="doctor-card_title">General Dentist &amp; Clinic Manager</div>
+                                    <div class="doctor-card_qualification">BDS • 15 Years Exp.</div>
+                                    <div class="doctor-card_tags">
+                                        <span class="doctor-card_tag">Smile Design</span>
+                                        <span class="doctor-card_tag">Aesthetic Dentistry</span>
+                                        <span class="doctor-card_tag">Preventive Care</span>
+                                    </div>
+                                </div>
+                                <a href="#book" class="doctor-card_btn">
+                                    <span>Book Consultation</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Doctor 3: Dr. Bilal Ahmed Asaq (Orthodontist) -->
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
                                 <img src="assets/img/doctors/doctor-04.webp" alt="Dr. Bilal Ahmed Asaq - Consultant Orthodontist &amp; Dentofacial Orthopedics" class="doctor-card_image" loading="lazy" />
@@ -515,9 +619,9 @@
                             </div>
                             <div class="doctor-card_content">
                                 <div>
-                                    <h2 class="doctor-card_name">Consultant Dental Specialist</h2>
-                                    <div class="doctor-card_title">Aesthetic Dentistry &amp; Surgery</div>
-                                    <div class="doctor-card_qualification">BDS, MDS • 8+ Years Exp.</div>
+                                    <h2 class="doctor-card_name">Dr. Lipika</h2>
+                                    <div class="doctor-card_title">Consultant Dental Specialist</div>
+                                    <div class="doctor-card_qualification">BDS, MDS • Aesthetic Dentistry &amp; Surgery • 8+ Years Exp.</div>
                                     <div class="doctor-card_tags">
                                         <span class="doctor-card_tag">Aesthetic Dentistry</span>
                                         <span class="doctor-card_tag">Painless Extraction</span>
@@ -628,15 +732,53 @@
                                     <a href="/" class="footer-menu_link w-inline-block">
                                         <div data-i18n="nav.home">Home</div>
                                     </a>
-                                    <a href="/about" class="footer-menu_link w-inline-block">
-                                        <div data-i18n="nav.about">About Us</div>
-                                    </a>
-                                    <a href="/doctors" aria-current="page" class="footer-menu_link w-inline-block w--current">
-                                        <div data-i18n="nav.meetOurDoctors">Doctors</div>
-                                    </a>
-                                    <a href="/services" class="footer-menu_link w-inline-block">
-                                        <div data-i18n="nav.services">Services</div>
-                                    </a>
+                                    <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                                     <a href="/gallery" class="footer-menu_link w-inline-block">
                                         <div data-i18n="nav.gallery">Gallery</div>
                                     </a>
@@ -717,7 +859,9 @@
     <!-- Scripts -->
     <script src="assets/js/doctors-data.js"></script>
     <script src="assets/js/accordions.js"></script>
+    <script src="assets/js/whatsapp-config.js"></script>
     <script src="assets/js/booking-system.js"></script>
+    <script src="assets/js/navbar-dropdowns.js"></script>
     
     <!-- Centralized Data Hydration Check -->
     <script>

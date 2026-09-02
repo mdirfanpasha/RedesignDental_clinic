@@ -231,7 +231,7 @@ module.exports = {
   "gallery.filter.all": "All Photos (52)",
   "gallery.filter.happy": "Happy Patients",
   "gallery.filter.smiles": "Patient Smiles",
-  "gallery.filter.care": "Patient Care",
+  "gallery.filter.care": "Surgical Pics",
   "gallery.filter.clinic": "Clinic Moments",
   "gallery.lightbox.next": "Next Image",
   "gallery.lightbox.prev": "Previous Image",

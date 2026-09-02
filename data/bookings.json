@@ -1,5 +1,36 @@
 [
   {
+    "referenceId": "RDC-APPT-20260902-AZZP",
+    "type": "appointment",
+    "name": "John Doe",
+    "phone": "9876543210",
+    "email": "",
+    "reason": "Implants",
+    "customMsg": "",
+    "date": "2026-09-02",
+    "time": "10:00 AM IST",
+    "ip": "::1",
+    "whatsappStatus": "failed",
+    "createdAt": "2026-09-02T14:59:47.949Z",
+    "createdAtIST": "Wednesday, 2 September 2026 at 8:29:47 pm IST",
+    "whatsappResults": [
+      {
+        "recipient": "918639055447",
+        "template": {
+          "success": false,
+          "status": "failed",
+          "error": "Authentication Error"
+        },
+        "details": {
+          "success": false,
+          "status": "failed",
+          "error": "Authentication Error"
+        },
+        "success": false
+      }
+    ]
+  },
+  {
     "referenceId": "RDC-ENQ-20260901-6FXO",
     "type": "contact",
     "name": "Jane Doe",

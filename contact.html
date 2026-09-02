@@ -174,12 +174,53 @@
                         <a href="/" class="navbar_link w-inline-block">
                             <div data-i18n="nav.home" data-i18n="nav.home" data-i18n="nav.home">Home</div>
                         </a>
-                        <a href="/about" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
-                        </a>
-                        <a href="/services" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                        </a>
+                        <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                         <a href="/gallery" class="navbar_link w-inline-block">
                             <div data-i18n="nav.gallery" data-i18n="nav.gallery" data-i18n="nav.gallery">Gallery</div>
                         </a>
@@ -208,14 +249,53 @@
                                             class="navbar-dropdown_link w-inline-block">
                                             <div data-i18n="nav.home" data-i18n="nav.home">Home</div>
                                         </a>
-                                        <a href="/about" data-animation="text-flip"
-                                            class="navbar-dropdown_link w-inline-block">
-                                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
-                                        </a>
-                                        <a href="/services" data-animation="text-flip"
-                                            class="navbar-dropdown_link w-inline-block">
-                                            <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                                        </a>
+                                        <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                                         <a href="/blog" data-animation="text-flip"
                                             class="navbar-dropdown_link w-inline-block">
                                             <div data-i18n="nav.blogs">Blogs</div>
@@ -765,12 +845,53 @@
                                     <a href="/" class="footer-menu_link w-inline-block">
                                         <div data-i18n="nav.home" data-i18n="nav.home">Home</div>
                                     </a>
-                                    <a href="/about" class="footer-menu_link w-inline-block">
-                                        <div>About</div>
-                                    </a>
-                                    <a href="/services" class="footer-menu_link w-inline-block">
-                                        <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                                    </a>
+                                    <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                                     <a href="/gallery" class="footer-menu_link w-inline-block">
                                         <div data-i18n="nav.gallery" data-i18n="nav.gallery" data-i18n="nav.gallery">Gallery</div>
                                     </a>
@@ -856,7 +977,9 @@
     <script src="assets/js/webflow.schunk.5e71080783712679.js" type="text/javascript"></script>
     <script src="assets/js/webflow.14a61ef3.f163d061e5e109b2.js" type="text/javascript"></script>
     <script src="assets/js/lumora.js?v=20260614f" type="text/javascript"></script>
+    <script src="assets/js/whatsapp-config.js" type="text/javascript"></script>
     <script src="assets/js/booking-system.js" type="text/javascript"></script>
+    <script src="/assets/js/navbar-dropdowns.js"></script>
 </body>
 
 </html>

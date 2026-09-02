@@ -14,6 +14,289 @@
 
   const services = [
     // ==========================================
+    // 0. ORTHODONTICS
+    // ==========================================
+    {
+      slug: 'braces',
+      aliases: ['orthodontic-braces', 'teeth-braces'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Teeth Alignment & Corrective Care',
+      title: 'Braces',
+      heroTitle: 'Orthodontic Braces',
+      heroSubtitle: 'Comprehensive orthodontic braces to align teeth, correct bite alignment, and enhance long-term oral health and aesthetics.',
+      image: 'assets/img/gen_blog-image-1.jpg',
+      overview: `Orthodontic braces are effective dental appliances designed to move teeth gradually into proper alignment. Whether correcting crowding, spacing, or bite irregularities, braces improve chewing efficiency and overall oral health.
+
+Our orthodontic specialists conduct thorough evaluations using 3D digital imaging to customize treatment plans tailored to each patient's age, anatomical needs, and lifestyle preferences.`,
+      whoMayBenefit: [
+        'Crooked or misaligned teeth',
+        'Crowded or overlapping teeth',
+        'Noticeable gaps or spacing between teeth',
+        'Overbite, underbite, crossbite, or open bite',
+        'Difficulty chewing comfortably due to tooth alignment',
+        'Desire for a balanced, functional, and aligned smile'
+      ],
+      benefits: [
+        { title: 'Improved Alignment', desc: 'Gradually guides teeth into optimal positions for enhanced symmetry and appearance.' },
+        { title: 'Bite Correction', desc: 'Helps align upper and lower arches for balanced biting and chewing function.' },
+        { title: 'Easier Cleaning', desc: 'Properly aligned teeth are easier to brush and floss, reducing plaque accumulation.' },
+        { title: 'Long-Term Stability', desc: 'Stabilizes dental arches to prevent irregular enamel wear over time.' },
+        { title: 'Customized Options', desc: 'Available in traditional metal, aesthetic tooth-colored ceramic, and clear aligners.' },
+        { title: 'Enhanced Confidence', desc: 'Delivers lasting functional and aesthetic improvements for a healthy smile.' }
+      ],
+      process: [
+        { step: '01', title: 'Orthodontic Evaluation', desc: 'Digital X-rays, intraoral scans, and clinical examination to assess tooth positioning and bite alignment.' },
+        { step: '02', title: 'Personalized Treatment Plan', desc: 'Your orthodontist designs a precise roadmap outlining expected duration and appliance choices.' },
+        { step: '03', title: 'Appliance Placement', desc: 'Brackets are carefully bonded to teeth and connected with flexible archwires.' },
+        { step: '04', title: 'Periodic Adjustments', desc: 'Regular check-ups every 4-6 weeks to adjust wire tension and monitor progress.' },
+        { step: '05', title: 'Debonding & Retention', desc: 'Appliances are safely removed, followed by custom retainers to maintain aligned positions.' }
+      ],
+      technology: [
+        { title: '3D Digital Intraoral Scanning', desc: 'Precision optical scans replacing uncomfortable impression materials.' },
+        { title: 'Panoramic & Cephalometric Imaging', desc: 'Detailed bone and jaw alignment analysis for millimeter-accurate planning.' }
+      ],
+      faqs: [
+        { q: 'How long does treatment with braces take?', a: 'Treatment duration typically ranges from 12 to 24 months, depending on the complexity of alignment needs.' },
+        { q: 'Are braces suitable for adults?', a: 'Yes! Orthodontic treatment is effective for children, teenagers, and adults of all ages.' }
+      ]
+    },
+    {
+      slug: 'metal-braces',
+      aliases: ['traditional-braces'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Proven Orthodontic Alignment',
+      title: 'Metal Braces',
+      heroTitle: 'Metal Braces',
+      heroSubtitle: 'Durable, time-tested traditional metal braces providing precise alignment control for all types of orthodontic conditions.',
+      image: 'assets/img/gen_blog-image-1.jpg',
+      overview: `Traditional metal braces remain one of the most reliable and efficient methods for correcting complex orthodontic alignment issues. Made from high-grade stainless steel, modern metal braces are smaller, sleeker, and more comfortable than ever.
+
+They apply gentle, continuous pressure to guide teeth into position, offering exceptional control for severe bite issues, overcrowding, and rotation.`,
+      whoMayBenefit: [
+        'Complex overcrowding or severe tooth rotation',
+        'Significant bite misalignments',
+        'Patients seeking a durable, cost-effective alignment solution',
+        'Children and teens needing reliable orthodontic correction'
+      ],
+      benefits: [
+        { title: 'High Durability', desc: 'Strong stainless steel construction withstands daily chewing forces.' },
+        { title: 'Precise Tooth Control', desc: 'Provides orthodontists with maximum control over individual tooth movements.' },
+        { title: 'Effective for All Severities', desc: 'Handles complex orthodontic cases reliably.' },
+        { title: 'Customization Options', desc: 'Choice of colorful elastic bands for younger patients.' }
+      ],
+      process: [
+        { step: '01', title: 'Initial Consultation', desc: 'Comprehensive exam and digital imaging to map teeth and jaw alignment.' },
+        { step: '02', title: 'Bonding Brackets', desc: 'Metal brackets are bonded onto individual teeth with dental adhesive.' },
+        { step: '03', title: 'Archwire Placement', desc: 'Flexible archwires are placed and secured with elastomeric ties.' },
+        { step: '04', title: 'Progress Adjustments', desc: 'Routine visits every 4 weeks to adjust tension.' }
+      ],
+      technology: [
+        { title: 'High-Grade Medical Stainless Steel', desc: 'Corrosion-resistant biocompatible steel brackets.' },
+        { title: 'Low-Friction Archwires', desc: 'Smooth forces for improved patient comfort.' }
+      ],
+      faqs: [
+        { q: 'Do metal braces hurt?', a: 'Mild pressure or soreness is normal for 2-3 days after placement or adjustments, easily managed with soft foods and OTC pain relievers.' }
+      ]
+    },
+    {
+      slug: 'ceramic-braces',
+      aliases: ['clear-braces', 'tooth-colored-braces'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Discreet Tooth Alignment',
+      title: 'Ceramic Braces',
+      heroTitle: 'Ceramic Braces',
+      heroSubtitle: 'Tooth-colored ceramic braces offering the alignment strength of traditional braces with a subtle, natural appearance.',
+      image: 'assets/img/gen_service-thumbnail-image-2.jpg',
+      overview: `Ceramic braces utilize translucent or tooth-colored ceramic brackets that blend naturally with your teeth. They offer the same effective corrective force as metal braces while remaining significantly less noticeable.
+
+Ideal for adults and teenagers who desire a discreet treatment option without sacrificing the precision of fixed orthodontic appliances.`,
+      whoMayBenefit: [
+        'Adults and teens wanting discreet orthodontic treatment',
+        'Patients requiring fixed braces for moderate to complex alignment',
+        'Individuals conscious of aesthetics during professional or social activities'
+      ],
+      benefits: [
+        { title: 'Aesthetic & Subtle', desc: 'Blends with natural enamel color for a low-profile appearance.' },
+        { title: 'Stain Resistant', desc: 'High-quality ceramic material resists discoloration during treatment.' },
+        { title: 'Effective Movement', desc: 'Delivers full orthodontic force control similar to metal braces.' }
+      ],
+      process: [
+        { step: '01', title: 'Consultation & Scans', desc: 'Detailed 3D evaluation and shade matching for brackets.' },
+        { step: '02', title: 'Ceramic Bracket Bonding', desc: 'Translucent brackets are bonded to tooth surfaces.' },
+        { step: '03', title: 'Tooth-Colored Wire Placement', desc: 'Esthetic archwires are placed for minimal visibility.' }
+      ],
+      technology: [
+        { title: 'Translucent Polycrystalline Alumina', desc: 'Strong, stain-resistant ceramic bracket formulation.' }
+      ],
+      faqs: [
+        { q: 'Do ceramic braces stain?', a: 'The ceramic brackets themselves do not stain, though light-colored elastic bands should be replaced regularly during checkups.' }
+      ]
+    },
+    {
+      slug: 'clear-aligners',
+      aliases: ['invisible-aligners', 'invisalign-aligners'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Removable Clear Alignment',
+      title: 'Clear Aligners',
+      heroTitle: 'Clear Aligners',
+      heroSubtitle: 'Custom transparent removable aligners designed to straighten teeth comfortably and discreetly without wires or brackets.',
+      image: 'assets/img/gen_blog-image-1.jpg',
+      overview: `Clear aligners are a modern, virtually invisible alternative to traditional braces. Utilizing a series of custom-molded, BPA-free clear plastic trays, aligners apply gentle continuous pressure to shift teeth into their ideal positions.
+
+Because clear aligners are completely removable, patients can eat their favorite foods and maintain normal brushing and flossing routines with ease.`,
+      whoMayBenefit: [
+        'Mild to moderate teeth crowding or gaps',
+        'Adults seeking virtually invisible tooth straightening',
+        'Patients needing removable appliances for flexible dining and hygiene'
+      ],
+      benefits: [
+        { title: 'Virtually Invisible', desc: 'Transparent plastic trays are barely noticeable when worn.' },
+        { title: 'Removable Convenience', desc: 'Easily removed for eating, drinking, brushing, and flossing.' },
+        { title: 'No Metal Irritation', desc: 'Smooth medical-grade plastic minimizes cheek and gum soreness.' }
+      ],
+      process: [
+        { step: '01', title: '3D Digital Impression', desc: 'Precision optical scan creates a digital 3D model of your teeth.' },
+        { step: '02', title: 'Virtual Treatment Setup', desc: 'Computer simulation maps step-by-step tooth movements from start to finish.' },
+        { step: '03', title: 'Aligner Series Delivery', desc: 'Receive custom aligner trays to wear 20-22 hours daily, switching trays every 1-2 weeks.' }
+      ],
+      technology: [
+        { title: 'CAD/CAM Digital Aligner Fabrication', desc: 'Laser-cut thermoformed SmartTrack medical polymer.' }
+      ],
+      faqs: [
+        { q: 'How many hours a day must I wear aligners?', a: 'Aligners must be worn for 20 to 22 hours daily for optimal results.' }
+      ]
+    },
+    {
+      slug: 'teeth-alignment',
+      aliases: ['orthodontic-alignment'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Comprehensive Occlusal Alignment',
+      title: 'Teeth Alignment',
+      heroTitle: 'Teeth Alignment',
+      heroSubtitle: 'Targeted alignment therapies to improve arch symmetry, spacing, and structural positioning of teeth.',
+      image: 'assets/img/gen_service-thumbnail-image.jpg',
+      overview: `Teeth alignment treatments focus on placing improperly positioned teeth into harmonious alignment within the dental arch. Proper alignment not only enhances smile aesthetics, but also reduces excessive wear on enamel and lowers the risk of gum disease.`,
+      whoMayBenefit: [
+        'Crooked or rotated teeth',
+        'Asymmetrical dental arches',
+        'Uneven enamel wear caused by misaligned contact points'
+      ],
+      benefits: [
+        { title: 'Enhanced Aesthetics', desc: 'Creates a symmetrical, well-proportioned smile.' },
+        { title: 'Protects Enamel', desc: 'Reduces irregular friction and enamel chipping.' }
+      ],
+      process: [
+        { step: '01', title: 'Diagnostic Mapping', desc: 'Evaluation of arch form, tooth width, and jaw relationship.' },
+        { step: '02', title: 'Alignment Therapy', desc: 'Custom appliance application tailored to your goals.' }
+      ],
+      technology: [
+        { title: '3D Arch Analysis', desc: 'Digital measurement of inter-dental contacts and arch form.' }
+      ],
+      faqs: [
+        { q: 'Can alignment improve chewing?', a: 'Yes! Aligning teeth ensures even distribution of biting forces across all teeth.' }
+      ]
+    },
+    {
+      slug: 'bite-correction',
+      aliases: ['occlusion-correction'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Occlusal & Malocclusion Therapy',
+      title: 'Bite Correction',
+      heroTitle: 'Bite Correction',
+      heroSubtitle: 'Specialized orthodontic evaluation and treatment to correct overbites, underbites, crossbites, and open bites.',
+      image: 'assets/img/gen_story-image-3.jpg',
+      overview: `Bite correction addresses malocclusions—situations where the upper and lower teeth do not fit together properly when closing the jaw. Correcting your bite relieves excessive strain on temporomandibular joints (TMJ) and restores natural chewing harmony.`,
+      whoMayBenefit: [
+        'Overbite or deep bite (upper teeth excessively overlapping lower teeth)',
+        'Underbite (lower jaw sticking out forward)',
+        'Crossbite (upper teeth fitting inside lower teeth)',
+        'Open bite (front teeth not touching when back teeth meet)'
+      ],
+      benefits: [
+        { title: 'Relieves Jaw Strain', desc: 'Balances biting forces to protect TMJ joint function.' },
+        { title: 'Improves Speech & Chewing', desc: 'Helps resolve biting difficulties and phonetic impediments.' }
+      ],
+      process: [
+        { step: '01', title: 'Bite & TMJ Analysis', desc: 'Clinical evaluation of jaw movement and occlusal contact points.' },
+        { step: '02', title: 'Targeted Orthodontic Care', desc: 'Use of specialized elastics, appliances, or aligners to guide bite placement.' }
+      ],
+      technology: [
+        { title: 'Digital Occlusal Analysis', desc: 'Precision digital bite force mapping.' }
+      ],
+      faqs: [
+        { q: 'Why is bite correction important?', a: 'Uncorrected malocclusions can cause TMJ pain, headaches, uneven tooth wear, and gum recession.' }
+      ]
+    },
+    {
+      slug: 'crowding-and-spacing',
+      aliases: ['crowding-correction', 'spacing-correction'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Arch Space Management',
+      title: 'Crowding & Spacing Correction',
+      heroTitle: 'Crowding & Spacing Correction',
+      heroSubtitle: 'Focused orthodontic treatment to resolve overlapping crowded teeth or close unwanted gaps for a uniform dental arch.',
+      image: 'assets/img/gen_our-story-image-2.jpg',
+      overview: `Dental crowding occurs when there is insufficient space in the jaw for teeth to fit naturally, causing overlapping or rotation. Spacing issues occur when there are extra gaps between teeth. Our orthodontic solutions efficiently realign teeth to create a uniform, healthy arch.`,
+      whoMayBenefit: [
+        'Overlapping or twisted teeth due to lack of space',
+        'Gaps or diastemas between teeth',
+        'Food entrapment caused by irregular tooth spacing'
+      ],
+      benefits: [
+        { title: 'Uniform Smile', desc: 'Closes gaps and un-crowds overlapping teeth for an even smile.' },
+        { title: 'Promotes Gum Health', desc: 'Eliminates tight overlapping spaces that harbor plaque and bacteria.' }
+      ],
+      process: [
+        { step: '01', title: 'Space Analysis', desc: 'Measuring space requirements for optimal arch width and tooth alignment.' },
+        { step: '02', title: 'Targeted Appliance Therapy', desc: 'Braces or aligners selected to move teeth into target positions.' }
+      ],
+      technology: [
+        { title: 'Digital Space Calculation', desc: 'Software calculation of arch expansion and tooth translation.' }
+      ],
+      faqs: [
+        { q: 'Will I need tooth extraction for severe crowding?', a: 'Our orthodontists prioritize non-extraction space creation whenever clinically feasible using arch expansion and slenderizing techniques.' }
+      ]
+    },
+    {
+      slug: 'orthodontic-consultation',
+      aliases: ['ortho-consultation'],
+      category: 'orthodontics',
+      categoryName: 'Orthodontics',
+      badge: 'Expert Diagnostic Assessment',
+      title: 'Orthodontic Consultation',
+      heroTitle: 'Orthodontic Consultation',
+      heroSubtitle: 'Comprehensive diagnostic evaluation, 3D imaging, and expert treatment planning with our specialist orthodontists.',
+      image: 'assets/img/gen_home-value-image.jpg',
+      overview: `An Orthodontic Consultation is the essential first step toward a straight, healthy smile. Our specialist team conducts a complete clinical examination, takes high-definition 3D digital impressions, and discusses all available treatment choices (braces, ceramic, clear aligners) tailored to your needs.`,
+      whoMayBenefit: [
+        'Anyone considering braces or clear aligners',
+        'Parents seeking early orthodontic evaluation for children (age 7+)',
+        'Adults wanting an expert opinion on bite or tooth alignment'
+      ],
+      benefits: [
+        { title: 'Comprehensive Diagnosis', desc: 'Includes digital scans, X-rays, and full facial aesthetic analysis.' },
+        { title: 'Clear Treatment Roadmap', desc: 'Understand exact timelines, steps, and options before starting.' }
+      ],
+      process: [
+        { step: '01', title: '3D Imaging & Examination', desc: 'Digital scans and panoramic radiographs.' },
+        { step: '02', title: 'Specialist Discussion', desc: 'In-depth review of candidacy, appliance options, and personalized recommendations.' }
+      ],
+      technology: [
+        { title: '3D CBCT & Intraoral Scanners', desc: 'Comprehensive digital diagnostic suite.' }
+      ],
+      faqs: [
+        { q: 'What should I bring to my consultation?', a: 'Simply bring any previous dental X-rays if available, along with your medical history details.' }
+      ]
+    },
+
+    // ==========================================
     // 1. DENTAL IMPLANTS
     // ==========================================
     {

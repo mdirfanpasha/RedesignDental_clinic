@@ -773,4 +773,661 @@ html.lang-hi, html.lang-hi * {
   word-spacing: normal !important;
 }
 
+/* ===== REDESIGN CLINICS DROPDOWN & ACCORDION SUBMENU NAVIGATION ===== */
+
+/* Section Anchor Scroll Margin Offset (fixes sticky header overlap) */
+.service-category-group {
+  scroll-margin-top: 120px !important;
+}
+
+/* Navbar Dropdown Wrapper */
+.rc-nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.rc-nav-dropdown .navbar-dropdown_toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.rc-nav-dropdown .dropdown_chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.8;
+}
+
+.rc-nav-dropdown.is-open .dropdown_chevron,
+.rc-nav-dropdown:hover .dropdown_chevron {
+  transform: rotate(180deg);
+}
+
+/* Desktop Dropdown Menu Panel */
+@media (min-width: 992px) {
+  .rc-nav-dropdown .rc-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px) scale(0.96);
+    background: #05262a;
+    border: 1px solid rgba(45, 212, 191, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(2, 20, 23, 0.6), 0 4px 16px rgba(13, 148, 136, 0.2);
+    min-width: 240px;
+    max-width: 320px;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease;
+    z-index: 1000;
+  }
+
+  .rc-nav-dropdown.is-open .rc-dropdown-menu,
+  .rc-nav-dropdown:hover .rc-dropdown-menu,
+  .rc-nav-dropdown:focus-within .rc-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  .rc-dropdown-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rc-dropdown-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    color: #e2e8f0 !important;
+    text-decoration: none !important;
+    font-family: 'Sora', sans-serif !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .rc-dropdown-link:hover,
+  .rc-dropdown-link:focus {
+    background: rgba(13, 148, 136, 0.25);
+    color: #2dd4bf !important;
+    padding-left: 18px;
+  }
+}
+
+/* Mobile Navigation Expandable Submenu */
+@media (max-width: 991px) {
+  .rc-nav-dropdown {
+    display: block;
+    width: 100%;
+  }
+
+  .rc-nav-dropdown .navbar-dropdown_toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 16px;
+  }
+
+  .rc-nav-dropdown .rc-dropdown-menu {
+    display: none;
+    background: rgba(5, 38, 42, 0.4);
+    border-radius: 12px;
+    margin: 4px 0 12px;
+    padding: 6px 8px;
+    border-left: 2px solid #0d9488;
+  }
+
+  .rc-nav-dropdown.is-open .rc-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .rc-dropdown-link {
+    display: block;
+    padding: 10px 14px;
+    color: #cbd5e1 !important;
+    text-decoration: none !important;
+    font-family: 'Sora', sans-serif !important;
+    font-size: 13.5px !important;
+    font-weight: 500 !important;
+    border-radius: 8px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .rc-dropdown-link:active,
+  .rc-dropdown-link:hover {
+    background: rgba(13, 148, 136, 0.2);
+    color: #2dd4bf !important;
+  }
+}
+
+/* ==========================================================================
+   FOOTER UI ADJUSTMENTS (Increased Logo & Balanced Phone Size)
+   ========================================================================== */
+.footer_brand {
+  max-width: 190px !important;
+  width: 190px !important;
+  display: inline-block !important;
+}
+
+.footer_brand img.brand_logo {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+
+.footer-contact_link[href^="tel"],
+.footer-contact_link {
+  font-size: 1.35rem !important; /* Increased font size for footer mobile number */
+  font-weight: 600 !important;
+}
+
+@media (max-width: 768px) {
+  .footer_brand {
+    max-width: 160px !important;
+    width: 160px !important;
+  }
+  .footer-contact_link[href^="tel"],
+  .footer-contact_link {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* ==========================================================================
+   REFINED NAVBAR DROPDOWN STYLES (Hover 300ms Delay & Separate Arrow Toggle)
+   ========================================================================== */
+.rc-nav-dropdown {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Invisible hover bridge to eliminate cursor dead-zone gap */
+.rc-nav-dropdown::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 20px !important;
+  display: block !important;
+  pointer-events: auto !important;
+  z-index: 9998 !important;
+}
+
+.navbar-dropdown_toggle_group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+}
+
+.rc-nav-parent-link {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  font-size: 15px !important;
+  padding: 6px 8px !important;
+  transition: color 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.rc-nav-parent-link:hover {
+  color: #2dd4bf !important;
+}
+
+.rc-dropdown-arrow-btn {
+  background: transparent !important;
+  border: none !important;
+  color: #ffffff !important;
+  padding: 6px 6px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.25s ease, color 0.2s ease !important;
+  border-radius: 4px !important;
+}
+
+.rc-dropdown-arrow-btn:hover {
+  color: #2dd4bf !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.rc-nav-dropdown.is-open .rc-dropdown-arrow-btn,
+.rc-nav-dropdown.w--open .rc-dropdown-arrow-btn {
+  transform: rotate(180deg) !important;
+  color: #2dd4bf !important;
+}
+
+/* Dropdown Menu Box */
+.rc-dropdown-menu {
+  position: absolute !important;
+  top: calc(100% + 4px) !important;
+  left: 0 !important;
+  background: #05262a !important;
+  border: 1px solid rgba(45, 212, 191, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4) !important;
+  padding: 10px 8px !important;
+  min-width: 230px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(8px) !important;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+}
+
+.rc-nav-dropdown.is-open .rc-dropdown-menu,
+.rc-nav-dropdown.w--open .rc-dropdown-menu,
+.rc-dropdown-menu.w--open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+  display: block !important;
+}
+
+.rc-dropdown-link {
+  display: block !important;
+  padding: 10px 16px !important;
+  color: #e2e8f0 !important;
+  text-decoration: none !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 10px !important;
+  transition: all 0.2s ease !important;
+  white-space: nowrap !important;
+}
+
+.rc-dropdown-link:hover {
+  background: rgba(45, 212, 191, 0.15) !important;
+  color: #2dd4bf !important;
+  padding-left: 20px !important;
+}
+
+/* Mobile Responsive Navigation (360px - 430px) */
+@media (max-width: 991px) {
+  .rc-nav-dropdown {
+    display: block !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  .rc-nav-dropdown::before {
+    display: none !important;
+  }
+
+  .navbar-dropdown_toggle_group {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .rc-nav-parent-link {
+    font-size: 16px !important;
+    padding: 4px 0 !important;
+  }
+
+  .rc-dropdown-arrow-btn {
+    padding: 8px 12px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+  }
+
+  .rc-dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-radius: 12px !important;
+    padding: 6px 8px !important;
+    margin-top: 6px !important;
+    margin-bottom: 10px !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease !important;
+    width: 100% !important;
+  }
+
+  .rc-nav-dropdown.is-open .rc-dropdown-menu {
+    max-height: 600px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    pointer-events: auto !important;
+  }
+
+  .rc-dropdown-link {
+    font-size: 14.5px !important;
+    padding: 10px 14px !important;
+  }
+}
+
+/* Comprehensive Letter Spacing & Typography Fix (Zero text merging) */
+.section_appointment-page *,
+.section_appointment-page h1,
+.section_appointment-page h1,
+.section_appointment-page h2,
+.section_appointment-page h3,
+.section_appointment-page h4,
+.section_appointment-page h5,
+.section_appointment-page h6,
+.section_appointment-page .apt-page-title,
+.section_appointment-page .rc-form-label {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  font-feature-settings: normal !important;
+}
+
+.section_appointment-page {
+  padding-top: 140px !important;
+  padding-bottom: 90px !important;
+  background-color: #f8fafc !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+@media (max-width: 991px) {
+  .section_appointment-page {
+    padding-top: 110px !important;
+    padding-bottom: 60px !important;
+  }
+}
+
+.apt-page-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 40px auto;
+}
+
+.apt-page-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(13, 148, 136, 0.1) !important;
+  border: 1px solid rgba(13, 148, 136, 0.25) !important;
+  color: #0d9488 !important;
+  padding: 6px 16px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.apt-page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0f172a !important;
+  margin-bottom: 16px;
+  line-height: 1.25;
+  letter-spacing: normal !important; /* Fixed: crisp spacing, zero letter merging */
+  word-spacing: normal !important;
+}
+
+.apt-page-subtitle {
+  font-size: 1.125rem;
+  color: #475569 !important;
+  line-height: 1.6;
+  letter-spacing: normal !important;
+}
+
+/* Centered Form Layout */
+.apt-page-grid {
+  display: block;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.apt-form-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06) !important;
+}
+
+.apt-form-card h2,
+.apt-form-card h3,
+.rc-form-label {
+  letter-spacing: -0.01em !important; /* Fixed letter spacing */
+  word-spacing: normal !important;
+  font-feature-settings: normal !important;
+}
+
+/* ── Inline Open Calendar UI ──────────────────────────────────────────────── */
+.apt-inline-calendar-container {
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 16px;
+  padding: 18px;
+  margin-top: 8px;
+}
+
+.inline-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.inline-cal-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: 0.01em !important;
+}
+
+.inline-cal-nav-btn {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.inline-cal-nav-btn:hover {
+  background: #0d9488;
+  color: #ffffff;
+  border-color: #0d9488;
+}
+
+.inline-cal-days-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em !important;
+}
+
+.inline-cal-dates-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.cal-date-cell {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+  height: 38px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+  letter-spacing: normal !important;
+}
+
+.cal-date-cell:hover:not(.is-past):not(.is-empty) {
+  background: #e6fffa;
+  border-color: #0d9488;
+  color: #0d9488;
+}
+
+.cal-date-cell.is-today {
+  border: 2px solid #0d9488;
+  color: #0d9488;
+  font-weight: 700;
+}
+
+.cal-date-cell.is-selected {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%) !important;
+  color: #ffffff !important;
+  border-color: #0d9488 !important;
+  box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+}
+
+.cal-date-cell.is-past {
+  opacity: 0.35;
+  background: #f1f5f9;
+  cursor: not-allowed;
+  border-color: transparent;
+}
+
+.cal-date-cell.is-empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.apt-selected-date-badge {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0d9488;
+  margin-top: 10px;
+  display: inline-block;
+  letter-spacing: normal !important;
+}
+
+/* ── Time Slots Grid ──────────────────────────────────────────────────────── */
+.apt-time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.apt-time-slot-btn {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #1e293b !important;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  letter-spacing: normal !important;
+}
+
+.apt-time-slot-btn:hover {
+  background: #e6fffa !important;
+  border-color: #0d9488 !important;
+  color: #0d9488 !important;
+  transform: translateY(-1px);
+}
+
+.apt-time-slot-btn.is-selected {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%) !important;
+  border-color: #0d9488 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3) !important;
+}
+
+.apt-time-slot-btn .slot-check-icon {
+  display: none;
+  font-weight: bold;
+}
+
+.apt-time-slot-btn.is-selected .slot-check-icon {
+  display: inline-block;
+}
+
+.apt-error-box {
+  background: #fef2f2 !important;
+  border: 1px solid #fca5a5 !important;
+  color: #991b1b !important;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: none;
+  letter-spacing: normal !important;
+}
+
+@media (max-width: 768px) {
+  .apt-page-title {
+    font-size: 2rem;
+  }
+
+  .apt-form-card {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .apt-time-slots-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .apt-time-slot-btn {
+    font-size: 12px;
+    padding: 9px 8px;
+  }
+}
+
+
+
+
+
 

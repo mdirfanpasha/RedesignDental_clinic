@@ -55,8 +55,9 @@
     <!-- Multilingual Engine -->
     <script src="assets/i18n/translations.js"></script>
     <script src="assets/js/i18n.js"></script>
-        <!-- Google reCAPTCHA v3 - Loaded eagerly -->
-        <script src="https://www.google.com/recaptcha/api.js?render=6LdkaZQtAAAAAlkSLA78ABt5Xeo0EgbfLbeqHZWu" async defer></script>
+    <!-- Google reCAPTCHA v3 - Loaded eagerly -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdkaZQtAAAAAlkSLA78ABt5Xeo0EgbfLbeqHZWu" async
+        defer></script>
 </head>
 
 <body>
@@ -65,20 +66,61 @@
             data-easing="ease" data-easing2="ease" role="banner" class="navbar_wrap w-nav">
             <div class="navbar_container">
                 <a href="/" class="navbar_logo w-nav-brand">
-                    <img loading="eager" src="assets/img/redesign-dental-clinics-logo-white.png" alt="Redesign Dental Clinics"
-                        class="logo_image" />
+                    <img loading="eager" src="assets/img/redesign-dental-clinics-logo-white.png"
+                        alt="Redesign Dental Clinics" class="logo_image" />
                 </a>
                 <div class="navbar-content_wrap">
                     <nav role="navigation" class="navbar_menu w-nav-menu">
                         <a href="/" class="navbar_link w-inline-block">
                             <div data-i18n="nav.home" data-i18n="nav.home" data-i18n="nav.home">Home</div>
                         </a>
-                        <a href="/about" aria-current="page" class="navbar_link w-inline-block w--current">
-                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
-                        </a>
-                        <a href="/services" class="navbar_link w-inline-block">
-                            <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
-                        </a>
+                        <!-- ABOUT US DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="about">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/about" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.about">About Us</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle About Us menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/about" class="rc-dropdown-link" data-i18n="nav.aboutRedesign">About Redesign</a>
+            <a href="/#doctor-profile" class="rc-dropdown-link" data-i18n="nav.aboutDrSuhail">About Dr. Suhail</a>
+            <a href="/doctors" class="rc-dropdown-link" data-i18n="nav.ourDoctors">Our Doctors</a>
+        </div>
+    </nav>
+</div>
+                        <!-- SERVICES DROPDOWN -->
+<div class="navbar_dropdown w-dropdown rc-nav-dropdown" data-dropdown-type="services">
+    <div class="navbar-dropdown_toggle_group">
+        <a href="/services" class="navbar_link rc-nav-parent-link"><span data-i18n="nav.services">Services</span></a>
+        <button type="button" class="rc-dropdown-arrow-btn" aria-label="Toggle Services menu" aria-expanded="false">
+            <span class="dropdown_chevron">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                    <path d="M9.99991 10.9763L14.1247 6.85156L15.3032 8.03007L9.99991 13.3334L4.69666 8.03007L5.87516 6.85156L9.99991 10.9763Z" fill="currentColor"></path>
+                </svg>
+            </span>
+        </button>
+    </div>
+    <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
+        <div class="rc-dropdown-inner">
+            <a href="/services#orthodontics" class="rc-dropdown-link" data-i18n="services.cat.orthodontics">Orthodontics</a>
+            <a href="/services#endodontics" class="rc-dropdown-link" data-i18n="services.cat.endodontics">Endodontics</a>
+            <a href="/services#preventive-general" class="rc-dropdown-link" data-i18n="services.cat.preventive">Preventive &amp; General</a>
+            <a href="/services#cosmetic-dentistry" class="rc-dropdown-link" data-i18n="services.cat.cosmetic">Cosmetic Dentistry</a>
+            <a href="/services#restorative-dentistry" class="rc-dropdown-link" data-i18n="services.cat.restorative">Restorative Dentistry</a>
+            <a href="/services#oral-surgery" class="rc-dropdown-link" data-i18n="services.cat.surgery">Oral Surgery</a>
+            <a href="/services#gum-care-periodontics" class="rc-dropdown-link" data-i18n="services.cat.periodontics">Gum Care / Periodontics</a>
+            <a href="/services#advanced-dentistry" class="rc-dropdown-link" data-i18n="services.cat.advanced">Advanced Dentistry</a>
+            <a href="/services#pediatric-care" class="rc-dropdown-link" data-i18n="services.cat.pediatric">Pediatric Care</a>
+            <a href="/services#emergency-care" class="rc-dropdown-link" data-i18n="services.cat.emergency">Emergency Care</a>
+        </div>
+    </nav>
+</div>
                         <a href="/gallery" class="navbar_link w-inline-block">
                             <div data-i18n="nav.gallery" data-i18n="nav.gallery" data-i18n="nav.gallery">Gallery</div>
                         </a>
@@ -109,11 +151,13 @@
                                         </a>
                                         <a href="/about" data-animation="text-flip" aria-current="page"
                                             class="navbar-dropdown_link w-inline-block w--current">
-                                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About Us</div>
+                                            <div data-i18n="nav.about" data-i18n="nav.about" data-i18n="nav.about">About
+                                                Us</div>
                                         </a>
                                         <a href="/services" data-animation="text-flip"
                                             class="navbar-dropdown_link w-inline-block">
-                                            <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
+                                            <div data-i18n="nav.services" data-i18n="nav.services"
+                                                data-i18n="nav.services">Services</div>
                                         </a>
                                         <a href="/blog" data-animation="text-flip"
                                             class="navbar-dropdown_link w-inline-block">
@@ -599,7 +643,8 @@
                                                 <div class="image-animation-scale">
                                                     <img src="assets/img/dr-suhail.webp"
                                                         onerror="this.onerror=null;this.src='assets/img/69de3a2ffad0bdd1136a1bcd_team-image-1.jpg'"
-                                                        loading="lazy" alt="Dr. Suhail A. Syed - Dental Surgeon & Dentist"
+                                                        loading="lazy"
+                                                        alt="Dr. Suhail A. Syed - Dental Surgeon & Dentist"
                                                         class="team_image"
                                                         style="width: 100%; height: 380px; object-fit: cover; object-position: top center;" />
                                                 </div>
@@ -611,7 +656,8 @@
                                                 <h3 class="team-menmber_name">Dr. Suhail A. Syed</h3>
                                             </a>
                                             <div class="team-menuber_info">
-                                                <p class="team-menuber_designation">Dental Surgeon & Dentist (BDS, MDS)</p>
+                                                <p class="team-menuber_designation">Dental Surgeon & Dentist (BDS, MDS)
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -626,13 +672,21 @@
                                     </div>
                                     <div class="button-icon_group">
                                         <div class="button-icon_wrap">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
-                                                <path d="M4.70139 0.75L10.5303 0.750201L10.5303 6.55165M0.530334 10.75L10.2896 0.990932" stroke="currentColor" stroke-width="1.5"></path>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12"
+                                                fill="none" vector-effect="non-scaling-stroke"
+                                                preserveAspectRatio="none">
+                                                <path
+                                                    d="M4.70139 0.75L10.5303 0.750201L10.5303 6.55165M0.530334 10.75L10.2896 0.990932"
+                                                    stroke="currentColor" stroke-width="1.5"></path>
                                             </svg>
                                         </div>
                                         <div class="button-icon_wrap is-hover">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
-                                                <path d="M4.70139 0.75L10.5303 0.750201L10.5303 6.55165M0.530334 10.75L10.2896 0.990932" stroke="currentColor" stroke-width="1.5"></path>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12"
+                                                fill="none" vector-effect="non-scaling-stroke"
+                                                preserveAspectRatio="none">
+                                                <path
+                                                    d="M4.70139 0.75L10.5303 0.750201L10.5303 6.55165M0.530334 10.75L10.2896 0.990932"
+                                                    stroke="currentColor" stroke-width="1.5"></path>
                                             </svg>
                                         </div>
                                     </div>
@@ -649,8 +703,8 @@
                     <div data-w-id="a1b41f4f-e78b-52e6-2492-2ff9a80f251e" class="footer_header">
                         <a id="w-node-_69a072d1-69e6-8783-2548-858b3e84bf4f-4af74ce9" href="/"
                             class="footer_brand w-inline-block">
-                            <img src="assets/img/redesign-dental-clinics-logo-white.png" loading="lazy" alt="Redesign Dental Clinics"
-                                class="brand_logo" />
+                            <img src="assets/img/redesign-dental-clinics-logo-white.png" loading="lazy"
+                                alt="Redesign Dental Clinics" class="brand_logo" />
                         </a>
                         <div class="footer-contact_wrap">
                             <a href="tel:+917780245307" class="footer-contact_link w-inline-block">
@@ -674,7 +728,9 @@
                                 class="button_primary w-variant-62db4792-8717-dbe8-e811-0d36eb02f9ec w-inline-block">
                                 <div class="button_inner">
                                     <div class="button-text_wrap">
-                                        <div class="button_text" data-i18n="nav.bookAppointment" data-i18n="nav.bookAppointment" data-i18n="nav.bookAppointment">Book Appointment</div>
+                                        <div class="button_text" data-i18n="nav.bookAppointment"
+                                            data-i18n="nav.bookAppointment" data-i18n="nav.bookAppointment">Book
+                                            Appointment</div>
                                     </div>
                                     <div class="button-icon_group w-variant-62db4792-8717-dbe8-e811-0d36eb02f9ec">
                                         <div class="button-icon_wrap">
@@ -711,7 +767,8 @@
                                         <div>About</div>
                                     </a>
                                     <a href="/services" class="footer-menu_link w-inline-block">
-                                        <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">Services</div>
+                                        <div data-i18n="nav.services" data-i18n="nav.services" data-i18n="nav.services">
+                                            Services</div>
                                     </a>
                                     <a href="/blog" class="footer-menu_link w-inline-block">
                                         <div>Blogs</div>
@@ -915,7 +972,9 @@
             document.querySelectorAll('img').forEach(bind);
         })();
     </script>
+    <script src="assets/js/whatsapp-config.js"></script>
     <script src="assets/js/booking-system.js"></script>
+    <script src="assets/js/navbar-dropdowns.js"></script>
 </body>
 
 </html>

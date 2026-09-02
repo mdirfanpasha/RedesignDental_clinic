@@ -40,9 +40,9 @@
   position: fixed;
   bottom: 120px;
   right: 24px;
-  width: 395px;
+  width: 400px;
   max-width: calc(100vw - 32px);
-  height: 600px;
+  height: 630px;
   max-height: calc(100vh - 140px);
   background: var(--sh-bg-canvas);
   border-radius: var(--sh-radius-panel);
@@ -384,7 +384,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .sh-cta-btn {
@@ -458,137 +458,119 @@
   flex-shrink: 0;
 }
 
-/* ─── Question Chips / Interactive Discovery Area ─────────────────────────── */
-.sh-discovery-container {
+/* ─── Dedicated Quick Questions Panel ────────────────────────────────────── */
+.sh-quick-questions-area {
+  background: #ffffff;
+  border-top: 1px solid rgba(14, 48, 50, 0.1);
+  padding: 12px 16px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
-  width: 100%;
+  gap: 8px;
 }
 
-.sh-discovery-label {
-  font-size: 11.5px;
+.sh-qq-header {
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
   color: var(--sh-text-muted);
-  margin-top: 6px;
-  margin-bottom: 3px;
+}
+
+.sh-qq-list,
+.sh-qq-expanded-panel {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 6px;
 }
 
-.sh-discovery-label svg {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+.sh-qq-expanded-panel {
+  max-height: 160px;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-top: 2px;
 }
 
-.sh-discovery-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
+.sh-qq-expanded-panel::-webkit-scrollbar {
+  width: 4px;
 }
 
-.sh-chip-btn {
-  background: #ffffff;
+.sh-qq-expanded-panel::-webkit-scrollbar-thumb {
+  background: rgba(14, 48, 50, 0.15);
+  border-radius: 4px;
+}
+
+.sh-qq-btn {
+  background: var(--sh-teal-light);
   color: var(--sh-teal-primary);
-  border: 1px solid rgba(14, 48, 50, 0.16);
-  padding: 7px 13px;
+  border: 1px solid rgba(46, 196, 182, 0.3);
+  padding: 9px 13px;
+  border-radius: 12px;
   font-size: 12.5px;
   font-weight: 600;
   font-family: var(--sh-font-sans);
-  border-radius: var(--sh-radius-chip);
-  cursor: pointer;
   text-align: left;
-  line-height: 1.3;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 4px rgba(14, 48, 50, 0.04);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.sh-chip-btn:hover {
-  background: var(--sh-teal-light);
-  border-color: var(--sh-teal-accent);
-  color: var(--sh-teal-dark);
-  transform: translateY(-1.5px);
-  box-shadow: 0 4px 10px rgba(46, 196, 182, 0.16);
-}
-
-.sh-chip-btn:active {
-  transform: scale(0.97);
-}
-
-.sh-view-all-btn {
-  background: transparent;
-  color: var(--sh-teal-primary);
-  border: 1px dashed rgba(14, 48, 50, 0.28);
-  font-weight: 700;
-  padding: 6px 12px;
-  font-size: 12px;
-  border-radius: var(--sh-radius-chip);
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  margin-top: 4px;
-  align-self: flex-start;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1.35;
 }
 
-.sh-view-all-btn:hover {
+.sh-qq-btn:hover {
+  background: var(--sh-teal-primary);
+  color: #ffffff;
+  border-color: var(--sh-teal-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(14, 48, 50, 0.14);
+}
+
+.sh-qq-btn:active {
+  transform: translateY(0);
+}
+
+.sh-see-more-btn {
+  background: transparent;
+  border: 1px dashed rgba(14, 48, 50, 0.25);
+  color: var(--sh-teal-primary);
+  padding: 7px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--sh-font-sans);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  margin-top: 2px;
+}
+
+.sh-see-more-btn:hover {
   background: var(--sh-teal-light);
   border-color: var(--sh-teal-accent);
 }
 
-.sh-view-all-btn svg {
-  width: 12px;
-  height: 12px;
-  transition: transform 0.2s ease;
+.sh-see-more-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
 }
 
-.sh-view-all-btn.is-open svg {
+.sh-see-more-icon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.sh-see-more-btn.is-expanded .sh-see-more-icon {
   transform: rotate(180deg);
-}
-
-/* ─── Expanded All Questions Drawer / Accordion ───────────────────────────── */
-.sh-all-questions-panel {
-  display: none;
-  flex-direction: column;
-  gap: 10px;
-  background: #ffffff;
-  border: 1px solid var(--sh-teal-border);
-  border-radius: 16px;
-  padding: 12px;
-  margin-top: 6px;
-  max-height: 240px;
-  overflow-y: auto;
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.03);
-}
-
-.sh-all-questions-panel.is-visible {
-  display: flex;
-}
-
-.sh-category-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.sh-category-title {
-  font-size: 10.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--sh-text-muted);
-  border-bottom: 1px solid rgba(14, 48, 50, 0.08);
-  padding-bottom: 3px;
-  margin-top: 4px;
 }
 
 /* ─── Chatbot Footer / Search Bar ─────────────────────────────────────────── */
@@ -772,7 +754,7 @@
   position: absolute;
   bottom: -5px;
   right: 36px;
-  width: 10px;
+  width: 100px;
   height: 10px;
   background: rgba(7, 36, 38, 0.94);
   transform: rotate(45deg);
@@ -813,9 +795,9 @@
     width: auto;
     max-width: none;
     height: auto;
-    max-height: 74vh;
+    max-height: 80vh;
     bottom: calc(14px + env(safe-area-inset-bottom, 0px));
-    border-radius: 26px;
+    border-radius: 24px;
     box-shadow: 0 16px 48px rgba(5, 26, 28, 0.4);
     transform: translateY(30px) scale(0.98);
   }
@@ -851,9 +833,9 @@
     padding: 10px 14px;
   }
 
-  .sh-chip-btn {
+  .sh-qq-btn {
     font-size: 12px;
-    padding: 6px 11px;
+    padding: 8px 11px;
   }
 
   .sh-doc-tooltip {
@@ -867,7 +849,7 @@
   .sh-message-row,
   .sh-status-dot,
   .sh-typing-dot,
-  .sh-chip-btn,
+  .sh-qq-btn,
   .sh-cta-btn {
     animation: none !important;
     transition: none !important;

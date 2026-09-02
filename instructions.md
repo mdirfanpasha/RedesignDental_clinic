@@ -13,8 +13,8 @@ is **no build step**, no `npm install`, no dev server, no bundler. A `localhost:
 an automatic failure.
 
 
-**Source of truth (public):** `https://github.com/toprmrproducer/lumora-dental`
-**Live reference (what the result must look like):** `https://toprmrproducer.github.io/lumora-dental/`
+**Source of truth (public):** `https://github.com/mdirfanpasha/RedesignDental_clinic`
+**Live reference:** `https://redesign-tau-five.vercel.app/`
 
 
 The repo is fully self-contained: all 8 JS libs, ~186 images (including 37 AI-generated `gen_*.jpg`
@@ -41,23 +41,23 @@ You need `git`. Pick the block for your OS. Replace nothing in the URL.
 
 **macOS / Linux (Terminal):**
 ```bash
-git clone https://github.com/toprmrproducer/lumora-dental.git
-cd lumora-dental
+git clone https://github.com/mdirfanpasha/RedesignDental_clinic.git
+cd RedesignDental_clinic
 ```
 
 
 **Windows (PowerShell or CMD):**
 ```powershell
-git clone https://github.com/toprmrproducer/lumora-dental.git
-cd lumora-dental
+git clone https://github.com/mdirfanpasha/RedesignDental_clinic.git
+cd RedesignDental_clinic
 ```
 
 
 **No git installed?** Download the ZIP instead and unzip it:
-- Browser: open `https://github.com/toprmrproducer/lumora-dental/archive/refs/heads/main.zip`, unzip,
- and `cd` into the unzipped `lumora-dental-main` folder.
-- macOS/Linux one-liner: `curl -L -o lumora.zip https://github.com/toprmrproducer/lumora-dental/archive/refs/heads/main.zip && unzip lumora.zip && cd lumora-dental-main`
-- Windows PowerShell: `Invoke-WebRequest https://github.com/toprmrproducer/lumora-dental/archive/refs/heads/main.zip -OutFile lumora.zip; Expand-Archive lumora.zip -Force; cd lumora-dental-main\lumora-dental-main`
+- Browser: open `https://github.com/mdirfanpasha/RedesignDental_clinic/archive/refs/heads/main.zip`, unzip,
+ and `cd` into the unzipped folder.
+- macOS/Linux one-liner: `curl -L -o repo.zip https://github.com/mdirfanpasha/RedesignDental_clinic/archive/refs/heads/main.zip && unzip repo.zip && cd RedesignDental_clinic-main`
+- Windows PowerShell: `Invoke-WebRequest https://github.com/mdirfanpasha/RedesignDental_clinic/archive/refs/heads/main.zip -OutFile repo.zip; Expand-Archive repo.zip -Force; cd RedesignDental_clinic-main`
 
 
 After this you have the COMPLETE site on disk. Do not modify the structure.
@@ -103,11 +103,11 @@ photos load. The teal site is the root; the blue variant is at `/variant-blue/`.
 
 
 ### Option A — GitHub Pages (free, recommended; needs a free GitHub account)
-1. On GitHub, **Fork** `toprmrproducer/lumora-dental` into your own account (button top-right), OR
+1. On GitHub, **Fork** `mdirfanpasha/RedesignDental_clinic` into your own account (button top-right), OR
   create a new empty repo and push this code to it:
   ```bash
   # from inside the cloned folder, pointing at YOUR new empty repo:
-  git remote set-url origin https://github.com/<YOUR_USERNAME>/<YOUR_REPO>.git
+  git remote set-url origin https://github.com/mdirfanpasha/RedesignDental_clinic.git
   git push -u origin main
   ```
 2. In your repo: **Settings → Pages → Build and deployment → Source: "Deploy from a branch" →
