@@ -947,6 +947,30 @@ html.lang-hi, html.lang-hi * {
 /* ==========================================================================
    REFINED NAVBAR DROPDOWN STYLES (Hover 300ms Delay & Separate Arrow Toggle)
    ========================================================================== */
+/* Global Smooth Scrolling and Navigation Offset */
+html {
+  scroll-behavior: smooth !important;
+}
+
+#doctor-profile,
+#our-story,
+#who-we-are,
+#clinical-excellence,
+#success-numbers,
+#team-members,
+#orthodontics,
+#endodontics,
+#preventive-general,
+#cosmetic-dentistry,
+#restorative-dentistry,
+#oral-surgery,
+#gum-care-periodontics,
+#advanced-dentistry,
+#pediatric-care,
+#emergency-care {
+  scroll-margin-top: 100px !important;
+}
+
 .rc-nav-dropdown {
   position: relative !important;
   display: inline-flex !important;
@@ -966,10 +990,29 @@ html.lang-hi, html.lang-hi * {
   z-index: 9998 !important;
 }
 
-.navbar-dropdown_toggle_group {
-  display: flex !important;
+.navbar-dropdown_toggle_group,
+.rc-dropdown-toggle-btn {
+  display: inline-flex !important;
   align-items: center !important;
-  gap: 2px !important;
+  gap: 4px !important;
+  cursor: pointer !important;
+  padding: 4px 6px !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  border-radius: 6px !important;
+  transition: color 0.2s ease, background 0.2s ease !important;
+}
+
+.navbar-dropdown_toggle_group:hover,
+.rc-dropdown-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.navbar-dropdown_toggle_group:hover .rc-nav-parent-link,
+.rc-dropdown-toggle-btn:hover .rc-nav-parent-link,
+.navbar-dropdown_toggle_group:hover .dropdown_chevron,
+.rc-dropdown-toggle-btn:hover .dropdown_chevron {
+  color: #2dd4bf !important;
 }
 
 .rc-nav-parent-link {
@@ -977,37 +1020,32 @@ html.lang-hi, html.lang-hi * {
   text-decoration: none !important;
   font-weight: 500 !important;
   font-size: 15px !important;
-  padding: 6px 8px !important;
+  padding: 4px 2px !important;
   transition: color 0.2s ease !important;
   display: inline-flex !important;
   align-items: center !important;
+  pointer-events: none !important; /* Click propagates cleanly to parent toggle */
 }
 
-.rc-nav-parent-link:hover {
-  color: #2dd4bf !important;
-}
-
+.dropdown_chevron,
 .rc-dropdown-arrow-btn {
-  background: transparent !important;
-  border: none !important;
   color: #ffffff !important;
-  padding: 6px 6px !important;
-  cursor: pointer !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   transition: transform 0.25s ease, color 0.2s ease !important;
-  border-radius: 4px !important;
 }
 
-.rc-dropdown-arrow-btn:hover {
-  color: #2dd4bf !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-}
-
+.rc-nav-dropdown.is-open .dropdown_chevron,
+.rc-nav-dropdown.w--open .dropdown_chevron,
 .rc-nav-dropdown.is-open .rc-dropdown-arrow-btn,
 .rc-nav-dropdown.w--open .rc-dropdown-arrow-btn {
   transform: rotate(180deg) !important;
+  color: #2dd4bf !important;
+}
+
+.rc-nav-dropdown.is-open .rc-nav-parent-link,
+.rc-nav-dropdown.w--open .rc-nav-parent-link {
   color: #2dd4bf !important;
 }
 
