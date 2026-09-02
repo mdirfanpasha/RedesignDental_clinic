@@ -359,9 +359,15 @@ const server = http.createServer(async (req, res) => {
   } catch (e) {}
   const urlPath = path.posix.normalize(rawPath).replace(/^(\.\.\/)+/, '') || '/';
 
-  // ── Step 1: 301 redirect legacy .html URLs → clean routes ─────────────────
+  // ── Step 1: 301 redirect legacy .html URLs & trailing slashes → clean routes ─
   if (HTML_REDIRECTS[urlPath]) {
     res.writeHead(301, { Location: HTML_REDIRECTS[urlPath] });
+    res.end();
+    return;
+  }
+  if (urlPath !== '/' && urlPath.endsWith('/')) {
+    const cleanUrl = urlPath.replace(/\/+$/, '');
+    res.writeHead(301, { Location: cleanUrl });
     res.end();
     return;
   }
@@ -375,6 +381,14 @@ const server = http.createServer(async (req, res) => {
     const cleanService = urlPath.replace(/\.html?$/i, '');
     res.writeHead(301, { Location: cleanService });
     res.end();
+    return;
+  }
+
+  // ── Step 1.5: Resilient Asset Serving (maps any /.../assets/* request directly to /assets/*)
+  if (urlPath.includes('/assets/')) {
+    const assetSubPath = urlPath.substring(urlPath.indexOf('/assets/'));
+    const assetPath = path.join(__dirname, assetSubPath);
+    serveFile(req, res, assetPath);
     return;
   }
 
