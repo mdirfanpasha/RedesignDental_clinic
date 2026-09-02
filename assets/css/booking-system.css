@@ -946,6 +946,8 @@ html.lang-hi, html.lang-hi * {
 
 /* ==========================================================================
    REFINED NAVBAR DROPDOWN STYLES (Hover 300ms Delay & Separate Arrow Toggle)
+   ========================================================================== *//* ==========================================================================
+   PERFECT NAVBAR STABILITY & ISOLATED DROPDOWN OVERLAY
    ========================================================================== */
 /* Global Smooth Scrolling and Navigation Offset */
 html {
@@ -971,10 +973,47 @@ html {
   scroll-margin-top: 100px !important;
 }
 
+/* Ensure stable navbar container layout without shifting or reversing */
+.navbar_wrap {
+  position: absolute !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 1000 !important;
+}
+
+.navbar_container {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.navbar-content_wrap {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.navbar_menu {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.navbar_menu > * {
+  order: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Parent Dropdown Item Container */
 .rc-nav-dropdown {
   position: relative !important;
   display: inline-flex !important;
   align-items: center !important;
+  vertical-align: middle !important;
 }
 
 /* Invisible hover bridge to eliminate cursor dead-zone gap */
@@ -982,37 +1021,20 @@ html {
   content: '' !important;
   position: absolute !important;
   top: 100% !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 20px !important;
+  left: -4px !important;
+  right: -4px !important;
+  height: 16px !important;
   display: block !important;
   pointer-events: auto !important;
   z-index: 9998 !important;
 }
 
-.navbar-dropdown_toggle_group,
-.rc-dropdown-toggle-btn {
+.navbar-dropdown_toggle_group {
   display: inline-flex !important;
   align-items: center !important;
-  gap: 4px !important;
-  cursor: pointer !important;
-  padding: 4px 6px !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  border-radius: 6px !important;
-  transition: color 0.2s ease, background 0.2s ease !important;
-}
-
-.navbar-dropdown_toggle_group:hover,
-.rc-dropdown-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.06) !important;
-}
-
-.navbar-dropdown_toggle_group:hover .rc-nav-parent-link,
-.rc-dropdown-toggle-btn:hover .rc-nav-parent-link,
-.navbar-dropdown_toggle_group:hover .dropdown_chevron,
-.rc-dropdown-toggle-btn:hover .dropdown_chevron {
-  color: #2dd4bf !important;
+  gap: 2px !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .rc-nav-parent-link {
@@ -1020,57 +1042,71 @@ html {
   text-decoration: none !important;
   font-weight: 500 !important;
   font-size: 15px !important;
-  padding: 4px 2px !important;
+  padding: 6px 6px !important;
   transition: color 0.2s ease !important;
   display: inline-flex !important;
   align-items: center !important;
-  pointer-events: none !important; /* Click propagates cleanly to parent toggle */
+  cursor: pointer !important;
+  pointer-events: auto !important;
 }
 
-.dropdown_chevron,
+.rc-nav-parent-link:hover {
+  color: #2dd4bf !important;
+}
+
 .rc-dropdown-arrow-btn {
+  background: transparent !important;
+  border: none !important;
   color: #ffffff !important;
+  padding: 6px 6px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   transition: transform 0.25s ease, color 0.2s ease !important;
+  border-radius: 4px !important;
 }
 
-.rc-nav-dropdown.is-open .dropdown_chevron,
-.rc-nav-dropdown.w--open .dropdown_chevron,
-.rc-nav-dropdown.is-open .rc-dropdown-arrow-btn,
-.rc-nav-dropdown.w--open .rc-dropdown-arrow-btn {
+.rc-dropdown-arrow-btn:hover {
+  color: #2dd4bf !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.rc-nav-dropdown.is-open .rc-dropdown-arrow-btn {
   transform: rotate(180deg) !important;
   color: #2dd4bf !important;
 }
 
-.rc-nav-dropdown.is-open .rc-nav-parent-link,
-.rc-nav-dropdown.w--open .rc-nav-parent-link {
+.rc-nav-dropdown.is-open .rc-nav-parent-link {
   color: #2dd4bf !important;
 }
 
-/* Dropdown Menu Box */
+/* Dropdown Menu Box — Strict Absolute Overlay */
 .rc-dropdown-menu {
   position: absolute !important;
   top: calc(100% + 4px) !important;
   left: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  inset: calc(100% + 4px) auto auto 0 !important;
   background: #05262a !important;
   border: 1px solid rgba(45, 212, 191, 0.3) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4) !important;
-  padding: 10px 8px !important;
-  min-width: 230px !important;
+  border-radius: 14px !important;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45) !important;
+  padding: 8px !important;
+  min-width: 220px !important;
+  max-width: 280px !important;
   opacity: 0 !important;
   visibility: hidden !important;
-  transform: translateY(8px) !important;
-  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s ease !important;
+  transform: translateY(-5px) !important;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease !important;
   z-index: 9999 !important;
   pointer-events: none !important;
+  margin: 0 !important;
 }
 
-.rc-nav-dropdown.is-open .rc-dropdown-menu,
-.rc-nav-dropdown.w--open .rc-dropdown-menu,
-.rc-dropdown-menu.w--open {
+.rc-nav-dropdown.is-open .rc-dropdown-menu {
   opacity: 1 !important;
   visibility: visible !important;
   transform: translateY(0) !important;
@@ -1080,28 +1116,32 @@ html {
 
 .rc-dropdown-link {
   display: block !important;
-  padding: 10px 16px !important;
+  padding: 8px 14px !important;
   color: #e2e8f0 !important;
   text-decoration: none !important;
   font-size: 14px !important;
   font-weight: 500 !important;
-  border-radius: 10px !important;
-  transition: all 0.2s ease !important;
+  border-radius: 8px !important;
+  transition: all 0.18s ease !important;
   white-space: nowrap !important;
 }
 
 .rc-dropdown-link:hover {
   background: rgba(45, 212, 191, 0.15) !important;
   color: #2dd4bf !important;
-  padding-left: 20px !important;
+  padding-left: 18px !important;
 }
 
-/* Mobile Responsive Navigation (360px - 430px) */
+/* Mobile Responsive Navigation (<= 991px) */
 @media (max-width: 991px) {
+  .navbar_menu {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
   .rc-nav-dropdown {
     display: block !important;
     width: 100% !important;
-    position: relative !important;
   }
 
   .rc-nav-dropdown::before {
@@ -1110,53 +1150,51 @@ html {
 
   .navbar-dropdown_toggle_group {
     display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
     width: 100% !important;
-    padding: 10px 0 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    justify-content: space-between !important;
+    align-items: center !important;
   }
 
   .rc-nav-parent-link {
+    flex-grow: 1 !important;
+    padding: 12px 16px !important;
     font-size: 16px !important;
-    padding: 4px 0 !important;
   }
 
   .rc-dropdown-arrow-btn {
-    padding: 8px 12px !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-    border-radius: 8px !important;
+    padding: 12px 16px !important;
   }
 
   .rc-dropdown-menu {
     position: static !important;
-    transform: none !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
     box-shadow: none !important;
-    border: none !important;
-    background: rgba(0, 0, 0, 0.25) !important;
-    border-radius: 12px !important;
-    padding: 6px 8px !important;
-    margin-top: 6px !important;
-    margin-bottom: 10px !important;
-    max-height: 0 !important;
-    overflow: hidden !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s ease !important;
-    width: 100% !important;
+    border-radius: 8px !important;
+    background: rgba(5, 38, 42, 0.7) !important;
+    border: 1px solid rgba(45, 212, 191, 0.15) !important;
+    margin: 4px 0 8px 0 !important;
+    display: none !important;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 8px !important;
+    transform: none !important;
   }
 
   .rc-nav-dropdown.is-open .rc-dropdown-menu {
+    display: block !important;
     max-height: 600px !important;
+    padding: 8px !important;
     opacity: 1 !important;
     visibility: visible !important;
-    display: block !important;
-    pointer-events: auto !important;
   }
 
   .rc-dropdown-link {
-    font-size: 14.5px !important;
     padding: 10px 14px !important;
+    font-size: 15px !important;
   }
 }
 
