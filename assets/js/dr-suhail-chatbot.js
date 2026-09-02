@@ -529,11 +529,15 @@
 
     open: function (triggerEl) {
       if (this.isOpenState) return;
-      this.activeTriggerBtn = triggerEl || null;
+      this.activeTriggerBtn = triggerEl || document.getElementById('rc-float-doctor-btn') || null;
       this.isOpenState = true;
       this.widgetEl.classList.add('is-active');
       if (this.backdropEl) this.backdropEl.classList.add('is-active');
       this.widgetEl.setAttribute('aria-modal', 'true');
+      document.body.classList.add('sh-chat-open');
+      if (this.activeTriggerBtn) {
+        this.activeTriggerBtn.classList.add('is-active');
+      }
 
       this.scrollToBottom();
 
@@ -550,6 +554,10 @@
       this.widgetEl.classList.remove('is-active');
       if (this.backdropEl) this.backdropEl.classList.remove('is-active');
       this.widgetEl.setAttribute('aria-modal', 'false');
+      document.body.classList.remove('sh-chat-open');
+      if (this.activeTriggerBtn) {
+        this.activeTriggerBtn.classList.remove('is-active');
+      }
       this.clearSearch();
 
       if (this.activeTriggerBtn && typeof this.activeTriggerBtn.focus === 'function') {

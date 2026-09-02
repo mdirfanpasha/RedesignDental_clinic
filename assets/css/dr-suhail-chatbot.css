@@ -753,8 +753,8 @@
   content: '';
   position: absolute;
   bottom: -5px;
-  right: 36px;
-  width: 100px;
+  right: 26px;
+  width: 10px;
   height: 10px;
   background: rgba(7, 36, 38, 0.94);
   transform: rotate(45deg);
@@ -765,6 +765,18 @@
 .rc-float-doc:hover .sh-doc-tooltip {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Hide tooltip immediately when button is active, focused, clicked, or chatbot is open */
+.rc-float-doc:active .sh-doc-tooltip,
+.rc-float-doc:focus .sh-doc-tooltip,
+.rc-float-doc.is-active .sh-doc-tooltip,
+.sh-chat-widget.is-active ~ .rc-floating-actions .sh-doc-tooltip,
+body.sh-chat-open .sh-doc-tooltip {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  display: none !important;
+  pointer-events: none !important;
 }
 
 /* ─── Backdrop / Click-Outside Catcher ────────────────────────────────────── */

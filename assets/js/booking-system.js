@@ -814,7 +814,7 @@
     container.id = 'rc-floating-actions-root';
     container.className = 'rc-floating-actions';
     container.innerHTML = `
-      <button type="button" class="rc-float-btn rc-float-doc" id="rc-float-doctor-btn" aria-label="Ask Dr. Suhail's Assistant" title="Need help? Ask Dr. Suhail">
+      <button type="button" class="rc-float-btn rc-float-doc" id="rc-float-doctor-btn" aria-label="Ask Dr. Suhail's Assistant">
         <span class="rc-float-doc-label sh-doc-tooltip">Need help? Ask Dr. Suhail</span>
         <div class="rc-float-doc-wrap">
           <img src="/assets/img/dr-suhail-floating-icon.png" onerror="this.onerror=null;this.src='/assets/img/suhail_icon-removebg-preview.png'" alt="Dr. Suhail's Virtual Assistant" class="rc-float-doc-img" />
