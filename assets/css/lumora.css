@@ -3576,13 +3576,24 @@ figure {
 }
 
 .logo_image {
-  height: var(--_max-width---max-width--100);
+  width: 140px;
+  max-width: 100%;
+  height: auto;
+  max-height: 48px;
   object-fit: contain;
+  object-position: left center;
+  display: block;
 }
 
 .navbar_logo {
-  width: var(--_max-width---max-width--100);
+  width: 140px;
   max-width: 140px;
+  min-width: 140px;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
   padding: var(--_size-variables---element-spacing--none);
 }
 
@@ -9057,7 +9068,15 @@ figure {
   }
 
   .navbar_logo {
+    width: 130px;
     max-width: 130px;
+    min-width: 120px;
+    flex-shrink: 0;
+  }
+
+  .logo_image {
+    width: 130px;
+    max-height: 44px;
   }
 
   .navbar_wrap {

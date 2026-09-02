@@ -758,7 +758,15 @@
         self.messages.push(assistantMsg);
         self.appendMessageDOM(assistantMsg);
         self.saveCurrentSession();
-        self.scrollToBottom();
+        var rowEl = document.getElementById(assistantMsg.id);
+        if (rowEl && self.bodyEl) {
+          setTimeout(function () {
+            var targetTop = rowEl.offsetTop - 12;
+            self.bodyEl.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+          }, 60);
+        } else {
+          self.scrollToBottom();
+        }
         self.isProcessing = false;
       }, 750);
     },
@@ -914,7 +922,6 @@
       return `
         <div class="sh-discovery-container">
           <div class="sh-discovery-label">
-            ${ICONS.sparkle}
             <span>${label}</span>
           </div>
           <div class="sh-discovery-chips">

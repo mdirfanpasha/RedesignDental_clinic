@@ -473,10 +473,17 @@
   text-transform: uppercase;
   letter-spacing: 0.6px;
   color: var(--sh-text-muted);
-  margin-bottom: 2px;
+  margin-top: 6px;
+  margin-bottom: 3px;
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.sh-discovery-label svg {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 .sh-discovery-chips {
