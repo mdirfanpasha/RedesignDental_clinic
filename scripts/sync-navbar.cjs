@@ -1,45 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FMNL8XFZ4N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+/**
+ * scripts/sync-navbar.cjs
+ * 
+ * Synchronizes the canonical single-source-of-truth Navbar component across all HTML files
+ * in the repository, ensuring 100% markup consistency, locked desktop DOM order,
+ * overlay dropdowns, and mobile responsiveness.
+ */
 
-  gtag('config', 'G-FMNL8XFZ4N');
-</script>
-    <meta charset="utf-8"/>
-    <title>Terms & Conditions | Redesign Dental Clinics</title>
-    <meta content="The terms that apply when you use the Redesign Dental Clinics website and services." name="description"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-            <link href="https://fonts.googleapis.com" rel="preconnect"/>
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="assets/img/favicon.svg" rel="shortcut icon" type="image/svg+xml"/>
-    <link href="assets/img/webclip.png" rel="apple-touch-icon"/>
-    <style>
-        body{margin:0;background:#fafafa;color:#06182e;font-family:Sora,'Helvetica Neue',Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased;}
-        .legal-nav{display:flex;align-items:center;justify-content:space-between;padding:24px 6vw;border-bottom:1px solid #e2e2e2;}
-        .legal-nav a.back{color:#2f80ff;text-decoration:none;font-weight:500;font-size:15px;}
-        .legal-wrap{max-width:760px;margin:0 auto;padding:64px 24px 96px;}
-        .legal-wrap h1{font-size:clamp(32px,5vw,48px);font-weight:600;letter-spacing:-1px;margin:0 0 8px;}
-        .legal-wrap .updated{color:#758696;font-size:14px;margin-bottom:40px;}
-        .legal-wrap h2{font-size:22px;font-weight:600;margin:40px 0 12px;}
-        .legal-wrap p,.legal-wrap li{color:#3a4a4d;font-size:16px;}
-        .legal-wrap a{color:#2f80ff;}
-        .legal-foot{text-align:center;padding:40px 24px;border-top:1px solid #e2e2e2;color:#758696;font-size:14px;}
-    </style>
-    <link rel="stylesheet" href="assets/css/booking-system.css" type="text/css"/>
-        <!-- Multilingual Engine -->
-        <script src="assets/i18n/translations.js"></script>
-        <script src="assets/js/i18n.js"></script>
-</head>
-<body>
-    <!-- ===== CANONICAL SINGLE SOURCE OF TRUTH NAVBAR ===== -->
+const fs = require('fs');
+const path = require('path');
+
+const ROOT_DIR = path.resolve(__dirname, '..');
+
+const CANONICAL_NAVBAR_HTML = `        <!-- ===== CANONICAL SINGLE SOURCE OF TRUTH NAVBAR ===== -->
         <div data-collapse="medium" data-animation="default" data-duration="400" fs-scrolldisable-element="smart-nav" data-easing="ease" data-easing2="ease" role="banner" class="navbar_wrap w-nav">
             <div class="navbar_container">
                 <a href="/" class="navbar_logo w-nav-brand">
@@ -187,64 +159,179 @@
                     </div>
                 </div>
             </div>
-        </div>
-    <main class="legal-wrap">
-        <h1><span data-i18n="legal.termsTitle">Terms & Conditions</span></h1>
-        <p class="updated">Last updated: June 2026</p>
-        <p>Welcome to Redesign Dental Clinics. By using this website and booking appointments through it, you agree to the following terms. Please read them carefully.</p>
-        <h2>Use of this website</h2>
-        <p>The content on this site is provided for general information about our dental services. It is not a substitute for professional medical or dental advice, diagnosis, or treatment. Always consult a qualified clinician about your specific situation.</p>
-        <h2>Appointments</h2>
-        <ul>
-            <li>Bookings made through our scheduling page are requests confirmed by our team.</li>
-            <li>Please give us at least 24 hours' notice to reschedule or cancel a visit.</li>
-            <li>Repeated no-shows may affect future booking availability.</li>
-        </ul>
-        <h2>Intellectual property</h2>
-        <p>All text, images, logos, and design elements on this site are the property of Redesign Dental Clinics and may not be reproduced without permission.</p>
-        <h2>Limitation of liability</h2>
-        <p>Redesign Dental Clinics is not liable for any indirect or incidental damages arising from the use of this website. Treatment outcomes vary between individuals and are discussed with you directly during your visit.</p>
-        <h2>Contact</h2>
-        <p>For any questions about these terms, contact <a href="mailto:redesigndental@gmail.com">redesigndental@gmail.com</a>.</p>
-    </main>
-    <div class="legal-foot">
-    <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 20px;">
-        <a href="https://www.facebook.com/RedesignDental" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #e2e8f0; color: #05262a; text-decoration: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M9.33464 8.9987H11.0013L11.668 6.33203H9.33464V4.9987C9.33464 4.31244 9.33464 3.66536 10.668 3.66536H11.668V1.42543C11.4508 1.3966 10.63 1.33203 9.76324 1.33203C7.95357 1.33203 6.66797 2.4366 6.66797 4.46517V6.33203H4.66797V8.9987H6.66797V14.6654H9.33464V8.9987Z"/></svg>
-        </a>
-        <a href="https://www.instagram.com/redesign.dental.clinics/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #e2e8f0; color: #05262a; text-decoration: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-        </a>
-        <a href="https://www.youtube.com/channel/UCA1C9H8oWZomVPiV2GjEOaQ" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: #e2e8f0; color: #05262a; text-decoration: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M15.8 4.6C15.6 3.9 15.1 3.3 14.4 3.1 13.1 2.8 8 2.8s-5.1 0-6.4.3C.9 3.3.4 3.9.2 4.6 0 5.9 0 8 0 8s0 2.1.2 3.4c.2.7.7 1.3 1.4 1.5 1.3.3 6.4.3 6.4.3s5.1 0 6.4-.3c.7-.2 1.2-.8 1.4-1.5.2-1.3.2-3.4.2-3.4s0-2.1-.2-3.4zM6.4 10.4V5.6l4.2 2.4-4.2 2.4z"/></svg>
-        </a>
-    </div>&copy; 2026 Redesign Dental Clinics. All rights reserved. &middot; <a href="/privacy" style="color:#758696;">Privacy Policy</a></div>
+        </div>`;
 
-<script>
-/* Lumora image guard: any failed/empty image -> on-brand gradient SVG so nothing ever looks broken. */
-(function(){
-  function ph(label){
-    var t=(label||'Redesign Dental Clinics').replace(/[<>&]/g,'').slice(0,22);
-    var svg='<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">'
-     +'<defs><linearGradient id="lg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">'
-     +'<stop offset="0" stop-color="#2f80ff"/><stop offset="1" stop-color="#06182e"/></linearGradient></defs>'
-     +'<rect width="1280" height="720" fill="url(#lg)"/>'
-     +'<circle cx="640" cy="298" r="44" fill="#fff" opacity="0.9"/>'
-     +'<text x="640" y="436" fill="#fff" font-family="Sora,Arial" font-size="40" font-weight="600" text-anchor="middle" opacity="0.92">'+t+'</text></svg>';
-    return 'data:image/svg+xml;utf8,'+encodeURIComponent(svg);
+function getAllHtmlFiles() {
+  const files = [];
+
+  // Root files
+  const rootEntries = fs.readdirSync(ROOT_DIR, { withFileTypes: true });
+  for (const entry of rootEntries) {
+    if (entry.isFile() && entry.name.endsWith('.html')) {
+      files.push(path.join(ROOT_DIR, entry.name));
+    }
   }
-  function bind(im){
-    im.addEventListener('error',function(){ if(im.dataset.fbk)return; im.dataset.fbk='1'; im.src=ph(im.alt); });
-    if(im.complete && im.naturalWidth===0 && !im.dataset.fbk){ im.dataset.fbk='1'; im.src=ph(im.alt); }
+
+  // Services files
+  const servicesDir = path.join(ROOT_DIR, 'services');
+  if (fs.existsSync(servicesDir)) {
+    const sEntries = fs.readdirSync(servicesDir, { withFileTypes: true });
+    for (const entry of sEntries) {
+      if (entry.isFile() && entry.name.endsWith('.html')) {
+        files.push(path.join(servicesDir, entry.name));
+      }
+    }
   }
-  document.querySelectorAll('img').forEach(bind);
-})();
-</script>
-    <script src="assets/js/whatsapp-config.js"></script>
-    <script src="assets/js/booking-system.js"></script>
-    <script src="assets/js/navbar-dropdowns.js"></script>
-</body>
-</html>
 
+  // Blog files
+  const blogDir = path.join(ROOT_DIR, 'blog');
+  if (fs.existsSync(blogDir)) {
+    const bEntries = fs.readdirSync(blogDir, { withFileTypes: true });
+    for (const entry of bEntries) {
+      if (entry.isFile() && entry.name.endsWith('.html')) {
+        files.push(path.join(blogDir, entry.name));
+      }
+    }
+  }
 
+  return files;
+}
 
+function syncFile(filePath) {
+  let content = fs.readFileSync(filePath, 'utf8');
+  let changed = false;
+
+  // Regex to match existing navbar_wrap block:
+  // Starts with navbar_wrap div and finds matching closing tags
+  const startIdx = content.indexOf('class="navbar_wrap');
+  if (startIdx !== -1) {
+    // Find the opening <div before class="navbar_wrap
+    const openTagIdx = content.lastIndexOf('<div', startIdx);
+    
+    // Find where the navbar block starts (include comment if right before)
+    let blockStart = openTagIdx;
+    const preText = content.substring(Math.max(0, openTagIdx - 150), openTagIdx);
+    const commentMatch = preText.match(/<!--[\s\S]*?(?:NAVBAR|Navigation)[\s\S]*?-->\s*$/i);
+    if (commentMatch) {
+      blockStart = openTagIdx - commentMatch[0].length;
+    }
+
+    // Now find the closing </div> of navbar_wrap by counting nested div tags
+    let depth = 0;
+    let pos = openTagIdx;
+    let blockEnd = -1;
+
+    while (pos < content.length) {
+      const nextOpen = content.indexOf('<div', pos);
+      const nextClose = content.indexOf('</div>', pos);
+
+      if (nextClose === -1) break;
+
+      if (nextOpen !== -1 && nextOpen < nextClose) {
+        depth++;
+        pos = nextOpen + 4;
+      } else {
+        depth--;
+        pos = nextClose + 6;
+        if (depth === 0) {
+          blockEnd = pos;
+          break;
+        }
+      }
+    }
+
+    if (blockEnd !== -1) {
+      content = content.substring(0, blockStart) + CANONICAL_NAVBAR_HTML.trim() + content.substring(blockEnd);
+      changed = true;
+    }
+  } else if (content.includes('class="legal-nav"')) {
+    // For legal pages like privacy.html, terms.html, cookies.html, licenses.html
+    const legalNavRegex = /<(?:div|nav)[^>]*class="legal-nav"[\s\S]*?<\/(?:div|nav)>/i;
+    content = content.replace(legalNavRegex, CANONICAL_NAVBAR_HTML.trim());
+    changed = true;
+  } else if (filePath.endsWith('404.html')) {
+    // For 404.html, insert the navbar right after <body>
+    const bodyOpenRegex = /<body[^>]*>/i;
+    content = content.replace(bodyOpenRegex, '$&\n' + CANONICAL_NAVBAR_HTML.trim());
+    changed = true;
+  }
+
+  // Ensure /assets/css/booking-system.css is included in <head>
+  if (!content.includes('booking-system.css')) {
+    content = content.replace(
+      '</head>',
+      '    <link rel="stylesheet" href="/assets/css/booking-system.css" type="text/css"/>\n</head>'
+    );
+    changed = true;
+  }
+
+  // Ensure /assets/js/navbar-dropdowns.js is included before </body>
+  if (!content.includes('navbar-dropdowns.js')) {
+    content = content.replace(
+      '</body>',
+      '    <script src="/assets/js/navbar-dropdowns.js"></script>\n</body>'
+    );
+    changed = true;
+  }
+
+  if (changed) {
+    fs.writeFileSync(filePath, content, 'utf8');
+    return true;
+  }
+  return false;
+}
+
+function verifyFile(filePath) {
+  const content = fs.readFileSync(filePath, 'utf8');
+  const hasNavbarWrap = content.includes('class="navbar_wrap');
+  const hasAboutDropdown = content.includes('data-dropdown-type="about"');
+  const hasServicesDropdown = content.includes('data-dropdown-type="services"');
+  const hasPagesDropdown = content.includes('data-dropdown-type="pages"');
+  const hasOrthodontics = content.includes('/services#orthodontics');
+  const hasBookingCss = content.includes('booking-system.css');
+  const hasNavbarJs = content.includes('navbar-dropdowns.js');
+
+  return {
+    file: path.relative(ROOT_DIR, filePath),
+    valid: hasNavbarWrap && hasAboutDropdown && hasServicesDropdown && hasPagesDropdown && hasOrthodontics && hasBookingCss && hasNavbarJs,
+    details: {
+      hasNavbarWrap,
+      hasAboutDropdown,
+      hasServicesDropdown,
+      hasPagesDropdown,
+      hasOrthodontics,
+      hasBookingCss,
+      hasNavbarJs
+    }
+  };
+}
+
+// CLI Execution
+const isVerifyOnly = process.argv.includes('--verify');
+const files = getAllHtmlFiles();
+
+console.log(`Found ${files.length} HTML files.`);
+
+if (isVerifyOnly) {
+  let passed = 0;
+  let failed = 0;
+  for (const f of files) {
+    const res = verifyFile(f);
+    if (res.valid) {
+      passed++;
+    } else {
+      failed++;
+      console.warn(`[FAIL] ${res.file}:`, res.details);
+    }
+  }
+  console.log(`Verification: ${passed} passed, ${failed} failed.`);
+  process.exit(failed > 0 ? 1 : 0);
+} else {
+  let updated = 0;
+  for (const f of files) {
+    if (syncFile(f)) {
+      updated++;
+    }
+  }
+  console.log(`Synced canonical navbar to ${updated} files.`);
+}

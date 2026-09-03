@@ -1,20 +1,20 @@
 /**
- * Redesign Dental Clinics — Professional Navbar Dropdown Engine
+ * Redesign Dental Clinics — Unified Navbar Engine
  * 
- * - Hover behavior with 300ms close delay on desktop (>= 992px).
- * - Clicking main text ("About Us" / "Services") navigates directly to /about and /services.
- * - Clicking the arrow button toggles the dropdown overlay without shifting the navbar.
- * - Invisible bridge prevents cursor dead zones between button and menu.
- * - Fully isolated from Webflow to eliminate layout jumping or reversing.
- * - Mobile responsive accordion submenus with smooth expand/collapse.
+ * - Stable single-source-of-truth navbar controller
+ * - Desktop (>= 992px): Absolute overlay with 250ms hover delay. Never participates in flex flow.
+ * - Mobile (<= 991px): Smooth accordion drawer. Mutual exclusive submenu expansion.
+ * - In-page smooth scroll with 105px header offset for all hash targets.
+ * - Cross-page hash arrival scroll offset handling.
  * - Full accessibility: ESC key, aria-expanded, outside click to close.
+ * - Hides floating actions when mobile menu drawer is open.
  */
 
 (function () {
   'use strict';
 
   var closeTimers = {};
-  var HEADER_OFFSET = 95;
+  var HEADER_OFFSET = 105;
 
   function initNavbarDropdowns() {
     var dropdowns = document.querySelectorAll('.rc-nav-dropdown');
@@ -22,10 +22,8 @@
     dropdowns.forEach(function (dd, index) {
       var timerId = 'rc_dd_' + index;
       var arrowBtn = dd.querySelector('.rc-dropdown-arrow-btn');
-      var parentLink = dd.querySelector('.rc-nav-parent-link');
       var listMenu = dd.querySelector('.rc-dropdown-menu');
 
-      // ── Helper: Open Dropdown ──────────────────────────────────────────────
       function openMenu() {
         if (closeTimers[timerId]) {
           clearTimeout(closeTimers[timerId]);
@@ -43,15 +41,13 @@
         if (arrowBtn) arrowBtn.setAttribute('aria-expanded', 'true');
       }
 
-      // ── Helper: Schedule 300ms Close Delay (Desktop Hover) ─────────────────
       function scheduleCloseMenu() {
         if (closeTimers[timerId]) clearTimeout(closeTimers[timerId]);
         closeTimers[timerId] = setTimeout(function () {
           closeMenuImmediately(dd, timerId);
-        }, 300);
+        }, 250);
       }
 
-      // ── Helper: Close Dropdown Immediately ────────────────────────────────
       function closeMenuImmediately(targetDd, tId) {
         if (closeTimers[tId]) {
           clearTimeout(closeTimers[tId]);
@@ -113,33 +109,33 @@
             if (currentPath === '') currentPath = '/';
 
             var isHomePage = (currentPath === '/' || currentPath === '');
+            var isServicesPage = (currentPath === '/services' || currentPath === '/services.html');
 
-            // In-page smooth scroll if already on homepage targeting #doctor-profile
+            // In-page smooth scroll if on homepage targeting #doctor-profile
             if (isHomePage && (href === '/#doctor-profile' || href === '#doctor-profile')) {
               var docEl = document.getElementById('doctor-profile');
               if (docEl) {
                 e.preventDefault();
                 closeMenuImmediately(dd, timerId);
+                closeMobileNav();
                 var docTop = docEl.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({ top: docTop - HEADER_OFFSET, behavior: 'smooth' });
                 try { history.pushState(null, null, '#doctor-profile'); } catch (err) {}
-                closeMobileNav();
                 return;
               }
             }
 
             // In-page smooth scroll if on /services targeting #category
-            var isServicesPage = (currentPath === '/services' || currentPath === '/services.html');
             if (isServicesPage && href.startsWith('/services#')) {
               var sTargetId = href.split('#')[1];
               var sTargetEl = document.getElementById(sTargetId);
               if (sTargetEl) {
                 e.preventDefault();
                 closeMenuImmediately(dd, timerId);
+                closeMobileNav();
                 var sTargetTop = sTargetEl.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({ top: sTargetTop - HEADER_OFFSET, behavior: 'smooth' });
                 try { history.pushState(null, null, '#' + sTargetId); } catch (err) {}
-                closeMobileNav();
                 return;
               }
             }
@@ -152,25 +148,55 @@
       }
     });
 
-    // Helper: Close mobile navigation menu if open
-    function closeMobileNav() {
-      var mobileNavMenu = document.querySelector('.w-nav-menu');
-      var mobileToggle = document.querySelector('.w-nav-button');
-      if (mobileNavMenu && mobileNavMenu.classList.contains('w--open')) {
-        if (mobileToggle) {
-          try { mobileToggle.click(); } catch (err) {}
+    // ── MOBILE MENU TOGGLER & BODY CLASS ─────────────────────────────────────
+    var mobileToggle = document.querySelector('.navbar-toggler-button');
+    var mobileNavMenu = document.querySelector('.navbar_menu');
+
+    if (mobileToggle && mobileNavMenu) {
+      mobileToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = mobileNavMenu.classList.contains('w--open');
+        if (isOpen) {
+          // Close
+          mobileNavMenu.classList.remove('w--open');
+          mobileToggle.classList.remove('w--open');
+          mobileToggle.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('rc-menu-open');
+        } else {
+          // Open
+          mobileNavMenu.classList.add('w--open');
+          mobileToggle.classList.add('w--open');
+          mobileToggle.setAttribute('aria-expanded', 'true');
+          document.body.classList.add('rc-menu-open');
         }
-      }
+      });
     }
 
-    // ── CLICK OUTSIDE TO CLOSE ───────────────────────────────────────────────
+    // Helper: Close mobile navigation menu if open
+    function closeMobileNav() {
+      if (mobileNavMenu) {
+        mobileNavMenu.classList.remove('w--open');
+      }
+      if (mobileToggle) {
+        mobileToggle.classList.remove('w--open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
+      document.body.classList.remove('rc-menu-open');
+    }
+
+    // ── CLICK OUTSIDE TO CLOSE DROPDOWNS & MOBILE MENU ───────────────────────
     document.addEventListener('click', function (e) {
+      // Close desktop dropdowns when clicking outside
       if (!e.target.closest('.rc-nav-dropdown')) {
         dropdowns.forEach(function (dd, index) {
           dd.classList.remove('is-open');
           var arrowBtn = dd.querySelector('.rc-dropdown-arrow-btn');
           if (arrowBtn) arrowBtn.setAttribute('aria-expanded', 'false');
         });
+      }
+      // Close mobile menu when clicking outside the navbar entirely
+      if (!e.target.closest('.navbar_wrap')) {
+        closeMobileNav();
       }
     });
 
@@ -182,6 +208,7 @@
           var arrowBtn = dd.querySelector('.rc-dropdown-arrow-btn');
           if (arrowBtn) arrowBtn.setAttribute('aria-expanded', 'false');
         });
+        closeMobileNav();
       }
     });
   }
@@ -189,7 +216,7 @@
   // ── CROSS-PAGE HASH ARRIVAL SCROLL OFFSET ──────────────────────────────────
   function handleInitialHashScroll() {
     if (window.location.hash) {
-      setTimeout(function () {
+      function attemptScroll(retries) {
         var targetElem = document.querySelector(window.location.hash);
         if (targetElem) {
           var elemPos = targetElem.getBoundingClientRect().top + window.pageYOffset;
@@ -197,8 +224,11 @@
             top: elemPos - HEADER_OFFSET,
             behavior: 'smooth'
           });
+        } else if (retries > 0) {
+          setTimeout(function () { attemptScroll(retries - 1); }, 150);
         }
-      }, 250);
+      }
+      setTimeout(function () { attemptScroll(5); }, 200);
     }
   }
 
