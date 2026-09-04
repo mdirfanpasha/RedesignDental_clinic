@@ -48,7 +48,7 @@ Add these variables to **Vercel Project Settings > Environment Variables** (for 
 | `WHATSAPP_ACCESS_TOKEN` | Meta System User Permanent Token | `EAA...` (Secret) |
 | `WHATSAPP_PHONE_NUMBER_ID` | WhatsApp Business Phone Number ID from Meta | `102938475610293` |
 | `WHATSAPP_BUSINESS_ACCOUNT_ID` | WABA ID from Meta Business Manager | `987654321098765` |
-| `WHATSAPP_NOTIFY_NUMBER` | Doctor / Reception WhatsApp number (with country code) | `917780245307` |
+| `WHATSAPP_NOTIFY_NUMBER` | Doctor / Reception WhatsApp number (with country code) | `918179738737` |
 | `WHATSAPP_NOTIFY_NUMBERS` | *(Optional)* Multiple recipient numbers (comma-separated) | `917780245307,919876543210` |
 | `WHATSAPP_API_VERSION` | Meta Graph API Version | `v20.0` |
 | `WHATSAPP_APPOINTMENT_TEMPLATE` | *(Optional)* Approved Meta Template Name | `new_appointment_request` |

@@ -1,5 +1,36 @@
 [
   {
+    "referenceId": "RDC-APPT-20260904-C2JA",
+    "type": "appointment",
+    "name": "ifab",
+    "phone": "1234567890",
+    "email": "",
+    "reason": "General Consultation",
+    "customMsg": "",
+    "date": "2026-09-04",
+    "time": "10:00 AM IST",
+    "ip": "::1",
+    "whatsappStatus": "failed",
+    "createdAt": "2026-09-04T07:11:16.811Z",
+    "createdAtIST": "Friday, 4 September 2026 at 12:41:16 pm IST",
+    "whatsappResults": [
+      {
+        "recipient": "918179738737",
+        "template": {
+          "success": false,
+          "status": "failed",
+          "error": "Authentication Error"
+        },
+        "details": {
+          "success": false,
+          "status": "failed",
+          "error": "Authentication Error"
+        },
+        "success": false
+      }
+    ]
+  },
+  {
     "referenceId": "RDC-APPT-20260902-AZZP",
     "type": "appointment",
     "name": "John Doe",

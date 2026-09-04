@@ -33,11 +33,55 @@
   var selectedTimeSlot = null;
   var currentCalDate = new Date();
   var selectedDateStr = currentCalDate.toISOString().split('T')[0];
+  var selectedDoctor = null;
+
+  function parseQueryParams() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var doc = params.get('doctor');
+      var srv = params.get('service');
+      
+      var doctorMap = {
+        'dr-suhail': { name: 'Dr. Suhail A. Syed', service: 'Periodontics & Gum Care' },
+        'dr-harika': { name: 'Dr. Harika Choudhary', service: 'Endodontics (Root Canal Treatment)' },
+        'dr-mousa': { name: 'Dr. Mousa Jeelani', service: 'Preventive & General Dentistry' },
+        'orthodontist': { name: 'Dr. Bilal Ahmed Asaq', service: 'Orthodontics (Braces / Aligners)' },
+        'dr-bilal': { name: 'Dr. Bilal Ahmed Asaq', service: 'Orthodontics (Braces / Aligners)' },
+        'endodontist': { name: 'Dr. Ahmed Ali Khan', service: 'Endodontics (Root Canal Treatment)' },
+        'dr-ahmed': { name: 'Dr. Ahmed Ali Khan', service: 'Endodontics (Root Canal Treatment)' },
+        'prosthodontist': { name: 'Dr. Nooruddin Talha', service: 'Restorative Dentistry (Crowns / Bridges)' },
+        'dr-talha': { name: 'Dr. Nooruddin Talha', service: 'Restorative Dentistry (Crowns / Bridges)' },
+        'dr-lipika': { name: 'Dr. Lipika', service: 'Restorative Dentistry (Crowns / Bridges)' }
+      };
+
+      var serviceEl = document.getElementById('apt-page-service');
+      if (doc && doctorMap[doc]) {
+        selectedDoctor = doctorMap[doc].name;
+        if (serviceEl) {
+          var targetService = doctorMap[doc].service;
+          for (var i = 0; i < serviceEl.options.length; i++) {
+            if (serviceEl.options[i].text.includes(targetService) || serviceEl.options[i].value.includes(targetService)) {
+              serviceEl.selectedIndex = i;
+              break;
+            }
+          }
+        }
+      } else if (srv && serviceEl) {
+        for (var j = 0; j < serviceEl.options.length; j++) {
+          if (serviceEl.options[j].text.toLowerCase().includes(srv.toLowerCase()) || serviceEl.options[j].value.toLowerCase().includes(srv.toLowerCase())) {
+            serviceEl.selectedIndex = j;
+            break;
+          }
+        }
+      }
+    } catch (e) {}
+  }
 
   function initAppointmentPage() {
     var form = document.getElementById('dedicated-appointment-form');
     if (!form) return;
 
+    parseQueryParams();
     initInlineCalendar();
     renderTimeSlots();
     initReasonToggle();
@@ -268,6 +312,7 @@
         phone: phone,
         email: email || 'Not provided',
         service: service || 'Not specified (General Consultation)',
+        doctor: selectedDoctor,
         date: dateStr,
         timeSlot: selectedTimeSlot,
         reason: (reason === 'Custom Message' && customMsg ? customMsg : (reason || 'Not provided')),
@@ -301,7 +346,7 @@
   }
 
   function triggerWhatsAppAppointment(data) {
-    var cleanNumber = '917780245307';
+    var cleanNumber = (window.whatsappConfig && window.whatsappConfig.clinicNumber) ? window.whatsappConfig.clinicNumber : '918179738737';
     var lines = [
       'Hello Redesign Dental Clinics 👋',
       '',
@@ -320,6 +365,7 @@
       '⏰ Preferred Time:',
       data.timeSlot,
       '',
+      (data.doctor ? ('👨‍⚕️ Preferred Doctor: ' + data.doctor + '\n\n') : '') +
       '🦷 Service Required:',
       data.service,
       '',

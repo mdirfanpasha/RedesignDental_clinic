@@ -549,7 +549,7 @@ ${schemaJson}
                         <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.ctaTitle">Have Questions About Your Dental Health?</h3>
                         <p style="font-size: 14px; opacity: 0.9; margin: 0; color: #e2e8f0; letter-spacing: normal !important; word-spacing: normal !important;" data-i18n="blog.ctaSubtitle">Consult with our specialist dentists at Redesign Dental Clinics in Banjara Hills, Hyderabad.</p>
                     </div>
-                    <a href="/contact#book" style="padding: 14px 24px; background: #ffffff; color: #05262a; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 14px; white-space: nowrap; transition: all 0.2s;" data-i18n="blog.ctaButton">
+                    <a href="/booking" style="padding: 14px 24px; background: #ffffff; color: #05262a; border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 14px; white-space: nowrap; transition: all 0.2s;" data-i18n="blog.ctaButton">
                         Book Consultation
                     </a>
                 </div>

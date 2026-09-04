@@ -81,13 +81,13 @@ function setSecurityHeaders(res) {
   // Content Security Policy
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://ajax.googleapis.com",
+    "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://ajax.googleapis.com https://va.vercel-scripts.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
     "img-src 'self' data: https: blob:",
     "media-src 'self' data: blob:",
     "frame-src 'self' https://www.google.com/ https://www.youtube.com/ https://www.youtube-nocookie.com/ https://maps.google.com/",
-    "connect-src 'self' https://www.google.com/recaptcha/ https://graph.facebook.com/",
+    "connect-src 'self' https://www.google.com/recaptcha/ https://graph.facebook.com/ https://vitals.vercel-insights.com",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'"
@@ -104,7 +104,7 @@ const CLEAN_ROUTES = {
   '/gallery':   'gallery.html',
   '/contact':   'contact.html',
   '/blog':      'blog.html',
-  '/booking':   'booking.html',
+  '/booking':   'appointment.html',
   '/appointment': 'appointment.html',
   '/privacy':   'privacy.html',
   '/terms':     'terms.html',
@@ -122,7 +122,7 @@ const HTML_REDIRECTS = {
   '/gallery.html':     '/gallery',
   '/contact.html':     '/contact',
   '/blog.html':        '/blog',
-  '/booking.html':     '/booking',
+  '/booking.html':     '/appointment',
   '/appointment.html': '/appointment',
   '/appointment.htm':  '/appointment',
   '/privacy.html':     '/privacy',

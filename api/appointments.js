@@ -81,6 +81,7 @@ export default async function handler(req, res) {
     const cleanName = sanitizeText(validData.name, 100);
     const cleanPhone = sanitizeText(validData.phone, 20);
     const cleanEmail = sanitizeText(validData.email || '', 150);
+    const cleanDoctor = sanitizeText(validData.doctor || '', 120);
     const cleanReason = sanitizeText(validData.reason || 'General Consultation', 120);
     const cleanCustomMsg = sanitizeText(validData.customMsg || '', 1000);
     const cleanDate = sanitizeText(validData.date, 30);
@@ -114,6 +115,7 @@ export default async function handler(req, res) {
       name: cleanName,
       phone: cleanPhone,
       email: cleanEmail,
+      doctor: cleanDoctor,
       reason: cleanReason,
       customMsg: cleanCustomMsg,
       date: cleanDate,

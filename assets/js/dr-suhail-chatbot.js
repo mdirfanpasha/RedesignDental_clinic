@@ -188,7 +188,7 @@
   var DOCTOR_AVATAR_SRC = '/assets/img/dr-suhail-floating-icon.png';
   var DOCTOR_AVATAR_FALLBACK = '/assets/img/suhail_icon-removebg-preview.png';
   var CLINIC_PHONE = '+917780245307';
-  var WA_URL = 'https://wa.me/917780245307?text=Hi%20Redesign%20Dental%20Clinics%2C%20I%20would%20like%20to%20enquire%20about%20dental%20treatments';
+  var WA_URL = 'https://wa.me/918179738737?text=Hi%20Redesign%20Dental%20Clinics%2C%20I%20would%20like%20to%20enquire%20about%20dental%20treatments';
   var SESSION_STORAGE_KEY = 'redesign_suhail_chat_session_v2';
 
   // ─── SVG Icons Helper ───────────────────────────────────────────────────────
@@ -241,7 +241,7 @@
     clear: function () {
       try {
         sessionStorage.removeItem(SESSION_STORAGE_KEY);
-      } catch (err) {}
+      } catch (err) { }
     }
   };
 
@@ -764,7 +764,7 @@
           var payloadRaw = btn.getAttribute('data-payload');
           var payload = null;
           if (payloadRaw) {
-            try { payload = JSON.parse(payloadRaw); } catch (e) {}
+            try { payload = JSON.parse(payloadRaw); } catch (e) { }
           }
           self.executeCtaAction(action, payload);
         });
@@ -784,7 +784,7 @@
               }
             }
           } else {
-            window.location.href = '/booking';
+            window.location.href = '/appointment';
           }
           break;
 

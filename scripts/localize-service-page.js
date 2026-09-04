@@ -343,7 +343,7 @@ const newServicesScript = `<!-- ===== SERVICES DATA & REAL-TIME FILTER ENGINE ==
                                 <p class="card-desc-light">\${itemDesc}</p>
                             </div>
                             <div class="card-footer-light">
-                                <a href="#book" class="card-cta-btn-light" aria-label="\${ctaText} for \${itemName}">
+                                <a href="/booking" class="card-cta-btn-light" aria-label="\${ctaText} for \${itemName}">
                                     <span>\${ctaText}</span>
                                     <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

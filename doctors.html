@@ -11,6 +11,17 @@
 
   gtag('config', 'G-FMNL8XFZ4N');
 </script>
+    <!-- Vercel Web Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+
     <meta charset="utf-8" />
     <title>Our Doctors & Dental Specialists | Redesign Dental Clinics Hyderabad</title>
     <meta
@@ -281,6 +292,538 @@
                 font-size: 0.88rem;
             }
         }
+
+        /* Smooth scrolling for anchor jumps */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Chief Doctor Showcase Section */
+        .section_doctor_showcase {
+            padding: 90px 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f4f8f8 100%) !important;
+            position: relative;
+            overflow: hidden;
+            color: #05262a !important;
+        }
+
+        .doctor-showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+        }
+
+        .doctor-showcase-heading {
+            font-family: var(--font, 'Sora', sans-serif);
+            color: #05262a !important;
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -1.4px;
+            margin: 0 0 8px 0;
+            line-height: 1.15;
+        }
+
+        .doctor-degrees {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0f766e !important;
+            margin-bottom: 6px;
+        }
+
+        .doctor-subtext {
+            font-size: 15px;
+            color: #64748b;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .doctor-pills-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .doc-pill {
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .doc-pill.is-cyan {
+            background: #e6f4f4;
+            border: 1px solid #bce3e3;
+            color: #05262a;
+        }
+
+        .doc-pill.is-green {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        .doc-pill.is-amber {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+        }
+
+        .doctor-bio-wrap {
+            margin-bottom: 24px;
+            color: #475569 !important;
+            font-size: 15.5px;
+            line-height: 1.7;
+        }
+
+        .doctor-bio-wrap p {
+            color: #475569 !important;
+        }
+
+        .specialties-header {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #05262a !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .specialties-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .specialty-tag {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #05262a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .specialty-tag:hover {
+            background: #f0fdfa;
+            border-color: #0d9488;
+            color: #0f766e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(13, 148, 136, 0.14);
+        }
+
+        .doctor-image-col {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+        }
+
+        .doctor-bg-accent {
+            position: absolute;
+            width: 90%;
+            height: 94%;
+            background: linear-gradient(135deg, #05262a 0%, #0f766e 100%);
+            border-radius: 32px;
+            top: 18px;
+            right: -12px;
+            transform: rotate(3deg);
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        /* --- Doctor Image Container with 3D Video Flip --- */
+        .doctor-img-box.doctor-flip-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 520px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(5, 38, 42, 0.22);
+            border: 4px solid #ffffff;
+            background: #05262a;
+            perspective: 1200px;
+            -webkit-perspective: 1200px;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            outline: none;
+        }
+
+        .doctor-img-box.doctor-flip-container:focus-visible {
+            box-shadow: 0 0 0 4px #0f766e, 0 25px 60px rgba(5, 38, 42, 0.3);
+        }
+
+        .doctor-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        .doctor-flip-container.is-flipped .doctor-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .doctor-flip-face {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .doctor-flip-face.is-front {
+            background: #ffffff;
+            transform: rotateY(0deg);
+            z-index: 2;
+        }
+
+        .doctor-flip-face.is-back {
+            background: #05262a;
+            transform: rotateY(180deg);
+            z-index: 1;
+        }
+
+        .doctor-portrait-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+
+        .doctor-portrait-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            background: #05262a;
+        }
+
+        /* Interactive Video Hint Pill */
+        .doctor-video-hint-pill {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(5, 38, 42, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 8px 18px;
+            border-radius: 99px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            z-index: 4;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            max-width: 90%;
+            pointer-events: none;
+        }
+
+        .doctor-img-box:hover .doctor-video-hint-pill {
+            transform: translateX(-50%) scale(1.04);
+            background: rgba(15, 118, 110, 0.95);
+            box-shadow: 0 12px 30px rgba(15, 118, 110, 0.4);
+        }
+
+        .doctor-hint-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #05262a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .doctor-img-box:hover .doctor-hint-icon {
+            transform: scale(1.1);
+        }
+
+        .doctor-hint-text-wrap {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .doctor-hint-main {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.2;
+            white-space: nowrap;
+            color: #ffffff;
+        }
+
+        .doctor-hint-sub {
+            font-size: 10px;
+            opacity: 0.85;
+            white-space: nowrap;
+            color: #e2e8f0;
+        }
+
+        .doctor-hint-timer-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: #38bdf8;
+            transition: width 3s linear;
+        }
+
+        /* Video Controls Overlays on Back Face */
+        .doctor-video-top-bar {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 5;
+        }
+
+        .doctor-flip-close-btn {
+            background: rgba(5, 38, 42, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            padding: 7px 14px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .doctor-flip-close-btn:hover {
+            background: #0f766e;
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .doctor-video-bottom-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+
+        .doctor-video-controls-pill {
+            background: rgba(5, 38, 42, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 99px;
+            padding: 6px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .doc-video-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .doc-video-btn:hover {
+            color: #38bdf8;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .doctor-video-progress-track {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 6;
+        }
+
+        .doctor-video-progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #0f766e;
+            transition: width 0.1s linear;
+        }
+
+        .floating-cards-row {
+            display: contents;
+        }
+
+        .floating-doc-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 8px 12px;
+            box-shadow: 0 10px 25px rgba(5, 38, 42, 0.12);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 3;
+            white-space: nowrap;
+        }
+
+        .floating-doc-card.card-exp {
+            position: absolute;
+            top: 18px;
+            left: -48px;
+            max-width: 190px;
+        }
+
+        .floating-doc-card.card-rating {
+            position: absolute;
+            bottom: 24px;
+            right: -36px;
+        }
+
+        .floating-card-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .floating-card-icon.is-cyan {
+            background: #e6f4f4;
+            color: #0f766e;
+            font-size: 14px;
+        }
+
+        .floating-card-icon.is-amber {
+            background: #fffbeb;
+            color: #d97706;
+            font-size: 13px;
+        }
+
+        .floating-card-title {
+            font-weight: 700;
+            font-size: 12px;
+            color: #05262a;
+            line-height: 1.2;
+        }
+
+        .floating-card-sub {
+            font-size: 10.5px;
+            color: #64748b;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 991px) {
+            .section_doctor_showcase {
+                padding: 60px 0 !important;
+            }
+
+            .doctor-showcase-grid {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+
+            .doctor-image-col {
+                order: -1;
+                margin: 0 auto 10px auto !important;
+                width: 100% !important;
+                max-width: 420px !important;
+            }
+
+            .doctor-bg-accent {
+                display: none !important;
+            }
+
+            .doctor-showcase-heading {
+                font-size: 32px !important;
+                letter-spacing: -1px !important;
+            }
+
+            .doctor-degrees {
+                font-size: 16px !important;
+            }
+
+            .doctor-img-box.doctor-flip-container {
+                height: 440px !important;
+            }
+
+            .floating-cards-row {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+                margin-top: 16px !important;
+                width: 100% !important;
+            }
+
+            .floating-doc-card {
+                position: static !important;
+                left: auto !important;
+                right: auto !important;
+                top: auto !important;
+                bottom: auto !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                padding: 12px 14px !important;
+                box-shadow: 0 4px 15px rgba(5, 38, 42, 0.08) !important;
+                white-space: normal !important;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .section_doctor_showcase {
+                padding: 48px 0 !important;
+            }
+
+            .doctor-showcase-heading {
+                font-size: 28px !important;
+            }
+
+            .doctor-img-box.doctor-flip-container {
+                height: 380px !important;
+            }
+
+            .floating-cards-row {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
         <!-- Google reCAPTCHA v3 - Loaded eagerly -->
         <script src="https://www.google.com/recaptcha/api.js?render=6LdkaZQtAAAAAlkSLA78ABt5Xeo0EgbfLbeqHZWu" async defer></script>
@@ -398,7 +941,7 @@
                         </div>
                         <!-- Dedicated Mobile Drawer CTA button -->
                         <div class="rc-mobile-menu-cta">
-                            <a href="/booking" class="button_primary w-inline-block">
+                            <a href="/appointment" class="button_primary w-inline-block">
                                 <div class="button_inner">
                                     <div class="button-text_wrap">
                                         <div class="button_text" data-i18n="nav.getAppointment">Get Appointment</div>
@@ -410,7 +953,7 @@
                     <div class="navbar-button_wrapper">
                         <div class="navbar_button hide-mobile">
                             <div class="button-container">
-                                <a href="/booking" class="button_primary w-inline-block">
+                                <a href="/appointment" class="button_primary w-inline-block">
                                     <div class="button_inner">
                                         <div class="button-text_wrap">
                                             <div class="button_text" data-i18n="nav.getAppointment">Get Appointment</div>
@@ -465,38 +1008,319 @@
                 </div>
             </header>
 
-            <!-- Doctors Grid Section (5 Dental Specialists) -->
-            <section class="doctors-main_section">
+            <!-- ===== Chief Doctor Showcase Section (Dr. Suhail A. Syed) ===== -->
+            <section id="doctor-profile" class="section_doctor_showcase"
+                style="padding: 90px 0; background: linear-gradient(180deg, #ffffff 0%, #f4f8f8 100%); position: relative; overflow: hidden;">
+                <a id="dr-suhail" style="position: absolute; top: -80px;"></a>
+                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
+                    <div class="doctor-showcase-grid">
+
+                        <!-- Left Column: Doctor Info & Bio -->
+                        <div class="doctor-info-col">
+                            <div class="section_tag"
+                                style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                                <div class="icon_wrap is-small">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12" fill="none"
+                                        vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                                        <path
+                                            d="M6 0C6.4 3.2 8.8 5.6 12 6C8.8 6.4 6.4 8.8 6 12C5.6 8.8 3.2 6.4 0 6C3.2 5.6 5.6 3.2 6 0Z"
+                                            fill="currentColor"></path>
+                                    </svg>
+                                </div>
+                                <span>YOUR DENTAL CARE, IN EXPERT HANDS</span>
+                            </div>
+
+                            <h2 class="doctor-showcase-heading">
+                                Meet Dr. Suhail A. Syed
+                            </h2>
+
+                            <div class="doctor-degrees">
+                                BDS, MDS (Periodontics) &nbsp;·&nbsp; <span
+                                    style="color: #475569; font-weight: 500;">MS : Strategic Implantologist</span>
+                            </div>
+
+                            <div class="doctor-subtext">
+                                <div style="font-weight: 700; color: #0d9488; margin-bottom: 3px; font-size: 15.5px;">
+                                    Founder &amp; Lead Dentist, Redesign Dental Clinics</div>
+                                <div style="color: #64748b; font-size: 14.5px;">Periodontics &amp; Strategic Implantologist
+                                    &nbsp;·&nbsp; Banjara Hills, Hyderabad</div>
+                            </div>
+
+                            <!-- Credential Pills Row -->
+                            <div class="doctor-pills-row">
+                                <div class="doc-pill is-cyan">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0f766e"
+                                        stroke-width="2.5">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                    Medical Registration Verified
+                                </div>
+                                <div class="doc-pill is-green">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a"
+                                        stroke-width="2.5">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    20+ Years Experience
+                                </div>
+                                <div class="doc-pill is-amber">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="none">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg>
+                                    20K+ Verified Patients
+                                </div>
+                            </div>
+
+                            <!-- Biography Paragraphs -->
+                            <div class="doctor-bio-wrap"
+                                style="margin-bottom: 24px; color: #475569; font-size: 15.5px; line-height: 1.7;">
+                                <p style="margin-bottom: 12px;">Dr. Suhail A. Syed is the Founder and Lead Dentist at
+                                    Redesign Dental Clinics, Banjara Hills, Hyderabad. With over 20 years of experience,
+                                    he is committed to delivering modern, precise and patient-focused dental care.</p>
+                                <p style="margin-bottom: 12px;">His approach combines clinical expertise with a strong
+                                    focus on aesthetics, comfort and long-term oral health. Dr. Suhail believes that
+                                    exceptional dentistry goes beyond treatment — it is about understanding every
+                                    patient, earning their trust and creating a comfortable and personalised treatment
+                                    experience.</p>
+                                <p style="margin-bottom: 0;">At Redesign Dental Clinics, every smile is treated with
+                                    precision, care and a commitment to helping patients achieve healthier, confident
+                                    and long-lasting smiles.</p>
+                            </div>
+
+                            <!-- Specialties & Key Services -->
+                            <div style="margin-bottom: 28px;">
+                                <div class="specialties-header"
+                                    style="font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0f172a; margin-bottom: 12px;">
+                                    SPECIALITIES &amp; KEY CLINICAL PROCEDURES
+                                </div>
+                                <div class="specialties-tags" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                    <span class="specialty-tag" title="Periodontics &amp; Gum Care">Periodontics</span>
+                                    <span class="specialty-tag" title="Implant Dentistry">Implant Dentistry</span>
+                                    <span class="specialty-tag" title="Aesthetic Dentistry">Aesthetic Dentistry</span>
+                                    <span class="specialty-tag" title="Fixed Partial Dentures">Fixed Partial Dentures</span>
+                                    <span class="specialty-tag" title="Full Mouth Rehabilitation">Full Mouth Rehabilitation</span>
+                                    <span class="specialty-tag" title="Smile Makeovers">Smile Makeovers</span>
+                                    <span class="specialty-tag" title="Prosthodontics &amp; Restorations">Prosthodontics</span>
+                                </div>
+                            </div>
+
+                            <!-- Primary & Secondary CTA Buttons -->
+                            <div class="doctor-cta-wrap"
+                                style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+                                <a href="/appointment?doctor=dr-suhail" class="button_primary w-inline-block">
+                                    <div class="button_inner">
+                                        <div class="button-text_wrap">
+                                            <div class="button_text">Book Appointment</div>
+                                        </div>
+                                        <div class="button-icon_group">
+                                            <div class="button-icon_wrap">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12"
+                                                    fill="none" vector-effect="non-scaling-stroke"
+                                                    preserveAspectRatio="none">
+                                                    <path
+                                                        d="M4.70139 0.75L10.5303 0.750201L10.5303 6.55165M0.530334 10.75L10.2896 0.990932"
+                                                        stroke="currentColor" stroke-width="1.5"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#specialist-doctors" class="button_secondary w-inline-block"
+                                    style="background: rgba(13, 148, 136, 0.08); border: 1.5px solid rgba(13, 148, 136, 0.35); color: #0d9488; padding: 14px 28px; border-radius: 9999px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.3s ease;">
+                                    <span>Meet Our Doctors</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Doctor Portrait Showcase -->
+                        <div class="doctor-image-col">
+                            <!-- Decorative background shape -->
+                            <div class="doctor-bg-accent"></div>
+
+                            <!-- Doctor Image Container with 3D Video Flip -->
+                            <div class="doctor-img-box doctor-flip-container" id="doctor-flip-card" role="button"
+                                tabindex="0"
+                                aria-label="Meet Dr. Suhail A. Syed - Interactive video card. Click or hover to watch video introduction."
+                                aria-expanded="false">
+                                <div class="doctor-flip-inner" id="doctor-flip-inner">
+
+                                    <!-- FRONT FACE: Doctor Portrait -->
+                                    <div class="doctor-flip-face is-front" id="doctor-flip-front">
+                                        <img src="assets/img/dr-suhail.webp"
+                                            onerror="this.onerror=null;this.src='assets/img/69de3a2ffad0bdd1136a1bcd_team-image-1.jpg'"
+                                            alt="Dr. Suhail A. Syed - Periodontics &amp; Strategic Implantologist at Redesign Dental Clinics"
+                                            loading="lazy" class="doctor-portrait-img" />
+
+                                        <!-- Interactive Video Hint Pill -->
+                                        <div class="doctor-video-hint-pill">
+                                            <div class="doctor-hint-icon">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                                </svg>
+                                            </div>
+                                            <div class="doctor-hint-text-wrap">
+                                                <span class="doctor-hint-main">▶ Watch Dr. Suhail</span>
+                                                <span class="doctor-hint-sub">Click or hover to watch</span>
+                                            </div>
+                                            <div class="doctor-hint-timer-bar" id="doctor-hover-timer-bar"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- BACK FACE: Dr. Suhail Video -->
+                                    <div class="doctor-flip-face is-back" id="doctor-flip-back" aria-hidden="true">
+                                        <video id="dr-suhail-flip-video" class="doctor-portrait-video" playsinline muted
+                                            preload="none" poster="assets/video/dr-suhail-poster.jpg">
+                                            <source src="assets/video/dr-suhail-profile.mp4" type="video/mp4" />
+                                        </video>
+
+                                        <!-- Top Overlay: Return / Close Button -->
+                                        <div class="doctor-video-top-bar">
+                                            <button type="button" class="doctor-flip-close-btn"
+                                                id="doctor-flip-close-btn" aria-label="Back to Photo"
+                                                title="Back to Photo" data-i18n-title="doctor.closeVideo">
+                                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                                                </svg>
+                                                <span data-i18n="doctor.closeVideo">Back to Photo</span>
+                                            </button>
+                                        </div>
+
+                                        <!-- Bottom Overlay: Controls (Play/Pause, Sound Toggle) -->
+                                        <div class="doctor-video-bottom-bar">
+                                            <div class="doctor-video-controls-pill">
+                                                <button type="button" class="doc-video-btn" id="doc-video-play-btn"
+                                                    aria-label="Play / Pause" title="Play / Pause">
+                                                    <svg class="icon-pause" width="16" height="16" viewBox="0 0 24 24"
+                                                        fill="currentColor">
+                                                        <rect x="6" y="4" width="4" height="16"></rect>
+                                                        <rect x="14" y="4" width="4" height="16"></rect>
+                                                    </svg>
+                                                    <svg class="icon-play" width="16" height="16" viewBox="0 0 24 24"
+                                                        fill="currentColor" style="display: none;">
+                                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                                    </svg>
+                                                </button>
+
+                                                <button type="button" class="doc-video-btn" id="doc-video-sound-btn"
+                                                    aria-label="Unmute" title="Unmute">
+                                                    <svg class="icon-muted" width="16" height="16" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                                                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                                                    </svg>
+                                                    <svg class="icon-unmuted" width="16" height="16" viewBox="0 0 24 24"
+                                                        fill="none" stroke="currentColor" stroke-width="2"
+                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                        style="display: none;">
+                                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                                        <path
+                                                            d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07">
+                                                        </path>
+                                                    </svg>
+                                                    <span id="doc-video-sound-text" data-i18n="doctor.unmuteVideo"
+                                                        style="font-size: 12px; font-weight: 600; margin-left: 4px;">Unmute</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Video Progress Bar -->
+                                        <div class="doctor-video-progress-track">
+                                            <div class="doctor-video-progress-fill" id="doctor-video-progress-fill">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Floating Cards Wrapper -->
+                            <div class="floating-cards-row">
+                                <!-- Floating Card 1: Experience -->
+                                <div class="floating-doc-card card-exp">
+                                    <div class="floating-card-icon is-cyan">
+                                        20+
+                                    </div>
+                                    <div>
+                                        <div class="floating-card-title">Years Experience</div>
+                                        <div class="floating-card-sub">Periodontics Specialist</div>
+                                    </div>
+                                </div>
+
+                                <!-- Floating Card 2: Rating -->
+                                <div class="floating-doc-card card-rating">
+                                    <div class="floating-card-icon is-amber">
+                                        100%
+                                    </div>
+                                    <div>
+                                        <div class="floating-card-title">Patient Rating</div>
+                                        <div class="floating-card-sub">20K+ Verified Patients</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- Specialist Doctors Section (All Specialists Below Chief Doctor) -->
+            <section id="specialist-doctors" class="doctors-main_section" style="padding-top: 70px;">
                 <div class="container">
+                    <div style="text-align: center; max-width: 760px; margin: 0 auto 36px;">
+                        <div class="section_tag" style="margin: 0 auto 14px;">
+                            <div class="icon_wrap is-small">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 12 12" fill="none" vector-effect="non-scaling-stroke" preserveAspectRatio="none">
+                                    <path d="M6 0C6.4 3.2 8.8 5.6 12 6C8.8 6.4 6.4 8.8 6 12C5.6 8.8 3.2 6.4 0 6C3.2 5.6 5.6 3.2 6 0Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                            <div>Our Specialist Team</div>
+                        </div>
+                        <h2 class="heading-style-h2" style="font-family: var(--font, 'Sora', sans-serif); color: #ffffff; margin-bottom: 12px; font-size: 2.2rem;">
+                            Meet Our Specialist Doctors
+                        </h2>
+                        <p style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+                            Hyderabad's leading consultants in Endodontics, Orthodontics, Prosthodontics, and Esthetic Dentistry working collaboratively for exceptional smile outcomes.
+                        </p>
+                    </div>
+
                     <div class="doctors-page_grid">
-                        
-                        <!-- Doctor 1: Dr. Suhail A. Syed (Chief / Lead) -->
+
+                        <!-- Specialist 1: Dr. Harika Choudhary (Endodontist & Conservative Dentist) -->
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
-                                <span class="doctor-card_featured-badge">★ Chief Surgeon</span>
-                                <a href="/#doctor-profile" title="View Dr. Suhail A. Syed Profile" style="display:block;width:100%;height:100%;">
-                                    <img src="assets/img/dr-suhail.webp" alt="Dr. Suhail A. Syed - Chief Dental Surgeon &amp; Implantologist" class="doctor-card_image" loading="eager" />
-                                </a>
+                                <img src="assets/img/doctors/dr-harika-choudhary.webp" alt="Dr. Harika Choudhary - Consultant Endodontist &amp; Conservative Dentist" class="doctor-card_image" loading="lazy" onerror="this.src='assets/img/doctors/dr-harika-choudhary.jpg'" />
                             </div>
                             <div class="doctor-card_content">
                                 <div>
-                                    <h2 class="doctor-card_name"><a href="/#doctor-profile" style="color:inherit;text-decoration:none;" title="View Dr. Suhail A. Syed Profile">Dr. Suhail A. Syed</a></h2>
-                                    <div class="doctor-card_title">Founder &amp; Lead Dentist</div>
-                                    <div class="doctor-card_qualification">BDS, MDS – Periodontics · Fellow AAID, USA • 20+ Years Exp.</div>
+                                    <h2 class="doctor-card_name">Dr. Harika Choudhary</h2>
+                                    <div class="doctor-card_title">Consultant Endodontist &amp; Conservative Dentist</div>
+                                    <div class="doctor-card_qualification">BDS, MDS - Endodontics • 12+ Years Exp.</div>
                                     <div class="doctor-card_tags">
-                                        <span class="doctor-card_tag">Implantology</span>
-                                        <span class="doctor-card_tag">Periodontics</span>
-                                        <span class="doctor-card_tag">Full Mouth Rehab</span>
+                                        <span class="doctor-card_tag">Single-Sitting RCT</span>
+                                        <span class="doctor-card_tag">Micro-Endodontics</span>
+                                        <span class="doctor-card_tag">Restorations</span>
                                     </div>
                                 </div>
-                                <a href="#book" class="doctor-card_btn">
+                                <a href="/appointment?doctor=dr-harika" class="doctor-card_btn">
                                     <span>Book Consultation</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Doctor 2: Dr. Mousa Jeelani (General Dentist & Clinic Manager) -->
+                        <!-- Specialist 2: Dr. Mousa Jeelani (General Dentist & Clinic Manager) -->
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
                                 <img src="assets/img/dr-mousa-jeelani.webp" alt="Dr. Mousa Jeelani - General Dentist &amp; Clinic Manager" class="doctor-card_image" loading="lazy" onerror="this.src='assets/img/dr-mousa-jeelani.jpg'" />
@@ -512,14 +1336,14 @@
                                         <span class="doctor-card_tag">Preventive Care</span>
                                     </div>
                                 </div>
-                                <a href="#book" class="doctor-card_btn">
+                                <a href="/appointment?doctor=dr-mousa" class="doctor-card_btn">
                                     <span>Book Consultation</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Doctor 3: Dr. Bilal Ahmed Asaq (Orthodontist) -->
+                        <!-- Specialist 3: Dr. Bilal Ahmed Asaq (Orthodontist) -->
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
                                 <img src="assets/img/doctors/doctor-04.webp" alt="Dr. Bilal Ahmed Asaq - Consultant Orthodontist &amp; Dentofacial Orthopedics" class="doctor-card_image" loading="lazy" />
@@ -535,14 +1359,14 @@
                                         <span class="doctor-card_tag">Smile Design</span>
                                     </div>
                                 </div>
-                                <a href="#book" class="doctor-card_btn">
+                                <a href="/appointment?doctor=orthodontist" class="doctor-card_btn">
                                     <span>Book Consultation</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Doctor 3: Dr. Ahmed Ali Khan (Endodontist) -->
+                        <!-- Specialist 4: Dr. Ahmed Ali Khan (Endodontist) -->
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
                                 <img src="assets/img/doctors/doctor-03.webp" alt="Dr. Ahmed Ali Khan - Consultant Endodontist &amp; Conservative Dentist" class="doctor-card_image" loading="lazy" />
@@ -558,14 +1382,14 @@
                                         <span class="doctor-card_tag">Restorations</span>
                                     </div>
                                 </div>
-                                <a href="#book" class="doctor-card_btn">
+                                <a href="/appointment?doctor=endodontist" class="doctor-card_btn">
                                     <span>Book Consultation</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Doctor 4: Dr. Nooruddin Talha (Prosthodontist) -->
+                        <!-- Specialist 5: Dr. Nooruddin Talha (Prosthodontist) -->
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
                                 <img src="assets/img/doctors/doctor-02.webp" alt="Dr. Nooruddin Talha - Consultant Prosthodontist &amp; Implantologist" class="doctor-card_image" loading="lazy" />
@@ -581,30 +1405,30 @@
                                         <span class="doctor-card_tag">Full Mouth Rehab</span>
                                     </div>
                                 </div>
-                                <a href="#book" class="doctor-card_btn">
+                                <a href="/appointment?doctor=prosthodontist" class="doctor-card_btn">
                                     <span>Book Consultation</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Doctor 5: Consultant Dental Specialist -->
+                        <!-- Specialist 6: Dr. Lipika (Prosthodontist & Implantologist) -->
                         <div class="doctor-card">
                             <div class="doctor-card_image-wrap">
-                                <img src="assets/img/doctors/doctor-05.webp" alt="Consultant Dental Specialist - Aesthetic Dentistry &amp; Surgery" class="doctor-card_image" loading="lazy" />
+                                <img src="assets/img/doctors/doctor-05.webp" alt="Dr. Lipika - Consultant Prosthodontist &amp; Implantologist" class="doctor-card_image" loading="lazy" />
                             </div>
                             <div class="doctor-card_content">
                                 <div>
                                     <h2 class="doctor-card_name">Dr. Lipika</h2>
-                                    <div class="doctor-card_title">Consultant Dental Specialist</div>
-                                    <div class="doctor-card_qualification">BDS, MDS • Aesthetic Dentistry &amp; Surgery • 8+ Years Exp.</div>
+                                    <div class="doctor-card_title">Consultant Prosthodontist &amp; Implantologist</div>
+                                    <div class="doctor-card_qualification">BDS, MDS - Prosthodontics • 9+ Years Exp.</div>
                                     <div class="doctor-card_tags">
-                                        <span class="doctor-card_tag">Aesthetic Dentistry</span>
-                                        <span class="doctor-card_tag">Painless Extraction</span>
-                                        <span class="doctor-card_tag">Preventive Care</span>
+                                        <span class="doctor-card_tag">Ceramic Veneers</span>
+                                        <span class="doctor-card_tag">Zirconia Crowns</span>
+                                        <span class="doctor-card_tag">Full Mouth Rehab</span>
                                     </div>
                                 </div>
-                                <a href="#book" class="doctor-card_btn">
+                                <a href="/appointment?doctor=dr-lipika" class="doctor-card_btn">
                                     <span>Book Consultation</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                                 </a>
@@ -631,13 +1455,13 @@
                             Schedule Your Visit with <span class="text-highlighted">Our Doctors</span>
                         </h2>
                         <p style="color: #cbd5e1; font-size: 1.05rem; margin-bottom: 36px;">
-                            Ready to restore your smile? Call us directly or book your consultation online today.
+                            Ready to restore your smile? Choose a time with our doctors online or contact us directly.
                         </p>
                         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                            <a href="tel:+917780245307" class="button_primary w-inline-block">
+                            <a href="/appointment" class="button_primary w-inline-block" style="text-decoration: none;">
                                 <div class="button_inner">
                                     <div class="button-text_wrap">
-                                        <div class="button_text">Call +91 7780-245-307</div>
+                                        <div class="button_text">Book Appointment Online</div>
                                     </div>
                                     <div class="button-icon_group">
                                         <div class="button-icon_wrap">
@@ -648,7 +1472,10 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="https://wa.me/917780245307?text=Hello%20Redesign%20Dental%20Clinics,%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener noreferrer" class="button_secondary w-inline-block" style="background: rgba(37, 211, 102, 0.15); border: 1.5px solid #25D366; color: #25D366; padding: 14px 28px; border-radius: 9999px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                            <a href="tel:+917780245307" class="button_secondary w-inline-block" style="border: 1.5px solid rgba(255,255,255,0.3); color: #ffffff; padding: 14px 28px; border-radius: 9999px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                                <span>Call +91 7780-245-307</span>
+                            </a>
+                            <a href="https://wa.me/918179738737?text=Hello%20Redesign%20Dental%20Clinics,%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener noreferrer" class="button_secondary w-inline-block" style="background: rgba(37, 211, 102, 0.15); border: 1.5px solid #25D366; color: #25D366; padding: 14px 28px; border-radius: 9999px; font-weight: 600; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
                                 <span>WhatsApp Consultation</span>
                             </a>
                         </div>
@@ -681,7 +1508,7 @@
                                     <p class="footer-info_para">Advanced technology, a caring team, and treatments designed to keep your smile healthy for life.</p>
                                 </div>
                             </div>
-                            <a data-wf--button-primary--variant="light" href="#book" class="button_primary w-variant-62db4792-8717-dbe8-e811-0d36eb02f9ec w-inline-block">
+                            <a data-wf--button-primary--variant="light" href="/appointment" class="button_primary w-variant-62db4792-8717-dbe8-e811-0d36eb02f9ec w-inline-block">
                                 <div class="button_inner">
                                     <div class="button-text_wrap">
                                         <div class="button_text" data-i18n="nav.bookAppointment">Book Appointment</div>
@@ -753,42 +1580,7 @@
     <script src="assets/js/whatsapp-config.js"></script>
     <script src="assets/js/booking-system.js"></script>
     <script src="assets/js/navbar-dropdowns.js"></script>
-    
-    <!-- Centralized Data Hydration Check -->
-    <script>
-        (function() {
-            // Ensures if additional doctors are appended in doctors-data.js, the grid auto-populates
-            if (window.doctorsData && Array.isArray(window.doctorsData)) {
-                var grid = document.querySelector('.doctors-page_grid');
-                if (grid && window.doctorsData.length > 5) {
-                    // Render any newly appended doctor beyond initial 5
-                    for (var i = 5; i < window.doctorsData.length; i++) {
-                        var doc = window.doctorsData[i];
-                        var card = document.createElement('div');
-                        card.className = 'doctor-card';
-                        card.innerHTML = 
-                            '<div class="doctor-card_image-wrap">' +
-                                (doc.featured ? '<span class="doctor-card_featured-badge">★ Featured</span>' : '') +
-                                '<img src="' + doc.image + '" alt="' + doc.name + ' - ' + doc.title + '" class="doctor-card_image" loading="lazy" />' +
-                            '</div>' +
-                            '<div class="doctor-card_content">' +
-                                '<div>' +
-                                    '<h2 class="doctor-card_name">' + doc.name + '</h2>' +
-                                    '<div class="doctor-card_title">' + doc.title + '</div>' +
-                                    '<div class="doctor-card_qualification">' + doc.qualification + (doc.experience ? ' • ' + doc.experience : '') + '</div>' +
-                                    (doc.specialty ? '<div class="doctor-card_tags"><span class="doctor-card_tag">' + doc.specialty + '</span></div>' : '') +
-                                '</div>' +
-                                '<a href="#book" class="doctor-card_btn">' +
-                                    '<span>Book Consultation</span>' +
-                                    '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' +
-                                '</a>' +
-                            '</div>';
-                        grid.appendChild(card);
-                    }
-                }
-            }
-        })();
-    </script>
+    <script src="assets/js/doctor-flip.js"></script>
 </body>
 
 </html>
