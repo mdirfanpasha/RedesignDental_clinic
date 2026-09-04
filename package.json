@@ -7,10 +7,14 @@
     "start": "node server.js",
     "dev": "node server.js",
     "validate:i18n": "node scripts/validate-i18n.js",
-    "build": "node scripts/validate-i18n.js && node scripts/generate-sitemap.js"
+    "build:minify": "node scripts/build-minify.cjs",
+    "build": "node scripts/build-minify.cjs && node scripts/validate-i18n.js && node scripts/generate-sitemap.js"
   },
   "devDependencies": {
-    "@ffmpeg-installer/ffmpeg": "^1.1.0"
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "clean-css": "^5.3.3",
+    "sharp": "^0.35.4",
+    "terser": "^5.51.2"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

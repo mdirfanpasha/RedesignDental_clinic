@@ -70,12 +70,14 @@
             if (playBtn) {
               var playSpan = playBtn.querySelector('span');
               if (playSpan) playSpan.textContent = 'Play';
+              playBtn.setAttribute('aria-label', 'Play - Toggle video playback');
             }
             var soundBtn = card.querySelector('.video-sound-btn');
             if (soundBtn) {
               soundBtn.classList.remove('is-unmuted');
               var soundSpan = soundBtn.querySelector('span');
               if (soundSpan) soundSpan.textContent = 'Unmute';
+              soundBtn.setAttribute('aria-label', 'Unmute - Toggle video audio');
             }
           }
         }
@@ -105,6 +107,8 @@
         var dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'hybrid-testimonial_dot' + (i === currentIndex ? ' active' : '');
+        dot.setAttribute('role', 'tab');
+        dot.setAttribute('aria-selected', i === currentIndex ? 'true' : 'false');
         dot.setAttribute('aria-label', 'Go to testimonial slide ' + (i + 1));
         dot.dataset.index = i;
         (function (idx) {
@@ -122,8 +126,10 @@
       dots.forEach(function (d, i) {
         if (i === currentIndex) {
           d.classList.add('active');
+          d.setAttribute('aria-selected', 'true');
         } else {
           d.classList.remove('active');
+          d.setAttribute('aria-selected', 'false');
         }
       });
     }
@@ -161,7 +167,15 @@
       var backToVideoBtns = inner.querySelectorAll('.card-flip-close-btn');
 
       if (video) {
+        function ensureVideoLoaded() {
+          if (!video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+            video.load();
+          }
+        }
+
         function togglePlay() {
+          ensureVideoLoaded();
           if (video.paused) {
             stopAllVideos(video);
             activePlayingVideo = video;
@@ -172,6 +186,7 @@
               if (playBtn) {
                 var s = playBtn.querySelector('span');
                 if (s) s.textContent = 'Pause';
+                playBtn.setAttribute('aria-label', 'Pause - Toggle video playback');
               }
             }).catch(function () {
               video.muted = true;
@@ -185,6 +200,7 @@
             if (playBtn) {
               var s = playBtn.querySelector('span');
               if (s) s.textContent = 'Play';
+              playBtn.setAttribute('aria-label', 'Play - Toggle video playback');
             }
             activePlayingVideo = null;
           }
@@ -211,6 +227,7 @@
           soundBtn.addEventListener('click', function (e) {
             e.stopPropagation();
             e.preventDefault();
+            ensureVideoLoaded();
 
             var currentlyMuted = video.muted;
 
@@ -228,6 +245,7 @@
                   soundBtn.classList.remove('is-unmuted');
                   var span = soundBtn.querySelector('span');
                   if (span) span.textContent = 'Unmute';
+                  soundBtn.setAttribute('aria-label', 'Unmute - Toggle video audio');
                 });
               }
 
@@ -235,9 +253,11 @@
               soundBtn.classList.add('is-unmuted');
               var span = soundBtn.querySelector('span');
               if (span) span.textContent = 'Mute';
+              soundBtn.setAttribute('aria-label', 'Mute - Toggle video audio');
               if (playBtn) {
                 var ps = playBtn.querySelector('span');
                 if (ps) ps.textContent = 'Pause';
+                playBtn.setAttribute('aria-label', 'Pause - Toggle video playback');
               }
               activePlayingVideo = video;
               pauseAutoPlay();
@@ -249,6 +269,7 @@
               soundBtn.classList.remove('is-unmuted');
               var span = soundBtn.querySelector('span');
               if (span) span.textContent = 'Unmute';
+              soundBtn.setAttribute('aria-label', 'Unmute - Toggle video audio');
             }
           });
         }
@@ -258,6 +279,7 @@
           if (playBtn) {
             var s = playBtn.querySelector('span');
             if (s) s.textContent = 'Play';
+            playBtn.setAttribute('aria-label', 'Play - Toggle video playback');
           }
           activePlayingVideo = null;
           startAutoPlay();
@@ -268,6 +290,10 @@
       if (flipToReviewBtn) {
         flipToReviewBtn.addEventListener('click', function (e) {
           e.stopPropagation();
+          if (video && !video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+            video.load();
+          }
           stopAllVideos(video);
           flipAllBack(inner);
           inner.classList.add('is-flipped');
@@ -279,6 +305,7 @@
               if (playBtn) {
                 var s = playBtn.querySelector('span');
                 if (s) s.textContent = 'Pause';
+                playBtn.setAttribute('aria-label', 'Pause - Toggle video playback');
               }
             }).catch(function () {
               video.muted = true;
@@ -287,6 +314,7 @@
                 if (playBtn) {
                   var s = playBtn.querySelector('span');
                   if (s) s.textContent = 'Pause';
+                  playBtn.setAttribute('aria-label', 'Pause - Toggle video playback');
                 }
               }).catch(function () {});
             });
@@ -298,6 +326,10 @@
       if (front && inner.classList.contains('is-flip-enabled')) {
         front.addEventListener('click', function (e) {
           if (e.target.closest('button') || e.target.closest('a')) return;
+          if (video && !video.src && video.dataset.src) {
+            video.src = video.dataset.src;
+            video.load();
+          }
           stopAllVideos(video);
           flipAllBack(inner);
           inner.classList.add('is-flipped');
@@ -424,6 +456,22 @@
     renderDots();
     goToSlide(0);
     startAutoPlay();
+
+    if ('IntersectionObserver' in window) {
+      var sectionObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            stopAllVideos();
+            pauseAutoPlay();
+          } else {
+            if (!activePlayingVideo) {
+              startAutoPlay();
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+      sectionObserver.observe(section);
+    }
   }
 
   if (document.readyState === 'loading') {

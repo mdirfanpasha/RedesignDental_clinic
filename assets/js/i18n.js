@@ -166,7 +166,7 @@
     }).join('');
 
     wrap.innerHTML =
-      '<button type="button" class="lang-selector_toggle" id="' + idPrefix + 'toggle" aria-haspopup="true" aria-expanded="false" aria-label="Select Language">' +
+      '<button type="button" class="lang-selector_toggle" id="' + idPrefix + 'toggle" aria-haspopup="true" aria-expanded="false" aria-label="' + currentMeta.nativeName + ' - Select Language">' +
         '<span class="lang-globe-icon">' +
           '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
             '<circle cx="12" cy="12" r="10"></circle>' +
@@ -222,6 +222,9 @@
     var meta = SUPPORTED_LANGUAGES[currentLang] || SUPPORTED_LANGUAGES[DEFAULT_LANG];
     document.querySelectorAll('.lang-current-label').forEach(function (span) {
       span.textContent = meta.nativeName;
+    });
+    document.querySelectorAll('.lang-selector_toggle').forEach(function (btn) {
+      btn.setAttribute('aria-label', meta.nativeName + ' - Select Language');
     });
     document.querySelectorAll('.lang-dropdown_header').forEach(function (head) {
       head.textContent = t('nav.language');

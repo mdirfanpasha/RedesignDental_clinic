@@ -1,6 +1,7 @@
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import zlib from 'zlib';
 import { fileURLToPath } from 'url';
 import { verifyRecaptcha } from './lib/verifyRecaptcha.js';
 
@@ -81,13 +82,13 @@ function setSecurityHeaders(res) {
   // Content Security Policy
   const csp = [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://ajax.googleapis.com https://va.vercel-scripts.com",
+    "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/ https://ajax.googleapis.com https://va.vercel-scripts.com https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com https://s.ytimg.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com data:",
-    "img-src 'self' data: https: blob:",
+    "img-src 'self' data: https: blob: https://www.googletagmanager.com https://www.google-analytics.com https://i.ytimg.com",
     "media-src 'self' data: blob:",
     "frame-src 'self' https://www.google.com/ https://www.youtube.com/ https://www.youtube-nocookie.com/ https://maps.google.com/",
-    "connect-src 'self' https://www.google.com/recaptcha/ https://graph.facebook.com/ https://vitals.vercel-insights.com",
+    "connect-src 'self' https://www.google.com/recaptcha/ https://graph.facebook.com/ https://vitals.vercel-insights.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.youtube.com",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'"
@@ -176,7 +177,17 @@ function parseJsonBody(req, maxBytes = MAX_BODY_SIZE) {
   });
 }
 
-// ─── Helper: serve a file with Range support & Path Traversal Prevention ───
+const COMPRESSIBLE_TYPES = new Set([
+  'text/html; charset=utf-8',
+  'text/html',
+  'text/css',
+  'text/javascript',
+  'application/json',
+  'image/svg+xml',
+  'application/xml'
+]);
+
+// ─── Helper: serve a file with Range support, Caching & Gzip Compression ──
 function serveFile(req, res, filePath) {
   // Path Traversal Security Check: Ensure requested path stays strictly within __dirname
   const safeResolvedPath = path.resolve(filePath);
@@ -205,6 +216,13 @@ function serveFile(req, res, filePath) {
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
     const range = req ? req.headers?.range : null;
 
+    // Cache-Control headers
+    if (ext === '.html' || ext === '.htm') {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+    } else if (['.css', '.js', '.woff', '.woff2', '.ttf', '.webp', '.jpg', '.jpeg', '.png', '.svg', '.gif', '.ico', '.mp4'].includes(ext)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+
     if (range && stats.size > 0) {
       const parts = range.replace(/bytes=/, '').split('-');
       const start = parseInt(parts[0], 10);
@@ -218,6 +236,20 @@ function serveFile(req, res, filePath) {
         'Content-Type': contentType,
       });
       file.pipe(res);
+      return;
+    }
+
+    // Gzip compression for compressible files > 1KB
+    const acceptEncoding = req ? (req.headers?.['accept-encoding'] || '') : '';
+    const shouldCompress = COMPRESSIBLE_TYPES.has(contentType) && stats.size > 1024;
+
+    if (shouldCompress && /\bgzip\b/.test(acceptEncoding)) {
+      res.writeHead(200, {
+        'Content-Type': contentType,
+        'Content-Encoding': 'gzip',
+        'Vary': 'Accept-Encoding'
+      });
+      fs.createReadStream(safeResolvedPath).pipe(zlib.createGzip()).pipe(res);
     } else {
       res.writeHead(200, {
         'Content-Length': stats.size,
@@ -358,6 +390,16 @@ const server = http.createServer(async (req, res) => {
     rawPath = decodeURIComponent(rawPath);
   } catch (e) {}
   const urlPath = path.posix.normalize(rawPath).replace(/^(\.\.\/)+/, '') || '/';
+
+  // Handle Vercel Analytics scripts gracefully in standalone/self-hosted/local mode
+  if (urlPath === '/_vercel/insights/script.js' || urlPath === '/_vercel/speed-insights/script.js') {
+    res.writeHead(200, {
+      'Content-Type': 'text/javascript',
+      'Cache-Control': 'public, max-age=86400'
+    });
+    res.end('/* vercel analytics local stub */');
+    return;
+  }
 
   // ── Step 1: 301 redirect legacy .html URLs & trailing slashes → clean routes ─
   if (HTML_REDIRECTS[urlPath]) {

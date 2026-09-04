@@ -61,7 +61,7 @@
   /* ─── Language Selector HTML ─────────────────────────── */
   var LANG_SELECTOR_HTML = [
     '<div class="lang-selector_wrap" id="rc-lang-selector-desktop" role="navigation" aria-label="Language selector">',
-    '  <button class="lang-selector_toggle" id="rc-lang-toggle" aria-haspopup="listbox" aria-expanded="false" type="button">',
+    '  <button class="lang-selector_toggle" id="rc-lang-toggle" aria-haspopup="listbox" aria-expanded="false" type="button" aria-label="EN - Select Language">',
     '    <span class="lang-globe-icon" aria-hidden="true">',
     '      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">',
     '        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>',
@@ -168,8 +168,13 @@
   /* ─── Update selector UI to reflect active lang ─────── */
   function updateSelectorUI(lang) {
     var currentLabel = document.getElementById('rc-lang-current');
+    var pill = SUPPORTED[lang] ? SUPPORTED[lang].pill : lang.toUpperCase();
     if (currentLabel) {
-      currentLabel.textContent = SUPPORTED[lang] ? SUPPORTED[lang].pill : lang.toUpperCase();
+      currentLabel.textContent = pill;
+    }
+    var toggle = document.getElementById('rc-lang-toggle');
+    if (toggle) {
+      toggle.setAttribute('aria-label', pill + ' - Select Language');
     }
 
     // Mark active option

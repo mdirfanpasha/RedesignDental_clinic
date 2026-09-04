@@ -21,7 +21,6 @@
       window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
-
     <meta charset="utf-8" />
     <title>Redesign Dental Clinics | Dental Clinic in Banjara Hills, Hyderabad</title>
     <meta
@@ -40,7 +39,12 @@
     <meta property="og:type" content="website" />
     <meta content="summary_large_image" name="twitter:card" />
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <link href="assets/css/lumora.css?v=20260614f" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="assets/img/hero/dr-suhail-redesign-dental-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="assets/img/hero/dr-suhail-redesign-dental-desktop.webp" media="(min-width: 768px)" fetchpriority="high" />
+
+    <link href="assets/css/lumora.min.css?v=20260614f" rel="stylesheet" type="text/css" />
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
@@ -454,24 +458,14 @@
             }
         }
     </style>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" />
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        WebFont.load({
-            google: {
-                families: [
-                    "Sora:300,400,500,600,700",
-                    "Noto Sans Telugu:300,400,500,600,700",
-                    "Noto Sans Devanagari:300,400,500,600,700",
-                    "Noto Sans Arabic:300,400,500,600,700"
-                ]
-            }
-        });
-    </script>
+        rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
     <script type="text/javascript">
         !function (o, c) {
             var n = c.documentElement
@@ -482,14 +476,12 @@
     </script>
     <link href="assets/img/favicon.svg" rel="shortcut icon" type="image/x-icon" />
     <link href="assets/img/webclip.png" rel="apple-touch-icon" />
-    <!-- SGAP cdn -->
-    <script src="assets/js/gsap.min.js"></script>
-    <script src="assets/js/ScrollTrigger.min.js"></script>
-    <link rel="stylesheet" href="assets/css/booking-system.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/booking-system.min.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="assets/css/booking-system.min.css" /></noscript>
     <!-- Multilingual Engine -->
-    <script src="assets/i18n/translations.js"></script>
-    <script src="assets/js/i18n.js"></script>
-    <!-- Google reCAPTCHA v3 — Loaded eagerly so it's always ready when booking form opens -->
+    <script src="assets/i18n/translations.min.js" defer></script>
+    <script src="assets/js/i18n.js" defer></script>
+    <!-- Google reCAPTCHA v3 — Non-blocking -->
     <script src="https://www.google.com/recaptcha/api.js?render=6LdkaZQtAAAAAlkSLA78ABt5Xeo0EgbfLbeqHZWu" async
         defer></script>
 </head>
@@ -501,8 +493,7 @@
             data-easing="ease" data-easing2="ease" role="banner" class="navbar_wrap w-nav">
             <div class="navbar_container">
                 <a href="/" class="navbar_logo w-nav-brand">
-                    <img loading="eager" src="/assets/img/redesign-dental-clinics-logo-white.png"
-                        alt="Redesign Dental Clinics" class="logo_image" />
+                    <img loading="eager" src="/assets/img/redesign-dental-clinics-logo-white.webp" alt="Redesign Dental Clinics" class="logo_image" / width="576" height="161" decoding="async">
                 </a>
                 <div class="navbar-content_wrap">
                     <nav role="navigation" class="navbar_menu w-nav-menu">
@@ -526,6 +517,7 @@
                                         </svg>
                                     </span>
                                 </button>
+
                             </div>
                             <nav class="navbar-dropdown_list w-dropdown-list rc-dropdown-menu">
                                 <div class="rc-dropdown-inner">
@@ -721,21 +713,18 @@
                         <div class="section_component">
                             <div class="home-hero_content">
                                 <div class="margin-bottom margin-16px">
-                                    <h1 hero-text-split=""
-                                        data-wf-target="[[[&quot;6989a716ebe888bb965ec33c&quot;,&quot;15f4ab3a-4cb8-bb3e-3e46-bdbd57d995b3&quot;],[]]]"
-                                        data-w-id="15f4ab3a-4cb8-bb3e-3e46-bdbd57d995b3"
-                                        style="-webkit-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 25%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
+                                    <h1 style="transform: none; opacity: 1;"
                                         class="hero-text-split" data-i18n="hero.title"><span
                                             data-i18n="hero.title">Trusted Dental Care for Every Generation</span></h1>
                                 </div>
                                 <div class="margin-bottom margin-32px">
-                                    <p data-w-id="59cae1c0-9ae0-0825-f9e9-7645d908b0e0" style="opacity:0"
+                                    <p data-w-id="59cae1c0-9ae0-0825-f9e9-7645d908b0e0"
                                         class="home-hero_para" data-i18n="hero.subtitle"><span
                                             data-i18n="hero.subtitle">From preventive care to advanced dental implants
                                             and full-mouth rehabilitation, our specialist-led clinic brings together
                                             clinical precision and gentle patient comfort.</span></p>
                                 </div>
-                                <div data-w-id="123dbd0a-737f-01ae-eb77-4a2f18726493" style="opacity:0"
+                                <div data-w-id="123dbd0a-737f-01ae-eb77-4a2f18726493"
                                     class="button-container">
                                     <a data-wf--button-primary--variant="light" href="/appointment"
                                         class="button_primary w-variant-62db4792-8717-dbe8-e811-0d36eb02f9ec w-inline-block">
@@ -781,9 +770,11 @@
                                     <form class="lead-form" onsubmit="return lumoraLead(event)">
                                         <input class="lead-form_input" type="text" name="name"
                                             placeholder="Your Full Name"
+                                            aria-label="Your Full Name"
                                             data-i18n-placeholder="hero.leadForm.namePlaceholder" required="">
                                         <input class="lead-form_input" type="tel" name="phone"
                                             placeholder="10-Digit Mobile Number"
+                                            aria-label="10-Digit Mobile Number"
                                             data-i18n-placeholder="hero.leadForm.phonePlaceholder" required="">
                                         <button class="lead-form_btn" type="submit" data-i18n="hero.leadForm.submit"
                                             data-i18n="hero.leadForm.submit" data-i18n="hero.leadForm.submit">Request
@@ -916,15 +907,14 @@
                     <div class="hero_overlay is-gradient"></div>
                 </div>
                 <div data-w-id="e790d2ce-f71a-82ed-935b-8c0db2fa91f1" class="hero-image_wrap">
-                    <img src="assets/img/hero/dr-suhail-redesign-dental.webp" loading="eager"
+                    <img src="assets/img/hero/dr-suhail-redesign-dental-desktop.webp"
+                        srcset="assets/img/hero/dr-suhail-redesign-dental-mobile.webp 800w, assets/img/hero/dr-suhail-redesign-dental-tablet.webp 1440w, assets/img/hero/dr-suhail-redesign-dental-desktop.webp 2000w"
+                        sizes="100vw"
                         alt="Dr. Suhail at Redesign Dental Clinics"
-                        class="home-hero_image hero-carousel-img is-active" />
-                    <img src="assets/img/hero/dental-surgery-team.webp" loading="lazy"
-                        alt="Dental surgery in progress at Redesign Dental Clinics"
-                        class="home-hero_image hero-carousel-img" />
-                    <img src="assets/img/hero/dental-operation-theatre.webp" loading="lazy"
-                        alt="State-of-the-art dental operation theatre at Redesign Dental Clinics"
-                        class="home-hero_image hero-carousel-img" />
+                        class="home-hero_image hero-carousel-img is-active"
+                        width="2000" height="974" loading="eager" fetchpriority="high" decoding="sync">
+                    <img src="assets/img/hero/dental-surgery-team.webp" loading="lazy" alt="Dental surgery in progress at Redesign Dental Clinics" class="home-hero_image hero-carousel-img" width="2500" height="1535" decoding="async">
+                    <img src="assets/img/hero/dental-operation-theatre.webp" loading="lazy" alt="State-of-the-art dental operation theatre at Redesign Dental Clinics" class="home-hero_image hero-carousel-img" width="1486" height="720" decoding="async">
                 </div>
             </header>
             <!-- ===== MOBILE ONLY: Consultation Card (hidden on desktop) ===== -->
@@ -937,8 +927,10 @@
                     </div>
                     <form class="lead-form" onsubmit="return lumoraLead(event)">
                         <input class="lead-form_input" type="text" name="name" placeholder="Your Full Name"
+                            aria-label="Your Full Name"
                             data-i18n-placeholder="hero.leadForm.namePlaceholder" required="">
                         <input class="lead-form_input" type="tel" name="phone" placeholder="10-Digit Mobile Number"
+                            aria-label="10-Digit Mobile Number"
                             data-i18n-placeholder="hero.leadForm.phonePlaceholder" required="">
                         <button class="lead-form_btn" type="submit" data-i18n="hero.leadForm.submit">Request Callback
                             Now</button>
@@ -990,7 +982,7 @@
                                 style="position: relative; width: 100%; border-radius: 24px; overflow: hidden; background: #000000; box-shadow: 0 25px 60px -15px rgba(5, 38, 42, 0.25), 0 10px 25px -5px rgba(0,0,0,0.1); border: 1px solid rgba(13, 148, 136, 0.25); aspect-ratio: 16/9;">
                                 <video id="clinicDroneVideo"
                                     style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 24px;"
-                                    preload="metadata" autoplay muted loop playsinline controls
+                                    preload="none" autoplay muted loop playsinline
                                     controlsList="nodownload"
                                     aria-label="Redesign Dental Clinics Banjara Hills Drone Aerial View">
                                     <source src="assets/video/redesign-clinics-drone.mp4" type="video/mp4">
@@ -1003,6 +995,24 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"
                                         fill="currentColor" style="margin-left: 3px;">
                                         <path d="M8 5v14l11-7z" />
+                                    </svg>
+                                </button>
+
+                                <!-- Mute / Unmute Toggle Button -->
+                                <button id="droneMuteBtn" type="button"
+                                    aria-label="Unmute drone video" title="Unmute"
+                                    style="position: absolute; bottom: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; background: rgba(5, 38, 42, 0.80); backdrop-filter: blur(8px); border: 1.5px solid rgba(255,255,255,0.35); color: #ffffff; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.35); z-index: 4; transition: background 0.2s ease, transform 0.15s ease;">
+                                    <!-- Muted icon (speaker with X) -->
+                                    <svg id="droneMuteIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                        <line x1="23" y1="9" x2="17" y2="15"></line>
+                                        <line x1="17" y1="9" x2="23" y2="15"></line>
+                                    </svg>
+                                    <!-- Unmuted icon (speaker with sound waves) - hidden by default -->
+                                    <svg id="droneUnmuteIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                                     </svg>
                                 </button>
                             </div>
@@ -1102,10 +1112,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="our-story_item-image_wrap">
-                                                    <img src="assets/img/gen_our-story-image-1.jpg" loading="lazy"
-                                                        sizes="(max-width: 820px) 100vw, 820px"
-                                                        srcset="assets/img/gen_our-story-image-1.jpg 500w, assets/img/gen_our-story-image-1.jpg 800w, assets/img/gen_our-story-image-1.jpg 820w"
-                                                        alt="Patient comfort experience" class="our-story_item-image" />
+                                                    <img src="assets/img/gen_our-story-image-1.webp" loading="lazy" sizes="(max-width: 820px) 100vw, 820px" srcset="assets/img/gen_our-story-image-1.jpg 500w, assets/img/gen_our-story-image-1.jpg 800w, assets/img/gen_our-story-image-1.jpg 820w" alt="Patient comfort experience" class="our-story_item-image" / width="768" height="1024" decoding="async">
                                                 </div>
                                             </div>
                                         </div>
@@ -1134,10 +1141,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="our-story_item-image_wrap">
-                                                    <img src="assets/img/gen_our-story-image-2.jpg" loading="lazy"
-                                                        sizes="(max-width: 820px) 100vw, 820px"
-                                                        srcset="assets/img/gen_our-story-image-2.jpg 500w, assets/img/gen_our-story-image-2.jpg 800w, assets/img/gen_our-story-image-2.jpg 820w"
-                                                        alt="Trusted dental team" class="our-story_item-image" />
+                                                    <img src="assets/img/gen_our-story-image-2.webp" loading="lazy" sizes="(max-width: 820px) 100vw, 820px" srcset="assets/img/gen_our-story-image-2.jpg 500w, assets/img/gen_our-story-image-2.jpg 800w, assets/img/gen_our-story-image-2.jpg 820w" alt="Trusted dental team" class="our-story_item-image" / width="768" height="1024" decoding="async">
                                                 </div>
                                             </div>
                                         </div>
@@ -1172,10 +1176,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="our-story_item-image_wrap">
-                                                    <img src="assets/img/gen_our-story-image-3.jpg" loading="lazy"
-                                                        sizes="(max-width: 820px) 100vw, 820px"
-                                                        srcset="assets/img/gen_our-story-image-3.jpg 500w, assets/img/gen_our-story-image-3.jpg 800w, assets/img/gen_our-story-image-3.jpg 820w"
-                                                        alt="Minimal waiting time care" class="our-story_item-image" />
+                                                    <img src="assets/img/gen_our-story-image-3.webp" loading="lazy" sizes="(max-width: 820px) 100vw, 820px" srcset="assets/img/gen_our-story-image-3.jpg 500w, assets/img/gen_our-story-image-3.jpg 800w, assets/img/gen_our-story-image-3.jpg 820w" alt="Minimal waiting time care" class="our-story_item-image" / width="768" height="1024" decoding="async">
                                                 </div>
                                             </div>
                                         </div>
@@ -1210,11 +1211,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="our-story_item-image_wrap">
-                                                    <img src="assets/img/gen_our-story-image-4.jpg" loading="lazy"
-                                                        sizes="(max-width: 820px) 100vw, 820px"
-                                                        srcset="assets/img/gen_our-story-image-4.jpg 500w, assets/img/gen_our-story-image-4.jpg 800w, assets/img/gen_our-story-image-4.jpg 820w"
-                                                        alt="Emergency dental assistance"
-                                                        class="our-story_item-image" />
+                                                    <img src="assets/img/gen_our-story-image-4.webp" loading="lazy" sizes="(max-width: 820px) 100vw, 820px" srcset="assets/img/gen_our-story-image-4.jpg 500w, assets/img/gen_our-story-image-4.jpg 800w, assets/img/gen_our-story-image-4.jpg 820w" alt="Emergency dental assistance" class="our-story_item-image" / width="768" height="1024" decoding="async">
                                                 </div>
                                             </div>
                                         </div>
@@ -1247,10 +1244,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="our-story_item-image_wrap">
-                                                    <img src="assets/img/gen_our-story-image-5.jpg" loading="lazy"
-                                                        sizes="(max-width: 820px) 100vw, 820px"
-                                                        srcset="assets/img/gen_our-story-image-5.jpg 500w, assets/img/gen_our-story-image-5.jpg 800w, assets/img/gen_our-story-image-5.jpg 820w"
-                                                        alt="Preventive dental health" class="our-story_item-image" />
+                                                    <img src="assets/img/gen_our-story-image-5.webp" loading="lazy" sizes="(max-width: 820px) 100vw, 820px" srcset="assets/img/gen_our-story-image-5.jpg 500w, assets/img/gen_our-story-image-5.jpg 800w, assets/img/gen_our-story-image-5.jpg 820w" alt="Preventive dental health" class="our-story_item-image" / width="768" height="1024" decoding="async">
                                                 </div>
                                             </div>
                                         </div>
@@ -1317,107 +1311,85 @@
                         <!-- Award Card 1 (Real Photo) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-00.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-00.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="1198" height="879" decoding="async">
                         </div>
                         <!-- Award Card 2 (Real Photo) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-01.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-01.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="949" height="766" decoding="async">
                         </div>
                         <!-- Award Card 3 (Real Photo) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-02.jpeg" alt="Redesign Dental Clinics recognition"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-02.webp" alt="Redesign Dental Clinics recognition" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="1205" height="887" decoding="async">
                         </div>
                         <!-- Award Card 4 (Real Photo) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-03.jpeg" alt="Redesign Dental Clinics recognition"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-03.webp" alt="Redesign Dental Clinics recognition" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="983" height="729" decoding="async">
                         </div>
                         <!-- Award Card 5 (Real Photo) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-04.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-04.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="963" height="1280" decoding="async">
                         </div>
                         <!-- Award Card 6 (Real Photo) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-05.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-05.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="905" height="1280" decoding="async">
                         </div>
                         <!-- Award Card 7 (Real Photo) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-06.jpeg"
-                                alt="Redesign Dental Clinics dental excellence award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-06.webp" alt="Redesign Dental Clinics dental excellence award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="1280" height="853" decoding="async">
                         </div>
                         <!-- Award Card 8 (Real Photo - Plaque of Appreciation) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-07.png" alt="Redesign Dental Clinics plaque of appreciation"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-07.webp" alt="Redesign Dental Clinics plaque of appreciation" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="405" height="522" decoding="async">
                         </div>
                         <!-- Award Card 9 (Real Photo - i-Fix KOL Key Opinion Leader Certificate) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-08.png"
-                                alt="Dr. Syed Suhail Ahmed - i-Fix Key Opinion Leader (KOL) in Dental Implantology Certificate"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-08.webp" alt="Dr. Syed Suhail Ahmed - i-Fix Key Opinion Leader (KOL) in Dental Implantology Certificate" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="707" height="524" decoding="async">
                         </div>
 
                         <!-- Seamless Loop Duplicate Set (all 9 repeated) -->
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-00.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-00.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="1198" height="879" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-01.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-01.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="949" height="766" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-02.jpeg" alt="Redesign Dental Clinics recognition"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-02.webp" alt="Redesign Dental Clinics recognition" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="1205" height="887" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-03.jpeg" alt="Redesign Dental Clinics recognition"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-03.webp" alt="Redesign Dental Clinics recognition" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="983" height="729" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-04.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-04.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="963" height="1280" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-05.jpeg" alt="Redesign Dental Clinics award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-05.webp" alt="Redesign Dental Clinics award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="905" height="1280" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-06.jpeg"
-                                alt="Redesign Dental Clinics dental excellence award" loading="lazy"
-                                style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-06.webp" alt="Redesign Dental Clinics dental excellence award" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="1280" height="853" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-07.png" alt="Redesign Dental Clinics plaque of appreciation"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-07.webp" alt="Redesign Dental Clinics plaque of appreciation" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="405" height="522" decoding="async">
                         </div>
                         <div class="award_card"
                             style="flex: 0 0 auto; width: 280px; height: 160px; background: #ffffff; border-radius: 20px; padding: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #edf2f4; position: relative;">
-                            <img src="assets/img/award-real-08.png"
-                                alt="Dr. Syed Suhail Ahmed - i-Fix Key Opinion Leader (KOL) in Dental Implantology Certificate"
-                                loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+                            <img src="assets/img/award-real-08.webp" alt="Dr. Syed Suhail Ahmed - i-Fix Key Opinion Leader (KOL) in Dental Implantology Certificate" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain;" / width="707" height="524" decoding="async">
                         </div>
                     </div>
                 </div>
@@ -1592,16 +1564,13 @@
                             <!-- Doctor Image Container with 3D Video Flip -->
                             <div class="doctor-img-box doctor-flip-container" id="doctor-flip-card" role="button"
                                 tabindex="0"
-                                aria-label="Meet Dr. Suhail A. Syed - Interactive video card. Click or hover to watch video introduction."
+                                aria-label="▶ Watch Dr. Suhail - Meet Dr. Suhail A. Syed - Interactive video card. Click or hover to watch video introduction."
                                 aria-expanded="false">
                                 <div class="doctor-flip-inner" id="doctor-flip-inner">
 
                                     <!-- FRONT FACE: Doctor Portrait -->
                                     <div class="doctor-flip-face is-front" id="doctor-flip-front">
-                                        <img src="assets/img/dr-suhail.webp"
-                                            onerror="this.onerror=null;this.src='assets/img/69de3a2ffad0bdd1136a1bcd_team-image-1.jpg'"
-                                            alt="Dr. Suhail A. Syed - Periodontics &amp; Strategic Implantologist at Redesign Dental Clinics"
-                                            loading="lazy" class="doctor-portrait-img" />
+                                        <img src="assets/img/dr-suhail.webp" onerror="this.onerror=null;this.src='assets/img/69de3a2ffad0bdd1136a1bcd_team-image-1.jpg'" alt="Dr. Suhail A. Syed - Periodontics &amp; Strategic Implantologist at Redesign Dental Clinics" loading="lazy" class="doctor-portrait-img" width="752" height="1024" decoding="async">
 
                                         <!-- Interactive Video Hint Pill -->
                                         <div class="doctor-video-hint-pill">
@@ -3031,12 +3000,7 @@
                                                 class="team-image_wrap w-inline-block">
                                                 <div class="image-animation-trigger">
                                                     <div class="image-animation-scale">
-                                                        <img src="assets/img/dr-suhail.webp"
-                                                            onerror="this.onerror=null;this.src='assets/img/69de3a2ffad0bdd1136a1bcd_team-image-1.jpg'"
-                                                            loading="lazy"
-                                                            alt="Dr. Suhail A. Syed - Dental Surgeon & Dentist"
-                                                            class="team_image"
-                                                            style="width: 100%; height: 380px; object-fit: cover; object-position: top center;" />
+                                                        <img src="assets/img/dr-suhail.webp" onerror="this.onerror=null;this.src='assets/img/69de3a2ffad0bdd1136a1bcd_team-image-1.jpg'" loading="lazy" alt="Dr. Suhail A. Syed - Dental Surgeon & Dentist" class="team_image" style="width: 100%; height: 380px; object-fit: cover; object-position: top center;" / width="752" height="1024" decoding="async">
                                                     </div>
                                                 </div>
                                             </a>
@@ -3254,12 +3218,7 @@
                             </div>
                             <div id="w-node-_5b767983-ec09-06ac-0772-7c427fc7d118-965ec33c"
                                 class="home-value_image-wrap">
-                                <img class="home-value_image" src="assets/img/why-choose-us.jpg"
-                                    alt="Why Choose Redesign Dental Clinics"
-                                    style="-webkit-transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);"
-                                    sizes="(max-width: 960px) 100vw, 960px"
-                                    data-w-id="873c2836-960d-5b59-d9c4-47329988daeb" loading="lazy"
-                                    srcset="assets/img/why-choose-us.jpg 500w, assets/img/why-choose-us.jpg 800w, assets/img/why-choose-us.jpg 960w" />
+                                <img class="home-value_image" src="assets/img/why-choose-us.webp" alt="Why Choose Redesign Dental Clinics" style="-webkit-transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1.5, 1.5, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);" sizes="(max-width: 960px) 100vw, 960px" data-w-id="873c2836-960d-5b59-d9c4-47329988daeb" loading="lazy" srcset="assets/img/why-choose-us.jpg 500w, assets/img/why-choose-us.jpg 800w, assets/img/why-choose-us.jpg 960w" / width="768" height="1024" decoding="async">
                             </div>
                         </div>
                     </div>
@@ -3334,8 +3293,8 @@
                                                 <span class="hybrid-card_stars-badge">★★★★★</span>
                                             </div>
                                             <div class="hybrid-card_video-container">
-                                                <video class="hybrid-card_video" src="assets/video/t1.mp4" playsinline
-                                                    muted preload="metadata" loop
+                                                <video class="hybrid-card_video" data-src="assets/video/t1.mp4" playsinline
+                                                    muted preload="none" loop
                                                     aria-label="Patient video testimonial ABDRABALREDHA"></video>
                                                 <div class="hybrid-video_play-overlay">
                                                     <div class="hybrid-play-circle">
@@ -3348,7 +3307,7 @@
                                             </div>
                                             <div class="hybrid-card_video-bottombar">
                                                 <button type="button" class="video-ctrl-btn video-play-btn"
-                                                    aria-label="Play or Pause video">
+                                                    aria-label="Play - Toggle video playback">
                                                     <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="14"
                                                         height="14" viewBox="0 0 24 24" fill="currentColor">
                                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -3356,7 +3315,7 @@
                                                     <span>Play</span>
                                                 </button>
                                                 <button type="button" class="video-ctrl-btn video-sound-btn"
-                                                    aria-label="Toggle video audio">
+                                                    aria-label="Unmute - Toggle video audio">
                                                     <svg class="icon-sound" xmlns="http://www.w3.org/2000/svg"
                                                         width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -3419,8 +3378,8 @@
                                                 <span class="hybrid-card_stars-badge">★★★★★</span>
                                             </div>
                                             <div class="hybrid-card_video-container">
-                                                <video class="hybrid-card_video" src="assets/video/t2.mp4" playsinline
-                                                    muted preload="metadata" loop
+                                                <video class="hybrid-card_video" data-src="assets/video/t2.mp4" playsinline
+                                                    muted preload="none" loop
                                                     aria-label="Patient video testimonial ALMAZNI MOHAMMED"></video>
                                                 <div class="hybrid-video_play-overlay">
                                                     <div class="hybrid-play-circle">
@@ -3433,7 +3392,7 @@
                                             </div>
                                             <div class="hybrid-card_video-bottombar">
                                                 <button type="button" class="video-ctrl-btn video-play-btn"
-                                                    aria-label="Play or Pause video">
+                                                    aria-label="Play - Toggle video playback">
                                                     <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="14"
                                                         height="14" viewBox="0 0 24 24" fill="currentColor">
                                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -3441,7 +3400,7 @@
                                                     <span>Play</span>
                                                 </button>
                                                 <button type="button" class="video-ctrl-btn video-sound-btn"
-                                                    aria-label="Toggle video audio">
+                                                    aria-label="Unmute - Toggle video audio">
                                                     <svg class="icon-sound" xmlns="http://www.w3.org/2000/svg"
                                                         width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -3504,8 +3463,8 @@
                                                 <span class="hybrid-card_stars-badge">★★★★★</span>
                                             </div>
                                             <div class="hybrid-card_video-container">
-                                                <video class="hybrid-card_video" src="assets/video/t3.mp4" playsinline
-                                                    muted preload="metadata" loop
+                                                <video class="hybrid-card_video" data-src="assets/video/t3.mp4" playsinline
+                                                    muted preload="none" loop
                                                     aria-label="Patient video testimonial JUMAAH TAHAAR"></video>
                                                 <div class="hybrid-video_play-overlay">
                                                     <div class="hybrid-play-circle">
@@ -3518,7 +3477,7 @@
                                             </div>
                                             <div class="hybrid-card_video-bottombar">
                                                 <button type="button" class="video-ctrl-btn video-play-btn"
-                                                    aria-label="Play or Pause video">
+                                                    aria-label="Play - Toggle video playback">
                                                     <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="14"
                                                         height="14" viewBox="0 0 24 24" fill="currentColor">
                                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -3526,7 +3485,7 @@
                                                     <span>Play</span>
                                                 </button>
                                                 <button type="button" class="video-ctrl-btn video-sound-btn"
-                                                    aria-label="Toggle video audio">
+                                                    aria-label="Unmute - Toggle video audio">
                                                     <svg class="icon-sound" xmlns="http://www.w3.org/2000/svg"
                                                         width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -3589,8 +3548,8 @@
                                                 <span class="hybrid-card_stars-badge">★★★★★</span>
                                             </div>
                                             <div class="hybrid-card_video-container">
-                                                <video class="hybrid-card_video" src="assets/video/t4.mp4" playsinline
-                                                    muted preload="metadata" loop
+                                                <video class="hybrid-card_video" data-src="assets/video/t4.mp4" playsinline
+                                                    muted preload="none" loop
                                                     aria-label="Patient video testimonial NASSER ABDULWAHAB"></video>
                                                 <div class="hybrid-video_play-overlay">
                                                     <div class="hybrid-play-circle">
@@ -3603,7 +3562,7 @@
                                             </div>
                                             <div class="hybrid-card_video-bottombar">
                                                 <button type="button" class="video-ctrl-btn video-play-btn"
-                                                    aria-label="Play or Pause video">
+                                                    aria-label="Play - Toggle video playback">
                                                     <svg class="icon-play" xmlns="http://www.w3.org/2000/svg" width="14"
                                                         height="14" viewBox="0 0 24 24" fill="currentColor">
                                                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
@@ -3611,7 +3570,7 @@
                                                     <span>Play</span>
                                                 </button>
                                                 <button type="button" class="video-ctrl-btn video-sound-btn"
-                                                    aria-label="Toggle video audio">
+                                                    aria-label="Unmute - Toggle video audio">
                                                     <svg class="icon-sound" xmlns="http://www.w3.org/2000/svg"
                                                         width="14" height="14" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -3858,6 +3817,7 @@
                                     <iframe id="yt-player-1"
                                         src="https://www.youtube-nocookie.com/embed/lZdUn-c20Zc?enablejsapi=1&rel=0&playsinline=1"
                                         title="Redesign Dental Clinics Patient Video Testimonial 1"
+                                        loading="lazy"
                                         style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowfullscreen>
@@ -3870,6 +3830,7 @@
                                     <iframe id="yt-player-2"
                                         src="https://www.youtube-nocookie.com/embed/ZLbwfZ5gsBU?enablejsapi=1&rel=0&playsinline=1"
                                         title="Redesign Dental Clinics Patient Video Testimonial 2"
+                                        loading="lazy"
                                         style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowfullscreen>
@@ -3882,6 +3843,7 @@
                                     <iframe id="yt-player-3"
                                         src="https://www.youtube-nocookie.com/embed/JGLxEK0la50?enablejsapi=1&rel=0&playsinline=1"
                                         title="Redesign Dental Clinics Patient Video Testimonial 3"
+                                        loading="lazy"
                                         style="position: absolute; top:0; left:0; width:100%; height:100%; border:0;"
                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                         allowfullscreen>
@@ -3913,14 +3875,14 @@
 
                         <!-- Carousel Indicators -->
                         <div class="patient-yt-dots" id="patient-yt-dots"
-                            style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;"
+                            style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 20px;"
                             role="tablist" aria-label="Patient video carousel navigation">
-                            <button type="button" class="patient-yt-dot active" data-index="0" aria-label="Video 1"
-                                style="width: 28px; height: 10px; border-radius: 5px; background: #0D9488; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); outline: none; padding: 0;"></button>
-                            <button type="button" class="patient-yt-dot" data-index="1" aria-label="Video 2"
-                                style="width: 10px; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.35); border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); outline: none; padding: 0;"></button>
-                            <button type="button" class="patient-yt-dot" data-index="2" aria-label="Video 3"
-                                style="width: 10px; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, 0.35); border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); outline: none; padding: 0;"></button>
+                            <button type="button" class="patient-yt-dot active" data-index="0" role="tab" aria-selected="true" aria-label="Video 1"
+                                style="width: 28px; min-height: 24px; padding: 7px 0; background-clip: content-box; box-sizing: border-box; border-radius: 5px; background-color: #0D9488; border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); outline: none;"></button>
+                            <button type="button" class="patient-yt-dot" data-index="1" role="tab" aria-selected="false" aria-label="Video 2"
+                                style="width: 10px; min-height: 24px; padding: 7px 0; background-clip: content-box; box-sizing: border-box; border-radius: 5px; background-color: rgba(255, 255, 255, 0.35); border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); outline: none;"></button>
+                            <button type="button" class="patient-yt-dot" data-index="2" role="tab" aria-selected="false" aria-label="Video 3"
+                                style="width: 10px; min-height: 24px; padding: 7px 0; background-clip: content-box; box-sizing: border-box; border-radius: 5px; background-color: rgba(255, 255, 255, 0.35); border: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); outline: none;"></button>
                         </div>
                     </div>
 
@@ -3956,11 +3918,13 @@
                         dots.forEach(function (d, i) {
                             if (i === current) {
                                 d.classList.add('active');
-                                d.style.background = '#0D9488';
+                                d.setAttribute('aria-selected', 'true');
+                                d.style.backgroundColor = '#0D9488';
                                 d.style.width = '28px';
                             } else {
                                 d.classList.remove('active');
-                                d.style.background = 'rgba(255, 255, 255, 0.35)';
+                                d.setAttribute('aria-selected', 'false');
+                                d.style.backgroundColor = 'rgba(255, 255, 255, 0.35)';
                                 d.style.width = '10px';
                             }
                         });
@@ -4002,7 +3966,7 @@
                             <div class="instagram_cta-wrap">
                                 <a href="https://www.instagram.com/redesign.dental.clinics/" target="_blank"
                                     rel="noopener noreferrer" class="instagram_follow-btn"
-                                    aria-label="Follow Redesign Dental Clinics on Instagram">
+                                    aria-label="@redesign.dental.clinics • Follow Us on Instagram">
                                     <span class="instagram_btn-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -4026,9 +3990,7 @@
                                 rel="noopener noreferrer" class="instagram-post_card"
                                 aria-label="Redesign Dental Clinics Instagram post - Patient smile transformation">
                                 <div class="instagram-post_media">
-                                    <img src="assets/img/instagram/post-01.jpg"
-                                        alt="Redesign Dental Clinics Instagram post - Patient smile transformation"
-                                        loading="lazy" class="instagram-post_img" />
+                                    <img src="assets/img/instagram/post-01.webp" alt="Redesign Dental Clinics Instagram post - Patient smile transformation" loading="lazy" class="instagram-post_img" / width="640" height="800" decoding="async">
                                     <div class="instagram-post_overlay">
                                         <div class="instagram-post_icon-wrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -4049,9 +4011,7 @@
                                 rel="noopener noreferrer" class="instagram-post_card"
                                 aria-label="Redesign Dental Clinics Instagram post - Clinical excellence & care">
                                 <div class="instagram-post_media">
-                                    <img src="assets/img/instagram/post-02.jpg"
-                                        alt="Redesign Dental Clinics Instagram post - Clinical excellence & care"
-                                        loading="lazy" class="instagram-post_img" />
+                                    <img src="assets/img/instagram/post-02.webp" alt="Redesign Dental Clinics Instagram post - Clinical excellence & care" loading="lazy" class="instagram-post_img" / width="640" height="740" decoding="async">
                                     <div class="instagram-post_overlay">
                                         <div class="instagram-post_icon-wrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -4072,9 +4032,7 @@
                                 rel="noopener noreferrer" class="instagram-post_card"
                                 aria-label="Redesign Dental Clinics Instagram post - Modern facility in Banjara Hills">
                                 <div class="instagram-post_media">
-                                    <img src="assets/img/instagram/post-03.jpg"
-                                        alt="Redesign Dental Clinics Instagram post - Modern facility in Banjara Hills"
-                                        loading="lazy" class="instagram-post_img" />
+                                    <img src="assets/img/instagram/post-03.webp" alt="Redesign Dental Clinics Instagram post - Modern facility in Banjara Hills" loading="lazy" class="instagram-post_img" / width="640" height="799" decoding="async">
                                     <div class="instagram-post_overlay">
                                         <div class="instagram-post_icon-wrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -4095,9 +4053,7 @@
                                 rel="noopener noreferrer" class="instagram-post_card"
                                 aria-label="Redesign Dental Clinics Instagram post - Precision dental treatment">
                                 <div class="instagram-post_media">
-                                    <img src="assets/img/instagram/post-04.jpg"
-                                        alt="Redesign Dental Clinics Instagram post - Precision dental treatment"
-                                        loading="lazy" class="instagram-post_img" />
+                                    <img src="assets/img/instagram/post-04.webp" alt="Redesign Dental Clinics Instagram post - Precision dental treatment" loading="lazy" class="instagram-post_img" / width="640" height="799" decoding="async">
                                     <div class="instagram-post_overlay">
                                         <div class="instagram-post_icon-wrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -4118,9 +4074,7 @@
                                 rel="noopener noreferrer" class="instagram-post_card"
                                 aria-label="Redesign Dental Clinics Instagram post - Specialist dental consultation">
                                 <div class="instagram-post_media">
-                                    <img src="assets/img/instagram/post-05.jpg"
-                                        alt="Redesign Dental Clinics Instagram post - Specialist dental consultation"
-                                        loading="lazy" class="instagram-post_img" />
+                                    <img src="assets/img/instagram/post-05.webp" alt="Redesign Dental Clinics Instagram post - Specialist dental consultation" loading="lazy" class="instagram-post_img" / width="640" height="799" decoding="async">
                                     <div class="instagram-post_overlay">
                                         <div class="instagram-post_icon-wrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -4141,9 +4095,7 @@
                                 rel="noopener noreferrer" class="instagram-post_card"
                                 aria-label="Redesign Dental Clinics Instagram post - Restoring healthy confident smiles">
                                 <div class="instagram-post_media">
-                                    <img src="assets/img/instagram/post-06.jpg"
-                                        alt="Redesign Dental Clinics Instagram post - Restoring healthy confident smiles"
-                                        loading="lazy" class="instagram-post_img" />
+                                    <img src="assets/img/instagram/post-06.webp" alt="Redesign Dental Clinics Instagram post - Restoring healthy confident smiles" loading="lazy" class="instagram-post_img" / width="1080" height="1080" decoding="async">
                                     <div class="instagram-post_overlay">
                                         <div class="instagram-post_icon-wrap">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
@@ -4201,7 +4153,7 @@
                                 style="position: relative; width: 100%; border-radius: 24px; overflow: hidden; background: #0f172a; box-shadow: 0 25px 50px -12px rgba(13, 148, 136, 0.18), 0 10px 25px -5px rgba(0,0,0,0.1); border: 1px solid rgba(13, 148, 136, 0.2);">
                                 <video id="clinicFacilityVideo"
                                     style="width: 100%; height: auto; max-height: 80vh; display: block; object-fit: cover; margin: 0 auto; border-radius: 24px;"
-                                    preload="metadata" autoplay muted loop playsinline controls
+                                    preload="none" autoplay muted loop playsinline controls
                                     controlsList="nodownload"
                                     aria-label="Inside Redesign Dental Clinics facility video tour">
                                     <source src="assets/video/redesign-clinics.mp4" type="video/mp4">
@@ -4302,10 +4254,7 @@
                                                 </div>
                                             </div>
                                             <div class="blog-item_image-wrap">
-                                                <img src="assets/img/gen_blog-image-6.jpg" loading="lazy" alt=""
-                                                    sizes="100vw"
-                                                    srcset="assets/img/gen_blog-image-6.jpg 500w, assets/img/gen_blog-image-6.jpg 800w, assets/img/gen_blog-image-6.jpg 1080w, assets/img/gen_blog-image-6.jpg 1600w, assets/img/gen_blog-image-6.jpg 1620w"
-                                                    class="blog-item_image" />
+                                                <img src="assets/img/gen_blog-image-6.webp" loading="lazy" alt="" sizes="100vw" srcset="assets/img/gen_blog-image-6.jpg 500w, assets/img/gen_blog-image-6.jpg 800w, assets/img/gen_blog-image-6.jpg 1080w, assets/img/gen_blog-image-6.jpg 1600w, assets/img/gen_blog-image-6.jpg 1620w" class="blog-item_image" / width="1344" height="752" decoding="async">
                                             </div>
                                         </a>
                                     </div>
@@ -4333,10 +4282,7 @@
                                                 </div>
                                             </div>
                                             <div class="blog-item_image-wrap">
-                                                <img src="assets/img/gen_blog-image-5.jpg" loading="lazy" alt=""
-                                                    sizes="100vw"
-                                                    srcset="assets/img/gen_blog-image-5.jpg 500w, assets/img/gen_blog-image-5.jpg 800w, assets/img/gen_blog-image-5.jpg 1080w, assets/img/gen_blog-image-5.jpg 1600w, assets/img/gen_blog-image-5.jpg 1620w"
-                                                    class="blog-item_image" />
+                                                <img src="assets/img/gen_blog-image-5.webp" loading="lazy" alt="" sizes="100vw" srcset="assets/img/gen_blog-image-5.jpg 500w, assets/img/gen_blog-image-5.jpg 800w, assets/img/gen_blog-image-5.jpg 1080w, assets/img/gen_blog-image-5.jpg 1600w, assets/img/gen_blog-image-5.jpg 1620w" class="blog-item_image" / width="1344" height="752" decoding="async">
                                             </div>
                                         </a>
                                     </div>
@@ -4364,10 +4310,7 @@
                                                 </div>
                                             </div>
                                             <div class="blog-item_image-wrap">
-                                                <img src="assets/img/gen_blog-image-4.jpg" loading="lazy" alt=""
-                                                    sizes="100vw"
-                                                    srcset="assets/img/gen_blog-image-4.jpg 500w, assets/img/gen_blog-image-4.jpg 800w, assets/img/gen_blog-image-4.jpg 1080w, assets/img/gen_blog-image-4.jpg 1600w, assets/img/gen_blog-image-4.jpg 1620w"
-                                                    class="blog-item_image" />
+                                                <img src="assets/img/gen_blog-image-4.webp" loading="lazy" alt="" sizes="100vw" srcset="assets/img/gen_blog-image-4.jpg 500w, assets/img/gen_blog-image-4.jpg 800w, assets/img/gen_blog-image-4.jpg 1080w, assets/img/gen_blog-image-4.jpg 1600w, assets/img/gen_blog-image-4.jpg 1620w" class="blog-item_image" / width="1344" height="752" decoding="async">
                                             </div>
                                         </a>
                                     </div>
@@ -4444,16 +4387,11 @@
                             <article class="transformation_card" role="listitem" tabindex="0"
                                 aria-label="Smile Transformation 1 — Full Mouth Rehabilitation & Smile Design">
                                 <div class="transformation_slider" style="--pos: 50%;">
-                                    <img src="photos/transformations/transformation-1-after.png"
-                                        alt="After Smile Transformation — Full Aesthetic Smile Restoration"
-                                        class="transformation_img is-after" width="640" height="400" loading="lazy" />
+                                    <img src="photos/transformations/transformation-1-after.webp" alt="After Smile Transformation — Full Aesthetic Smile Restoration" class="transformation_img is-after" width="640" height="400" loading="lazy" / decoding="async">
                                     <span class="transformation_label is-after"
                                         aria-label="After treatment">AFTER</span>
                                     <div class="transformation_before-wrap">
-                                        <img src="photos/transformations/transformation-1-before.png"
-                                            alt="Before Smile Transformation — Dental Wear and Spacing"
-                                            class="transformation_img is-before" width="640" height="400"
-                                            loading="lazy" />
+                                        <img src="photos/transformations/transformation-1-before.webp" alt="Before Smile Transformation — Dental Wear and Spacing" class="transformation_img is-before" width="640" height="400" loading="lazy" / decoding="async">
                                         <span class="transformation_label is-before"
                                             aria-label="Before treatment">BEFORE</span>
                                     </div>
@@ -4483,16 +4421,11 @@
                             <article class="transformation_card" role="listitem" tabindex="0"
                                 aria-label="Smile Transformation 2 — Dental Implants & Smile Makeover">
                                 <div class="transformation_slider" style="--pos: 50%;">
-                                    <img src="photos/transformations/transformation-2-after.png"
-                                        alt="After Patient Transformation — Restored Smile with Dental Implants"
-                                        class="transformation_img is-after" width="640" height="400" loading="lazy" />
+                                    <img src="photos/transformations/transformation-2-after.webp" alt="After Patient Transformation — Restored Smile with Dental Implants" class="transformation_img is-after" width="640" height="400" loading="lazy" / decoding="async">
                                     <span class="transformation_label is-after"
                                         aria-label="After treatment">AFTER</span>
                                     <div class="transformation_before-wrap">
-                                        <img src="photos/transformations/transformation-2-before.png"
-                                            alt="Before Patient Transformation — Anterior Gaps and Missing Teeth"
-                                            class="transformation_img is-before" width="640" height="400"
-                                            loading="lazy" />
+                                        <img src="photos/transformations/transformation-2-before.webp" alt="Before Patient Transformation — Anterior Gaps and Missing Teeth" class="transformation_img is-before" width="640" height="400" loading="lazy" / decoding="async">
                                         <span class="transformation_label is-before"
                                             aria-label="Before treatment">BEFORE</span>
                                     </div>
@@ -4522,16 +4455,11 @@
                             <article class="transformation_card" role="listitem" tabindex="0"
                                 aria-label="Smile Transformation 3 — Aesthetic Smile Makeover & Porcelain Veneers">
                                 <div class="transformation_slider" style="--pos: 50%;">
-                                    <img src="photos/transformations/transformation-3-after.png"
-                                        alt="After Smile Makeover — Restored Radiant Smile with Porcelain Aesthetics"
-                                        class="transformation_img is-after" width="640" height="400" loading="lazy" />
+                                    <img src="photos/transformations/transformation-3-after.webp" alt="After Smile Makeover — Restored Radiant Smile with Porcelain Aesthetics" class="transformation_img is-after" width="640" height="400" loading="lazy" / decoding="async">
                                     <span class="transformation_label is-after"
                                         aria-label="After treatment">AFTER</span>
                                     <div class="transformation_before-wrap">
-                                        <img src="photos/transformations/transformation-3-before.png"
-                                            alt="Before Smile Makeover — Worn Anterior Dentition"
-                                            class="transformation_img is-before" width="640" height="400"
-                                            loading="lazy" />
+                                        <img src="photos/transformations/transformation-3-before.webp" alt="Before Smile Makeover — Worn Anterior Dentition" class="transformation_img is-before" width="640" height="400" loading="lazy" / decoding="async">
                                         <span class="transformation_label is-before"
                                             aria-label="Before treatment">BEFORE</span>
                                     </div>
@@ -4561,16 +4489,11 @@
                             <article class="transformation_card" role="listitem" tabindex="0"
                                 aria-label="Smile Transformation 4 — Teeth Whitening & Aesthetic Restoration">
                                 <div class="transformation_slider" style="--pos: 50%;">
-                                    <img src="photos/transformations/transformation-4-after.png"
-                                        alt="After Teeth Whitening — Bright Radiant White Smile"
-                                        class="transformation_img is-after" width="297" height="270" loading="lazy" />
+                                    <img src="photos/transformations/transformation-4-after.webp" alt="After Teeth Whitening — Bright Radiant White Smile" class="transformation_img is-after" width="297" height="270" loading="lazy" / decoding="async">
                                     <span class="transformation_label is-after"
                                         aria-label="After treatment">AFTER</span>
                                     <div class="transformation_before-wrap">
-                                        <img src="photos/transformations/transformation-4-before.png"
-                                            alt="Before Teeth Whitening — Dental Staining and Wear"
-                                            class="transformation_img is-before" width="669" height="339"
-                                            loading="lazy" />
+                                        <img src="photos/transformations/transformation-4-before.webp" alt="Before Teeth Whitening — Dental Staining and Wear" class="transformation_img is-before" width="669" height="339" loading="lazy" / decoding="async">
                                         <span class="transformation_label is-before"
                                             aria-label="Before treatment">BEFORE</span>
                                     </div>
@@ -4600,16 +4523,11 @@
                             <article class="transformation_card" role="listitem" tabindex="0"
                                 aria-label="Smile Transformation 5 — Full Mouth Rehabilitation & Implants">
                                 <div class="transformation_slider" style="--pos: 50%;">
-                                    <img src="photos/transformations/transformation-5-after.png"
-                                        alt="After Full Mouth Rehabilitation — Full-Arch Implant Reconstruction Radiograph"
-                                        class="transformation_img is-after" width="653" height="319" loading="lazy" />
+                                    <img src="photos/transformations/transformation-5-after.webp" alt="After Full Mouth Rehabilitation — Full-Arch Implant Reconstruction Radiograph" class="transformation_img is-after" width="653" height="319" loading="lazy" / decoding="async">
                                     <span class="transformation_label is-after"
                                         aria-label="After treatment">AFTER</span>
                                     <div class="transformation_before-wrap">
-                                        <img src="photos/transformations/transformation-5-before.png"
-                                            alt="Before Full Mouth Rehabilitation — Pre-Operative Radiograph"
-                                            class="transformation_img is-before" width="687" height="323"
-                                            loading="lazy" />
+                                        <img src="photos/transformations/transformation-5-before.webp" alt="Before Full Mouth Rehabilitation — Pre-Operative Radiograph" class="transformation_img is-before" width="687" height="323" loading="lazy" / decoding="async">
                                         <span class="transformation_label is-before"
                                             aria-label="Before treatment">BEFORE</span>
                                     </div>
@@ -4639,16 +4557,11 @@
                             <article class="transformation_card" role="listitem" tabindex="0"
                                 aria-label="Smile Transformation 6 — Full Occlusal Alignment & Smile Correction">
                                 <div class="transformation_slider" style="--pos: 50%;">
-                                    <img src="photos/transformations/transformation-6-after.jpg"
-                                        alt="After Alignment Correction — Frontal Balanced Aesthetic Occlusion"
-                                        class="transformation_img is-after" width="588" height="292" loading="lazy" />
+                                    <img src="photos/transformations/transformation-6-after.webp" alt="After Alignment Correction — Frontal Balanced Aesthetic Occlusion" class="transformation_img is-after" width="588" height="292" loading="lazy" / decoding="async">
                                     <span class="transformation_label is-after"
                                         aria-label="After treatment">AFTER</span>
                                     <div class="transformation_before-wrap">
-                                        <img src="photos/transformations/transformation-6-before.jpg"
-                                            alt="Before Alignment Correction — Lateral Bite Position"
-                                            class="transformation_img is-before" width="1024" height="528"
-                                            loading="lazy" />
+                                        <img src="photos/transformations/transformation-6-before.webp" alt="Before Alignment Correction — Lateral Bite Position" class="transformation_img is-before" width="1024" height="528" loading="lazy" / decoding="async">
                                         <span class="transformation_label is-before"
                                             aria-label="Before treatment">BEFORE</span>
                                     </div>
@@ -5133,8 +5046,7 @@
                     <div data-w-id="a1b41f4f-e78b-52e6-2492-2ff9a80f251e" class="footer_header">
                         <a id="w-node-_69a072d1-69e6-8783-2548-858b3e84bf4f-4af74ce9" href="/" aria-current="page"
                             class="footer_brand w-inline-block w--current">
-                            <img src="assets/img/redesign-dental-clinics-logo-white.png" loading="lazy"
-                                alt="Redesign Dental Clinics" class="brand_logo" />
+                            <img src="assets/img/redesign-dental-clinics-logo-white.webp" loading="lazy" alt="Redesign Dental Clinics" class="brand_logo" / width="576" height="161" decoding="async">
                         </a>
                         <div class="footer-contact_wrap">
                             <a href="tel:+917780245307" class="footer-contact_link w-inline-block">
@@ -5277,7 +5189,7 @@
                         </a>
                         <div class="footer-bottom_right-divider"></div>
                         <a href="/privacy" class="footer-menu_link w-inline-block">
-                            <div data-i18n="nav.privacy" data-i18n="nav.privacy">Privacy Policy</div>
+                            <div data-i18n="nav.privacy">Privacy Policy</div>
                         </a>
                     </div>
                 </div>
@@ -5484,27 +5396,41 @@
     </script>
     <script>
         (function () {
-            // 1. All Website Videos: Autoplay + Default Muted Controller
-            var videos = document.querySelectorAll('video');
-            videos.forEach(function (video) {
-                video.muted = true;
-                video.volume = 0;
-                video.setAttribute('muted', '');
-                video.setAttribute('playsinline', '');
-                video.setAttribute('autoplay', '');
-                video.setAttribute('loop', '');
-
-                var playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function (err) {
-                        // Suppress autoplay policy rejection
-                    });
-                }
-            });
-
-            // Drone Video Overlay Play/Pause Button
+            // Ambient Video Controller: IntersectionObserver for Clinic & Drone Videos
             var droneVid = document.getElementById('clinicDroneVideo');
             var droneBtn = document.getElementById('droneVideoPlayBtn');
+            var facilityVid = document.getElementById('clinicFacilityVideo');
+
+            [droneVid, facilityVid].forEach(function (v) {
+                if (!v) return;
+                v.muted = true;
+                v.volume = 0;
+                v.setAttribute('muted', '');
+                v.setAttribute('playsinline', '');
+            });
+
+            if ('IntersectionObserver' in window) {
+                var ambientVideoObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        var v = entry.target;
+                        if (entry.isIntersecting) {
+                            if (v.paused) {
+                                var p = v.play();
+                                if (p !== undefined) p.catch(function () {});
+                            }
+                        } else {
+                            if (!v.paused) {
+                                v.pause();
+                            }
+                        }
+                    });
+                }, { threshold: 0.2 });
+
+                if (droneVid) ambientVideoObserver.observe(droneVid);
+                if (facilityVid) ambientVideoObserver.observe(facilityVid);
+            }
+
+            // Drone Video Overlay Play/Pause Button
             if (droneVid && droneBtn) {
                 droneBtn.addEventListener('click', function () {
                     if (droneVid.paused) {
@@ -5521,6 +5447,57 @@
                     droneBtn.style.opacity = '1';
                     droneBtn.style.pointerEvents = 'auto';
                 });
+            }
+
+            // Drone Video Mute / Unmute Button
+            var droneMuteBtn = document.getElementById('droneMuteBtn');
+            var droneMuteIcon = document.getElementById('droneMuteIcon');
+            var droneUnmuteIcon = document.getElementById('droneUnmuteIcon');
+
+            function updateDroneMuteUI(isMuted) {
+                if (!droneMuteIcon || !droneUnmuteIcon || !droneMuteBtn) return;
+                if (isMuted) {
+                    droneMuteIcon.style.display = '';
+                    droneUnmuteIcon.style.display = 'none';
+                    droneMuteBtn.setAttribute('aria-label', 'Unmute drone video');
+                    droneMuteBtn.setAttribute('title', 'Unmute');
+                } else {
+                    droneMuteIcon.style.display = 'none';
+                    droneUnmuteIcon.style.display = '';
+                    droneMuteBtn.setAttribute('aria-label', 'Mute drone video');
+                    droneMuteBtn.setAttribute('title', 'Mute');
+                }
+            }
+
+            if (droneVid && droneMuteBtn) {
+                droneMuteBtn.addEventListener('click', function () {
+                    if (droneVid.muted) {
+                        droneVid.muted = false;
+                        droneVid.volume = 1;
+                    } else {
+                        droneVid.muted = true;
+                        droneVid.volume = 0;
+                    }
+                    updateDroneMuteUI(droneVid.muted);
+                });
+
+                // Hover feedback
+                droneMuteBtn.addEventListener('mouseenter', function () {
+                    droneMuteBtn.style.background = 'rgba(13, 148, 136, 0.90)';
+                    droneMuteBtn.style.transform = 'scale(1.1)';
+                });
+                droneMuteBtn.addEventListener('mouseleave', function () {
+                    droneMuteBtn.style.background = 'rgba(5, 38, 42, 0.80)';
+                    droneMuteBtn.style.transform = 'scale(1)';
+                });
+
+                // Sync UI on volumechange event (e.g. if native controls are also used)
+                droneVid.addEventListener('volumechange', function () {
+                    updateDroneMuteUI(droneVid.muted);
+                });
+
+                // Initial state
+                updateDroneMuteUI(true);
             }
 
             // (Why Choose Us & FAQ Accordions managed by assets/js/accordions.js)
@@ -5576,14 +5553,18 @@
                 });
             });
 
-            // 3. Awards Horizontal Scrolling Center Zoom Pop-Out Effect
+            // 3. Awards Horizontal Scrolling Center Zoom Pop-Out Effect (Observer-Guarded rAF)
             var awardsContainer = document.querySelector('.awards_marquee-container');
             if (awardsContainer) {
                 var awardCards = awardsContainer.querySelectorAll('.award_card');
                 var isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
                 if (awardCards.length > 0 && !isReducedMotion) {
+                    var isAwardsVisible = false;
+                    var awardsRafId = null;
+
                     function updateAwardsCenterZoom() {
+                        if (!isAwardsVisible) return;
                         var containerRect = awardsContainer.getBoundingClientRect();
                         var containerCenter = containerRect.left + containerRect.width / 2;
                         var maxDistance = Math.min(380, containerRect.width * 0.46);
@@ -5603,11 +5584,10 @@
                             var distance = Math.abs(containerCenter - cardCenter);
 
                             if (distance < maxDistance) {
-                                var normalized = distance / maxDistance; // 0 (center) to 1 (outer edge)
-                                // Smooth bell curve using cosine squared for a punchy, smooth pop-out
-                                var factor = Math.pow(Math.cos(normalized * Math.PI * 0.5), 2); // 1.0 at center -> 0.0 at edge
-                                var scale = 1.0 + (0.28 * factor); // Scales up to 1.28x at center for a dramatic outward zoom
-                                var translateY = -8 * factor; // Slight 3D lift
+                                var normalized = distance / maxDistance;
+                                var factor = Math.pow(Math.cos(normalized * Math.PI * 0.5), 2);
+                                var scale = 1.0 + (0.28 * factor);
+                                var translateY = -8 * factor;
                                 card.style.transform = 'scale(' + scale.toFixed(4) + ') translateY(' + translateY.toFixed(1) + 'px)';
                                 card.style.zIndex = factor > 0.05 ? '25' : '1';
                                 card.style.boxShadow = factor > 0.05
@@ -5621,9 +5601,26 @@
                                 card.style.borderColor = '#edf2f4';
                             }
                         }
-                        requestAnimationFrame(updateAwardsCenterZoom);
+                        awardsRafId = requestAnimationFrame(updateAwardsCenterZoom);
                     }
-                    requestAnimationFrame(updateAwardsCenterZoom);
+
+                    if ('IntersectionObserver' in window) {
+                        var awardsObserver = new IntersectionObserver(function (entries) {
+                            entries.forEach(function (entry) {
+                                isAwardsVisible = entry.isIntersecting;
+                                if (isAwardsVisible) {
+                                    cancelAnimationFrame(awardsRafId);
+                                    awardsRafId = requestAnimationFrame(updateAwardsCenterZoom);
+                                } else {
+                                    cancelAnimationFrame(awardsRafId);
+                                }
+                            });
+                        }, { threshold: 0.05 });
+                        awardsObserver.observe(awardsContainer);
+                    } else {
+                        isAwardsVisible = true;
+                        awardsRafId = requestAnimationFrame(updateAwardsCenterZoom);
+                    }
                 }
             }
         })();

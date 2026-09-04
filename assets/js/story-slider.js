@@ -107,9 +107,11 @@
           if (idx === currentIndex) {
             dot.classList.add('is-active');
             dot.setAttribute('aria-current', 'true');
+            dot.setAttribute('aria-selected', 'true');
           } else {
             dot.classList.remove('is-active');
             dot.removeAttribute('aria-current');
+            dot.setAttribute('aria-selected', 'false');
           }
         });
       }
@@ -131,6 +133,8 @@
         (function(index) {
           var dot = document.createElement('button');
           dot.className = 'story-slider_dot' + (index === currentIndex ? ' is-active' : '');
+          dot.setAttribute('role', 'tab');
+          dot.setAttribute('aria-selected', index === currentIndex ? 'true' : 'false');
           dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
           dot.type = 'button';
           dot.addEventListener('click', function(e) {
