@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
-const domain = 'https://redesign-tau-five.vercel.app';
+const domain = 'https://www.redesigndentalclinics.com';
 const urls = [
   '',
   '/about',
