@@ -346,7 +346,19 @@
   }
 
   function triggerWhatsAppAppointment(data) {
-    var cleanNumber = (window.whatsappConfig && window.whatsappConfig.clinicNumber) ? window.whatsappConfig.clinicNumber : '918179738737';
+    if (window.RedesignWhatsApp && typeof window.RedesignWhatsApp.openWhatsApp === 'function') {
+      var msg = window.RedesignWhatsApp.buildAppointmentMessage(data);
+      window.RedesignWhatsApp.openWhatsApp(msg);
+      return;
+    }
+
+    var rawNumber = (window.whatsappConfig && window.whatsappConfig.clinicNumber)
+      ? String(window.whatsappConfig.clinicNumber)
+      : '8179738737';
+    var cleanNumber = rawNumber.replace(/\D/g, '');
+    if (cleanNumber.length === 10) cleanNumber = '91' + cleanNumber;
+    if (!cleanNumber) cleanNumber = '918179738737';
+
     var lines = [
       'Hello Redesign Dental Clinics 👋',
       '',
