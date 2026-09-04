@@ -262,6 +262,160 @@
                 display: none !important;
             }
         }
+
+        /* ============================================================
+           OUR SERVICES CAROUSEL & NATURAL SECTION SPACING FIX
+           Removes the 400vh/200vh sticky scroll void so that:
+           [ Our Services heading ]
+           [ Carousel cards ]
+           [ Normal bottom spacing ]
+           [ Next section immediately follows ]
+           Preserves cards, images, text, animations, hover effects, and categories.
+           ============================================================ */
+        .section_service {
+            height: auto !important;
+            min-height: 0 !important;
+            position: relative !important;
+        }
+
+        .section_service .section-padding.padding-0x120 {
+            padding-top: var(--_size-variables---section-padding--none, 0px) !important;
+            padding-bottom: 48px !important;
+        }
+
+        .service_sticky-trigger {
+            height: auto !important;
+            min-height: 0 !important;
+            position: relative !important;
+            z-index: 2;
+        }
+
+        .service_sticky-camera {
+            position: relative !important;
+            top: auto !important;
+            height: auto !important;
+            justify-content: flex-start !important;
+        }
+
+        .scroll-mobile_trigger {
+            height: auto !important;
+            min-height: 0 !important;
+            padding-bottom: 0 !important;
+            position: relative !important;
+        }
+
+        .scroll-mobile_camera {
+            position: relative !important;
+            top: auto !important;
+            height: auto !important;
+        }
+
+        .service_wrap {
+            display: block !important;
+            width: 100% !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            scroll-behavior: smooth !important;
+            scroll-snap-type: x mandatory !important;
+            -webkit-overflow-scrolling: touch !important;
+            scrollbar-width: none !important;
+            touch-action: pan-x pan-y !important;
+            cursor: grab;
+            position: relative;
+        }
+
+        .service_wrap:active {
+            cursor: grabbing;
+        }
+
+        .service_wrap::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        .scroll_track {
+            display: flex !important;
+            transform: none !important;
+            width: max-content !important;
+        }
+
+        .scroll_list {
+            margin-right: 0 !important;
+            display: flex !important;
+        }
+
+        .service_list {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            align-items: stretch !important;
+        }
+
+        .service_item-wrap {
+            scroll-snap-align: start !important;
+            scroll-snap-stop: normal !important;
+        }
+
+        /* Carousel Navigation Buttons */
+        .home-service_button {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .service-carousel-nav-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-nav-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(5, 38, 42, 0.15);
+            background: #ffffff;
+            color: #05262a;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            outline: none;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        .service-nav-btn:hover:not(:disabled) {
+            background: #0f766e;
+            color: #ffffff;
+            border-color: #0f766e;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(15, 118, 110, 0.22);
+        }
+
+        .service-nav-btn:disabled {
+            opacity: 0.35 !important;
+            cursor: default !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        @media (max-width: 767px) {
+            .section_service .section-padding.padding-0x120 {
+                padding-bottom: 32px !important;
+            }
+
+            .home-service_header {
+                gap: 20px;
+            }
+
+            .home-service_button {
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
@@ -2175,6 +2329,18 @@
                                                     </div>
                                                 </div>
                                             </a>
+                                            <div class="service-carousel-nav-group">
+                                                <button type="button" class="service-nav-btn is-prev" aria-label="Previous Service">
+                                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M10 12L6 8L10 4" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </button>
+                                                <button type="button" class="service-nav-btn is-next" aria-label="Next Service">
+                                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path d="M6 4L10 8L6 12" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -5432,6 +5598,7 @@
     <script src="assets/js/whatsapp-config.js"></script>
     <script src="assets/js/booking-system.js"></script>
     <script src="assets/js/navbar-dropdowns.js"></script>
+    <script src="assets/js/services-carousel.js"></script>
 </body>
 
 </html>

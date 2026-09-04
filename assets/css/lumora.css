@@ -6997,17 +6997,17 @@ figure {
 
 .service_sticky-trigger {
   z-index: 2;
-  height: 400vh;
+  height: auto;
   position: relative;
 }
 
 .service_sticky-camera {
   flex-flow: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   height: auto;
-  position: sticky;
-  top: 1vh;
+  position: relative;
+  top: auto;
 }
 
 .service_sticky-camera.is-service-details {
@@ -8837,7 +8837,7 @@ figure {
   .service_sticky-camera {
     height: auto;
     position: relative;
-    top: 5vh;
+    top: auto;
   }
 
   .story-slider_mask {
@@ -8869,13 +8869,14 @@ figure {
   }
 
   .scroll-mobile_camera {
-    position: sticky;
-    top: 3vh;
+    position: relative;
+    top: auto;
+    height: auto;
   }
 
   .scroll-mobile_trigger {
-    height: 200vh;
-    padding-bottom: 70px;
+    height: auto;
+    padding-bottom: 0;
   }
 
   .blog-content_wrap {
