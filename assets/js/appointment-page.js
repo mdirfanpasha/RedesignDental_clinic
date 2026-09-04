@@ -35,6 +35,55 @@
   var selectedDateStr = currentCalDate.toISOString().split('T')[0];
   var selectedDoctor = null;
 
+  // ── i18n Safe Helper ──
+  function t(key, fallback) {
+    if (window.i18n && typeof window.i18n.t === 'function') {
+      var res = window.i18n.t(key);
+      if (res && res !== key) return res;
+    }
+    return fallback;
+  }
+
+  function getCurrentLang() {
+    if (window.i18n && typeof window.i18n.getLanguage === 'function') {
+      return window.i18n.getLanguage();
+    }
+    return 'en';
+  }
+
+  function getLocalizedDayHeaders(lang) {
+    var dayMap = {
+      en: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      te: ['సోమ', 'మంగళ', 'బుధ', 'గురు', 'శుక్ర', 'శని', 'ఆది'],
+      hi: ['सोम', 'मंगल', 'बुध', 'गुरु', 'शुक्र', 'शनि', 'रवि'],
+      ar: ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت', 'الأحد']
+    };
+    return dayMap[lang] || dayMap.en;
+  }
+
+  function getLocalizedMonthName(year, month, lang) {
+    var d = new Date(year, month, 1);
+    var localeMap = { en: 'en-US', te: 'te-IN', hi: 'hi-IN', ar: 'ar-SA' };
+    try {
+      return d.toLocaleDateString(localeMap[lang] || 'en-US', { month: 'long' });
+    } catch(e) {
+      var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      return monthNames[month];
+    }
+  }
+
+  function updateSelectedDateSummary() {
+    var summaryEl = document.getElementById('apt-page-selected-date-summary');
+    if (!summaryEl || !selectedDateStr) return;
+    var dateObj = new Date(selectedDateStr + 'T00:00:00');
+    var lang = getCurrentLang();
+    var prefix = t('apt.selectedDatePrefix', 'Selected Date: ');
+    var localeMap = { en: 'en-GB', te: 'te-IN', hi: 'hi-IN', ar: 'ar-SA' };
+    var formatted = dateObj.toLocaleDateString(localeMap[lang] || 'en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+    summaryEl.textContent = prefix + formatted;
+  }
+
+
   function parseQueryParams() {
     try {
       var params = new URLSearchParams(window.location.search);
@@ -45,8 +94,8 @@
         'dr-suhail': { name: 'Dr. Suhail A. Syed', service: 'Periodontics & Gum Care' },
         'dr-harika': { name: 'Dr. Harika Choudhary', service: 'Endodontics (Root Canal Treatment)' },
         'dr-mousa': { name: 'Dr. Mousa Jeelani', service: 'Preventive & General Dentistry' },
-        'orthodontist': { name: 'Dr. Bilal Ahmed Asaq', service: 'Orthodontics (Braces / Aligners)' },
-        'dr-bilal': { name: 'Dr. Bilal Ahmed Asaq', service: 'Orthodontics (Braces / Aligners)' },
+        'orthodontist': { name: 'Dr. Bilal Ahmed Afaq', service: 'Orthodontics (Braces / Aligners)' },
+        'dr-bilal': { name: 'Dr. Bilal Ahmed Afaq', service: 'Orthodontics (Braces / Aligners)' },
         'endodontist': { name: 'Dr. Ahmed Ali Khan', service: 'Endodontics (Root Canal Treatment)' },
         'dr-ahmed': { name: 'Dr. Ahmed Ali Khan', service: 'Endodontics (Root Canal Treatment)' },
         'prosthodontist': { name: 'Dr. Nooruddin Talha', service: 'Restorative Dentistry (Crowns / Bridges)' },
@@ -121,7 +170,7 @@
     var html = `
       <div class="inline-cal-header">
         <button type="button" class="inline-cal-nav-btn" id="cal-prev-month" aria-label="Previous Month">‹</button>
-        <div class="inline-cal-title">${monthNames[month]} ${year}</div>
+        <div class="inline-cal-title">${monthTitle} ${year}</div>
         <button type="button" class="inline-cal-nav-btn" id="cal-next-month" aria-label="Next Month">›</button>
       </div>
       <div class="inline-cal-days-header">
@@ -275,27 +324,27 @@
 
       // 1. Name validation
       if (!name) {
-        showError('Please enter your full name.');
+        showError(t('apt.errName', 'Please enter your full name.'));
         document.getElementById('apt-page-name').focus();
         return;
       }
 
       // 2. Phone validation
       if (!phone || phone.replace(/\D/g, '').length < 10) {
-        showError('Please enter a valid 10-digit mobile number.');
+        showError(t('apt.errPhone', 'Please enter a valid 10-digit mobile number.'));
         document.getElementById('apt-page-phone').focus();
         return;
       }
 
       // 3. Date validation
       if (!dateVal) {
-        showError('Please select your preferred appointment date.');
+        showError(t('apt.errDate', 'Please select an appointment date.'));
         return;
       }
 
       // 4. Time slot validation
       if (!selectedTimeSlot) {
-        showError('Please select your preferred appointment time.');
+        showError(t('apt.errSlot', 'Please select a preferred 30-minute time slot.'));
         var slotsContainer = document.getElementById('apt-page-time-slots');
         if (slotsContainer) slotsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;

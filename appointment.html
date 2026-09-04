@@ -30,12 +30,76 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Multilingual & Brand Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Noto+Sans+Telugu:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Multilingual i18n Engine (Zero Flash) -->
+    <script src="/assets/i18n/translations.js"></script>
+    <script src="/assets/js/i18n.js"></script>
 
     <!-- Core Styles -->
     <link rel="stylesheet" href="/assets/css/lumora.css" type="text/css" />
     <link rel="stylesheet" href="/assets/css/booking-system.css" type="text/css" />
     <link rel="stylesheet" href="/assets/css/dr-suhail-chatbot.css" type="text/css" />
+
+    <style>
+        /* High-contrast signature dark navbar for appointment page */
+        .navbar_wrap {
+            background: rgba(2, 20, 23, 0.96) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(13, 148, 136, 0.25) !important;
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 1000 !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .navbar_link {
+            color: #f1f5f9 !important;
+            font-weight: 500;
+            transition: color 0.25s ease;
+        }
+
+        .navbar_link:hover,
+        .navbar_link.w--current {
+            color: #2dd4bf !important;
+        }
+
+        .navbar-dropdown_toggle_group .rc-nav-parent-link {
+            color: #f1f5f9 !important;
+        }
+
+        .navbar-dropdown_toggle_group .rc-dropdown-arrow-btn {
+            color: #f1f5f9 !important;
+        }
+
+        .navbar-dropdown_toggle_group:hover .rc-nav-parent-link,
+        .navbar-dropdown_toggle_group:hover .rc-dropdown-arrow-btn {
+            color: #2dd4bf !important;
+        }
+
+        .navbar-dropdown_list.w-dropdown-list,
+        .rc-dropdown-menu {
+            background: #05262a !important;
+            border: 1px solid rgba(13, 148, 136, 0.3) !important;
+        }
+
+        .rc-dropdown-link {
+            color: #e2e8f0 !important;
+        }
+
+        .rc-dropdown-link:hover {
+            color: #2dd4bf !important;
+            background: rgba(13, 148, 136, 0.12) !important;
+        }
+
+        .section_appointment-page {
+            padding-top: 36px;
+        }
+    </style>
 </head>
 <body class="body" style="background-color: #f8fafc;">
     <div class="page-wrapper">
@@ -197,9 +261,9 @@
                     <div class="container">
                         <div class="apt-page-header">
                             <div class="apt-page-pill">
-                                <span>✦ Specialist Dental Appointment</span>
+                                <span data-i18n="apt.pill">✦ Specialist Dental Appointment</span>
                             </div>
-                            <h1 class="apt-page-title">Book Your Appointment</h1>
+                            <h1 class="apt-page-title" data-i18n="apt.title">Book Your Appointment</h1>
                             <p class="apt-page-subtitle">
                                 Choose your preferred date and time, share your details, and request an appointment with Redesign Dental Clinics.
                             </p>
@@ -209,7 +273,7 @@
                         <div class="apt-page-grid">
                             <div class="apt-form-card">
                                 <div id="apt-page-form-view">
-                                    <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin-bottom: 24px; letter-spacing: -0.01em;">Select Date, Time &amp; Details</h2>
+                                    <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin-bottom: 24px; letter-spacing: -0.01em;" data-i18n="apt.cardTitle">Select Date, Time &amp; Details</h2>
 
                                     <!-- Error validation message box -->
                                     <div class="apt-error-box" id="apt-page-error-box"></div>
@@ -217,60 +281,60 @@
                                     <form id="dedicated-appointment-form" novalidate>
                                         <!-- Full Name -->
                                         <div class="rc-form-group">
-                                            <label class="rc-form-label" for="apt-page-name" style="color:#0f172a; font-weight:700;">Full Name *</label>
-                                            <input type="text" id="apt-page-name" class="rc-form-input" placeholder="Enter your full name" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;" required />
+                                            <label class="rc-form-label" for="apt-page-name" style="color:#0f172a; font-weight:700;"><span data-i18n="booking.fullNameLabel">Full Name</span> *</label>
+                                            <input type="text" id="apt-page-name" class="rc-form-input" placeholder="Enter your full name" data-i18n-placeholder="booking.fullNamePlaceholder" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;" required />
                                         </div>
 
                                         <!-- Mobile Number -->
                                         <div class="rc-form-group">
-                                            <label class="rc-form-label" for="apt-page-phone" style="color:#0f172a; font-weight:700;">Mobile Number *</label>
-                                            <input type="tel" id="apt-page-phone" class="rc-form-input" placeholder="10-Digit Mobile Number" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;" required />
+                                            <label class="rc-form-label" for="apt-page-phone" style="color:#0f172a; font-weight:700;"><span data-i18n="booking.phoneLabel">Mobile Number</span> *</label>
+                                            <input type="tel" id="apt-page-phone" class="rc-form-input" placeholder="10-Digit Mobile Number" data-i18n-placeholder="booking.phonePlaceholder" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;" required />
                                         </div>
 
                                         <!-- Email Address (Optional) -->
                                         <div class="rc-form-group">
-                                            <label class="rc-form-label" for="apt-page-email" style="color:#0f172a; font-weight:700;">Email Address <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
-                                            <input type="email" id="apt-page-email" class="rc-form-input" placeholder="your.email@example.com (Optional)" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;" />
+                                            <label class="rc-form-label" for="apt-page-email" style="color:#0f172a; font-weight:700;"><span data-i18n="booking.emailLabel">Email Address</span> <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
+                                            <input type="email" id="apt-page-email" class="rc-form-input" placeholder="your.email@example.com (Optional)" data-i18n-placeholder="booking.emailPlaceholder" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;" />
                                         </div>
 
                                         <!-- Dental Service (Optional) -->
                                         <div class="rc-form-group">
-                                            <label class="rc-form-label" for="apt-page-service" style="color:#0f172a; font-weight:700;">Dental Service <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
+                                            <label class="rc-form-label" for="apt-page-service" style="color:#0f172a; font-weight:700;"><span data-i18n="apt.serviceLabel">Dental Service</span> <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
                                             <select id="apt-page-service" class="rc-form-select" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;">
-                                                <option value="">-- Select Dental Service (Optional) --</option>
-                                                <option value="Orthodontics (Braces / Aligners)">1. Orthodontics (Braces / Clear Aligners)</option>
-                                                <option value="Endodontics (Root Canal Treatment)">2. Endodontics (Root Canal Treatment)</option>
-                                                <option value="Preventive & General Dentistry">3. Preventive &amp; General Dentistry</option>
-                                                <option value="Cosmetic Dentistry & Smile Makeover">4. Cosmetic Dentistry &amp; Smile Makeover</option>
-                                                <option value="Restorative Dentistry (Crowns / Bridges)">5. Restorative Dentistry (Crowns / Bridges)</option>
-                                                <option value="Oral Surgery & Tooth Extraction">6. Oral Surgery &amp; Tooth Extractions</option>
-                                                <option value="Periodontics & Gum Care">7. Periodontics &amp; Gum Care</option>
-                                                <option value="Advanced Laser Dentistry">8. Advanced Laser Dentistry</option>
-                                                <option value="Pediatric Dental Care">9. Pediatric Dental Care</option>
-                                                <option value="Emergency Dental Care">10. Emergency Dental Care</option>
-                                                <option value="General Consultation">General Dental Consultation</option>
+                                                <option value="" data-i18n="apt.selectService">-- Select Dental Service (Optional) --</option>
+                                                <option value="Orthodontics (Braces / Aligners)" data-i18n="apt.srv.ortho">1. Orthodontics (Braces / Clear Aligners)</option>
+                                                <option value="Endodontics (Root Canal Treatment)" data-i18n="apt.srv.endo">2. Endodontics (Root Canal Treatment)</option>
+                                                <option value="Preventive & General Dentistry" data-i18n="apt.srv.prev">3. Preventive &amp; General Dentistry</option>
+                                                <option value="Cosmetic Dentistry & Smile Makeover" data-i18n="apt.srv.cosmetic">4. Cosmetic Dentistry &amp; Smile Makeover</option>
+                                                <option value="Restorative Dentistry (Crowns / Bridges)" data-i18n="apt.srv.resto">5. Restorative Dentistry (Crowns / Bridges)</option>
+                                                <option value="Oral Surgery & Tooth Extraction" data-i18n="apt.srv.surgery">6. Oral Surgery &amp; Tooth Extractions</option>
+                                                <option value="Periodontics & Gum Care" data-i18n="apt.srv.perio">7. Periodontics &amp; Gum Care</option>
+                                                <option value="Advanced Laser Dentistry" data-i18n="apt.srv.laser">8. Advanced Laser Dentistry</option>
+                                                <option value="Pediatric Dental Care" data-i18n="apt.srv.pedia">9. Pediatric Dental Care</option>
+                                                <option value="Emergency Dental Care" data-i18n="apt.srv.emergency">10. Emergency Dental Care</option>
+                                                <option value="General Consultation" data-i18n="apt.srv.consult">General Dental Consultation</option>
                                             </select>
                                         </div>
 
                                         <!-- Reason for Appointment (Optional) -->
                                         <div class="rc-form-group">
-                                            <label class="rc-form-label" for="apt-page-reason" style="color:#0f172a; font-weight:700;">Reason for Appointment <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
+                                            <label class="rc-form-label" for="apt-page-reason" style="color:#0f172a; font-weight:700;"><span data-i18n="booking.reasonLabel">Reason for Appointment</span> <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
                                             <select id="apt-page-reason" class="rc-form-select" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;">
-                                                <option value="">Select Reason (Optional)</option>
-                                                <option value="General">General</option>
-                                                <option value="Emergency">Emergency</option>
-                                                <option value="Implants">Implants</option>
-                                                <option value="Custom Message">Custom Message</option>
+                                                <option value="" data-i18n="booking.reasonSelect">Select Reason (Optional)</option>
+                                                <option value="General" data-i18n="booking.reasonGeneral">General</option>
+                                                <option value="Emergency" data-i18n="booking.reasonEmergency">Emergency</option>
+                                                <option value="Implants" data-i18n="booking.reasonImplants">Implants</option>
+                                                <option value="Custom Message" data-i18n="booking.reasonCustom">Custom Message</option>
                                             </select>
                                             <div id="apt-page-custom-group" style="display: none; margin-top: 12px;">
-                                                <label class="rc-form-label" for="apt-page-custom-msg" style="color:#0f172a; font-weight:700;">Tell us more <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
-                                                <textarea id="apt-page-custom-msg" class="rc-form-textarea" placeholder="Describe your specific concern or question (Optional)" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;"></textarea>
+                                                <label class="rc-form-label" for="apt-page-custom-msg" style="color:#0f172a; font-weight:700;"><span data-i18n="booking.customMsgLabel">Tell us more</span> <span style="color:#64748b; font-weight:normal;">(Optional)</span></label>
+                                                <textarea id="apt-page-custom-msg" class="rc-form-textarea" placeholder="Describe your specific concern or question (Optional)" data-i18n-placeholder="booking.customMsgPlaceholder" style="background:#ffffff; color:#0f172a; border:1.5px solid #cbd5e1;"></textarea>
                                             </div>
                                         </div>
 
                                         <!-- Preferred Appointment Date (INLINE CALENDAR OPEN BY DEFAULT) -->
                                         <div class="rc-form-group">
-                                            <label class="rc-form-label" style="color:#0f172a; font-weight:700;">Select Preferred Appointment Date *</label>
+                                            <label class="rc-form-label" style="color:#0f172a; font-weight:700;" data-i18n="apt.selectDate">Select Preferred Appointment Date *</label>
                                             <input type="hidden" id="apt-page-date" required />
                                             <div class="apt-inline-calendar-container">
                                                 <div id="apt-inline-calendar-wrap">
@@ -282,7 +346,7 @@
 
                                         <!-- Preferred 30-Minute Time Slot Selection -->
                                         <div class="rc-form-group" style="margin-top: 24px;">
-                                            <label class="rc-form-label" style="color:#0f172a; font-weight:700;">Select Preferred 30-Minute Time Slot *</label>
+                                            <label class="rc-form-label" style="color:#0f172a; font-weight:700;" data-i18n="apt.selectSlot">Select Preferred 30-Minute Time Slot *</label>
                                             <div class="apt-time-slots-grid" id="apt-page-time-slots">
                                                 <!-- Dynamic 30-minute time slot pills generated via JS -->
                                             </div>
@@ -290,12 +354,12 @@
 
                                         <!-- Submit Button -->
                                         <button type="submit" id="apt-page-submit-btn" class="rc-submit-btn" style="width:100%; margin-top:24px; background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);">
-                                            <span>Request Appointment via WhatsApp</span>
+                                            <span data-i18n="apt.submitWhatsApp">Request Appointment via WhatsApp</span>
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" fill="currentColor"/></svg>
                                         </button>
 
                                         <p style="font-size: 12.5px; color: #64748b; text-align: center; margin-top: 14px; line-height: 1.4;">
-                                            Your appointment request will be prepared and sent to Redesign Dental Clinics for confirmation.
+                                            <span data-i18n="apt.submitNote">Your appointment request will be prepared and sent to Redesign Dental Clinics for confirmation.</span>
                                         </p>
                                     </form>
                                 </div>
@@ -303,12 +367,12 @@
                                 <!-- Success Confirmation View -->
                                 <div id="apt-page-success-view" class="rc-success-box" style="display: none; text-align: center; padding: 30px 10px;">
                                     <div class="rc-success-icon" style="font-size: 40px; color: #0d9488; margin-bottom: 16px;">✓</div>
-                                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 12px;">Appointment Request Prepared!</h3>
+                                    <h3 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 12px;" data-i18n="apt.successTitle">Appointment Request Prepared!</h3>
                                     <p id="apt-page-success-text" style="font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 24px;"></p>
                                     <a href="/" class="button_primary w-inline-block">
                                         <div class="button_inner">
                                             <div class="button-text_wrap">
-                                                <div class="button_text">Return to Homepage</div>
+                                                <div class="button_text" data-i18n="apt.returnHome">Return to Homepage</div>
                                             </div>
                                         </div>
                                     </a>
@@ -318,33 +382,33 @@
 
                         <!-- HELPFUL BOOKING WORKFLOW SECTION -->
                         <div style="margin-top: 80px; text-align: center;">
-                            <h2 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-bottom: 12px; letter-spacing: normal !important;">How Booking Works</h2>
+                            <h2 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-bottom: 12px; letter-spacing: normal !important;" data-i18n="apt.howItWorksTitle">How Booking Works</h2>
                             <p style="font-size: 1rem; color: #475569; max-width: 600px; margin: 0 auto 40px auto; letter-spacing: normal !important;">
                                 A seamless, transparent 3-step appointment experience designed for your convenience.
                             </p>
 
                             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; text-align: left;">
                                 <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);">
-                                    <div style="font-size: 18px; font-weight: 800; color: #0d9488; margin-bottom: 10px; letter-spacing: 0.05em !important;">STEP 1</div>
-                                    <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: normal !important;">Select Slot &amp; Details</h3>
+                                    <div style="font-size: 18px; font-weight: 800; color: #0d9488; margin-bottom: 10px; letter-spacing: 0.05em !important;" data-i18n="apt.step1Tag">STEP 1</div>
+                                    <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: normal !important;" data-i18n="apt.step1Title">Select Slot &amp; Details</h3>
                                     <p style="font-size: 13.5px; color: #64748b; margin: 0; line-height: 1.5; letter-spacing: normal !important;">
-                                        Pick your required dental service, preferred date on the open calendar, and exact 30-minute time slot.
+                                        <span data-i18n="apt.step1Desc">Pick your required dental service, preferred date on the open calendar, and exact 30-minute time slot.</span>
                                     </p>
                                 </div>
 
                                 <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);">
-                                    <div style="font-size: 18px; font-weight: 800; color: #0d9488; margin-bottom: 10px; letter-spacing: 0.05em !important;">STEP 2</div>
-                                    <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: normal !important;">WhatsApp Confirmation</h3>
+                                    <div style="font-size: 18px; font-weight: 800; color: #0d9488; margin-bottom: 10px; letter-spacing: 0.05em !important;" data-i18n="apt.step2Tag">STEP 2</div>
+                                    <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: normal !important;" data-i18n="apt.step2Title">WhatsApp Confirmation</h3>
                                     <p style="font-size: 13.5px; color: #64748b; margin: 0; line-height: 1.5; letter-spacing: normal !important;">
-                                        Your request opens in WhatsApp pre-filled with all details. Simply press Send.
+                                        <span data-i18n="apt.step2Desc">Your request opens in WhatsApp pre-filled with all details. Simply press Send.</span>
                                     </p>
                                 </div>
 
                                 <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);">
-                                    <div style="font-size: 18px; font-weight: 800; color: #0d9488; margin-bottom: 10px; letter-spacing: 0.05em !important;">STEP 3</div>
-                                    <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: normal !important;">Visit Clinic</h3>
+                                    <div style="font-size: 18px; font-weight: 800; color: #0d9488; margin-bottom: 10px; letter-spacing: 0.05em !important;" data-i18n="apt.step3Tag">STEP 3</div>
+                                    <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 8px; letter-spacing: normal !important;" data-i18n="apt.step3Title">Visit Clinic</h3>
                                     <p style="font-size: 13.5px; color: #64748b; margin: 0; line-height: 1.5; letter-spacing: normal !important;">
-                                        Receive fast confirmation from our front desk and visit us at Banjara Hills Road No. 1.
+                                        <span data-i18n="apt.step3Desc">Receive fast confirmation from our front desk and visit us at Banjara Hills Road No. 1.</span>
                                     </p>
                                 </div>
                             </div>

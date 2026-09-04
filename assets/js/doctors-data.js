@@ -39,7 +39,7 @@ const doctorsData = [
   },
   {
     id: "dr-bilal-ahmed-asaq",
-    name: "Dr. Bilal Ahmed Asaq",
+    name: "Dr. Bilal Ahmed Afaq",
     title: "Consultant Orthodontist & Dentofacial Orthopedics",
     qualification: "BDS, MDS - Orthodontics",
     specialty: "Clear Aligners & Invisible Braces",
