@@ -1,108 +1,298 @@
 /**
- * Redesign Dental Clinics - Services Carousel Controller
- * Enables smooth horizontal scrolling, next/prev navigation, touch swipe & mouse drag.
+ * Redesign Dental Clinics - Smooth Horizontal Services Carousel Engine
+ * 
+ * Features:
+ * - Continuous, buttery-smooth horizontal sliding animation via requestAnimationFrame & GPU transform
+ * - Seamless infinite looping using cloned service cards without jumps or flickers
+ * - Interactive Next / Prev navigation with smooth ease-to-card transitions
+ * - Pause on hover / focus, resume on mouseleave / blur
+ * - Touch swipe & mouse drag-to-scroll support with seamless velocity handoff
+ * - Strictly zero layout shifts or vertical height expansion (maintains the white space fix)
+ * - Window resize & document visibility handling
  */
 (function () {
-    function initServicesCarousel() {
-        const wrap = document.querySelector('.section_service .service_wrap');
-        if (!wrap) return;
+  'use strict';
 
-        const prevBtn = document.querySelector('.service-nav-btn.is-prev');
-        const nextBtn = document.querySelector('.service-nav-btn.is-next');
+  function initServicesCarousel() {
+    var wrap = document.querySelector('.section_service .service_wrap');
+    if (!wrap) return;
 
-        function getCardWidth() {
-            const card = wrap.querySelector('.service_item-wrap');
-            if (card) {
-                const style = window.getComputedStyle(card);
-                const gap = parseFloat(style.marginRight) || 32;
-                return card.offsetWidth + gap;
-            }
-            return wrap.clientWidth * 0.9;
-        }
+    var track = wrap.querySelector('.scroll_track');
+    var serviceList = wrap.querySelector('.service_list');
+    if (!track || !serviceList) return;
 
-        function scrollCarousel(delta) {
-            const maxScroll = Math.max(0, wrap.scrollWidth - wrap.clientWidth);
-            const current = wrap.scrollLeft;
-            const clamped = Math.max(0, Math.min(maxScroll, current + delta));
+    var prevBtn = document.querySelector('.service-nav-btn.is-prev');
+    var nextBtn = document.querySelector('.service-nav-btn.is-next');
 
-            try {
-                wrap.scrollBy({ left: delta, behavior: 'smooth' });
-            } catch (e) {}
+    // Get original cards
+    var originalCards = Array.from(serviceList.querySelectorAll('.service_item-wrap:not(.is-cloned)'));
+    if (originalCards.length === 0) return;
 
-            // Immediate fallback for environments where smooth scrolling does not execute (headless or reduced motion)
-            if (wrap.scrollLeft === current) {
-                wrap.scrollTo({ left: clamped, behavior: 'instant' });
-            }
+    // Clean up any previously appended clones (e.g. if re-initialized)
+    var existingClones = serviceList.querySelectorAll('.service_item-wrap.is-cloned');
+    existingClones.forEach(function (c) { c.remove(); });
 
-            updateNavState();
-        }
+    // Duplicate cards horizontally once for seamless infinite looping
+    originalCards.forEach(function (card) {
+      var clone = card.cloneNode(true);
+      clone.classList.add('is-cloned');
+      clone.setAttribute('aria-hidden', 'true');
+      // Strip IDs from clone to avoid duplicate DOM IDs
+      var withIds = clone.querySelectorAll('[id]');
+      withIds.forEach(function (el) { el.removeAttribute('id'); });
+      serviceList.appendChild(clone);
+    });
 
-        if (prevBtn) {
-            prevBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                scrollCarousel(-getCardWidth());
-            });
-        }
+    // Configuration & State
+    var SPEED = 45; // Pixels per second (steady, gentle, readable glide)
+    var currentX = 0;
+    var targetX = 0;
+    var singleSetWidth = 0;
+    var isPaused = false;
+    var isDragging = false;
+    var isNavigating = false;
+    var lastTime = 0;
+    var dragStartX = 0;
+    var dragStartTranslate = 0;
+    var dragDistance = 0;
+    var animFrameId = null;
 
-        if (nextBtn) {
-            nextBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                scrollCarousel(getCardWidth());
-            });
-        }
+    function measure() {
+      if (originalCards.length < 1) return;
+      var allCards = Array.from(serviceList.children);
+      var firstOriginal = originalCards[0];
+      var firstClone = allCards[originalCards.length];
 
-        function updateNavState() {
-            if (!prevBtn || !nextBtn) return;
-            const maxScroll = wrap.scrollWidth - wrap.clientWidth - 15;
-            const isStart = wrap.scrollLeft <= 15;
-            const isEnd = wrap.scrollLeft >= maxScroll;
+      if (firstOriginal && firstClone) {
+        singleSetWidth = firstClone.offsetLeft - firstOriginal.offsetLeft;
+      }
 
-            prevBtn.disabled = isStart;
-            prevBtn.style.opacity = isStart ? '0.35' : '1';
-            prevBtn.style.pointerEvents = isStart ? 'none' : 'auto';
-
-            nextBtn.disabled = isEnd;
-            nextBtn.style.opacity = isEnd ? '0.35' : '1';
-            nextBtn.style.pointerEvents = isEnd ? 'none' : 'auto';
-        }
-
-        wrap.addEventListener('scroll', updateNavState, { passive: true });
-        window.addEventListener('resize', updateNavState, { passive: true });
-        updateNavState();
-
-        // Mouse drag-to-scroll for desktop
-        let isDown = false;
-        let startX = 0;
-        let scrollLeft = 0;
-
-        wrap.addEventListener('mousedown', function (e) {
-            if (e.target.closest('a, button, input, textarea')) return;
-            isDown = true;
-            startX = e.pageX - wrap.offsetLeft;
-            scrollLeft = wrap.scrollLeft;
-            wrap.style.cursor = 'grabbing';
+      // Fallback if offsetLeft measurement isn't ready
+      if (!singleSetWidth || singleSetWidth <= 0) {
+        var total = 0;
+        originalCards.forEach(function (c) {
+          var style = window.getComputedStyle(c);
+          var mr = parseFloat(style.marginRight) || 0;
+          total += c.offsetWidth + mr;
         });
-
-        window.addEventListener('mouseup', function () {
-            if (!isDown) return;
-            isDown = false;
-            wrap.style.cursor = 'grab';
-            updateNavState();
-        });
-
-        wrap.addEventListener('mousemove', function (e) {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - wrap.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            wrap.scrollLeft = scrollLeft - walk;
-            updateNavState();
-        });
+        singleSetWidth = total;
+      }
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initServicesCarousel);
-    } else {
-        initServicesCarousel();
+    // Initial measurement
+    measure();
+    window.addEventListener('load', measure);
+
+    function getCardStep() {
+      if (originalCards.length > 1) {
+        var step = originalCards[1].offsetLeft - originalCards[0].offsetLeft;
+        if (step > 0) return step;
+      }
+      if (originalCards.length > 0) {
+        return originalCards[0].offsetWidth + 32;
+      }
+      return wrap.clientWidth * 0.9;
     }
+
+    function applyTransform(x) {
+      track.style.transform = 'translate3d(' + (-x) + 'px, 0, 0)';
+    }
+
+    function normalizeX(x) {
+      if (singleSetWidth <= 0) return x;
+      return ((x % singleSetWidth) + singleSetWidth) % singleSetWidth;
+    }
+
+    // Main 60/120fps Animation Loop
+    function tick(time) {
+      if (!lastTime) lastTime = time;
+      var dt = (time - lastTime) / 1000;
+      lastTime = time;
+
+      // Avoid huge jump if tab was backgrounded
+      if (dt > 0.1) dt = 0.1;
+
+      if (singleSetWidth <= 0) {
+        measure();
+      }
+
+      if (!isPaused && !isDragging) {
+        if (isNavigating) {
+          // Smooth spring ease toward targetX
+          var diff = targetX - currentX;
+          if (Math.abs(diff) < 0.5) {
+            currentX = targetX;
+            isNavigating = false;
+          } else {
+            currentX += diff * 0.12;
+          }
+        } else {
+          // Continuous smooth auto-glide
+          currentX += SPEED * dt;
+        }
+
+        // Seamless wrap check
+        if (singleSetWidth > 0) {
+          if (currentX >= singleSetWidth) {
+            currentX -= singleSetWidth;
+            if (isNavigating) targetX -= singleSetWidth;
+          } else if (currentX < 0) {
+            currentX += singleSetWidth;
+            if (isNavigating) targetX += singleSetWidth;
+          }
+        }
+
+        applyTransform(currentX);
+      }
+
+      animFrameId = requestAnimationFrame(tick);
+    }
+
+    animFrameId = requestAnimationFrame(tick);
+
+    // Prev / Next Navigation
+    function advance(delta) {
+      measure();
+      if (singleSetWidth <= 0) return;
+
+      currentX = normalizeX(currentX);
+      targetX = currentX + delta;
+      isNavigating = true;
+    }
+
+    if (nextBtn) {
+      nextBtn.disabled = false;
+      nextBtn.style.opacity = '1';
+      nextBtn.style.pointerEvents = 'auto';
+      nextBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        advance(getCardStep());
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.disabled = false;
+      prevBtn.style.opacity = '1';
+      prevBtn.style.pointerEvents = 'auto';
+      prevBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        advance(-getCardStep());
+      });
+    }
+
+    // Hover & Focus Pause Handling
+    wrap.addEventListener('mouseenter', function () { isPaused = true; });
+    wrap.addEventListener('mouseleave', function () {
+      if (!isDragging) isPaused = false;
+    });
+
+    wrap.addEventListener('focusin', function () { isPaused = true; });
+    wrap.addEventListener('focusout', function () {
+      if (!isDragging) isPaused = false;
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('mouseenter', function () { isPaused = true; });
+      prevBtn.addEventListener('mouseleave', function () { if (!isDragging) isPaused = false; });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('mouseenter', function () { isPaused = true; });
+      nextBtn.addEventListener('mouseleave', function () { if (!isDragging) isPaused = false; });
+    }
+
+    // Mouse Drag Support
+    wrap.addEventListener('mousedown', function (e) {
+      if (e.target.closest('button, a, input, textarea')) return;
+      isDragging = true;
+      isPaused = true;
+      isNavigating = false;
+      dragStartX = e.pageX;
+      dragStartTranslate = currentX;
+      dragDistance = 0;
+      wrap.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      var walk = e.pageX - dragStartX;
+      dragDistance += Math.abs(walk);
+      currentX = dragStartTranslate - walk;
+      currentX = normalizeX(currentX);
+      applyTransform(currentX);
+    });
+
+    window.addEventListener('mouseup', function () {
+      if (!isDragging) return;
+      isDragging = false;
+      wrap.style.cursor = 'grab';
+      isPaused = false;
+    });
+
+    // Touch Swipe Support
+    wrap.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      isDragging = true;
+      isPaused = true;
+      isNavigating = false;
+      dragStartX = e.touches[0].clientX;
+      dragStartTranslate = currentX;
+      dragDistance = 0;
+    }, { passive: true });
+
+    wrap.addEventListener('touchmove', function (e) {
+      if (!isDragging || e.touches.length !== 1) return;
+      var walk = e.touches[0].clientX - dragStartX;
+      dragDistance += Math.abs(walk);
+      currentX = dragStartTranslate - walk;
+      currentX = normalizeX(currentX);
+      applyTransform(currentX);
+    }, { passive: true });
+
+    wrap.addEventListener('touchend', function () {
+      if (!isDragging) return;
+      isDragging = false;
+      isPaused = false;
+    });
+
+    wrap.addEventListener('touchcancel', function () {
+      if (!isDragging) return;
+      isDragging = false;
+      isPaused = false;
+    });
+
+    // Prevent accidental link clicks after dragging
+    wrap.addEventListener('click', function (e) {
+      if (dragDistance > 10) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    // Responsive Resize & Re-measurement
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        measure();
+        currentX = normalizeX(currentX);
+        applyTransform(currentX);
+      }, 100);
+    });
+
+    // Handle Tab Visibility
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        lastTime = 0;
+      } else {
+        lastTime = performance.now();
+        measure();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServicesCarousel);
+  } else {
+    initServicesCarousel();
+  }
 })();

@@ -313,47 +313,84 @@
         .service_wrap {
             display: block !important;
             width: 100% !important;
-            overflow-x: auto !important;
-            overflow-y: hidden !important;
-            scroll-behavior: smooth !important;
-            scroll-snap-type: x mandatory !important;
-            -webkit-overflow-scrolling: touch !important;
-            scrollbar-width: none !important;
-            touch-action: pan-x pan-y !important;
+            overflow: hidden !important;
+            position: relative !important;
+            height: auto !important;
+            min-height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
             cursor: grab;
-            position: relative;
+            touch-action: pan-y;
+            user-select: none;
+            -webkit-user-select: none;
+            container-type: inline-size;
         }
 
         .service_wrap:active {
             cursor: grabbing;
         }
 
-        .service_wrap::-webkit-scrollbar {
-            display: none !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-
         .scroll_track {
             display: flex !important;
-            transform: none !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: stretch !important;
             width: max-content !important;
+            height: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            position: relative !important;
+            will-change: transform;
         }
 
-        .scroll_list {
-            margin-right: 0 !important;
+        .scroll_list,
+        .collection-list-wrapper,
+        .service_list {
             display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: stretch !important;
+            width: max-content !important;
+            height: auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         .service_list {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            align-items: stretch !important;
+            gap: 40px !important;
+            grid-column-gap: 40px !important;
+            grid-row-gap: 0 !important;
         }
 
         .service_item-wrap {
-            scroll-snap-align: start !important;
-            scroll-snap-stop: normal !important;
+            flex: 0 0 auto !important;
+            width: 90cqw !important;
+            max-width: 1080px !important;
+            height: auto !important;
+            margin: 0 !important;
+            display: flex !important;
+            align-items: stretch !important;
+        }
+
+        @media (max-width: 991px) {
+            .service_item-wrap {
+                width: 92cqw !important;
+                max-width: none !important;
+            }
+            .service_list {
+                gap: 24px !important;
+                grid-column-gap: 24px !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .service_item-wrap {
+                width: 95cqw !important;
+            }
+            .service_list {
+                gap: 16px !important;
+                grid-column-gap: 16px !important;
+            }
         }
 
         /* Carousel Navigation Buttons */
