@@ -14,7 +14,7 @@ an automatic failure.
 
 
 **Source of truth (public):** `https://github.com/mdirfanpasha/RedesignDental_clinic`
-**Live reference:** `https://www.redesigndentalclinics.com` (`https://redesign-93m5heyb3-redesigndental.vercel.app/`)
+**Live reference:** `https://www.redesigndentalclinics.com` (`https://redesign-bsk0xom0d-redesigndental.vercel.app/` | `https://redesign-redesigndental.vercel.app/`)
 
 
 The repo is fully self-contained: all 8 JS libs, ~186 images (including 37 AI-generated `gen_*.jpg`

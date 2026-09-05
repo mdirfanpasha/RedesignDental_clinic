@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 
 const rootDir = path.resolve(__dirname, '..');
 const OLD_VERCEL = 'redesign-tau-five.vercel.app';
-const NEW_VERCEL = 'redesign-93m5heyb3-redesigndental.vercel.app';
+const NEW_VERCEL = 'redesign-bsk0xom0d-redesigndental.vercel.app';
 const CANONICAL = 'www.redesigndentalclinics.com';
 
 // Files that reference the old Vercel URL
