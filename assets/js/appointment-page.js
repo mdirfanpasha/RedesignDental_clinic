@@ -166,6 +166,7 @@
 
     var todayObj = new Date();
     var todayStr = todayObj.toISOString().split('T')[0];
+    var monthTitle = monthNames[month];
 
     var html = `
       <div class="inline-cal-header">

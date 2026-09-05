@@ -4,6 +4,8 @@
  * Features:
  * - Continuous, buttery-smooth horizontal sliding animation via requestAnimationFrame & GPU transform
  * - Seamless infinite looping using cloned service cards without jumps or flickers
+ * - Controlled, clamped mouse wheel & trackpad scrolling with gentle normalized sensitivity
+ * - Prevents runaway acceleration, duplicate listeners, or jumping through multiple cards
  * - Interactive Next / Prev navigation with smooth ease-to-card transitions
  * - Pause on hover / focus, resume on mouseleave / blur
  * - Touch swipe & mouse drag-to-scroll support with seamless velocity handoff
@@ -16,6 +18,10 @@
   function initServicesCarousel() {
     var wrap = document.querySelector('.section_service .service_wrap');
     if (!wrap) return;
+
+    // Guard: ensure event listeners and clones are attached only once
+    if (wrap._carouselInitted) return;
+    wrap._carouselInitted = true;
 
     var track = wrap.querySelector('.scroll_track');
     var serviceList = wrap.querySelector('.service_list');
@@ -51,6 +57,9 @@
     var isPaused = false;
     var isDragging = false;
     var isNavigating = false;
+    var isMouseOverWrap = false;
+    var isWheelActive = false;
+    var wheelIdleTimer = null;
     var lastTime = 0;
     var dragStartX = 0;
     var dragStartTranslate = 0;
@@ -116,18 +125,19 @@
         measure();
       }
 
-      if (!isPaused && !isDragging) {
+      if (!isDragging) {
         if (isNavigating) {
           // Smooth spring ease toward targetX
           var diff = targetX - currentX;
-          if (Math.abs(diff) < 0.5) {
+          if (Math.abs(diff) < 0.4) {
             currentX = targetX;
             isNavigating = false;
           } else {
-            currentX += diff * 0.12;
+            // Silky smooth damping factor
+            currentX += diff * 0.10;
           }
-        } else {
-          // Continuous smooth auto-glide
+        } else if (!isPaused) {
+          // Continuous smooth auto-glide when not manually navigating or paused
           currentX += SPEED * dt;
         }
 
@@ -180,24 +190,95 @@
       });
     }
 
+    // Controlled, Clamped Mouse Wheel & Trackpad Scroll Handling
+    wrap.addEventListener('wheel', function (e) {
+      // Don't intercept pinch-zoom (ctrl + wheel)
+      if (e.ctrlKey) return;
+
+      var absX = Math.abs(e.deltaX);
+      var absY = Math.abs(e.deltaY);
+
+      // Ignore trivial noise
+      if (absX < 0.5 && absY < 0.5) return;
+
+      // Pick dominant axis: horizontal swipe takes precedence if present, otherwise vertical wheel
+      var rawDelta = absX > absY ? e.deltaX : e.deltaY;
+
+      // Normalize delta mode across browsers and input types (mouse wheel vs trackpad)
+      var modeMultiplier = 1;
+      if (e.deltaMode === 1) modeMultiplier = 20; // Lines
+      else if (e.deltaMode === 2) modeMultiplier = 300; // Pages
+
+      var normalized = rawDelta * modeMultiplier;
+
+      // Clamp delta per individual event: prevents fast flicks from generating gigantic jumps
+      var clamped = Math.max(-50, Math.min(50, normalized));
+
+      // Controlled sensitivity multiplier: reduces speed for precise, buttery control
+      var delta = clamped * 0.35;
+
+      // Prevent page from jumping vertically while scrolling the horizontal carousel
+      e.preventDefault();
+
+      measure();
+      if (singleSetWidth <= 0) return;
+
+      currentX = normalizeX(currentX);
+
+      // Start easing from current position if not currently navigating
+      if (!isNavigating) {
+        targetX = currentX;
+      }
+
+      targetX += delta;
+
+      // Limit queue ahead so fast continuous wheeling cannot queue more than 0.75 of a card width
+      var cardStep = getCardStep();
+      var maxAhead = cardStep * 0.75;
+      if (targetX - currentX > maxAhead) targetX = currentX + maxAhead;
+      if (targetX - currentX < -maxAhead) targetX = currentX - maxAhead;
+
+      isNavigating = true;
+      isWheelActive = true;
+      isPaused = true;
+
+      // Smooth idle resumption
+      clearTimeout(wheelIdleTimer);
+      wheelIdleTimer = setTimeout(function () {
+        isWheelActive = false;
+        if (!isMouseOverWrap) {
+          isPaused = false;
+        }
+      }, 350);
+    }, { passive: false });
+
     // Hover & Focus Pause Handling
-    wrap.addEventListener('mouseenter', function () { isPaused = true; });
+    wrap.addEventListener('mouseenter', function () {
+      isMouseOverWrap = true;
+      isPaused = true;
+    });
+
     wrap.addEventListener('mouseleave', function () {
-      if (!isDragging) isPaused = false;
+      isMouseOverWrap = false;
+      if (!isDragging && !isWheelActive) {
+        isPaused = false;
+      }
     });
 
     wrap.addEventListener('focusin', function () { isPaused = true; });
     wrap.addEventListener('focusout', function () {
-      if (!isDragging) isPaused = false;
+      if (!isDragging && !isWheelActive && !isMouseOverWrap) {
+        isPaused = false;
+      }
     });
 
     if (prevBtn) {
       prevBtn.addEventListener('mouseenter', function () { isPaused = true; });
-      prevBtn.addEventListener('mouseleave', function () { if (!isDragging) isPaused = false; });
+      prevBtn.addEventListener('mouseleave', function () { if (!isDragging && !isMouseOverWrap) isPaused = false; });
     }
     if (nextBtn) {
       nextBtn.addEventListener('mouseenter', function () { isPaused = true; });
-      nextBtn.addEventListener('mouseleave', function () { if (!isDragging) isPaused = false; });
+      nextBtn.addEventListener('mouseleave', function () { if (!isDragging && !isMouseOverWrap) isPaused = false; });
     }
 
     // Mouse Drag Support
@@ -225,7 +306,9 @@
       if (!isDragging) return;
       isDragging = false;
       wrap.style.cursor = 'grab';
-      isPaused = false;
+      if (!isMouseOverWrap) {
+        isPaused = false;
+      }
     });
 
     // Touch Swipe Support
@@ -251,13 +334,17 @@
     wrap.addEventListener('touchend', function () {
       if (!isDragging) return;
       isDragging = false;
-      isPaused = false;
+      if (!isMouseOverWrap) {
+        isPaused = false;
+      }
     });
 
     wrap.addEventListener('touchcancel', function () {
       if (!isDragging) return;
       isDragging = false;
-      isPaused = false;
+      if (!isMouseOverWrap) {
+        isPaused = false;
+      }
     });
 
     // Prevent accidental link clicks after dragging
