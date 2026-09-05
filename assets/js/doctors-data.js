@@ -65,7 +65,7 @@ const doctorsData = [
     title: "Consultant Prosthodontist & Implantologist",
     qualification: "BDS, MDS - Prosthodontics",
     specialty: "Veneers, Crowns & Full Mouth Rehab",
-    experience: "9+ Years Experience",
+    experience: "12+ Years Experience",
     image: "assets/img/doctors/doctor-02.webp",
     featured: false,
     bio: "Dedicated to precision ceramic veneers, zirconia crowns, full arch restorations, and aesthetic rehabilitation."
