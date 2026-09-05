@@ -9,3 +9,5 @@ drvideo/
 
 .vercel
 .env*
+*.bak
+lighthouse-*.json

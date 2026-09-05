@@ -7,8 +7,11 @@
     "start": "node server.js",
     "dev": "node server.js",
     "validate:i18n": "node scripts/validate-i18n.js",
+    "sync:footer": "node scripts/sync-footer.cjs",
+    "sync:navbar": "node scripts/sync-navbar.cjs",
+    "sync:components": "node scripts/sync-navbar.cjs && node scripts/sync-footer.cjs",
     "build:minify": "node scripts/build-minify.cjs",
-    "build": "node scripts/build-minify.cjs && node scripts/validate-i18n.js && node scripts/generate-sitemap.js"
+    "build": "node scripts/sync-footer.cjs && node scripts/build-minify.cjs && node scripts/validate-i18n.js && node scripts/generate-sitemap.js"
   },
   "devDependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
