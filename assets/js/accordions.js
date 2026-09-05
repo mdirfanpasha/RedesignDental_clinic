@@ -3,16 +3,13 @@
  * 
  * Requirements:
  * - Desktop: Instant expansion on the VERY FIRST hover over any item, with NO prior click required.
- * - Mobile & Touch Devices: Tap/click to expand/collapse.
+ * - Full Text & Content Visibility: Inner text/content containers are ALWAYS forced to opacity 1,
+ *   visible, and transform none when expanded so text is never hidden by Webflow IX2.
+ * - Mobile & Touch Devices: Tap/click to expand/collapse cleanly.
  * - Natural Height: Dynamically calculated so multi-lingual text never clips.
  * - Single Active Item: Smoothly closes previously open item when moving to a new item.
  * - Accessibility: ARIA attributes and keyboard Enter/Space support.
  * - Independent: Every item works independently from page load onwards.
- *
- * Architecture:
- * - Webflow's native .w-tabs system is DISABLED on our accordion containers
- *   because it fights hover logic by resetting classes and inline styles.
- * - All expand/collapse state is managed entirely by this script.
  */
 
 (function () {
@@ -37,6 +34,25 @@
     isTouchUser = false;
   }, { passive: true, capture: true });
 
+  // Helper to recursively remove Webflow-injected animation styles
+  function cleanWebflowStyles(el) {
+    if (!el) return;
+    el.style.removeProperty('opacity');
+    el.style.removeProperty('transform');
+    el.style.removeProperty('max-height');
+    el.style.removeProperty('height');
+    var descendants = el.querySelectorAll('*');
+    for (var i = 0; i < descendants.length; i++) {
+      var d = descendants[i];
+      d.style.removeProperty('opacity');
+      d.style.removeProperty('transform');
+      d.style.removeProperty('max-height');
+      d.style.removeProperty('height');
+      if (d.style.display === 'none') {
+        d.style.removeProperty('display');
+      }
+    }
+  }
 
   function initAccordionGroup(containerSelector, itemSelector, contentSelector) {
     var container = document.querySelector(containerSelector);
@@ -50,15 +66,7 @@
     if (!items || !items.length) return;
 
     // ===================================================================
-    // CRITICAL: Neutralize Webflow's native .w-tabs system.
-    //
-    // Webflow's runtime JS finds all .w-tabs containers and attaches its
-    // own click handlers to .w-tab-link children. Those handlers call IX2
-    // animations that set inline styles (max-height, opacity, transform)
-    // which OVERRIDE our hover-based expansion.
-    //
-    // By removing these marker classes, Webflow's tab system ignores our
-    // accordion elements entirely, giving us full control.
+    // CRITICAL: Neutralize Webflow's native .w-tabs runtime
     // ===================================================================
     container.classList.remove('w-tabs');
 
@@ -70,22 +78,7 @@
 
     items.forEach(function (item) {
       item.classList.remove('w-tab-link');
-    });
-
-    // Clear ALL Webflow-injected inline styles on content elements.
-    // Webflow IX2 sets inline max-height/opacity/transform during init,
-    // which override our CSS rules. By clearing them, our CSS transitions
-    // and JS-set styles take effect cleanly.
-    items.forEach(function (item) {
-      var content = item.querySelector(contentSelector);
-      if (content) {
-        content.removeAttribute('style');
-      }
-      // Also clear any inline styles on the item itself (IX2 may set transforms)
-      // But preserve display/layout properties by only clearing animation props
-      item.style.removeProperty('opacity');
-      item.style.removeProperty('transform');
-      item.style.removeProperty('max-height');
+      cleanWebflowStyles(item);
     });
 
     var activeItem = null;
@@ -94,13 +87,64 @@
       var content = item.querySelector(contentSelector);
       if (!content) return;
 
+      var inners = content.querySelectorAll('.tabs-accordion_info-inner, .faq-description_inner, p, div, span');
+      var faqIcon = item.querySelector('.faq-header_icon-wrap');
+      var tabsIcon = item.querySelector('.tabs-accordion_header-icon');
+      var faqTitle = item.querySelector('.faq-header_title');
+      var tabsTitle = item.querySelector('.tabs-accordion_header-title');
+      var faqLines = item.querySelectorAll('.faq-header_icon-line');
+
       if (isExpand) {
+        // 1. Force all inner text & containers to be fully visible and unscaled
+        for (var j = 0; j < inners.length; j++) {
+          inners[j].style.setProperty('opacity', '1', 'important');
+          inners[j].style.setProperty('visibility', 'visible', 'important');
+          inners[j].style.setProperty('transform', 'none', 'important');
+          if (inners[j].style.display === 'none') {
+            inners[j].style.removeProperty('display');
+          }
+        }
+
+        // 2. Measure natural scrollHeight and expand
         var naturalHeight = content.scrollHeight;
-        content.style.maxHeight = (naturalHeight > 0 ? naturalHeight : 500) + 'px';
-        content.style.opacity = '1';
+        content.style.maxHeight = (naturalHeight > 0 ? (naturalHeight + 40) : 600) + 'px';
+        content.style.setProperty('opacity', '1', 'important');
+        content.style.setProperty('visibility', 'visible', 'important');
+
+        // 3. Rotate and highlight icon
+        if (faqIcon) {
+          faqIcon.style.transform = 'rotate(45deg)';
+        }
+        if (tabsIcon) {
+          tabsIcon.style.transform = 'rotate(45deg)';
+          tabsIcon.style.color = '#0f766e';
+        }
+        for (var l = 0; l < faqLines.length; l++) {
+          faqLines[l].style.backgroundColor = '#0f766e';
+        }
+        if (faqTitle) faqTitle.style.color = '#05262a';
+        if (tabsTitle) tabsTitle.style.color = '#05262a';
       } else {
+        // Collapse
         content.style.maxHeight = '0px';
         content.style.opacity = '0';
+        for (var k = 0; k < inners.length; k++) {
+          inners[k].style.opacity = '0';
+        }
+
+        // Reset icon and title
+        if (faqIcon) {
+          faqIcon.style.transform = 'rotate(0deg)';
+        }
+        if (tabsIcon) {
+          tabsIcon.style.transform = 'rotate(0deg)';
+          tabsIcon.style.removeProperty('color');
+        }
+        for (var m = 0; m < faqLines.length; m++) {
+          faqLines[m].style.removeProperty('background-color');
+        }
+        if (faqTitle) faqTitle.style.removeProperty('color');
+        if (tabsTitle) tabsTitle.style.removeProperty('color');
       }
     }
 
@@ -161,17 +205,17 @@
     setActiveItem(initialItem);
 
     // ===================================================================
-    // EVENT HANDLERS
+    // EVENT HANDLERS (First hover guaranteed)
     // ===================================================================
     items.forEach(function (item) {
 
       // 1. Pointer Enter — fires for mouse, pen, and touch
       item.addEventListener('pointerenter', function (e) {
-        if (e.pointerType === 'touch') return; // Touch users get tap instead
+        if (e.pointerType === 'touch') return;
         setActiveItem(item);
       });
 
-      // 2. Mouse Enter — standard desktop hover (fallback for older browsers)
+      // 2. Mouse Enter — standard desktop hover
       item.addEventListener('mouseenter', function () {
         if (isTouchUser) return;
         setActiveItem(item);
@@ -188,7 +232,7 @@
       // 4. Click / Tap — mobile toggle and desktop click guarantee
       item.addEventListener('click', function (e) {
         e.preventDefault();
-        e.stopPropagation(); // Prevent any residual Webflow handlers
+        e.stopPropagation();
 
         if (isTouchUser && activeItem === item) {
           closeActiveItem();
@@ -228,10 +272,8 @@
     });
   }
 
-
   function initAllAccordions() {
     // 1. Why Choose Us Accordion
-    //    Container: .tabs_accordion  (fallback: .tabs-accordion_menu)
     var whyUsSelector = document.querySelector('.tabs_accordion')
       ? '.tabs_accordion'
       : (document.querySelector('.tabs-accordion_menu') ? '.tabs-accordion_menu' : null);
@@ -240,7 +282,6 @@
     }
 
     // 2. FAQ Accordion
-    //    Container: .faq_tabs  (fallback: .faq-tabs_menu)
     var faqSelector = document.querySelector('.faq_tabs')
       ? '.faq_tabs'
       : (document.querySelector('.faq-tabs_menu') ? '.faq-tabs_menu' : null);
@@ -256,31 +297,32 @@
     initAllAccordions();
   }
 
-  // Safety: re-run after full window load in case Webflow's late init reset things.
-  // The duplicate-init guard (dataset.accordionInit) ensures we don't double-bind,
-  // but we DO need to re-neutralize Webflow if it ran between DOMContentLoaded and load.
+  // Re-verify after full window load in case Webflow's late init reset things
   window.addEventListener('load', function () {
-    // Give Webflow's IX2 engine 200ms to finish its post-load animations,
-    // then re-assert our state.
     setTimeout(function () {
       var containers = document.querySelectorAll('[data-accordion-init="true"]');
       containers.forEach(function (container) {
-        // Re-neutralize in case Webflow re-added classes
         container.classList.remove('w-tabs');
         var menu = container.querySelector('.w-tab-menu');
         if (menu) menu.classList.remove('w-tab-menu');
 
-        // Re-clear any IX2 inline styles on content elements
-        var infoEls = container.querySelectorAll('.tabs-accordion_info, .faq_description');
-        infoEls.forEach(function (el) {
-          // Only touch non-active items (active items have our JS-set maxHeight)
-          var parent = el.closest('.tabs-accordion_item, .faq_item');
-          if (parent && !parent.classList.contains('is-active')) {
-            el.style.maxHeight = '0px';
-            el.style.opacity = '0';
+        var activeEl = container.querySelector('.tabs-accordion_item.is-active, .faq_item.is-active');
+        if (activeEl) {
+          var activeContent = activeEl.querySelector('.tabs-accordion_info, .faq_description');
+          if (activeContent) {
+            var naturalH = activeContent.scrollHeight;
+            activeContent.style.maxHeight = (naturalH > 0 ? (naturalH + 40) : 600) + 'px';
+            activeContent.style.setProperty('opacity', '1', 'important');
+            activeContent.style.setProperty('visibility', 'visible', 'important');
+            var inners = activeContent.querySelectorAll('.tabs-accordion_info-inner, .faq-description_inner, p');
+            for (var i = 0; i < inners.length; i++) {
+              inners[i].style.setProperty('opacity', '1', 'important');
+              inners[i].style.setProperty('visibility', 'visible', 'important');
+              inners[i].style.setProperty('transform', 'none', 'important');
+            }
           }
-        });
+        }
       });
-    }, 200);
+    }, 150);
   });
 })();

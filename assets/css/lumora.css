@@ -3377,8 +3377,9 @@ figure {
 .faq_item.w--current .faq_description,
 .faq_item.is-active .faq_description,
 .faq_item:hover .faq_description {
-  max-height: 500px;
-  opacity: 1;
+  max-height: 800px;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .faq-header_title {
@@ -3398,6 +3399,22 @@ figure {
 .faq-description_inner {
   max-width: 92%;
   padding-top: var(--_size-variables---element-spacing--md);
+  transition: opacity 0.3s ease;
+}
+
+.faq_item.w--current .faq-description_inner,
+.faq_item.is-active .faq-description_inner,
+.faq_item:hover .faq-description_inner {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.faq_item.w--current .faq-description_inner *,
+.faq_item.is-active .faq-description_inner *,
+.faq_item:hover .faq-description_inner * {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .faq-header_icon-wrap {
@@ -5063,8 +5080,9 @@ figure {
 .tabs-accordion_item.w--current .tabs-accordion_info,
 .tabs-accordion_item.is-active .tabs-accordion_info,
 .tabs-accordion_item:hover .tabs-accordion_info {
-  max-height: 500px;
-  opacity: 1;
+  max-height: 800px;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .tabs-accordion_item.is-active .tabs-accordion_header-icon {
@@ -5078,6 +5096,22 @@ figure {
 
 .tabs-accordion_info-inner {
   padding-top: var(--_size-variables---element-spacing--xl);
+  transition: opacity 0.3s ease;
+}
+
+.tabs-accordion_item.w--current .tabs-accordion_info-inner,
+.tabs-accordion_item.is-active .tabs-accordion_info-inner,
+.tabs-accordion_item:hover .tabs-accordion_info-inner {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.tabs-accordion_item.w--current .tabs-accordion_info-inner *,
+.tabs-accordion_item.is-active .tabs-accordion_info-inner *,
+.tabs-accordion_item:hover .tabs-accordion_info-inner * {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .section_blog.is-related {
