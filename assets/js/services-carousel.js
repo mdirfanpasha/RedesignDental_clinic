@@ -190,7 +190,9 @@
       });
     }
 
-    // Controlled, Clamped Mouse Wheel & Trackpad Scroll Handling
+    // Controlled Mouse Wheel & Trackpad Scroll Handling
+    // ONLY intercept genuinely horizontal swipe gestures (deltaX dominant).
+    // Vertical mouse wheel / trackpad scroll ALWAYS passes through to normal page scrolling.
     wrap.addEventListener('wheel', function (e) {
       // Don't intercept pinch-zoom (ctrl + wheel)
       if (e.ctrlKey) return;
@@ -201,10 +203,14 @@
       // Ignore trivial noise
       if (absX < 0.5 && absY < 0.5) return;
 
-      // Pick dominant axis: horizontal swipe takes precedence if present, otherwise vertical wheel
-      var rawDelta = absX > absY ? e.deltaX : e.deltaY;
+      // ONLY intercept horizontal swipe gestures (trackpad horizontal scroll).
+      // If vertical scroll is dominant or equal, let the page scroll normally.
+      if (absX <= absY) return;
 
-      // Normalize delta mode across browsers and input types (mouse wheel vs trackpad)
+      // We have a genuinely horizontal swipe — handle it for the carousel
+      var rawDelta = e.deltaX;
+
+      // Normalize delta mode across browsers and input types
       var modeMultiplier = 1;
       if (e.deltaMode === 1) modeMultiplier = 20; // Lines
       else if (e.deltaMode === 2) modeMultiplier = 300; // Pages
@@ -217,7 +223,7 @@
       // Controlled sensitivity multiplier: reduces speed for precise, buttery control
       var delta = clamped * 0.35;
 
-      // Prevent page from jumping vertically while scrolling the horizontal carousel
+      // Only prevent default for genuine horizontal swipe to stop horizontal page scroll
       e.preventDefault();
 
       measure();

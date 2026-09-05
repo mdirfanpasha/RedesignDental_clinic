@@ -3375,7 +3375,8 @@ figure {
 }
 
 .faq_item.w--current .faq_description,
-.faq_item.is-active .faq_description {
+.faq_item.is-active .faq_description,
+.faq_item:hover .faq_description {
   max-height: 500px;
   opacity: 1;
 }
@@ -3411,7 +3412,8 @@ figure {
 }
 
 .faq_item.w--current .faq-header_icon-wrap,
-.faq_item.is-active .faq-header_icon-wrap {
+.faq_item.is-active .faq-header_icon-wrap,
+.faq_item:hover .faq-header_icon-wrap {
   transform: rotate(45deg);
 }
 
@@ -5059,7 +5061,8 @@ figure {
 }
 
 .tabs-accordion_item.w--current .tabs-accordion_info,
-.tabs-accordion_item.is-active .tabs-accordion_info {
+.tabs-accordion_item.is-active .tabs-accordion_info,
+.tabs-accordion_item:hover .tabs-accordion_info {
   max-height: 500px;
   opacity: 1;
 }
